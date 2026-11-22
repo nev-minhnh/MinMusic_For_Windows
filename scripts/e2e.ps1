@@ -1,8 +1,9 @@
 <#
 .SYNOPSIS  Starts the real app in test mode and runs an e2e suite (test-guide section 0 and 3).
 .DESCRIPTION
-  -Suite contract : node tests/contract/run.mjs --target mock (or -Exe real); no app started.
-  -Suite web      : Playwright web project (Vite + mock-core), tests/e2e/web.
+  -Suite contract : node tests/contract/run.mjs --target mock (or -Exe real) --suite <-ContractSuite>; no app started.
+  -Suite web      : Playwright web project (Vite + mock-core), tests/e2e/web, or only -Spec <file>. Ports from MM_WEB_PORT /
+                    MOCK_PORT (defaults 5173 / 47999); servers are never reused unless MM_REUSE=1.
   -Suite process  : PowerShell lifecycle tests T-P1..T-P12 (each test starts its own instance).
   -Suite <name>   : starts the app once, attaches Playwright over CDP, runs
                     npx playwright test --project=app tests/e2e/<name>
@@ -17,7 +18,9 @@ param(
   [Parameter(Mandatory)][string]$Suite,
   [string]$Exe,
   [switch]$Keep,                 # keep the app running and the data root after the run
-  [string[]]$Only = @()          # process suite: run only these ids, e.g. -Only T-P1,T-P3
+  [string[]]$Only = @(),         # process suite: run only these ids, e.g. -Only T-P1,T-P3
+  [string]$Spec = "",            # web / app suites: run only this Playwright file, e.g. -Spec tests/e2e/web/m1-3b.spec.ts
+  [string]$ContractSuite = "all"  # contract suite: names in tests/contract/suites, comma separated, or all
 )
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot '..\tools\perf\lib.ps1')
@@ -38,12 +41,13 @@ try {
     $target = if ($Exe -eq 'real') { 'real' } else { 'mock' }
     $exePath = $null
     Push-Location $repo
-    try { & node tests/contract/run.mjs --target $target --suite m0; $failures = $LASTEXITCODE } finally { Pop-Location }
+    try { & node tests/contract/run.mjs --target $target --suite $ContractSuite; $failures = $LASTEXITCODE } finally { Pop-Location }
     Write-Host "contract ($target) exit $failures"
   } elseif ($Suite -eq 'web') {
     # Vite dev server + mock-core, Chromium (playwright.config.ts starts the servers when needed). No app.
     Push-Location $repo
-    try { & npx playwright test --project=web tests/e2e/web --reporter=list; $failures = $LASTEXITCODE } finally { Pop-Location }
+    $webSpec = if ($Spec) { $Spec } else { "tests/e2e/web" }
+    try { & npx playwright test --project=web $webSpec --reporter=list; $failures = $LASTEXITCODE } finally { Pop-Location }
   } elseif ($Suite -eq 'process') {
     . (Join-Path $repo 'tests\e2e\process\lifecycle.ps1')
     $ctx = @{ Exe = $exePath; RunRoot = $root }
@@ -69,7 +73,7 @@ try {
     $json = Join-Path $root 'playwright.json'
     $env:PLAYWRIGHT_JSON_OUTPUT_NAME = $json
     Push-Location $repo
-    try { & npx playwright test --project=app "tests/e2e/$Suite" --reporter=list,json } finally { Pop-Location }
+    try { & npx playwright test --project=app $(if ($Spec) { $Spec } else { "tests/e2e/$Suite" }) --reporter=list,json } finally { Pop-Location }
     if (Test-Path $json) {
       $st = (Get-Content $json -Raw | ConvertFrom-Json).stats
       $failures = [int]$st.unexpected + [int]$st.flaky
