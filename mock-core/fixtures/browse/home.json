@@ -1,0 +1,1624 @@
+{
+  "shelves": [
+    {
+      "key": "quick",
+      "title": "Chọn nhanh",
+      "subtitle": "Bắt đầu nghe",
+      "layout": "quickPicks",
+      "items": [
+        {
+          "t": "track",
+          "id": "rCMHoYQvnxt",
+          "title": "Chúng Ta Của Hiện Tại",
+          "artists": [
+            {
+              "id": "UC2Irj7hF6u-HXDylouBiBRq",
+              "name": "Sơn Tùng M-TP"
+            }
+          ],
+          "durationMs": 301000,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/DpYrba8oIx-39I_nO2Ts2NSOng3NfMHOmsXovz9xmryzjGPwgKTzuCudvd3jFZyj=w302-h302-l90-rj",
+            "w": 302,
+            "h": 302
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "TMt0eaH13zF",
+          "title": "Có Chắc Yêu Là Đây",
+          "artists": [
+            {
+              "id": "UCpT9FmreaEJVDywLn_PEKNn",
+              "name": "Sơn Tùng M-TP"
+            }
+          ],
+          "durationMs": 242000,
+          "art": {
+            "src": "https://i.ytimg.com/vi/LcO6THFYL9h/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "VkG0J0lgABR",
+          "title": "Muộn Rồi Mà Sao Còn",
+          "artists": [
+            {
+              "id": "UCfBLpOVaTiN-ilXTWKF3gdT",
+              "name": "Sơn Tùng M-TP"
+            }
+          ],
+          "durationMs": 275000,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/7ad7_pBTzc5OH8wbxxXg5DXh-N7Uqigj2UMVL45nApOtHY7izXmhDTWDsnungwBL=w226-h226-l90-rj",
+            "w": 226,
+            "h": 226
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "0GZGzSJz6RL",
+          "title": "Đi Về Nhà",
+          "artists": [
+            {
+              "id": "UCdxB55uckzmpPkUZ_p4XqAM",
+              "name": "Đen"
+            }
+          ],
+          "durationMs": 222000,
+          "art": {
+            "src": "https://i.ytimg.com/vi/PG2EmFBcDqa/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          },
+          "explicit": true
+        },
+        {
+          "t": "track",
+          "id": "EiqOZZY4jXa",
+          "title": "Mười Năm",
+          "artists": [
+            {
+              "id": "UCUl1lIwquoYRhTFP5fXGv3R",
+              "name": "Đen"
+            }
+          ],
+          "durationMs": 248000,
+          "art": {
+            "src": "https://i.ytimg.com/vi/GOIofu-AmTe/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "OH4RN6Vn3xd",
+          "title": "Bước Qua Nhau",
+          "artists": [
+            {
+              "id": "UC1eTf9QTCrgo-NIYt1YYHnT",
+              "name": "Vũ."
+            }
+          ],
+          "durationMs": 254000,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/B-eA5JfZgxKuu3y8wT9EbDIbsnu8hw4t5iy_1316FYz7SA_exihk--v36hmnmRE7=w302-h302-l90-rj",
+            "w": 302,
+            "h": 302
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "wveQU7jsKZs",
+          "title": "Nàng Thơ",
+          "artists": [
+            {
+              "id": "UCbo9LE22gI0fUw_ly-8dkom",
+              "name": "Hoàng Dũng"
+            }
+          ],
+          "durationMs": 252000,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/Zf23KF1u2JPvv2uiwzvviirDeFpuerU1l-8liw-kjjjjozyyIIZgWpd_G6FkDFkE=w600-h600-l90-rj",
+            "w": 600,
+            "h": 600
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "t2N_mtFkLJT",
+          "title": "Hơn Cả Yêu",
+          "artists": [
+            {
+              "id": "UCfpmKGDYgwn15-PCpvX3LyR",
+              "name": "Đức Phúc"
+            }
+          ],
+          "durationMs": 238000,
+          "art": {
+            "src": "https://i.ytimg.com/vi/GjqMMdKFxOH/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "FpoZ4Jz5Lis",
+          "title": "See Tình",
+          "artists": [
+            {
+              "id": "UCbz7hqGc2RL_3LFAocq-rx1",
+              "name": "Hoàng Thùy Linh"
+            }
+          ],
+          "durationMs": 187000,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/AeYqNSnys5_4h_iGy0NpLIAzweehw_0R6HAsgmpVMRdxtsn4MH5UNzSVmgWlYyp8=w226-h226-l90-rj",
+            "w": 226,
+            "h": 226
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "6KCfOhOCSj2",
+          "title": "Thức Giấc",
+          "artists": [
+            {
+              "id": "UCOTzHBeeqMbFb_MYZ44ibHs",
+              "name": "Da LAB"
+            }
+          ],
+          "durationMs": 301000,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/2cTr0TkLLV6DhoYQjDe6dK3rjcLiEkOh2vQ9O0BeEcoyrrlgk3uTDAp6xfemxw99=w544-h544-l90-rj",
+            "w": 544,
+            "h": 544
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "U1mOAaK4DpK",
+          "title": "Waiting For You",
+          "artists": [
+            {
+              "id": "UCOgTWJ7IFU1-KwaIyzOlI7v",
+              "name": "MONO"
+            }
+          ],
+          "durationMs": 266000,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/nFjFxff_9kpO_yQaeYsFOTRqVe9fCljXBRGGZKZ9WGjOVqZCSYDpuwr9OnRiYMM4=w226-h226-l90-rj",
+            "w": 226,
+            "h": 226
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          },
+          "explicit": true
+        },
+        {
+          "t": "track",
+          "id": "sMKVwZBbJBq",
+          "title": "Ngày Đầu Tiên",
+          "artists": [
+            {
+              "id": "UCvDZ9hhr5iMhlVUCPy-xI_X",
+              "name": "Đức Phúc"
+            }
+          ],
+          "durationMs": 232000,
+          "art": {
+            "src": "https://i.ytimg.com/vi/rfsWDinXqE3/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        }
+      ]
+    },
+    {
+      "key": "again",
+      "title": "Nghe lại",
+      "layout": "cards",
+      "items": [
+        {
+          "t": "album",
+          "id": "MPREb_IXm2DPi6iGg",
+          "title": "Sky Tour",
+          "artists": [
+            {
+              "id": "UCEnCqLbI1vo833CyMlpWYIa",
+              "name": "Sơn Tùng M-TP"
+            }
+          ],
+          "year": 2020,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/XDPU7gtbazydC23QZq4Wwua_n4KNox0J4JFq5V-ga42QR7dr8GUD381RBGXWijEd=w544-h544-l90-rj",
+            "w": 544,
+            "h": 544
+          },
+          "source": "yt",
+          "kind": "album"
+        },
+        {
+          "t": "album",
+          "id": "MPREb_Z9dPnXBt3xi",
+          "title": "Mười Năm",
+          "artists": [
+            {
+              "id": "UCDXT6WPRvr5vnuRkbXmCcnw",
+              "name": "Đen"
+            }
+          ],
+          "year": 2022,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/3KW2jN1LTVWctIBrogW3VjNWHCnOZswZd3IBIxEMTlPAWKAyKQJcEO2WSrZMKXIn=w302-h302-l90-rj",
+            "w": 302,
+            "h": 302
+          },
+          "source": "yt",
+          "kind": "single"
+        },
+        {
+          "t": "album",
+          "id": "MPREb_K9TTc9xyH7B",
+          "title": "Hoàng Thùy Linh: Link",
+          "artists": [
+            {
+              "id": "UCngIGUJ96H_J9bhdM7zLQI3",
+              "name": "Hoàng Thùy Linh"
+            }
+          ],
+          "year": 2021,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/C0zEqephiHuenJfDgCXB5T2D5-y9virFJPYWOjLuc-pIyEkNKvWgecSL__NWDPNa=w544-h544-l90-rj",
+            "w": 544,
+            "h": 544
+          },
+          "source": "yt",
+          "kind": "album"
+        },
+        {
+          "t": "album",
+          "id": "MPREb_1DTAwGEtwbt",
+          "title": "Đức Phúc Acoustic",
+          "artists": [
+            {
+              "id": "UC6hhTjoZz81SCl-vf6Jefog",
+              "name": "Đức Phúc"
+            }
+          ],
+          "year": 2023,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/Qo5BEDMsx0gMVNgM9pflFrli4m2i0Rdni25lAQ5x7ZVGPHLYJ-dUp8yVcIMyJOFS=w302-h302-l90-rj",
+            "w": 302,
+            "h": 302
+          },
+          "source": "yt",
+          "kind": "ep"
+        },
+        {
+          "t": "playlist",
+          "id": "VLPLEppUmiEu-7YLt7FXKo7AC6Kfb168_2Xa",
+          "title": "Nhạc Chill Cuối Tuần",
+          "subtitle": "YouTube Music • 20 bài",
+          "art": {
+            "src": "https://lh3.googleusercontent.com/eDXySKvBrlLQPic8FapzVUzBxsUFuWsVjfBccbnG0Rfs2u69S52SGqk0UrL6rAs4=w544-h544-l90-rj",
+            "w": 544,
+            "h": 544
+          },
+          "source": "yt",
+          "owner": "YouTube Music",
+          "local": false,
+          "count": 20
+        },
+        {
+          "t": "playlist",
+          "id": "zing:plfOZaZ07B",
+          "title": "V-Pop Đang Hot",
+          "subtitle": "Zing MP3 • 27 bài",
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/2/a/0016ef8ffe5e34769cdc501f5194097b.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "owner": "Zing MP3",
+          "local": false,
+          "count": 27
+        },
+        {
+          "t": "playlist",
+          "id": "VLPLmfPJOQtxyfQ3QI1av_1B5OfoCjOf4Fjq",
+          "title": "Lofi Học Bài",
+          "subtitle": "YouTube Music • 34 bài",
+          "art": {
+            "src": "https://i.ytimg.com/vi/pVGdBUXzrZJ/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "owner": "YouTube Music",
+          "local": false,
+          "count": 34
+        },
+        {
+          "t": "playlist",
+          "id": "nct:pl5mBnChvl",
+          "title": "Nhạc Trẻ Hay Nhất",
+          "subtitle": "NhacCuaTui • 41 bài",
+          "art": {
+            "src": "https://avatar-ex-swe.nixcdn.com/song/7120656714/14cabc3dc42a8cfaf737.jpg",
+            "w": 500,
+            "h": 500
+          },
+          "source": "nct",
+          "owner": "NhacCuaTui",
+          "local": false,
+          "count": 41
+        }
+      ]
+    },
+    {
+      "key": "zing",
+      "title": "BXH Zing MP3",
+      "subtitle": "Cập nhật mỗi giờ",
+      "layout": "chart",
+      "items": [
+        {
+          "t": "track",
+          "id": "zing:ZDDI8C8G",
+          "title": "Nàng Thơ",
+          "artists": [
+            {
+              "id": "UCDF8TMdySudBbzZ2VsaqMi4",
+              "name": "Hoàng Dũng"
+            }
+          ],
+          "durationMs": 252000,
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/5/4/c0a883b60806b04fe3d0c3546b97c1cf.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "quality": {
+            "label": "320",
+            "lossless": false,
+            "kbps": 320
+          }
+        },
+        {
+          "t": "track",
+          "id": "zing:ZAUCF0AC",
+          "title": "Hơn Cả Yêu",
+          "artists": [
+            {
+              "id": "UCUfdFh1QBPrM-AisAaUIrOM",
+              "name": "Đức Phúc"
+            }
+          ],
+          "durationMs": 238000,
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/8/1/941fcd6a3ca0e7461dd65e9590477df8.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "quality": {
+            "label": "320",
+            "lossless": false,
+            "kbps": 320
+          }
+        },
+        {
+          "t": "track",
+          "id": "zing:ZHGASSW5",
+          "title": "See Tình",
+          "artists": [
+            {
+              "id": "UC7P1s0lPbsQKO3iBquTvCZC",
+              "name": "Hoàng Thùy Linh"
+            }
+          ],
+          "durationMs": 187000,
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/7/d/39f948963c611a09f82f540f6e00a2a3.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "quality": {
+            "label": "320",
+            "lossless": false,
+            "kbps": 320
+          }
+        },
+        {
+          "t": "track",
+          "id": "zing:Z8F7J2IO",
+          "title": "Thức Giấc",
+          "artists": [
+            {
+              "id": "UC9L6_Dkoh4RnR60_1K1poTq",
+              "name": "Da LAB"
+            }
+          ],
+          "durationMs": 301000,
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/1/8/79e534e58cab7f3de9e3e71e809f9e8b.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "quality": {
+            "label": "320",
+            "lossless": false,
+            "kbps": 320
+          },
+          "explicit": true
+        },
+        {
+          "t": "track",
+          "id": "zing:ZF4GIWDH",
+          "title": "Waiting For You",
+          "artists": [
+            {
+              "id": "UCuzzXWVA-N4yIC4D9WJfJSF",
+              "name": "MONO"
+            }
+          ],
+          "durationMs": 266000,
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/a/b/e751c1bc91e9a1b72f11ce51ca90cf73.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "quality": {
+            "label": "320",
+            "lossless": false,
+            "kbps": 320
+          }
+        },
+        {
+          "t": "track",
+          "id": "zing:ZF7GEEUK",
+          "title": "Ngày Đầu Tiên",
+          "artists": [
+            {
+              "id": "UCFITL7rUx_rmy5vyDiaeq7k",
+              "name": "Đức Phúc"
+            }
+          ],
+          "durationMs": 232000,
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/2/a/5d5a7adf887c8fcd22c69c53f32cf183.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "quality": {
+            "label": "320",
+            "lossless": false,
+            "kbps": 320
+          }
+        },
+        {
+          "t": "track",
+          "id": "zing:ZYLXZAU6",
+          "title": "Em Của Ngày Hôm Qua",
+          "artists": [
+            {
+              "id": "UCJ70KajZNQF0G6dvoq7Ay-Z",
+              "name": "Sơn Tùng M-TP"
+            }
+          ],
+          "durationMs": 270000,
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/6/a/c7de1e537688ebffeadc7bba5f82c047.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "quality": {
+            "label": "320",
+            "lossless": false,
+            "kbps": 320
+          }
+        },
+        {
+          "t": "track",
+          "id": "zing:ZBBQHHZO",
+          "title": "Có Hẹn Với Thanh Xuân",
+          "artists": [
+            {
+              "id": "UCtN2mUqGTyAvXib9_6pIK__",
+              "name": "MONSTAR"
+            }
+          ],
+          "durationMs": 259000,
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/2/4/cc396ff112bcde0b35fe0a026ff4db61.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "quality": {
+            "label": "320",
+            "lossless": false,
+            "kbps": 320
+          }
+        },
+        {
+          "t": "track",
+          "id": "zing:ZLXYYAFW",
+          "title": "Một Triệu Like",
+          "artists": [
+            {
+              "id": "UCjIXHgBhrygL2qua6Tvu5bK",
+              "name": "Đen"
+            }
+          ],
+          "durationMs": 201000,
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/9/c/f00a9763c25b39f1f661ec712dfb501f.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "quality": {
+            "label": "320",
+            "lossless": false,
+            "kbps": 320
+          }
+        },
+        {
+          "t": "track",
+          "id": "zing:Z60TEVNO",
+          "title": "Chạy Ngay Đi",
+          "artists": [
+            {
+              "id": "UColdl1LoOj5Z6bIbAEoDOO8",
+              "name": "Sơn Tùng M-TP"
+            }
+          ],
+          "durationMs": 249000,
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/3/7/461413787d47cdc0e47183cefbbc3bb3.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "quality": {
+            "label": "320",
+            "lossless": false,
+            "kbps": 320
+          }
+        }
+      ],
+      "more": {
+        "route": "charts",
+        "params": {
+          "source": "zing"
+        }
+      }
+    },
+    {
+      "key": "albums",
+      "title": "Album dành cho bạn",
+      "layout": "cards",
+      "items": [
+        {
+          "t": "album",
+          "id": "MPREb_qqDjRa0DPSK",
+          "title": "Sky Tour",
+          "artists": [
+            {
+              "id": "UCCHmzluMd7d2xGlsvZLzYOs",
+              "name": "Sơn Tùng M-TP"
+            }
+          ],
+          "year": 2020,
+          "art": {
+            "src": "https://i.ytimg.com/vi/2lLZJAxMwaw/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "kind": "album"
+        },
+        {
+          "t": "album",
+          "id": "MPREb_r5tT5o1B9qF",
+          "title": "Mười Năm",
+          "artists": [
+            {
+              "id": "UCBI_-VbCBE3bSsdlRPJdTjW",
+              "name": "Đen"
+            }
+          ],
+          "year": 2022,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/Zih96W3BMi69C5GP-tCKs1e2CWLVikvHe7zP2uai4HjrDpT5oAdB-f-zhG1x-O-a=w600-h600-l90-rj",
+            "w": 600,
+            "h": 600
+          },
+          "source": "yt",
+          "kind": "single"
+        },
+        {
+          "t": "album",
+          "id": "MPREb_HIaK78wETql",
+          "title": "Hoàng Thùy Linh: Link",
+          "artists": [
+            {
+              "id": "UCM_-rSBfZOsIXePSyafloxH",
+              "name": "Hoàng Thùy Linh"
+            }
+          ],
+          "year": 2021,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/AGimVLk0gHYL9fGhvLVwYVBzWm6d4m1nLgxaPcYqFI3_v3ojdSyD_HsdyNcHP8ij=w302-h302-l90-rj",
+            "w": 302,
+            "h": 302
+          },
+          "source": "yt",
+          "kind": "album"
+        },
+        {
+          "t": "album",
+          "id": "MPREb_9gHO_pIbKdI",
+          "title": "Đức Phúc Acoustic",
+          "artists": [
+            {
+              "id": "UCzE2c6dvNVoZAVM-OAjJkj2",
+              "name": "Đức Phúc"
+            }
+          ],
+          "year": 2023,
+          "art": {
+            "src": "https://i.ytimg.com/vi/y5MY2ZA4rrX/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "kind": "ep"
+        },
+        {
+          "t": "album",
+          "id": "MPREb_8VT_NtShzYn",
+          "title": "After Hours",
+          "artists": [
+            {
+              "id": "UCytIsSSFKi5td5EGPo1fxe2",
+              "name": "The Weeknd"
+            }
+          ],
+          "year": 2020,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/NfaJrgpSgSSqY1YdavjSIiRMOnocS7w2Yao5bvHAqV3R4X7WcMcLOaoHp6NPEYCA=w302-h302-l90-rj",
+            "w": 302,
+            "h": 302
+          },
+          "source": "yt",
+          "kind": "album"
+        },
+        {
+          "t": "album",
+          "id": "MPREb_dgFleotnkMK",
+          "title": "Harry's House",
+          "artists": [
+            {
+              "id": "UC46XuE7FawHhRw5jFEWxil7",
+              "name": "Harry Styles"
+            }
+          ],
+          "year": 2022,
+          "art": {
+            "src": "https://i.ytimg.com/vi/rAGrgxsSaE6/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "kind": "album"
+        },
+        {
+          "t": "album",
+          "id": "MPREb_COoVRyVSc4y",
+          "title": "Midnights",
+          "artists": [
+            {
+              "id": "UCQymOrYalM3E1CAKH22N8n3",
+              "name": "Taylor Swift"
+            }
+          ],
+          "year": 2022,
+          "art": {
+            "src": "https://i.ytimg.com/vi/1AQg1ckOPZ3/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "kind": "album"
+        },
+        {
+          "t": "album",
+          "id": "MPREb_GqhZL26uk04",
+          "title": "Music of the Spheres",
+          "artists": [
+            {
+              "id": "UCf2gmv-AiRCMvFalHGdzD6m",
+              "name": "Coldplay"
+            }
+          ],
+          "year": 2021,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/zkr_HWOXtqMLZbDXYzoMs7gj3zAoasYSBmYbF9rCrfZE5Lc1ymj4I264db6y3mLS=w226-h226-l90-rj",
+            "w": 226,
+            "h": 226
+          },
+          "source": "yt",
+          "kind": "album"
+        },
+        {
+          "t": "album",
+          "id": "MPREb_OqcVPfNS0ZS",
+          "title": "Future Nostalgia",
+          "artists": [
+            {
+              "id": "UCcbx5R63pGvI-Ovyz7wrqwI",
+              "name": "Dua Lipa"
+            }
+          ],
+          "year": 2020,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/8i5WVeok4n_dfNjjfmFWf2gHCL8k0pqTMHe8PLz0N6T4g4XJWnlauThITMLDma1R=w226-h226-l90-rj",
+            "w": 226,
+            "h": 226
+          },
+          "source": "yt",
+          "kind": "album"
+        },
+        {
+          "t": "album",
+          "id": "MPREb_Zg8zTuf0Zhz",
+          "title": "Vũ.: Bảo Tàng Của Nuối Tiếc",
+          "artists": [
+            {
+              "id": "UCz9iyZFsVQUb7OdsQBKgENS",
+              "name": "Vũ."
+            }
+          ],
+          "year": 2020,
+          "art": {
+            "src": "https://i.ytimg.com/vi/8DeWiaX7u_i/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "kind": "album"
+        }
+      ],
+      "more": {
+        "route": "browse",
+        "params": {
+          "browseId": "FEmusic_new_releases_albums"
+        }
+      }
+    },
+    {
+      "key": "artists",
+      "title": "Nghệ sĩ bạn có thể thích",
+      "layout": "cards",
+      "items": [
+        {
+          "t": "artist",
+          "id": "UCg-Ds_COVaFZp8UNDZTfie6",
+          "name": "Sơn Tùng M-TP",
+          "art": {
+            "src": "https://i.ytimg.com/vi/1QnMheucHSA/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "subtitle": "0.6Tr người đăng ký",
+          "source": "yt"
+        },
+        {
+          "t": "artist",
+          "id": "UCBXmREyUh6njTh1NMm-d8Zk",
+          "name": "Đen",
+          "art": {
+            "src": "https://lh3.googleusercontent.com/u0n7vPGASYhsHL92CNa3-ZB6OjD5RkUjSEoP3uh774HKUZGQnSFXPjHKjfyslX7W=w544-h544-l90-rj",
+            "w": 544,
+            "h": 544
+          },
+          "subtitle": "1.8Tr người đăng ký",
+          "source": "yt"
+        },
+        {
+          "t": "artist",
+          "id": "UCCTqMq5P3ZXZQ_2_vtxvB2Z",
+          "name": "Hoàng Thùy Linh",
+          "art": {
+            "src": "https://lh3.googleusercontent.com/Ou43BfLWRzYZwP0VjNa4sluF4dJs1UBDFKBF4EMYWWcuYfZ9MjdWNDfT2lyrpSdd=w600-h600-l90-rj",
+            "w": 600,
+            "h": 600
+          },
+          "subtitle": "7.4Tr người đăng ký",
+          "source": "yt"
+        },
+        {
+          "t": "artist",
+          "id": "UCcr98yWNFjdT0TG3NHR_QxK",
+          "name": "Đức Phúc",
+          "art": {
+            "src": "https://i.ytimg.com/vi/eZiU4WflBpd/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "subtitle": "8.5Tr người đăng ký",
+          "source": "yt"
+        },
+        {
+          "t": "artist",
+          "id": "UCX0z-cn7yi4PZgxzINYXjKd",
+          "name": "Vũ.",
+          "art": {
+            "src": "https://lh3.googleusercontent.com/Fmk5LCREmpRloTRAWC2PwsrsXlWC-3v2jMDsaodhRyixTbNR0JgVd0VNc7r4wHMl=w544-h544-l90-rj",
+            "w": 544,
+            "h": 544
+          },
+          "subtitle": "5.8Tr người đăng ký",
+          "source": "yt"
+        },
+        {
+          "t": "artist",
+          "id": "UCqaHC94nC137yUsROqV8_pZ",
+          "name": "MONO",
+          "art": {
+            "src": "https://i.ytimg.com/vi/pPYL4zL2HjX/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "subtitle": "7.8Tr người đăng ký",
+          "source": "yt"
+        },
+        {
+          "t": "artist",
+          "id": "UCzV6YSsbz-owetkRvYf-4l2",
+          "name": "The Weeknd",
+          "art": {
+            "src": "https://i.ytimg.com/vi/CRLs6GHRzJK/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "subtitle": "0.5Tr người đăng ký",
+          "source": "yt"
+        },
+        {
+          "t": "artist",
+          "id": "UC2XYyfjeCHBTuw9zFQhFHU0",
+          "name": "Taylor Swift",
+          "art": {
+            "src": "https://lh3.googleusercontent.com/blaWFtaCaxfKpIhqcEm2kT9TiRBRkl3ARSg8kcLSXwY-TBVJs3YGVoWn5Q-BC2zr=w302-h302-l90-rj",
+            "w": 302,
+            "h": 302
+          },
+          "subtitle": "1.1Tr người đăng ký",
+          "source": "yt"
+        }
+      ]
+    },
+    {
+      "key": "new",
+      "title": "Nhạc mới phát hành",
+      "layout": "rows",
+      "items": [
+        {
+          "t": "track",
+          "id": "zing:ZVBNEUGL",
+          "title": "Tình Yêu Màu Nắng",
+          "artists": [
+            {
+              "id": "UCe08lBHTtXzmaasgxzw-fd3",
+              "name": "Đoàn Thúy Trang"
+            }
+          ],
+          "durationMs": 224000,
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/1/d/d6b9b1b9be23278ea74c49caa3ad91c7.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "quality": {
+            "label": "320",
+            "lossless": false,
+            "kbps": 320
+          }
+        },
+        {
+          "t": "track",
+          "id": "zQrgpvvNdZG",
+          "title": "Cưới Thôi",
+          "artists": [
+            {
+              "id": "UCDJUSeYmgccWXoraXcB2A4R",
+              "name": "Masew"
+            }
+          ],
+          "durationMs": 211000,
+          "art": {
+            "src": "https://i.ytimg.com/vi/5cNfMOO2usq/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "zing:ZXQ1C2XL",
+          "title": "Phép Màu",
+          "artists": [
+            {
+              "id": "UC-9YbcKPllLnKIqCX8b0mbx",
+              "name": "MAYDAYs"
+            }
+          ],
+          "durationMs": 236000,
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/b/1/26d4926c144a8760869580c854341307.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "quality": {
+            "label": "320",
+            "lossless": false,
+            "kbps": 320
+          }
+        },
+        {
+          "t": "track",
+          "id": "ICqTO7J3EkM",
+          "title": "Lạc Trôi",
+          "artists": [
+            {
+              "id": "UCDYYVxUIp9KIelPhLO9awyP",
+              "name": "Sơn Tùng M-TP"
+            }
+          ],
+          "durationMs": 232000,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/w09e75u63eufqQlCPXvm7U0q1kRQW1vNTeYkTXu8plXHoTzKpq8ILaYUbDVciJyc=w600-h600-l90-rj",
+            "w": 600,
+            "h": 600
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          },
+          "explicit": true
+        },
+        {
+          "t": "track",
+          "id": "zing:ZJLLMDYJ",
+          "title": "Blinding Lights",
+          "artists": [
+            {
+              "id": "UCMWRNkaI1GTjZmFhWA6iG0h",
+              "name": "The Weeknd"
+            }
+          ],
+          "durationMs": 200000,
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/7/e/f4ca02cab80db695163d411a8df5917e.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "quality": {
+            "label": "320",
+            "lossless": false,
+            "kbps": 320
+          }
+        },
+        {
+          "t": "track",
+          "id": "LS7aVIXeZJc",
+          "title": "As It Was",
+          "artists": [
+            {
+              "id": "UCksCC9NNcONzddOMWCivW-j",
+              "name": "Harry Styles"
+            }
+          ],
+          "durationMs": 167000,
+          "art": {
+            "src": "https://i.ytimg.com/vi/eICeSBk8wWM/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "zing:ZGEYZK7D",
+          "title": "Flowers",
+          "artists": [
+            {
+              "id": "UCGYiyYHtEV6-8GW_DDt8ssb",
+              "name": "Miley Cyrus"
+            }
+          ],
+          "durationMs": 200000,
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/e/f/6c857de743a23c39c323f445e3fb4b31.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "quality": {
+            "label": "320",
+            "lossless": false,
+            "kbps": 320
+          }
+        },
+        {
+          "t": "track",
+          "id": "c0HX0V8sa9T",
+          "title": "Anti-Hero",
+          "artists": [
+            {
+              "id": "UC5rH6L17RnmW_67FZq9TOXk",
+              "name": "Taylor Swift"
+            }
+          ],
+          "durationMs": 200000,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/66KfTPHb8UEe5sFYpWA6sYMrtCUl8JdPjB1BTk9snoUNGNU_FwraT8-asxnLb-BV=w544-h544-l90-rj",
+            "w": 544,
+            "h": 544
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "zing:ZJR5REKA",
+          "title": "Yellow",
+          "artists": [
+            {
+              "id": "UCR83GUGhme-0tMW7XnuXX64",
+              "name": "Coldplay"
+            }
+          ],
+          "durationMs": 269000,
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/9/d/f09bd4681df56ef7922021212a1cb5a1.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "quality": {
+            "label": "320",
+            "lossless": false,
+            "kbps": 320
+          }
+        },
+        {
+          "t": "track",
+          "id": "SIYHjmjudYk",
+          "title": "Heat Waves",
+          "artists": [
+            {
+              "id": "UCbR1mmOUHbHKzsYJ5GWiSrJ",
+              "name": "Glass Animals"
+            }
+          ],
+          "durationMs": 238000,
+          "art": {
+            "src": "https://i.ytimg.com/vi/7OWrxsCYxGx/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        }
+      ]
+    },
+    {
+      "key": "playlists",
+      "title": "Danh sách phát nổi bật",
+      "layout": "cards",
+      "items": [
+        {
+          "t": "playlist",
+          "id": "VLPLQKOUCxZSauQgq7sPzO9XCeGh3qqOuA8i",
+          "title": "Nhạc Chill Cuối Tuần",
+          "subtitle": "YouTube Music • 20 bài",
+          "art": {
+            "src": "https://i.ytimg.com/vi/PaLwjyIR_1H/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "owner": "YouTube Music",
+          "local": false,
+          "count": 20
+        },
+        {
+          "t": "playlist",
+          "id": "zing:plQEfdt_jJ",
+          "title": "V-Pop Đang Hot",
+          "subtitle": "Zing MP3 • 27 bài",
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/4/c/d14bc2529d0048186485113ed6c68956.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "owner": "Zing MP3",
+          "local": false,
+          "count": 27
+        },
+        {
+          "t": "playlist",
+          "id": "VLPLcVtx1mwLsB2Y1vBBB53yklx7hJpNGR-Y",
+          "title": "Lofi Học Bài",
+          "subtitle": "YouTube Music • 34 bài",
+          "art": {
+            "src": "https://lh3.googleusercontent.com/2RZNzB6IflnVmFkufqluqVeB7Oj9JP_exIl-r84cp4SZgYc1TaUncaRFWqeeDyby=w302-h302-l90-rj",
+            "w": 302,
+            "h": 302
+          },
+          "source": "yt",
+          "owner": "YouTube Music",
+          "local": false,
+          "count": 34
+        },
+        {
+          "t": "playlist",
+          "id": "nct:pl9Sz6perE",
+          "title": "Nhạc Trẻ Hay Nhất",
+          "subtitle": "NhacCuaTui • 41 bài",
+          "art": {
+            "src": "https://avatar-ex-swe.nixcdn.com/song/3868445238/1ba6b99793579ae77d24.jpg",
+            "w": 500,
+            "h": 500
+          },
+          "source": "nct",
+          "owner": "NhacCuaTui",
+          "local": false,
+          "count": 41
+        },
+        {
+          "t": "playlist",
+          "id": "VLPL4omMiEvFMlovK6v8p00uOxNZY36kLuA-",
+          "title": "Acoustic Việt",
+          "subtitle": "YouTube Music • 48 bài",
+          "art": {
+            "src": "https://lh3.googleusercontent.com/SrzjAuhGY08C_QejBi1shj1LJ-ioUkrk204vPtNxvyifLJXmaBBndNWT1jO54KuS=w544-h544-l90-rj",
+            "w": 544,
+            "h": 544
+          },
+          "source": "yt",
+          "owner": "YouTube Music",
+          "local": false,
+          "count": 48
+        },
+        {
+          "t": "playlist",
+          "id": "zing:plX5yi2gOp",
+          "title": "Rap Việt Tuyển Chọn",
+          "subtitle": "Zing MP3 • 55 bài",
+          "art": {
+            "src": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/0/5/196f87fd823cf922ce98a3209da1c5bc.jpg",
+            "w": 240,
+            "h": 240
+          },
+          "source": "zing",
+          "owner": "Zing MP3",
+          "local": false,
+          "count": 55
+        },
+        {
+          "t": "playlist",
+          "id": "VLPLCx7pRY3CV9Yea5A-2d5p2_zS3XefZEGZ",
+          "title": "Nhạc Xưa Bất Hủ",
+          "subtitle": "YouTube Music • 62 bài",
+          "art": {
+            "src": "https://lh3.googleusercontent.com/w4FZ2HZE1bANxtRF-d_XPz21BFuWqbXvDPHuj9JifGTWKvvGSlTxZWQd2tLMzLVt=w302-h302-l90-rj",
+            "w": 302,
+            "h": 302
+          },
+          "source": "yt",
+          "owner": "YouTube Music",
+          "local": false,
+          "count": 62
+        },
+        {
+          "t": "playlist",
+          "id": "sc:pld5wjJdIb",
+          "title": "Top Hits Quốc Tế",
+          "subtitle": "SoundCloud • 69 bài",
+          "art": {
+            "src": "https://i1.sndcdn.com/artworks-j7jjf4gko3i8-hipckm-t500x500.jpg",
+            "w": 500,
+            "h": 500
+          },
+          "source": "sc",
+          "owner": "SoundCloud",
+          "local": false,
+          "count": 69
+        }
+      ]
+    },
+    {
+      "key": "intl",
+      "title": "Quốc tế đang thịnh hành",
+      "layout": "rows",
+      "items": [
+        {
+          "t": "track",
+          "id": "uimlsanD2RR",
+          "title": "Blinding Lights",
+          "artists": [
+            {
+              "id": "UCGu8yrvBizvUKRuFh4wasbm",
+              "name": "The Weeknd"
+            }
+          ],
+          "durationMs": 200000,
+          "art": {
+            "src": "https://i.ytimg.com/vi/Wqkfwd4vzf8/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "f2zOxime2gf",
+          "title": "As It Was",
+          "artists": [
+            {
+              "id": "UCGw_TW21fqF5o0Y4Gm-aULV",
+              "name": "Harry Styles"
+            }
+          ],
+          "durationMs": 167000,
+          "art": {
+            "src": "https://i.ytimg.com/vi/uG4vMGz2mMs/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "0lV-jHm-2vC",
+          "title": "Flowers",
+          "artists": [
+            {
+              "id": "UCkE7_wXjWv44cryiP-pvqpH",
+              "name": "Miley Cyrus"
+            }
+          ],
+          "durationMs": 200000,
+          "art": {
+            "src": "https://i.ytimg.com/vi/047OtarCjWF/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "sA0yIxm6-j_",
+          "title": "Anti-Hero",
+          "artists": [
+            {
+              "id": "UC_GlGfpF2a3hwwnzGamOR9J",
+              "name": "Taylor Swift"
+            }
+          ],
+          "durationMs": 200000,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/t7CmKzAhGzxw0Gu4uaifd9TTPkfa1Z0HCyit0vOzLKQxTY5lEKjM1SJWJytX5dQN=w302-h302-l90-rj",
+            "w": 302,
+            "h": 302
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          },
+          "explicit": true
+        },
+        {
+          "t": "track",
+          "id": "YkzPuguc-Ay",
+          "title": "Yellow",
+          "artists": [
+            {
+              "id": "UCB9ewZui2AFkRoS4SvykMgH",
+              "name": "Coldplay"
+            }
+          ],
+          "durationMs": 269000,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/yUahLqS1WVep4_QE4TO2sTpuMYxFpCrM7lmCwOWZwLP31DJW6_AZ0fqQMDpyRQyg=w544-h544-l90-rj",
+            "w": 544,
+            "h": 544
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "NDCm1xuqaLZ",
+          "title": "Heat Waves",
+          "artists": [
+            {
+              "id": "UCBVycgdyFLFtFqbUGq0dsGO",
+              "name": "Glass Animals"
+            }
+          ],
+          "durationMs": 238000,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/_me3e6bx-UgVUYxTadCRhPEKSk1sKfdBp09LPamFvEuSTfhlbHgnfvy-yqB7rfdh=w600-h600-l90-rj",
+            "w": 600,
+            "h": 600
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "G2q9-l7BJ9E",
+          "title": "Levitating",
+          "artists": [
+            {
+              "id": "UC3_wDUnGDpCzqcHESyeVKGq",
+              "name": "Dua Lipa"
+            }
+          ],
+          "durationMs": 203000,
+          "art": {
+            "src": "https://i.ytimg.com/vi/M6eG24M6Uxx/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "l4uah1mcKbv",
+          "title": "Cruel Summer",
+          "artists": [
+            {
+              "id": "UCkykAW7Usgjqey2e7bFwyJV",
+              "name": "Taylor Swift"
+            }
+          ],
+          "durationMs": 178000,
+          "art": {
+            "src": "https://i.ytimg.com/vi/Q_doGQ273vU/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "zArQm78iypQ",
+          "title": "Good 4 U",
+          "artists": [
+            {
+              "id": "UCdepjdWlczw3SlQVjU7YtV7",
+              "name": "Olivia Rodrigo"
+            }
+          ],
+          "durationMs": 178000,
+          "art": {
+            "src": "https://lh3.googleusercontent.com/X2YvBos4OdfyMGvHLOQDTTByOjiB5IFQd43rpiaAktHx7Y5XXvLnHZEfhQVBKZRq=w544-h544-l90-rj",
+            "w": 544,
+            "h": 544
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        },
+        {
+          "t": "track",
+          "id": "Rm1DUFpFOVa",
+          "title": "Espresso",
+          "artists": [
+            {
+              "id": "UC9IxLPMoj9LnGZXcDlfJgNM",
+              "name": "Sabrina Carpenter"
+            }
+          ],
+          "durationMs": 175000,
+          "art": {
+            "src": "https://i.ytimg.com/vi/m3oI6nYMHyy/hqdefault.jpg",
+            "w": 480,
+            "h": 360
+          },
+          "source": "yt",
+          "quality": {
+            "label": "Opus 160",
+            "lossless": false,
+            "kbps": 160
+          }
+        }
+      ]
+    }
+  ],
+  "chips": [
+    {
+      "key": "relax",
+      "title": "Thư giãn",
+      "selected": false
+    },
+    {
+      "key": "workout",
+      "title": "Tập luyện",
+      "selected": false
+    },
+    {
+      "key": "focus",
+      "title": "Tập trung",
+      "selected": false
+    },
+    {
+      "key": "commute",
+      "title": "Di chuyển",
+      "selected": false
+    },
+    {
+      "key": "party",
+      "title": "Tiệc tùng",
+      "selected": false
+    },
+    {
+      "key": "sad",
+      "title": "Buồn",
+      "selected": false
+    }
+  ],
+  "greeting": {
+    "key": "good_evening"
+  },
+  "fromCache": true,
+  "next": null
+}
