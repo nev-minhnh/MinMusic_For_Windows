@@ -36,7 +36,7 @@ export type Session = {
   ws: WebSocket;
   authed: boolean;
   role: string;
-  subs: Map<number, { topic: string; seq: number }>;
+  subs: Map<number, { topic: string; seq: number; params?: Record<string, unknown> }>;
   nextSub: number;
   helloTimer: ReturnType<typeof setTimeout> | null;
   /** search.suggest in flight: calling it cancels the previous call of the same connection */

@@ -60,7 +60,7 @@ export async function startMock(opts: MockOptions): Promise<MockHandle> {
       const t = typeof topic === "string" ? T.get(topic) : undefined;
       if (!t) throw bad(`unsupported topic ${String(topic)}`);
       const id = s.nextSub++;
-      const sub = { topic: topic as string, seq: 0 };
+      const sub = { topic: topic as string, seq: 0, params: isObj(p?.params) ? p.params : undefined };
       s.subs.set(id, sub);
       // The first event of a subscription is the snapshot, after the response.
       setImmediate(() => {
