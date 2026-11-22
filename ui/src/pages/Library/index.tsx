@@ -1,18 +1,19 @@
+import type { RouteName } from "../../router/routes";
 import { For, createSignal, onCleanup, onMount, createResource, type Accessor } from "solid-js";
-import { Chip } from "../components/Chip";
-import { Card } from "../components/Card";
-import { Icon } from "../components/Icon";
-import { IconButton } from "../components/IconButton";
-import { Row } from "../components/Row";
-import { VirtualList } from "../components/VirtualList";
-import { QualityBadge } from "../components/Badge";
-import { createWindowStore } from "../state/library";
-import { client } from "../lib/core";
-import { loadAlbums } from "../state/albums";
-import { navigate } from "../router/router";
-import { player, playerState } from "../state/player";
-import { t } from "../i18n";
-import type { Track } from "../lib/types";
+import { Chip } from "../../components/Chip";
+import { Card } from "../../components/Card";
+import { Icon } from "../../components/Icon";
+import { IconButton } from "../../components/IconButton";
+import { Row } from "../../components/Row";
+import { VirtualList } from "../../components/VirtualList";
+import { QualityBadge } from "../../components/Badge";
+import { createWindowStore } from "../../state/library";
+import { client } from "../../lib/core";
+import { loadAlbums } from "../../state/userAlbums";
+import { navigate } from "../../router/router";
+import { player, playerState } from "../../state/player";
+import { t } from "../../i18n";
+import type { Track } from "../../lib/types";
 
 const SORT = { by: "added", desc: true } as const;
 
@@ -131,7 +132,7 @@ export function Library(_props: { params: Record<string, string>; active: Access
               selected={selected() === i()}
               playing={!!store.track(i()) && playerState()?.track?.id === store.track(i())!.id}
               labels={labels()}
-              onSelect={() => setSelected(i())}
+              onPick={() => setSelected(i())}
               onPlay={playTrack}
               onOpenAlbum={openAlbum}
             />
@@ -141,3 +142,6 @@ export function Library(_props: { params: Record<string, string>; active: Access
     </div>
   );
 }
+
+export const routes: RouteName[] = ["library"];
+export default Library;

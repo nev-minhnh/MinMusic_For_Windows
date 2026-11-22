@@ -1,6 +1,7 @@
 import { createMemo, createSignal } from "solid-js";
 
-export type RouteName = "home" | "library" | "album" | "search";
+import type { RouteName } from "./routes";
+export type { RouteName };
 export type Route = { name: RouteName; params: Record<string, string>; key: string };
 export type Dir = "init" | "push" | "pop" | "forward" | "replace";
 

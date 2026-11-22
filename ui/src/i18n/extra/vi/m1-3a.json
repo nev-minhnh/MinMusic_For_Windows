@@ -1,0 +1,53 @@
+{
+  "w2_missing_title": "Trang này chưa có",
+  "w2_missing_body": "Trang sẽ có trong bản cập nhật sau.",
+  "w2_settings_none": "Chưa có nhóm cài đặt nào ở đây",
+  "w2_loading": "Đang tải...",
+  "w2_none": "Chưa có gì",
+  "w2_error_generic": "Đã xảy ra lỗi. Hãy thử lại.",
+  "w2_link_copied": "Đã sao chép liên kết",
+  "w2_added_skipped": "Đã thêm {0} · bỏ qua {1}",
+  "w2_new_album_plus": "+ Album mới",
+  "w2_album_name": "Tên album",
+  "w2_album_created": "Đã tạo \"{0}\"",
+  "w2_create": "Tạo",
+  "w2_queued_n": {
+    "other": "Đã thêm {0} bài hát vào hàng đợi"
+  },
+  "w2_queued_one": "Đã thêm vào hàng đợi",
+  "w2_play_next": "Phát tiếp theo",
+  "w2_add_queue": "Thêm vào hàng đợi",
+  "w2_add_to_album": "Thêm vào album của tôi",
+  "w2_download": "Tải xuống",
+  "w2_choose_source": "Chọn nguồn",
+  "w2_go_artist": "Đi tới nghệ sĩ",
+  "w2_go_album": "Đi tới album",
+  "w2_copy_link": "Sao chép liên kết",
+  "w2_song_info": "Thông tin bài hát",
+  "w2_remove_from_album": "Xoá khỏi album",
+  "w2_src_vip": "VIP",
+  "w2_src_region": "Vùng",
+  "w2_src_preview": "Nghe thử",
+  "w2_shuffle": "Trộn bài",
+  "w2_unpin_sidebar": "Bỏ ghim khỏi sidebar",
+  "w2_pin_sidebar": "Ghim vào sidebar",
+  "w2_rename_album": "Đổi tên",
+  "w2_rename": "Đổi tên",
+  "w2_delete": "Xoá",
+  "w2_delete_album_q": "Xoá \"{0}\"?",
+  "w2_delete_album_body": "Album sẽ bị xoá. Các bài hát vẫn còn trong thư viện.",
+  "w2_change_cover": "Đổi ảnh bìa",
+  "w2_images": "Hình ảnh",
+  "w2_cancel": "Huỷ",
+  "w2_ok": "OK",
+  "w2_n_songs": {
+    "other": "{0} bài hát"
+  },
+  "w2_drop_n": {
+    "other": "Thả để thêm {0} bài"
+  },
+  "w2_stats": "Thống kê",
+  "w2_resize_sidebar": "Đổi độ rộng sidebar",
+  "w2_import_done": "Đã nhập {0} · lỗi {1}",
+  "w2_nothing_selected": "Chưa chọn gì"
+}

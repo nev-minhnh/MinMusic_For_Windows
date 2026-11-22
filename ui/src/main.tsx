@@ -3,8 +3,8 @@ import "./styles/fonts.css";
 import "./styles/tokens.css";
 import "./styles/motion.css";
 import "./styles/base.css";
-import sprite from "./icons/sprite.svg?raw";
+import { injectSprite } from "./icons/host";
 import { App } from "./shell/App";
 
-document.body.insertAdjacentHTML("afterbegin", sprite);
+injectSprite();
 render(() => <App />, document.getElementById("root")!);

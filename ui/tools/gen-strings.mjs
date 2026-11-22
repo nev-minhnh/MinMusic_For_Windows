@@ -43,11 +43,41 @@ export function scanKeys(dir) {
       } else if (/\.(ts|tsx)$/.test(f) && !/\.test\./.test(f)) {
         const src = readFileSync(p, "utf8");
         for (const m of src.matchAll(/\b(?:t|plural)\(\s*["']([\w.]+)["']/g)) keys.add(m[1]);
+        // `i18n: "key"` (toast({i18n}), anything that hands a key to t() later)
+        for (const m of src.matchAll(/\bi18n:\s*["']([\w.]+)["']/g)) keys.add(m[1]);
       }
     }
   };
   walk(dir);
   return keys;
+}
+
+/** Merges extra string files [{file, data}]. The same key in two files is a build error naming both files. */
+export function mergeExtra(sources) {
+  const out = {};
+  const from = {};
+  for (const { file, data } of sources) {
+    for (const [k, v] of Object.entries(data)) {
+      if (k in out) throw new Error(`gen-strings: duplicate key "${k}" in ${from[k]} and ${file}`);
+      out[k] = v;
+      from[k] = file;
+    }
+  }
+  return out;
+}
+
+/** extra/<locale>.json plus every extra/<locale>/*.json (one file per WP). */
+export function loadExtra(extraDir, locale) {
+  const sources = [];
+  const single = join(extraDir, locale + ".json");
+  if (existsSync(single)) sources.push({ file: single, data: JSON.parse(readFileSync(single, "utf8")) });
+  const dir = join(extraDir, locale);
+  if (existsSync(dir)) {
+    for (const f of readdirSync(dir).filter((x) => x.endsWith(".json")).sort()) {
+      sources.push({ file: join(dir, f), data: JSON.parse(readFileSync(join(dir, f), "utf8")) });
+    }
+  }
+  return mergeExtra(sources);
 }
 
 export function build(keys, base, loc, extra) {
@@ -73,7 +103,15 @@ if (process.argv[1] && resolve(process.argv[1]) === resolve(fileURLToPath(import
   const keys = scanKeys(join(ui, "src"));
   const base = read("values");
   const extraDir = join(ui, "src/i18n/extra");
-  const extra = (l) => (existsSync(join(extraDir, l + ".json")) ? JSON.parse(readFileSync(join(extraDir, l + ".json"), "utf8")) : {});
+  let extraEn, extraVi;
+  try {
+    extraEn = loadExtra(extraDir, "en");
+    extraVi = loadExtra(extraDir, "vi");
+  } catch (e) {
+    console.error(String(e.message ?? e));
+    process.exit(1);
+  }
+  const extra = (l) => (l === "en" ? extraEn : extraVi);
   mkdirSync(join(ui, "src/i18n"), { recursive: true });
   let missing = 0;
   for (const [l, dir] of [["en", "values"], ["vi", "values-vi"]]) {
