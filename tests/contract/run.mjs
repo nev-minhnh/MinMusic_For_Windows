@@ -14,10 +14,11 @@ import { startTarget } from "./lib/target.mjs";
 const args = process.argv.slice(2);
 const opt = (n, d) => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : d; };
 const target = opt("--target", "mock");
-const suite = opt("--suite", "m0");
+const suite = opt("--suite", "all");
 const only = opt("--only");
-if (!["mock", "real"].includes(target) || !["m0", "all"].includes(suite)) {
-  console.error("usage: run.mjs --target mock|real --suite m0|all [--only <substring>]");
+const offline = args.includes("--offline");
+if (!["mock", "real"].includes(target)) {
+  console.error("usage: run.mjs --target mock|real --suite <name>[,<name>...]|all [--only <substring>] [--offline]");
   process.exit(2);
 }
 

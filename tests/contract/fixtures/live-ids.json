@@ -1,0 +1,18 @@
+{
+  "_note": "Long-lived official YouTube Music ids for the live contract tests (verified 2026-11-22 against music.youtube.com/youtubei/v1/browse).",
+  "artist": {
+    "id": "UClyA28-01x4z60eWQ2kiNbA",
+    "name": "Sơn Tùng M-TP",
+    "url": "https://music.youtube.com/channel/UClyA28-01x4z60eWQ2kiNbA"
+  },
+  "album": {
+    "id": "MPREb_02D9VvpRQPT",
+    "name": "Sky Tour (Original Motion Picture Soundtrack), Sơn Tùng M-TP, 8 tracks",
+    "url": "https://music.youtube.com/browse/MPREb_02D9VvpRQPT"
+  },
+  "playlist": {
+    "id": "PLFgquLnL59alCl_2TQvOiD5Vgm1hCaGSI",
+    "name": "YouTube Music Top 100 Songs Global (YouTube-owned chart playlist, ~100 tracks)",
+    "url": "https://music.youtube.com/playlist?list=PLFgquLnL59alCl_2TQvOiD5Vgm1hCaGSI"
+  }
+}

@@ -49,7 +49,7 @@ export const strip = (s: string) =>
 export function parseCursor(c: unknown, tag: string): number {
   if (c === undefined || c === null || c === "") return 0;
   if (typeof c !== "string") throw bad("cursor: string required");
-  const m = new RegExp(`^${tag}:(\d{1,6})$`).exec(c);
+  const m = new RegExp(`^${tag}:([0-9]{1,6})$`).exec(c);
   if (!m) throw bad("stale cursor");
   return Number(m[1]);
 }
