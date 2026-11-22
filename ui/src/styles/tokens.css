@@ -1,0 +1,32 @@
+/* Tokens (frontend-spec section 2). Names match MK. */
+:root{
+  --sp-4:4px;--sp-8:8px;--sp-12:12px;--sp-16:16px;--sp-24:24px;--sp-32:32px;--sp-48:48px;--sp-64:64px;
+  --r-xs:4px;--r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-sheet:28px;
+  --grad:linear-gradient(120deg,#A6E3A1 0%,#76C6B4 42%,#6396EB 80%,#5B7CFA 100%);
+  --tb:48px;--pb:88px;--sb:256px;--g:32px;--qc:4;--cw:184px;
+  color-scheme:dark;
+}
+:root,:root[data-theme=dark]{
+  --bg:#0B0B0B;--s1:#151617;--s2:#1E2022;--s3:#2B2E31;--ink:#F2F4F3;--ink2:rgba(242,244,243,.76);--ink3:rgba(242,244,243,.56);
+  --line:rgba(242,244,243,.12);--hov:rgba(242,244,243,.06);--acc:#8FA4FF;--acc-t:#9DB0FF;--acc-c:#1D2547;--on-acc-c:#DCE2FF;
+  --gold:#E3B45E;--gold-c:rgba(227,180,94,.16);--scrim:rgba(0,0,0,.6);--menu-sh:0 0 0 1px rgba(242,244,243,.10),0 16px 40px rgba(0,0,0,.55);
+}
+:root[data-theme=black]{--bg:#000;--s1:#0B0B0B;--s2:#151617;--s3:#222426}
+:root[data-theme=light]{
+  color-scheme:light;
+  --bg:#F6F7F8;--s1:#ECEEF1;--s2:#E2E5E9;--s3:#D3D8DE;--ink:#0B0B0B;--ink2:rgba(11,11,11,.74);--ink3:rgba(11,11,11,.56);
+  --line:rgba(11,11,11,.12);--hov:rgba(11,11,11,.05);--acc:#4A66E0;--acc-t:#3550C8;--acc-c:#E1E7FF;--on-acc-c:#1B2A6B;
+  --gold:#7A5A12;--gold-c:#F1E6C8;--scrim:rgba(11,11,11,.42);--menu-sh:0 0 0 1px rgba(11,11,11,.08),0 8px 24px rgba(11,20,40,.12);
+}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme]){
+    color-scheme:light;
+    --bg:#F6F7F8;--s1:#ECEEF1;--s2:#E2E5E9;--s3:#D3D8DE;--ink:#0B0B0B;--ink2:rgba(11,11,11,.74);--ink3:rgba(11,11,11,.56);
+    --line:rgba(11,11,11,.12);--hov:rgba(11,11,11,.05);--acc:#4A66E0;--acc-t:#3550C8;--acc-c:#E1E7FF;--on-acc-c:#1B2A6B;
+    --gold:#7A5A12;--gold-c:#F1E6C8;--scrim:rgba(11,11,11,.42);--menu-sh:0 0 0 1px rgba(11,11,11,.08),0 8px 24px rgba(11,20,40,.12);
+  }
+}
+/* placeholder artwork gradients (mock core art, see components/Art) */
+.g1{--c1:#1F3B4D;--c2:#6FA3A8}.g2{--c1:#4A1E1A;--c2:#D2643F}.g3{--c1:#2B2A4A;--c2:#8A7FC1}.g4{--c1:#3D3A1E;--c2:#C9B458}
+.g5{--c1:#1E3A2B;--c2:#7DBF8E}.g6{--c1:#4A2238;--c2:#E08AA6}.g7{--c1:#222;--c2:#9A948C}.g8{--c1:#0F2A5A;--c2:#4FA0E8}
+.g9{--c1:#5A3A12;--c2:#F0B45A}.g10{--c1:#2E1630;--c2:#B66C8E}.g11{--c1:#133D3D;--c2:#E7D7A8}.g12{--c1:#4C0F0F;--c2:#F25E4A}

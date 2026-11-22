@@ -1,0 +1,31 @@
+/* Motion tokens (frontend-spec 6.1). Only transform and opacity are animated. */
+:root{
+  --m-fast:120ms;--e-fast:cubic-bezier(0.4,0,0.2,1);
+  --m-std-in:240ms;--e-std-in:cubic-bezier(0.05,0.7,0.1,1);
+  --m-std-out:160ms;--e-std-out:cubic-bezier(0.3,0,0.8,0.15);
+  --m-nav:300ms;--e-nav:cubic-bezier(0.05,0.7,0.1,1);
+  --m-container:380ms;--e-container:cubic-bezier(0.2,0.9,0.1,1);
+  --press-down:90ms;--press-up:160ms;--e-press:cubic-bezier(0.3,1.4,0.6,1);
+}
+/* press: art in rows, tiles, play buttons */
+.pressable{transition:transform var(--press-up) var(--e-press)}
+.pressable:active{transform:scale(.96);transition-duration:var(--press-down)}
+/* progress: scaleX on the compositor, no per-frame JS (6.4). Two names so a restart needs no reflow. */
+@keyframes mm-progress-a{from{transform:scaleX(var(--p0))}to{transform:scaleX(1)}}
+@keyframes mm-progress-b{from{transform:scaleX(var(--p0))}to{transform:scaleX(1)}}
+@keyframes mm-thumb-a{from{transform:translateX(calc(var(--p0)*100cqw))}to{transform:translateX(100cqw)}}
+@keyframes mm-thumb-b{from{transform:translateX(calc(var(--p0)*100cqw))}to{transform:translateX(100cqw)}}
+/* wavy progress: clip window moves right to reveal, content moves left in lock step */
+@keyframes mm-clip-a{from{transform:translateX(calc((var(--p0) - 1)*100%))}to{transform:translateX(0)}}
+@keyframes mm-clip-b{from{transform:translateX(calc((var(--p0) - 1)*100%))}to{transform:translateX(0)}}
+@keyframes mm-unclip-a{from{transform:translateX(calc((1 - var(--p0))*100%))}to{transform:translateX(0)}}
+@keyframes mm-unclip-b{from{transform:translateX(calc((1 - var(--p0))*100%))}to{transform:translateX(0)}}
+@keyframes mm-wave{from{transform:translateX(0)}to{transform:translateX(-28px)}}
+@keyframes mm-bars{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
+.reduce-motion *,.reduce-motion *::before,.reduce-motion *::after{transition-duration:0ms!important}
+.reduce-motion .wave-run{animation:none!important}
+@media (prefers-reduced-motion:reduce){
+  .pressable,.pressable:active{transition-duration:0ms}
+  .wave-run{animation:none!important}
+}
+.anim{will-change:transform,opacity}

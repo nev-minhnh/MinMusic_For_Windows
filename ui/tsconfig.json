@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", "module": "ESNext", "moduleResolution": "bundler",
+    "jsx": "preserve", "jsxImportSource": "solid-js",
+    "strict": true, "noEmit": true, "skipLibCheck": true,
+    "types": ["vite/client", "node"], "allowImportingTsExtensions": true, "paths": { "@minmusic/protocol": ["../protocol/src/index.ts"] }, "isolatedModules": true, "lib": ["ES2022", "DOM", "DOM.Iterable"]
+  },
+  "include": ["src", "vite.config.ts"], "exclude": ["src/core/**/*.test.ts"]
+}

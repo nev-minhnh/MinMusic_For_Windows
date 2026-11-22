@@ -9,3 +9,4 @@ playwright-report/
 *.log
 src-tauri/gen/
 src-tauri/WixTools/
+.env.local
