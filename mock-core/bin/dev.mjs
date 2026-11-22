@@ -9,7 +9,7 @@ const h = await startMock({
   port, token: "dev", artToken: "devart",
   allowedOrigins: [`http://localhost:${web}`, `http://127.0.0.1:${web}`],
   remoteArt: process.env.MOCK_REMOTE_ART === "1",
-  capabilities: ["video"],
+  capabilities: ["video", "deviceConnect", "listenTogether"], // M3-4b: the DC and LT UI hides itself without them
 });
 console.log(`mock core listening on ws://127.0.0.1:${h.port}/rpc`);
 console.log(`VITE_MM_CORE=${JSON.stringify({ port: h.port, token: "dev", artToken: "devart" })}`);
