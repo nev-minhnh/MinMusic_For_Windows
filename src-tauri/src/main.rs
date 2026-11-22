@@ -18,6 +18,7 @@ mod window_state;
 // <M3-1>
 // </M3-1>
 // <M5-2>
+mod update;
 // </M5-2>
 
 use paths::Paths;
@@ -203,6 +204,10 @@ fn with_commands(b: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
         // <M3-1>
         // </M3-1>
         // <M5-2>
+        update::update_check,
+        update::update_status,
+        update::update_install,
+        update::update_open_release_page,
         // </M5-2>
     ])
 }
@@ -232,6 +237,10 @@ fn with_commands(b: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
         // <M3-1>
         // </M3-1>
         // <M5-2>
+        update::update_check,
+        update::update_status,
+        update::update_install,
+        update::update_open_release_page,
         // </M5-2>
     ])
 }
@@ -276,6 +285,7 @@ fn main() {
         // <M3-1>
         // </M3-1>
         // <M5-2>
+        .plugin(update::plugin())
         // </M5-2>
         .on_window_event(|window, event| {
             if window.label() == MAIN {
@@ -317,6 +327,7 @@ fn main() {
             // <M3-1>
             // </M3-1>
             // <M5-2>
+            update::register(app.handle());
             // </M5-2>
             // Safety net: never leave the window hidden forever if the UI never signals ui_ready.
             let h = app.handle().clone();
