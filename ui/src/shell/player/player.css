@@ -95,6 +95,10 @@
 .chipbtn.btn{cursor:default}
 .chipbtn.btn:hover{background:var(--s3)}
 .pr .spd{min-width:36px;padding:0 8px}
+/* Right-side buttons line up with the play row, not the seek row (owner): the centre column is
+   controls 40 + gap 4 + seek row 18, so the play row sits 11px above the bar's centre (9px when short). */
+.pbar:not(.cmp) .pr{transform:translateY(-11px)}
+.win[data-h=short] .pbar:not(.cmp) .pr{transform:translateY(-9px)}
 
 /* ===== full player: final fidelity ===== */
 .fp .fp-bg{background:none;overflow:hidden;z-index:0;pointer-events:none}
