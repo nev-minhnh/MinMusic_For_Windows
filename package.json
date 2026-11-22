@@ -19,10 +19,12 @@
     "shell:build": "cargo tauri build --target x86_64-pc-windows-gnu --features e2e --no-bundle"
   },
   "devDependencies": {
-    "typescript": "5.8.3",
+    "typescript": "5.9.3",
     "vitest": "3.2.4",
     "jsdom": "26.1.0",
-    "solid-js": "1.9.7",
-    "@playwright/test": "1.54.2"
+    "solid-js": "1.9.20",
+    "@playwright/test": "1.65.1",
+    "vite": "7.3.1",
+    "vite-plugin-solid": "2.11.17"
   }
 }

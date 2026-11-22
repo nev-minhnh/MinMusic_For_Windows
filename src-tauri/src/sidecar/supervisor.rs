@@ -346,6 +346,8 @@ impl Supervisor {
                     core_exe.clone().into_os_string(),
                     vec![
                         format!("@{}", d.join("core.args").display()),
+                        // JVM crash log next to the other logs (not part of core.args).
+                        format!("-XX:ErrorFile={}", log_dir.join("hs_err_core_%p.log").display()),
                         "-cp".into(),
                         format!("{}", d.join("lib").join("*").display()),
                         "com.metrolist.core.SidecarMainKt".into(),
@@ -362,6 +364,10 @@ impl Supervisor {
             "--exe-path".into(),
             core_exe.display().to_string(),
         ]);
+        // The sidecar keeps all of its data under the test root when one is in effect.
+        if let Some(root) = &paths.test_root {
+            args.extend(["--data-root".into(), root.display().to_string()]);
+        }
         args.extend(testhooks::core_extra_args());
 
         let mut env_overrides = Vec::new();

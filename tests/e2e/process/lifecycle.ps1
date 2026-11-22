@@ -69,7 +69,7 @@ function Test-TP3($Ctx) {
     $r = $tl | Where-Object { $_.state -eq 'ready' } | Select-Object -Last 1
     $sawRestart = $states -match 'restarting'
     $p = Read-PidFile $app.PidFile
-    $cores = Get-CoreChildren $app.ShellPid
+    $cores = @(Get-CoreChildren $app.ShellPid)
     $new = if ($p) { [int]$p.corePid } else { 0 }
     $ok = $sawRestart -and ($states -match 'ready$') -and ($r.t -le 5400) -and ($cores.Count -eq 1) -and ($new -ne $old)
     New-TestResult $ok "states=$states ready at t=$($r.t) ms; core pids now: $($cores.Count) (old $old, new $new). Restart banner not asserted: M0-C defines no testid for it"
@@ -82,7 +82,7 @@ function Test-TP4($Ctx) {
     $old = @{}; foreach ($k in $app.Env.Keys) { $old[$k] = [Environment]::GetEnvironmentVariable($k); [Environment]::SetEnvironmentVariable($k, [string]$app.Env[$k]) }
     try { $second = Start-Process -FilePath $app.Exe -PassThru } finally { foreach ($k in $old.Keys) { [Environment]::SetEnvironmentVariable($k, $old[$k]) } }
     $t = Wait-ProcGone @($second.Id) 2
-    $cores = Get-CoreChildren $app.ShellPid
+    $cores = @(Get-CoreChildren $app.ShellPid)
     if ($t -lt 0) { Stop-Process -Id $second.Id -Force -ErrorAction SilentlyContinue }
     $ok = ($t -ge 0) -and ($cores.Count -eq 1)
     New-TestResult $ok ("second instance exited in {0:N2} s; minmusic-core.exe children of the shell: {1}. Window focus not asserted (needs an unlocked desktop)" -f $t, $cores.Count)
@@ -141,7 +141,7 @@ function Test-TP7($Ctx) {
       if ($st -match 'failed') { $failedAt = $i; break }
     }
     $st = try { Invoke-CdpEval $app.Port "window.__TAURI__.core.invoke('core_status').then(v=>JSON.stringify(v))" } catch { '' }
-    $cores = Get-CoreChildren $app.ShellPid
+    $cores = @(Get-CoreChildren $app.ShellPid)
     $ok = ($st -match 'failed') -and ($failedAt -eq 3) -and ($cores.Count -eq 0)
     $pids = Get-AppPids $app
     Invoke-CdpEval $app.Port "window.__TAURI__.core.invoke('app_quit')" 2>$null | Out-Null
@@ -156,12 +156,16 @@ function Test-TP8($Ctx) {
   try {
     Invoke-CdpEval $app.Port "window.__TAURI__.core.invoke('window_close')" | Out-Null
     Start-Sleep -Seconds 2
-    $hwnd = (Get-Process -Id $app.ShellPid).MainWindowHandle
+    # Process.MainWindowHandle turns into the single-instance helper window once hidden: pick the real one by class.
+    Add-Type -Namespace Mm -Name W -MemberDefinition '[DllImport("user32.dll")] public static extern bool EnumWindows(EnumProc p, System.IntPtr l); public delegate bool EnumProc(System.IntPtr h, System.IntPtr l); [DllImport("user32.dll")] public static extern int GetWindowThreadProcessId(System.IntPtr h, out int pid); [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern int GetClassName(System.IntPtr h, System.Text.StringBuilder s, int n);' -ErrorAction SilentlyContinue
+    $hwnd = [IntPtr]::Zero; $shellPid = $app.ShellPid
+    $cb = [Mm.W+EnumProc]{ param($h, $l) $p = 0; [void][Mm.W]::GetWindowThreadProcessId($h, [ref]$p); if ($p -eq $shellPid) { $sb = New-Object System.Text.StringBuilder 256; [void][Mm.W]::GetClassName($h, $sb, 256); if ($sb.ToString() -eq "Tauri Window") { $script:tp8Hwnd = $h; return $false } }; return $true }
+    $script:tp8Hwnd = [IntPtr]::Zero; [void][Mm.W]::EnumWindows($cb, [IntPtr]::Zero); $hwnd = $script:tp8Hwnd
     $alive = (Test-ProcAlive $app.ShellPid) -and (Test-ProcAlive $app.CorePid)
     $visible = $false
     try { Add-Type -Namespace Mm -Name U -MemberDefinition '[DllImport("user32.dll")] public static extern bool IsWindowVisible(System.IntPtr h);' } catch { }
-    if ($hwnd -ne 0) { $visible = [Mm.U]::IsWindowVisible($hwnd) }
-    New-TestResult ($alive -and -not $visible) "alive=$alive windowVisible=$visible (default settings: minimise to tray). player.playing for 10 s needs a playable fixture: not asserted"
+    if ($hwnd -ne [IntPtr]::Zero) { $visible = [Mm.U]::IsWindowVisible($hwnd) }
+    New-TestResult ($alive -and ($hwnd -ne [IntPtr]::Zero) -and -not $visible) "alive=$alive windowFound=$($hwnd -ne [IntPtr]::Zero) windowVisible=$visible (default settings: minimise to tray). player.playing for 10 s needs a playable fixture: not asserted"
   } catch { New-TestResult $false "$_" } finally { Stop-TestApp $app }
 }
 

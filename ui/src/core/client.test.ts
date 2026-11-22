@@ -1,3 +1,5 @@
+// @vitest-environment node
+// Real ws servers (mock core) plus the real global WebSocket client: jsdom would swap in its own WebSocket.
 import { afterEach, describe, expect, it } from "vitest";
 import { WebSocketServer } from "ws";
 import { startMock, type MockHandle } from "../../../mock-core/src/server.ts";

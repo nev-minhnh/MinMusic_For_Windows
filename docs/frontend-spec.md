@@ -154,7 +154,7 @@ Overlays are not routes, but they are part of the Esc stack (§7): full player, 
 - Minimise with `desktopMiniPlayerOnMinimize=true` opens the mini player.
 
 ## 6. Performance rules (enforced in review, measured in perf tests)
-1. **Animate only `transform` and `opacity`.** Never animate width, height, top, left, margin, padding, border, box-shadow, filter, clip-path (except the full-player transition, see 6.3) or background-position.
+1. **Animate only `transform` and `opacity`.** Never animate width, height, top, left, margin, padding, border, box-shadow, filter, clip-path (the full-player transition uses a `translateY` slide instead, see 6.3) or background-position.
 2. **No `backdrop-filter`.** No `filter:blur` over 8 px, and no blur at all on anything that moves or scrolls. No `background-attachment:fixed`.
 3. **`will-change: transform`** is set only for the duration of an animation, by adding a class on start and removing it on `transitionend`. Permanent exceptions: the player-bar progress fill and the full-player layer.
 4. **Scrollers** use `overflow-y:auto; overscroll-behavior:contain`. Never put a non-passive `wheel`, `touchmove` or `scroll` listener on them, and never write layout-affecting styles inside `scroll` handlers (use IntersectionObserver).
@@ -195,7 +195,7 @@ Overlays are not routes, but they are part of the Esc stack (§7): full player, 
   2. Set the art to `transform: translate(A−B) scale(A.w/B.w)` and the layer background to `opacity:0`.
   3. Animate to identity and `opacity:1` over `--m-container`.
   4. Player-bar content fades out over 0–25 % of the timeline. Full-player controls fade in and `translateY(16px→0)` over 35–100 %.
-  5. The layer's `clip-path: inset(calc(100% - var(--pb)) 0 0 0 round 0) → inset(0)` is the single allowed clip-path animation. It is compositor-friendly in Chromium when combined with `will-change:transform` on the layer. If M0 traces show main-thread paint, replace it with a `translateY(100% - pb)` slide of the layer.
+  5. **Decision (M0 perf trace): the layer slides with `transform: translateY(calc(100% - var(--pb))) → translateY(0)`, no clip-path.** The first design animated `clip-path: inset(...)`, but the trace showed a per-frame mask raster on the main/raster thread (the mask is re-rasterised on every frame even with `will-change:transform`). A pure `translateY` slide of the opaque layer stays on the compositor. The only clip-path animation allowed in 6.x is therefore none; rule 1 of section 5 now has no exception.
 - **Closing** reverses the sequence. Esc, the collapse chevron, T or a click on the background close it.
 - The artwork uses the same `artUrl(…, 520)` image in both places, so there is no decode during the transition. The bar `<img>` and full `<img>` share the URL, which is pre-requested when the bar art loads.
 
