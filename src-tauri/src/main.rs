@@ -320,6 +320,7 @@ fn main() {
             // </M2-4>
             // <M3-1>
             register_m3_1(app.handle());
+            deeplink::set_auth_handler(Box::new(|url: String| weblogin::on_auth_callback(&url)));
             // </M3-1>
             // <M5-2>
             // </M5-2>

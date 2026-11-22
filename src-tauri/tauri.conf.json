@@ -12,6 +12,7 @@
     "windows": [
       {
         "label": "main",
+        "dragDropEnabled": false,
         "title": "MinMusic",
         "width": 1280,
         "height": 800,

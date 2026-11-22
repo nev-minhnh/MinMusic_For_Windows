@@ -23,6 +23,8 @@ fn main() {
         // <M2-4>
         // </M2-4>
         // <M3-1>
+        "test_weblogin",
+        "test_po_evaluate",
         // </M3-1>
         // <M5-2>
         // </M5-2>
