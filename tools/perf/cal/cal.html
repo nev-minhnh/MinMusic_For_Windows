@@ -1,0 +1,39 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>MinMusic perf calibration page</title>
+<style>
+  html,body{margin:0;height:100%;background:#101014;color:#eee;font:14px system-ui}
+  #list{position:absolute;inset:0;overflow-y:auto;will-change:scroll-position}
+  .row{height:56px;display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1px solid #222}
+  .art{width:40px;height:40px;border-radius:4px;flex:none}
+  #spin{position:fixed;right:24px;top:24px;width:48px;height:48px;border-radius:50%;background:#e91e63;
+        animation:mv 1.2s linear infinite;will-change:transform}
+  @keyframes mv{from{transform:translateX(0)}to{transform:translateX(-200px)}}
+</style></head>
+<body>
+<div id="spin" data-testid="spin"></div>
+<div id="tick" style="position:fixed;right:24px;top:90px;width:48px;height:12px;background:#4fc3f7"></div>
+<div id="list" data-testid="songs-list"></div>
+<script>
+  // ?jank=1            : 120 ms busy loop on the main thread every 1000 ms
+  // ?jank=1&ms=N&every=M overrides
+  // ?idle=1            : no list, no animation (idle Home stand-in)
+  const q = new URLSearchParams(location.search);
+  const list = document.getElementById('list');
+  if (q.get('idle') === '1') { document.getElementById('spin').remove(); }
+  else {
+    const f = document.createDocumentFragment();
+    for (let i = 0; i < 5000; i++) {
+      const r = document.createElement('div'); r.className = 'row'; r.dataset.testid = 'song-row';
+      r.innerHTML = '<div class="art" style="background:hsl(' + (i * 7 % 360) + ',60%,45%)"></div><div>Song ' + i + '</div>';
+      f.appendChild(r);
+    }
+    list.appendChild(f);
+  }
+  // main-thread driven element: a stalled main thread must show up as dropped frames
+  if (q.get('idle') !== '1') { const tk = document.getElementById('tick'); (function f(t){ tk.style.transform = 'translateX(' + (-(t / 10 % 200)) + 'px)'; requestAnimationFrame(f); })(0); } else document.getElementById('tick').remove();
+  window.__calJank = { on: false, ms: +(q.get('ms') || 120), every: +(q.get('every') || 1000), count: 0 };
+  if (q.get('jank') === '1') {
+    window.__calJank.on = true;
+    setInterval(() => { const t = performance.now(); while (performance.now() - t < window.__calJank.ms); window.__calJank.count++; }, window.__calJank.every);
+  }
+</script></body></html>

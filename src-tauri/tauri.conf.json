@@ -1,0 +1,60 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "MinMusic",
+  "version": "2.0.0",
+  "identifier": "nev-minhnh.MinMusic",
+  "build": {
+    "devUrl": "http://localhost:5173",
+    "frontendDist": "../ui/dist"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "MinMusic",
+        "width": 1280,
+        "height": 800,
+        "minWidth": 640,
+        "minHeight": 480,
+        "decorations": false,
+        "visible": false,
+        "create": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src ipc: http://ipc.localhost ws://127.0.0.1:* http://127.0.0.1:*; img-src 'self' https: http://127.0.0.1:* data: blob:; media-src 'self' http://127.0.0.1:*",
+      "devCsp": "default-src 'self' http://localhost:5173; script-src 'self' 'unsafe-inline' http://localhost:5173; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src ipc: http://ipc.localhost ws://127.0.0.1:* http://127.0.0.1:* ws://localhost:5173 http://localhost:5173; img-src 'self' https: http://127.0.0.1:* http://localhost:5173 data: blob:; media-src 'self' http://127.0.0.1:*"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "nsis"
+    ],
+    "icon": [
+      "icons/32x32.png",
+      "icons/icon.png",
+      "icons/icon.ico"
+    ],
+    "publisher": "nev-minhnh",
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": [
+          "Vietnamese",
+          "English"
+        ]
+      },
+      "webviewInstallMode": {
+        "type": "downloadBootstrapper"
+      }
+    }
+  },
+  "plugins": {
+    "minmusic": {
+      "channel": "alpha",
+      "displayVersion": "2.0.0-alpha.0"
+    }
+  }
+}

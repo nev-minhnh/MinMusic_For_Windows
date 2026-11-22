@@ -7,3 +7,5 @@ tools/perf/bin/
 test-results/
 playwright-report/
 *.log
+src-tauri/gen/
+src-tauri/WixTools/
