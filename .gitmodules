@@ -1,0 +1,4 @@
+[submodule "core/MinMusic"]
+	path = core/MinMusic
+	url = https://github.com/nev-minhnh/MinMusic.git
+	branch = windows
