@@ -1,0 +1,174 @@
+{
+ "playlists": {
+  "spotify": [
+   {
+    "id": "spotify-pl1",
+    "title": "Daily Mix 1",
+    "count": 8,
+    "art": {
+     "src": "grad:g1"
+    }
+   },
+   {
+    "id": "spotify-pl2",
+    "title": "Road Trip",
+    "count": 29,
+    "art": {
+     "src": "grad:g2"
+    }
+   },
+   {
+    "id": "spotify-pl3",
+    "title": "Chill Vibes",
+    "count": 11,
+    "art": {
+     "src": "grad:g3"
+    }
+   },
+   {
+    "id": "spotify-pl4",
+    "title": "Workout",
+    "count": 32,
+    "art": {
+     "src": "grad:g4"
+    }
+   },
+   {
+    "id": "spotify-pl5",
+    "title": "Focus Flow",
+    "count": 14,
+    "art": {
+     "src": "grad:g5"
+    }
+   },
+   {
+    "id": "spotify-pl6",
+    "title": "Throwback 90s",
+    "count": 35,
+    "art": {
+     "src": "grad:g6"
+    }
+   }
+  ],
+  "tidal": [
+   {
+    "id": "tidal-pl1",
+    "title": "My Favorites",
+    "count": 8,
+    "art": {
+     "src": "grad:g1"
+    }
+   },
+   {
+    "id": "tidal-pl2",
+    "title": "Hi-Res Jazz",
+    "count": 29,
+    "art": {
+     "src": "grad:g2"
+    }
+   },
+   {
+    "id": "tidal-pl3",
+    "title": "Night Drive",
+    "count": 11,
+    "art": {
+     "src": "grad:g3"
+    }
+   },
+   {
+    "id": "tidal-pl4",
+    "title": "Classical Essentials",
+    "count": 32,
+    "art": {
+     "src": "grad:g4"
+    }
+   }
+  ],
+  "deezer": [
+   {
+    "id": "deezer-pl1",
+    "title": "Flow Favorites",
+    "count": 8,
+    "art": {
+     "src": "grad:g1"
+    }
+   },
+   {
+    "id": "deezer-pl2",
+    "title": "Party Hits",
+    "count": 29,
+    "art": {
+     "src": "grad:g2"
+    }
+   },
+   {
+    "id": "deezer-pl3",
+    "title": "Acoustic Mornings",
+    "count": 11,
+    "art": {
+     "src": "grad:g3"
+    }
+   },
+   {
+    "id": "deezer-pl4",
+    "title": "Rainy Day",
+    "count": 32,
+    "art": {
+     "src": "grad:g4"
+    }
+   }
+  ],
+  "apple": [
+   {
+    "id": "apple-pl1",
+    "title": "Heavy Rotation",
+    "count": 8,
+    "art": {
+     "src": "grad:g1"
+    }
+   },
+   {
+    "id": "apple-pl2",
+    "title": "Replay 2025",
+    "count": 29,
+    "art": {
+     "src": "grad:g2"
+    }
+   },
+   {
+    "id": "apple-pl3",
+    "title": "Indie Mix",
+    "count": 11,
+    "art": {
+     "src": "grad:g3"
+    }
+   }
+  ],
+  "amazon": [
+   {
+    "id": "amazon-pl1",
+    "title": "My Discovery Mix",
+    "count": 8,
+    "art": {
+     "src": "grad:g1"
+    }
+   },
+   {
+    "id": "amazon-pl2",
+    "title": "Study Beats",
+    "count": 29,
+    "art": {
+     "src": "grad:g2"
+    }
+   },
+   {
+    "id": "amazon-pl3",
+    "title": "Weekend Vibes",
+    "count": 11,
+    "art": {
+     "src": "grad:g3"
+    }
+   }
+  ]
+ }
+}
