@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-// Mock core for Vite dev: fixed port 47999, token "dev", allows Origin http://localhost:5173.
+// Mock core for Vite dev: MOCK_PORT (default 47999), token "dev", allows Origin http://localhost:${MM_WEB_PORT} (default 5173).
 //   node mock-core/bin/dev.mjs     then put the printed line into ui/.env.local
 import { startMock } from "../src/server.ts";
 
 const port = Number(process.env.MOCK_PORT) || 47999;
+const web = Number(process.env.MM_WEB_PORT) || 5173;
 const h = await startMock({
   port, token: "dev", artToken: "devart",
-  allowedOrigins: ["http://localhost:5173", "http://127.0.0.1:5173"],
+  allowedOrigins: [`http://localhost:${web}`, `http://127.0.0.1:${web}`],
   remoteArt: process.env.MOCK_REMOTE_ART === "1",
   capabilities: ["video"],
 });
