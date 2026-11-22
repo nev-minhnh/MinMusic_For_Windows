@@ -8,7 +8,7 @@ import { createInterface } from "node:readline";
 
 const repo = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 
-export async function startTarget(kind, { testRoot = join(repo, ".testdata", "contract") } = {}) {
+export async function startTarget(kind, { testRoot = join(repo, ".testdata", "contract"), noFixture = false } = {}) {
   const token = randomBytes(32).toString("hex");
   const artToken = randomBytes(16).toString("hex");
   mkdirSync(join(testRoot, "Local"), { recursive: true });
@@ -23,9 +23,10 @@ export async function startTarget(kind, { testRoot = join(repo, ".testdata", "co
     const exe = join(dist, "runtime", "bin", "minmusic-core.exe");
     if (!existsSync(exe)) throw new Error(`real target: ${exe} not found (build the sidecar first, or set MINMUSIC_SIDECAR_DIST)`);
     const fixture = join(repo, "tests", "fixtures", "home.json");
+    const seed = join(repo, "tests", "fixtures", "library-seed.json");
     const args = [`@${join(dist, "core.args")}`, "-cp", join(dist, "lib", "*"), "com.metrolist.core.SidecarMainKt",
       "--parent-pid", String(process.pid), "--data-root", join(testRoot, "Local", "MinMusic"), "--log-dir", join(testRoot, "logs"),
-      ...(existsSync(fixture) ? ["--fixture-home", fixture] : [])];
+      ...(existsSync(fixture) && !noFixture ? ["--fixture-home", fixture] : []), ...(existsSync(seed) ? ["--seed-library", seed] : [])];
     child = spawn(exe, args, { env, cwd: dist, stdio: ["pipe", "pipe", "pipe"] });
   } else throw new Error(`unknown target ${kind}`);
 
