@@ -1,9 +1,10 @@
-import { Show, createEffect, onCleanup, onMount } from "solid-js";
+import { Show } from "solid-js";
 import { Table, type TableApi } from "../Table";
 import type { Col } from "../Row";
 import { playerState } from "../../state/player";
 import { t } from "../../i18n";
 import type { CursorList } from "./cursorList";
+import { useSentinelPaging } from "./paging";
 import type { Track } from "../../lib/types";
 import "./pages.css";
 
@@ -22,27 +23,7 @@ export function CursorTable(props: {
 }) {
   let sentinel!: HTMLDivElement;
   const items = props.list.items;
-  onMount(() => {
-    if (!items().length) void props.list.loadMore();
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) void props.list.loadMore();
-      },
-      { rootMargin: "0px 0px 800px 0px" }
-    );
-    io.observe(sentinel);
-    onCleanup(() => io.disconnect());
-  });
-  // a page that does not fill the viewport leaves the sentinel visible without a new intersection: keep asking while it is
-  createEffect(() => {
-    items().length;
-    if (!props.list.loading() && !props.list.error() && props.list.hasMore() && items().length && sentinel) {
-      requestAnimationFrame(() => {
-        const r = sentinel.getBoundingClientRect();
-        if (r.top < window.innerHeight + 800) void props.list.loadMore();
-      });
-    }
-  });
+  useSentinelPaging(props.list, () => sentinel);
   return (
     <div>
       <Table

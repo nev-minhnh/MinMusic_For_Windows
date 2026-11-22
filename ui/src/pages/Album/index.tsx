@@ -2,6 +2,7 @@ import { For, Show, createSignal } from "solid-js";
 import type { RouteName } from "../../router/routes";
 import type { PageProps } from "../../router/registry";
 import { CollectionHeader } from "../../components/pages/CollectionHeader";
+import { LoadError } from "../../components/pages/LoadError";
 import { PageShelf } from "../../components/pages/Shelf";
 import { albumData, durationText } from "../../components/pages/data";
 import { albumContext, playExtra } from "../../components/pages/playContext";
@@ -22,7 +23,7 @@ const KICKER = { album: "w2_pg_album", single: "w2_pg_single", ep: "w2_pg_ep" } 
 /** Album: CollectionHeader + track Table (no virtualisation up to 60 rows) + "Phiên bản khác" and "Thêm từ <artist>" shelves. */
 export function Album(props: PageProps) {
   const id = () => props.params.id;
-  const { data, mutate } = albumData(id);
+  const { data, mutate, error, reload } = albumData(id);
   const [busy, setBusy] = createSignal(false);
   const play = (extra?: { shuffle?: boolean; startId?: string }) => void player.play(albumContext(id()), playExtra(extra));
 
@@ -83,6 +84,7 @@ export function Album(props: PageProps) {
         onSave={save}
         onMore={(at) => data() && openMenu(cardMenu({ t: "album", ...data()!.album }), at)}
       />
+      <LoadError error={error()} hasData={!!data()} retry={reload} />
       <div class="alb-tbl">
         <Table
           label={data()?.album.title ?? t("w2_pg_album")}

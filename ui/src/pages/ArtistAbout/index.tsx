@@ -1,6 +1,7 @@
 import { For, Show } from "solid-js";
 import type { RouteName } from "../../router/routes";
 import type { PageProps } from "../../router/registry";
+import { LoadError } from "../../components/pages/LoadError";
 import { IconButton } from "../../components/IconButton";
 import { Art } from "../../components/Art";
 import { artistAboutData, artistData } from "../../components/pages/data";
@@ -26,7 +27,9 @@ export function ArtistAbout(props: PageProps) {
           <h1 class="t28 w6 ell">{artist.data()?.artist.name ?? ""}</h1>
         </div>
       </div>
-      <Show when={about.data()} fallback={<div class="skel" style={{ width: "50%", "margin-top": "24px" }} />}>
+      <LoadError error={about.error()} hasData={!!about.data()} retry={about.reload} />
+      <Show when={about.data() || !about.error()} fallback={null}>
+        <Show when={about.data()} fallback={<div class="skel" style={{ width: "50%", "margin-top": "24px" }} />}>
         {(a) => (
           <>
             <Show when={a().bio}>
@@ -65,6 +68,7 @@ export function ArtistAbout(props: PageProps) {
             </Show>
           </>
         )}
+        </Show>
       </Show>
     </div>
   );

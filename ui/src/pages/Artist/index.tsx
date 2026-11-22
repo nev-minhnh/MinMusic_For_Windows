@@ -1,6 +1,7 @@
 import { For, Show, createSignal, onCleanup } from "solid-js";
 import type { RouteName } from "../../router/routes";
 import type { PageProps } from "../../router/registry";
+import { LoadError } from "../../components/pages/LoadError";
 import { PageShelf } from "../../components/pages/Shelf";
 import { CursorTable } from "../../components/pages/CursorTable";
 import { artistData } from "../../components/pages/data";
@@ -26,7 +27,7 @@ const TOP = 5;
 /** Artist (LS 4): feathered banner 232, name 28, Theo dõi / Phát / Radio, then top songs (5 rows + "Xem tất cả"), albums, singles, videos, related, About card. */
 export function Artist(props: PageProps) {
   const id = () => props.params.id;
-  const { data, mutate } = artistData(id);
+  const { data, mutate, error, reload } = artistData(id);
   const [view, setView] = createSignal<"main" | "all">("main");
   const all = createCursorList<Track>((cursor) => client.call<TrackPage>("artist.tracks", { id: id(), cursor }), `artistTracks:${props.params.id}`);
   let popEsc: (() => void) | null = null;
@@ -126,6 +127,7 @@ export function Artist(props: PageProps) {
           </div>
         </div>
 
+        <LoadError error={error()} hasData={!!data()} retry={reload} />
         <Show when={top().length}>
           <section class="sec" data-testid="artist-top">
             <div class="sh">

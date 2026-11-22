@@ -1,7 +1,9 @@
 import { For, Show, createSignal, onCleanup, onMount } from "solid-js";
+import { useSentinelPaging } from "../../components/pages/paging";
 import type { TrackPage } from "@minmusic/protocol";
 import type { RouteName } from "../../router/routes";
 import type { PageProps } from "../../router/registry";
+import { LoadError } from "../../components/pages/LoadError";
 import { CollectionHeader } from "../../components/pages/CollectionHeader";
 import { createCursorList } from "../../components/pages/cursorList";
 import { albumData, durationText } from "../../components/pages/data";
@@ -57,7 +59,7 @@ function Episode(props: { tr?: Track; index: number; playing: boolean; onPlay: (
 /** Podcast: CollectionHeader + episode list (podcast.episodes cursor; VirtualList beyond 60). */
 export function Podcast(props: PageProps) {
   const id = () => props.params.id;
-  const { data, mutate } = albumData(id, "podcast.get");
+  const { data, mutate, error, reload } = albumData(id, "podcast.get");
   const list = createCursorList<Track>((cursor) => client.call<TrackPage>("podcast.episodes", { id: id(), cursor }), `podcastEps:${props.params.id}`);
   const items = list.items;
   let host!: HTMLDivElement;
@@ -82,13 +84,8 @@ export function Podcast(props: PageProps) {
     }
   };
 
-  onMount(() => {
-    if (!items().length) void list.loadMore();
-    const off = delegate(host);
-    const io = new IntersectionObserver(([e]) => e.isIntersecting && void list.loadMore(), { rootMargin: "0px 0px 800px 0px" });
-    io.observe(sentinel);
-    onCleanup(() => (off(), io.disconnect()));
-  });
+  onMount(() => onCleanup(delegate(host)));
+  useSentinelPaging(list, () => sentinel);
   const row = (i: () => number) => <Episode tr={items()[i()]} index={i()} playing={!!items()[i()] && playerState()?.track?.id === items()[i()]!.id} onPlay={playEp} />;
 
   return (
@@ -115,6 +112,7 @@ export function Podcast(props: PageProps) {
         onSave={save}
         onMore={(at) => data() && openMenu(cardMenu({ t: "album", ...data()!.album }), at)}
       />
+      <LoadError error={error()} hasData={!!data()} retry={reload} />
       <div class="pod-list" ref={host} role="list" aria-label={t("w2_pg_episodes")} data-testid="episodes" style={{ "margin-top": "16px" }}>
         <Show
           when={items().length > SHORT}
