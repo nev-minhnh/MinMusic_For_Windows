@@ -24,7 +24,7 @@ run the same command with `D:/Coding_Project/MinMusic_4_Windows/core/MinMusic` a
 Overrides (dev and e2e builds only, compiled out of release):
 - `MINMUSIC_SIDECAR_CMD="<program> <leading args>"` replaces the sidecar, e.g. `node mock-core\bin\sidecar.mjs`
   (`scripts\dev.ps1` sets it unless `-Real`). To keep image-name checks working with the mock copy `node.exe` to `.testdata\fake-core\minmusic-core.exe`.
-- `MINMUSIC_DATA_ROOT=<dir>` redirects all data; the shell then also passes `--data-root <dir>` to the core.
+- `MINMUSIC_DATA_ROOT=<dir>` redirects all data; the shell then also passes `--data-root <dir>\Local\MinMusic` to the core (keeps the v1 `state\metrolist` layout).
 - `MINMUSIC_CORE_EXTRA_ARGS`, `MINMUSIC_DEVTOOLS_PORT`, `MINMUSIC_TEST_PIDFILE`, `MINMUSIC_TEST_NO_JOB`.
 
 The shell appends `-XX:ErrorFile=<logdir>\hs_err_core_%p.log` to the JVM arguments, so JVM crash logs land next to the core logs.

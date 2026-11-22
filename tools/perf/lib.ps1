@@ -41,6 +41,8 @@ function Get-RealDataSnapshot {
 
 function Invoke-Cdp {
   param([int]$Port, [Parameter(ValueFromRemainingArguments)]$Rest)
+  # Windows PowerShell 5.1 strips embedded double quotes from native arguments: escape them for node.
+  $Rest = @($Rest | ForEach-Object { if ($_ -is [string]) { $_ -replace '"', '\"' } else { $_ } })
   $o = & node $script:Cdp --port $Port @Rest 2>&1
   if ($LASTEXITCODE -ne 0) { throw "cdp $($Rest -join ' '): $o" }
   return ($o | Out-String).Trim()

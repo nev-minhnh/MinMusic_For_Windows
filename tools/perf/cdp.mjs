@@ -96,7 +96,8 @@ try {
   } else throw new Error('usage: cdp.mjs --port N eval|core|shot ...');
   s.close();
   console.log(JSON.stringify(out ?? null));
-  process.exit(0);
+  // Exiting while a ws close handshake is in flight trips a libuv assertion on Node 26 / Windows: let it finish.
+  setTimeout(() => process.exit(0), 150);
 } catch (e) {
   console.error(String(e.message || e));
   process.exit(1);

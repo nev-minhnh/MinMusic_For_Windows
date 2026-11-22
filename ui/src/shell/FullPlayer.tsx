@@ -194,7 +194,7 @@ export function FullPlayer() {
         </div>
         <div class="fp-body">
           <div class="fp-left">
-            <div class="fp-art" ref={artWrap}>
+            <div class="fp-art" ref={artWrap} data-testid="player-art">
               <Art art={tr()?.art} size={440} reqPx={520} fill class="soft fp-art-img" />
             </div>
             <div class="fp-ctl" ref={ctl}>

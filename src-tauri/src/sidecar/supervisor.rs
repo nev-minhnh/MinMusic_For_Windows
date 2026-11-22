@@ -365,8 +365,9 @@ impl Supervisor {
             core_exe.display().to_string(),
         ]);
         // The sidecar keeps all of its data under the test root when one is in effect.
-        if let Some(root) = &paths.test_root {
-            args.extend(["--data-root".into(), root.display().to_string()]);
+        // `<root>\Local\MinMusic` keeps the v1 layout (`state\metrolist`, `data`, `cache`) that the shell and the tests expect.
+        if paths.test_root.is_some() {
+            args.extend(["--data-root".into(), paths.app_local().display().to_string()]);
         }
         args.extend(testhooks::core_extra_args());
 

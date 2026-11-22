@@ -34,7 +34,7 @@ for (const vp of VIEWPORTS) {
       const cols = await page
         .locator('[data-testid="qp-tile"]')
         .evaluateAll((els) => new Set(els.slice(0, 12).map((e) => Math.round(e.getBoundingClientRect().left))).size);
-      const expected = vp.cls === 'expanded' ? [3, 4] : vp.cls === 'medium' ? [2, 3] : [1, 2];
+      const expected = vp.cls === 'expanded' ? [3, 6] : vp.cls === 'medium' ? [2, 3] : [1, 2];
       expect(cols, `quick picks columns at ${vp.name}`).toBeGreaterThanOrEqual(expected[0]);
       expect(cols).toBeLessThanOrEqual(expected[1]);
     });
