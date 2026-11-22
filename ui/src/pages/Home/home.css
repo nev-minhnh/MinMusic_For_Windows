@@ -1,0 +1,9 @@
+/* Home (M1-3b): skeletons, shelf extras. The page layout classes (.greet .qp .qt .shelf .card .box .crow) live in styles/base.css. */
+.qt-skel{background:var(--s1);opacity:.7}
+.crow-skel{background:var(--s2);opacity:.35;margin:0 0 0}
+.skel-sq{width:100%;aspect-ratio:1/1;border-radius:12px;background:var(--s3);opacity:.6}
+.hm-sentinel{height:1px}
+.sec .more{background:none;border:0;padding:0;margin-right:8px;cursor:pointer}
+.shelf-round .card .art{border-radius:50%}
+.shelf-round .card .ct,.shelf-round .card .t12{text-align:center}
+.home .tbl2{margin-top:-4px}
