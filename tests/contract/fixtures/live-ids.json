@@ -14,5 +14,17 @@
     "id": "PLFgquLnL59alCl_2TQvOiD5Vgm1hCaGSI",
     "name": "YouTube Music Top 100 Songs Global (YouTube-owned chart playlist, ~100 tracks)",
     "url": "https://music.youtube.com/playlist?list=PLFgquLnL59alCl_2TQvOiD5Vgm1hCaGSI"
-  }
+  },
+  "tracks": [
+    {
+      "id": "Llw9Q6akRo4",
+      "name": "Lạc Trôi (Official MV), Sơn Tùng M-TP Official",
+      "url": "https://www.youtube.com/watch?v=Llw9Q6akRo4"
+    },
+    {
+      "id": "psZ1g9fMfeo",
+      "name": "Chúng Ta Của Hiện Tại (Official MV), Sơn Tùng M-TP Official",
+      "url": "https://www.youtube.com/watch?v=psZ1g9fMfeo"
+    }
+  ]
 }

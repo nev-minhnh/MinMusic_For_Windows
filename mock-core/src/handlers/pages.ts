@@ -44,7 +44,6 @@ function playVideo(st: MockState, id: string) {
     st.registry.set(id, t);
   }
   st.setQueue([t], "Liên kết");
-  st.emitQueue(true);
   st.startAt(0);
   st.emitState();
   return { handled: true as const };

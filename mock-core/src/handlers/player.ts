@@ -1,24 +1,7 @@
 import type { HandlerModule } from "../state.ts";
-import { resolveContext } from "../content.ts";
-import { bad, isObj, notFound, reqBool, reqNum } from "../util.ts";
+import { bad, reqBool, reqNum } from "../util.ts";
 
 export const handlers: HandlerModule["handlers"] = {
-  "player.play": (p, { st }) => {
-    const pl = st.pl;
-    if (!isObj(p) || !p.context) throw bad("context required");
-    const { tracks, title } = resolveContext(st, p.context);
-    if (tracks.length === 0) throw bad("empty context");
-    let start = 0;
-    if (typeof p.startId === "string") { start = tracks.findIndex((t) => t.id === p.startId); if (start < 0) throw notFound("startId"); }
-    else if (typeof p.startIndex === "number") { start = p.startIndex; if (start < 0 || start >= tracks.length) throw bad("startIndex"); }
-    if (typeof p.shuffle === "boolean") pl.shuffle = p.shuffle;
-    if (pl.shuffle && p.startId === undefined && p.startIndex === undefined) start = Math.floor(st.rng() * tracks.length);
-    st.setQueue(tracks, title);
-    st.emitQueue(true);
-    st.startAt(start);
-    st.emitState();
-    return {};
-  },
   "player.toggle": (_p, { st }) => { st.pl.playing ? st.doPause() : st.doResume(); return {}; },
   "player.pause": (_p, { st }) => { st.doPause(); return {}; },
   "player.resume": (_p, { st }) => { st.doResume(); return {}; },

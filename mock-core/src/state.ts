@@ -313,6 +313,7 @@ export function createState(opts: MockOptions) {
   /** replace the queue; the caller then calls startAt() */
   function setQueue(tracks: Track[], title: string) {
     pl.q = toQ(tracks);
+    pl.qRevision++;
     pl.contextTitle = title;
     pl.index = -1;
   }
