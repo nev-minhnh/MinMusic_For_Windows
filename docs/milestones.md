@@ -56,55 +56,69 @@ Order:
 - the process tests T-P1…T-P6 (test-guide §3) pass
 - the perf table is filled in
 
-## M1: Core extraction + browse
-| WP | Content | Paths | Deps |
-|---|---|---|---|
-| M1-1 | Move CORE/MIXED-light files into `desktopCore` and flip the dependency; remove `:desktopApp` from the sidecar classpath; jlink without Compose UI/Skiko | MinMusic `desktopCore/`, `desktopApp/` build files | M0 |
-| M1-2 | Core API: home, charts, browse, search, album, artist, playlist, podcast, related, library.window/counts, likes/saves, userAlbum.*, history, stats | `desktopCore/.../api/{browse,search,library,pages}` | M1-1 (rebases after it) |
-| M1-3 | UI pages: Home (final), Search, Library (all filters), Album, UserAlbum, Artist, Playlist, Charts, Browse, History, Stats; context menu; selection and drag to album | `ui/src/pages/{Home,Search,Library,Album,UserAlbum,Artist,Playlist,Charts,Browse,History,Stats}`, `ui/src/components/Menu*` | mock fixtures from M1-5 |
-| M1-4 | Shell: tray, close-to-tray, SMTC, single instance + deep links, window state, Snap Layouts hit-test | `src-tauri/src/{tray,smtc,window,deeplink}.rs` | M0-A |
-| M1-5 | Mock-core fixtures and contract tests for every M1 method | `mock-core/fixtures/**`, `protocol/**`, `tests/contract/**` | api.md |
+## M1–M5 execution model (owner decision 2026-11-22)
+- Work runs in **cross-milestone waves**, not milestone by milestone. See `work-packages/waves.md`.
+- Conflict-free ownership, ports and the build policy are in `work-packages/conventions.md`. WP agents do no heavy builds; one integration agent per wave builds once, tests everything and fixes (`work-packages/integration.md`, `INT-W<n>.md`).
+- The gates below are checked at the integration that completes them: M1 at INT-W2, M2 at INT-W3, M3 at INT-W4, M4 at INT-W5, M5 at W6.
 
-**Acceptance:** all M1 contract tests pass against the real sidecar; e2e browse flows E-1…E-12 pass; P1–P5 still pass.
+## M1: Core extraction + browse
+| WP | Wave | Content | Brief |
+|---|---|---|---|
+| M1-1 | W1 | Move CORE files to `desktopCore` (same packages), flip the dependency, seams for Skia/Compose/Coil, sidecar runtime excludes, jlink locales | `M1-1-core-extraction.md` |
+| M1-2a | W1 | Core: `ApiRegistry` + `Cards.kt`; home chips/more, charts, browse, moods, search.*, album/artist/playlist/podcast/related, `app.openUrl/copyLink`; **all `player.play` contexts + `queue.window/add/addContext/setAutoplay` + `queue` topic + the auto-advance fix** | `M1-2a-core-browse.md` |
+| M1-2b | W2 | Core: `library.*` (all lists and sorts), likes/saves, `track.info/block`, `userAlbum.*`, history, stats, `/art` route, `--seed-library` | `M1-2b-core-library.md` |
+| M1-3a | W1 | UI foundation: route/settings/command globs, i18n and icons per WP, Menu, Table, selection, drag, Dialog, Toast, Sidebar/Rail, shortcuts, theme and locale | `M1-3a-ui-foundation.md` |
+| M1-3b | W2 | UI Home (final), Search, Charts, Browse | `M1-3b-ui-discover.md` |
+| M1-3c | W2 | UI Library (all filters), Liked/Downloads lists, UserAlbum, History, Stats, song info dialog | `M1-3c-ui-library.md` |
+| M1-3d | W2 | UI Album, Artist (+ About), Playlist, Podcast | `M1-3d-ui-pages.md` |
+| M1-4 | W1 | Shell: tray, close-to-tray, SMTC, deep links, window state/`shell.json`, Snap Layouts, corelink + core→shell requests, Rust shared-file setup | `M1-4-shell.md` |
+| M1-5 | W1 | Mock per area, M1 fixtures + seed, contract suites (live incl. auto-advance), port isolation, perf lock | `M1-5-mock-contract.md` |
+
+- **Scope moves:** `track.sources`/`track.setSource` (per-track source choice; no v1 backing) → M3-2. `import.files` (no v1 importer) → M4-2a.
+- **Queue:** the basic queue and auto-advance are folded into M1-2a. The remaining queue methods and the queue pane UI stay in M2.
+
+**Acceptance (INT-W2):** all M1 contract tests pass against the real sidecar; e2e browse flows E-1…E-12 pass; P1–P5 still pass; sidecar dist ≤ 200 MB.
 
 ## M2: Player complete
-| WP | Content | Paths |
+| WP | Wave | Content |
 |---|---|---|
-| M2-1 | Core: queue.*, player.* complete, sleep timer, output devices, lyrics.* (translate, romanize, offset, edit, search), related | `desktopCore/.../api/{player,queue,lyrics}` |
-| M2-2 | UI: full player final, queue pane, lyrics pane + fullscreen + karaoke, sleep timer, output picker, volume popover, floating player-bar variant, progress variants | `ui/src/shell/{FullPlayer,PlayerBar,SupportPane}`, `ui/src/pages/Lyrics*` |
-| M2-3 | Equalizer, core + UI (all features: 32 bands, filter types, preamp/auto, effects, profiles, undo/redo, APO import/export, AutoEq, per-device, spectrum) | `desktopCore/.../api/eq`, `ui/src/pages/Equalizer/**` |
-| M2-4 | Shell: mini-player window, taskbar thumb buttons, taskbar progress, Ctrl M | `src-tauri/src/{mini,taskbar}.rs`, `ui/src/mini/**` |
+| M2-1 | W3 | Core: `queue.remove/move/select/clear/radio`, `player.*` complete (mute, sleep timer, output devices, speed), `lyrics.*` (get/search/choose/offset/translate/romanize/edit/providers), `lyrics` topic |
+| M2-2 | W2 | UI: full player final, queue pane, lyrics pane + fullscreen + karaoke, sleep timer, output picker, volume popover, floating player-bar variant, progress variants (mock-first) |
+| M2-3a | W3 | Core EQ: `eq.*`, `eq` topic, spectrum, `eq.response` |
+| M2-3b | W3 | UI Equalizer page (all features, canvas graph) |
+| M2-4 | W3 | Shell + UI: mini-player window, taskbar thumb buttons + progress, Ctrl M |
 
-**Acceptance:** E-20…E-35; P4 at final full-player fidelity; C1.
+**Acceptance (INT-W3):** E-20…E-35; P4 at final full-player fidelity; C1.
 
 ## M3: Accounts, sources, integrations
-| WP | Content | Paths |
+| WP | Wave | Content |
 |---|---|---|
-| M3-1 | Shell `shell.webLogin` + `shell.po.*` (hidden webview, cookies, ExecuteScript) | `src-tauri/src/{weblogin,potoken}.rs` |
-| M3-2 | Core: `WebLoginConfigs`, `ShellPoTokenRuntime`, account.*, sources.*, NCT, Zing, Last.fm, ListenBrainz, Discord | `desktopCore/.../{shell,api/account,api/integrations}` |
-| M3-3 | UI: Settings → Nguồn nhạc, NCT and Last.fm dialogs, account menu, Tích hợp pages | `ui/src/pages/Settings/{Sources,Integrations}`, dialogs |
-| M3-4 | Device Connect + Listen Together, core API + UI panel/pages | `desktopCore/.../api/{dc,lt}`, `ui/src/pages/{DeviceConnect,ListenTogether}` |
+| M3-1 | W1 | Shell `shell.webLogin` + `shell.po.*` |
+| M3-2 | W4 | Core: `WebLoginConfigs`, `ShellPoTokenRuntime`, `account.*`, `sources.*`, `source.zing/nct.*`, Last.fm, ListenBrainz, Discord, **`track.sources/setSource`** |
+| M3-3 | W3 | UI: Settings → Nguồn nhạc, Tích hợp, NCT and Last.fm dialogs, account menu |
+| M3-4a | W4 | Core: Device Connect + Listen Together API (`dc.*`, `lt.*`, topics) |
+| M3-4b | W4 | UI: Device Connect panel, Listen Together page |
 
-**Acceptance:**
-- YouTube login and playback of a signed-in-only track
-- Zing VIP shows 320 only with a VIP account
-- the NCT password is absent from every file under the data dir and logs (grep test)
-- pair and control with Android 1.0.2 (manual QA M3)
+**Acceptance (INT-W4):** YouTube login + a signed-in-only track; Zing VIP 320 only with VIP; the NCT password grep test; pairing with Android 1.0.2 (manual QA).
 
 ## M4: Settings, downloads, data
-| WP | Content | Paths |
+| WP | Wave | Content |
 |---|---|---|
-| M4-1 | Settings: schema endpoint + every page/layout table, settings search | `desktopCore/.../api/settings`, `ui/src/pages/Settings/**` (except M3 pages) |
-| M4-2 | Downloads: core API + Library downloads box, queue, folder choice, save-to, storage page | `desktopCore/.../api/download`, `ui/src/pages/{Downloads,Settings/Storage}` |
-| M4-3 | Backup/restore, foreign import, crash prompt, onboarding, log viewer | `desktopCore/.../api/{backup,crash}`, `ui/src/pages/{Onboarding,Settings/Backup}` |
-| M4-4 | Playlist import (Spotify/Tidal/Deezer/Apple/Amazon) via webLogin | `desktopCore/.../api/import`, `ui/src/pages/Settings/Import` |
+| M4-1a | W4 | Core: `settings.schema/get/set/reset`, `settings` topic; the shell reads its keys over corelink |
+| M4-1b | W3 | UI: Settings shell + every general page (layout table), settings search |
+| M4-2a | W5 | Core: `download.*`, `storage.*`, `downloads` topic, **`import.files`** |
+| M4-2b | W4 | UI: Library downloads box, Downloads page, queue, folder choice, save-to, Storage page |
+| M4-3a | W5 | Core: `backup.*`, `import.foreignBackup`, `crash.*`, `onboarding.*`, `app.logs.tail` |
+| M4-3b | W4 | UI: Onboarding, Backup page, crash prompt, log viewer |
+| M4-4a | W5 | Core: `import.providers/login/playlists/run` via webLogin |
+| M4-4b | W5 | UI: Settings → Nhập playlist |
 
 ## M5: Packaging, migration, release
-| WP | Content | Paths |
+| WP | Wave | Content |
 |---|---|---|
-| M5-1 | NSIS (currentUser, hooks: stop processes, uninstall v1 MSI), portable zip, sizes | `src-tauri/nsis/**`, `tauri.conf.json` bundle |
-| M5-2 | Updater (latest.json, minisign), Updates settings page, v1 bridge release job | `src-tauri/src/update.rs`, `.github/workflows/**` |
-| M5-3 | Release workflow (MSVC) + no-ads check + contract tests in CI | `.github/workflows/release.yml` |
-| M5-4 | Full regression: perf table, QA checklist, v1 → v2 upgrade on a VM-free test user profile | `docs/perf/`, `docs/qa/` |
+| M5-1 | W2 | NSIS (currentUser, hooks: stop processes, uninstall v1 MSI, deep-link scheme registration), portable zip, size script |
+| M5-2 | W5 | Updater (latest.json, minisign), Updates settings page, v1 bridge release job |
+| M5-3 | W5 | Release workflow (MSVC), no-ads check, contract tests in CI |
+| M5-4 | W6 | Full regression: perf table, QA checklist, v1 → v2 upgrade tests, release candidate |
 
-**Release gate:** all P/S/R/C/I targets, the full manual QA checklist, and the upgrade tests U-1…U-4.
+**Release gate (W6):** all P/S/R/C/I targets, the full manual QA checklist, and the upgrade tests U-1…U-4.
