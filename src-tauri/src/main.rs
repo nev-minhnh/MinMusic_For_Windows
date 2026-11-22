@@ -5,6 +5,10 @@ mod paths;
 mod session_end;
 mod sidecar;
 mod testhooks;
+// <M3-1>
+mod potoken;
+mod weblogin;
+// </M3-1>
 
 use paths::Paths;
 use sidecar::{shutdown, supervisor::Supervisor};
@@ -178,7 +182,11 @@ fn with_commands(b: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
         core_config::core_config,
         core_config::core_status,
         core_config::core_retry,
-        test_set_window_size
+        test_set_window_size,
+        // <M3-1>
+        weblogin::test_weblogin,
+        potoken::test_po_evaluate
+        // </M3-1>
     ])
 }
 
