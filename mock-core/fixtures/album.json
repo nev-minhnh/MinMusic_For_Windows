@@ -1,0 +1,443 @@
+{
+  "album": {
+    "id": "MPREb_mockAlbum01",
+    "title": "Sky Tour",
+    "artists": [
+      {
+        "id": "UCdVyho5b1068a8LTywuwc2D",
+        "name": "Sơn Tùng M-TP"
+      }
+    ],
+    "year": 2020,
+    "art": {
+      "src": "https://lh3.googleusercontent.com/A6HoGSghabjiTuTr1B_F3Tl1hgBjZkpq9PqtwkKyj3uCYRtflfmhDXJNqqXxvjIa=w600-h600-l90-rj",
+      "w": 600,
+      "h": 600
+    },
+    "source": "yt",
+    "kind": "album",
+    "description": "Tuyển tập các ca khúc nổi bật, được tạo cho mock core (dữ liệu giả).",
+    "durationMs": 3018000,
+    "trackCount": 12,
+    "label": "M-TP Entertainment",
+    "saved": false
+  },
+  "tracks": [
+    {
+      "id": "3FG9mpaxo8y",
+      "title": "Chúng Ta Của Hiện Tại",
+      "artists": [
+        {
+          "id": "UC8iyVjsmsY96nF9Yj6xw1hn",
+          "name": "Sơn Tùng M-TP"
+        }
+      ],
+      "durationMs": 301000,
+      "art": {
+        "src": "https://lh3.googleusercontent.com/A6HoGSghabjiTuTr1B_F3Tl1hgBjZkpq9PqtwkKyj3uCYRtflfmhDXJNqqXxvjIa=w600-h600-l90-rj",
+        "w": 600,
+        "h": 600
+      },
+      "source": "yt",
+      "quality": {
+        "label": "Opus 160",
+        "lossless": false,
+        "kbps": 160
+      },
+      "album": {
+        "id": "MPREb_mockAlbum01",
+        "title": "Sky Tour"
+      }
+    },
+    {
+      "id": "mpSrCNdBv79",
+      "title": "Có Chắc Yêu Là Đây",
+      "artists": [
+        {
+          "id": "UC3lZDHX73_nE-ke8enxL7J4",
+          "name": "Sơn Tùng M-TP"
+        }
+      ],
+      "durationMs": 242000,
+      "art": {
+        "src": "https://lh3.googleusercontent.com/A6HoGSghabjiTuTr1B_F3Tl1hgBjZkpq9PqtwkKyj3uCYRtflfmhDXJNqqXxvjIa=w600-h600-l90-rj",
+        "w": 600,
+        "h": 600
+      },
+      "source": "yt",
+      "quality": {
+        "label": "Opus 160",
+        "lossless": false,
+        "kbps": 160
+      },
+      "album": {
+        "id": "MPREb_mockAlbum01",
+        "title": "Sky Tour"
+      }
+    },
+    {
+      "id": "l5J4iM2QGJq",
+      "title": "Muộn Rồi Mà Sao Còn",
+      "artists": [
+        {
+          "id": "UCYjMRcwNd5RBOovW51kUQFR",
+          "name": "Sơn Tùng M-TP"
+        }
+      ],
+      "durationMs": 275000,
+      "art": {
+        "src": "https://lh3.googleusercontent.com/A6HoGSghabjiTuTr1B_F3Tl1hgBjZkpq9PqtwkKyj3uCYRtflfmhDXJNqqXxvjIa=w600-h600-l90-rj",
+        "w": 600,
+        "h": 600
+      },
+      "source": "yt",
+      "quality": {
+        "label": "Opus 160",
+        "lossless": false,
+        "kbps": 160
+      },
+      "album": {
+        "id": "MPREb_mockAlbum01",
+        "title": "Sky Tour"
+      }
+    },
+    {
+      "id": "sAJGDmSGRlv",
+      "title": "Đi Về Nhà",
+      "artists": [
+        {
+          "id": "UCp7LwVAFZVyiI1esyMWXeD_",
+          "name": "Đen"
+        }
+      ],
+      "durationMs": 222000,
+      "art": {
+        "src": "https://lh3.googleusercontent.com/A6HoGSghabjiTuTr1B_F3Tl1hgBjZkpq9PqtwkKyj3uCYRtflfmhDXJNqqXxvjIa=w600-h600-l90-rj",
+        "w": 600,
+        "h": 600
+      },
+      "source": "yt",
+      "quality": {
+        "label": "Opus 160",
+        "lossless": false,
+        "kbps": 160
+      },
+      "explicit": true,
+      "album": {
+        "id": "MPREb_mockAlbum01",
+        "title": "Sky Tour"
+      }
+    },
+    {
+      "id": "cFjifEmV1Q4",
+      "title": "Mười Năm",
+      "artists": [
+        {
+          "id": "UCQVPpn8OIJQhuM-rOT9yUpA",
+          "name": "Đen"
+        }
+      ],
+      "durationMs": 248000,
+      "art": {
+        "src": "https://lh3.googleusercontent.com/A6HoGSghabjiTuTr1B_F3Tl1hgBjZkpq9PqtwkKyj3uCYRtflfmhDXJNqqXxvjIa=w600-h600-l90-rj",
+        "w": 600,
+        "h": 600
+      },
+      "source": "yt",
+      "quality": {
+        "label": "Opus 160",
+        "lossless": false,
+        "kbps": 160
+      },
+      "album": {
+        "id": "MPREb_mockAlbum01",
+        "title": "Sky Tour"
+      }
+    },
+    {
+      "id": "zUkdKh0_FGV",
+      "title": "Bước Qua Nhau",
+      "artists": [
+        {
+          "id": "UCuNCXibtGBSP7BayWddYnl1",
+          "name": "Vũ."
+        }
+      ],
+      "durationMs": 254000,
+      "art": {
+        "src": "https://lh3.googleusercontent.com/A6HoGSghabjiTuTr1B_F3Tl1hgBjZkpq9PqtwkKyj3uCYRtflfmhDXJNqqXxvjIa=w600-h600-l90-rj",
+        "w": 600,
+        "h": 600
+      },
+      "source": "yt",
+      "quality": {
+        "label": "Opus 160",
+        "lossless": false,
+        "kbps": 160
+      },
+      "album": {
+        "id": "MPREb_mockAlbum01",
+        "title": "Sky Tour"
+      }
+    },
+    {
+      "id": "zPk1Aai2qDN",
+      "title": "Nàng Thơ",
+      "artists": [
+        {
+          "id": "UCvrO9QBQGIVjXCr7bm9LxZO",
+          "name": "Hoàng Dũng"
+        }
+      ],
+      "durationMs": 252000,
+      "art": {
+        "src": "https://lh3.googleusercontent.com/A6HoGSghabjiTuTr1B_F3Tl1hgBjZkpq9PqtwkKyj3uCYRtflfmhDXJNqqXxvjIa=w600-h600-l90-rj",
+        "w": 600,
+        "h": 600
+      },
+      "source": "yt",
+      "quality": {
+        "label": "Opus 160",
+        "lossless": false,
+        "kbps": 160
+      },
+      "album": {
+        "id": "MPREb_mockAlbum01",
+        "title": "Sky Tour"
+      }
+    },
+    {
+      "id": "yS-oMOuc6Rj",
+      "title": "Hơn Cả Yêu",
+      "artists": [
+        {
+          "id": "UCC3s4QY2_cUwJH7qwNSbSfD",
+          "name": "Đức Phúc"
+        }
+      ],
+      "durationMs": 238000,
+      "art": {
+        "src": "https://lh3.googleusercontent.com/A6HoGSghabjiTuTr1B_F3Tl1hgBjZkpq9PqtwkKyj3uCYRtflfmhDXJNqqXxvjIa=w600-h600-l90-rj",
+        "w": 600,
+        "h": 600
+      },
+      "source": "yt",
+      "quality": {
+        "label": "Opus 160",
+        "lossless": false,
+        "kbps": 160
+      },
+      "album": {
+        "id": "MPREb_mockAlbum01",
+        "title": "Sky Tour"
+      }
+    },
+    {
+      "id": "C658HE4C7rO",
+      "title": "See Tình",
+      "artists": [
+        {
+          "id": "UCd2oPVamC9JYt2FiHHWDHTY",
+          "name": "Hoàng Thùy Linh"
+        }
+      ],
+      "durationMs": 187000,
+      "art": {
+        "src": "https://lh3.googleusercontent.com/A6HoGSghabjiTuTr1B_F3Tl1hgBjZkpq9PqtwkKyj3uCYRtflfmhDXJNqqXxvjIa=w600-h600-l90-rj",
+        "w": 600,
+        "h": 600
+      },
+      "source": "yt",
+      "quality": {
+        "label": "Opus 160",
+        "lossless": false,
+        "kbps": 160
+      },
+      "album": {
+        "id": "MPREb_mockAlbum01",
+        "title": "Sky Tour"
+      }
+    },
+    {
+      "id": "G8IAI4p3jYl",
+      "title": "Thức Giấc",
+      "artists": [
+        {
+          "id": "UCwZEN_0HpK6t3o3DHJr3uqP",
+          "name": "Da LAB"
+        }
+      ],
+      "durationMs": 301000,
+      "art": {
+        "src": "https://lh3.googleusercontent.com/A6HoGSghabjiTuTr1B_F3Tl1hgBjZkpq9PqtwkKyj3uCYRtflfmhDXJNqqXxvjIa=w600-h600-l90-rj",
+        "w": 600,
+        "h": 600
+      },
+      "source": "yt",
+      "quality": {
+        "label": "Opus 160",
+        "lossless": false,
+        "kbps": 160
+      },
+      "album": {
+        "id": "MPREb_mockAlbum01",
+        "title": "Sky Tour"
+      }
+    },
+    {
+      "id": "6PRaSeX1IXB",
+      "title": "Waiting For You",
+      "artists": [
+        {
+          "id": "UCkCExBo7DXjjGywze9xmRGC",
+          "name": "MONO"
+        }
+      ],
+      "durationMs": 266000,
+      "art": {
+        "src": "https://lh3.googleusercontent.com/A6HoGSghabjiTuTr1B_F3Tl1hgBjZkpq9PqtwkKyj3uCYRtflfmhDXJNqqXxvjIa=w600-h600-l90-rj",
+        "w": 600,
+        "h": 600
+      },
+      "source": "yt",
+      "quality": {
+        "label": "Opus 160",
+        "lossless": false,
+        "kbps": 160
+      },
+      "explicit": true,
+      "album": {
+        "id": "MPREb_mockAlbum01",
+        "title": "Sky Tour"
+      }
+    },
+    {
+      "id": "anGkuwadL91",
+      "title": "Ngày Đầu Tiên",
+      "artists": [
+        {
+          "id": "UCxqUQws9f6Y09dJUdNn9P8K",
+          "name": "Đức Phúc"
+        }
+      ],
+      "durationMs": 232000,
+      "art": {
+        "src": "https://lh3.googleusercontent.com/A6HoGSghabjiTuTr1B_F3Tl1hgBjZkpq9PqtwkKyj3uCYRtflfmhDXJNqqXxvjIa=w600-h600-l90-rj",
+        "w": 600,
+        "h": 600
+      },
+      "source": "yt",
+      "quality": {
+        "label": "Opus 160",
+        "lossless": false,
+        "kbps": 160
+      },
+      "album": {
+        "id": "MPREb_mockAlbum01",
+        "title": "Sky Tour"
+      }
+    }
+  ],
+  "otherVersions": [
+    {
+      "id": "MPREb_YevDLfFqWTA",
+      "title": "Sky Tour (Deluxe)",
+      "artists": [
+        {
+          "id": "UC7Cjx6GprO6kvdry6QSDxdw",
+          "name": "Sơn Tùng M-TP"
+        }
+      ],
+      "year": 2020,
+      "art": {
+        "src": "https://lh3.googleusercontent.com/8mrpW-goJg4ULr0VMSDIJ69iYOcUXsDllvgMrxX62oEje5KwLkP9Z6dPWTA-275V=w600-h600-l90-rj",
+        "w": 600,
+        "h": 600
+      },
+      "source": "yt",
+      "kind": "album"
+    },
+    {
+      "id": "MPREb_BJ7pQyaOc8T",
+      "title": "Sky Tour (Instrumental)",
+      "artists": [
+        {
+          "id": "UCuIWG00547vKMIe9y877Onj",
+          "name": "Sơn Tùng M-TP"
+        }
+      ],
+      "year": 2021,
+      "art": {
+        "src": "https://lh3.googleusercontent.com/x80Lc4QCtQK_-GwIPlODNxIhwqTTFZPtcrCzDJlmaLdweEByg9Th17xq811C0Ann=w302-h302-l90-rj",
+        "w": 302,
+        "h": 302
+      },
+      "source": "yt",
+      "kind": "album"
+    }
+  ],
+  "moreBy": {
+    "key": "moreBy",
+    "title": "Thêm từ Sơn Tùng M-TP",
+    "layout": "cards",
+    "items": [
+      {
+        "t": "album",
+        "id": "MPREb_SOcIsI7SjNY",
+        "title": "Sky Tour ",
+        "artists": [
+          {
+            "id": "UCWkwf-rVwKDfjYxRtwX_-Xg",
+            "name": "Sơn Tùng M-TP"
+          }
+        ],
+        "year": 2020,
+        "art": {
+          "src": "https://lh3.googleusercontent.com/JuTEr59YCzHi-iieG2lvs1L6Jl-iyBGyOe7fSDVhgQinb0pseTprW1XORK2Ytm0U=w302-h302-l90-rj",
+          "w": 302,
+          "h": 302
+        },
+        "source": "yt",
+        "kind": "album"
+      },
+      {
+        "t": "album",
+        "id": "MPREb_yMGxUgnZLsN",
+        "title": "Mười Năm ",
+        "artists": [
+          {
+            "id": "UCko5un4fQiAtiqK2Xif_C8k",
+            "name": "Sơn Tùng M-TP"
+          }
+        ],
+        "year": 2022,
+        "art": {
+          "src": "https://lh3.googleusercontent.com/QPigHmK7kfe-n7TN8K3tYd6C7IllFqrrV2fV_Q3fhaz3l9i3iR_ODoK0zohA7iGv=w600-h600-l90-rj",
+          "w": 600,
+          "h": 600
+        },
+        "source": "yt",
+        "kind": "single"
+      },
+      {
+        "t": "album",
+        "id": "MPREb_4AJBmu7FKp7",
+        "title": "Hoàng Thùy Linh: Link ",
+        "artists": [
+          {
+            "id": "UCCsp4gI8C2nS0mxooI-B_WK",
+            "name": "Sơn Tùng M-TP"
+          }
+        ],
+        "year": 2021,
+        "art": {
+          "src": "https://lh3.googleusercontent.com/mpQtNmMz5PsTkyWxMQn4qh1evxex6-5QOXHbjbqSpu9uRRDjYx7TXnecreMYzxS9=w600-h600-l90-rj",
+          "w": 600,
+          "h": 600
+        },
+        "source": "yt",
+        "kind": "album"
+      }
+    ]
+  }
+}
