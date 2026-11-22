@@ -16,6 +16,8 @@ mod window_state;
 // <M2-4>
 // </M2-4>
 // <M3-1>
+mod potoken;
+mod weblogin;
 // </M3-1>
 // <M5-2>
 // </M5-2>
@@ -201,6 +203,8 @@ fn with_commands(b: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
         // <M2-4>
         // </M2-4>
         // <M3-1>
+        weblogin::test_weblogin,
+        potoken::test_po_evaluate,
         // </M3-1>
         // <M5-2>
         // </M5-2>
@@ -315,6 +319,7 @@ fn main() {
             // <M2-4>
             // </M2-4>
             // <M3-1>
+            register_m3_1(app.handle());
             // </M3-1>
             // <M5-2>
             // </M5-2>
@@ -343,3 +348,26 @@ fn main() {
         }
     });
 }
+
+// <M3-1>
+/// Registers `shell.webLogin` and `shell.po.*` for the core -> shell channel.
+fn register_m3_1(app: &AppHandle) {
+    use corelink::srv::{register, ApiError};
+    use std::sync::Arc;
+    fn adapt<F, Fut>(app: &AppHandle, f: F) -> corelink::srv::Handler
+    where
+        F: Fn(AppHandle, serde_json::Value) -> Fut + Send + Sync + 'static,
+        Fut: std::future::Future<Output = Result<serde_json::Value, weblogin::ApiErr>> + Send + 'static,
+    {
+        let app = app.clone();
+        Arc::new(move |p| {
+            let fut = f(app.clone(), p);
+            Box::pin(async move { fut.await.map_err(|e| ApiError::new(&e.code, e.message)) })
+        })
+    }
+    register("shell.webLogin", adapt(app, weblogin::handle));
+    register("shell.po.evaluate", adapt(app, potoken::evaluate));
+    register("shell.po.reset", adapt(app, potoken::reset));
+    register("shell.po.available", adapt(app, potoken::available));
+}
+// </M3-1>

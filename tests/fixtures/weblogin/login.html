@@ -1,0 +1,14 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Fixture login</title>
+<body>
+<h1>Fixture login</h1>
+<p id="msg">Waiting</p>
+<script>
+  // ?auto=1 : go to the done page after 300 ms (the server sets the httpOnly cookie test_sid there).
+  // Without it the page stays open (used to test "busy" and the timeout).
+  if (new URLSearchParams(location.search).get('auto') === '1') {
+    setTimeout(() => location.assign('/done.html'), 300);
+  }
+</script>
+</body>
