@@ -382,7 +382,7 @@ export const mockOnly = [
   }],
   ["mock: methods outside M0 answer bad_request", async (ctx) => {
     const c = await ui(ctx);
-    for (const m of ["search.run", "eq.get", "settings.get", "queue.window", "lt.state"]) {
+    for (const m of ["eq.get", "lt.state", "download.summary", "lyrics.get"]) {
       assert.equal((await c.raw(m, undefined, { validate: false })).e?.code, "bad_request", m);
     }
   }],

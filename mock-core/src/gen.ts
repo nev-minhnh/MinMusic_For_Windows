@@ -7,6 +7,11 @@ export const SONG_COUNT = 5000;
 export const ALBUM_COUNT = 40;
 export const TRACKS_PER_ALBUM = 12;
 export const USER_ALBUM_COUNT = 10;
+export const HISTORY_COUNT = 2000;
+/** fixed reference time so output is deterministic */
+export const NOW = 1_795_000_000_000;
+
+export interface HistoryEvent { eventId: string; songId: string; playedAt: number; playTimeMs: number }
 
 export function mulberry32(seed: number): () => number {
   let a = seed >>> 0;
@@ -110,7 +115,9 @@ export interface Dataset {
   songs: Track[];
   albums: MockAlbum[];
   artists: ArtistCard[];
-  userAlbums: (PlaylistCard & { pinned: boolean; revision: number })[];
+  userAlbums: (PlaylistCard & { pinned: boolean; revision: number; songIds: string[] })[];
+  /** play history, newest first */
+  history: HistoryEvent[];
   /** song index -> number of plays (for sort by plays) */
   plays: number[];
   lastPlayed: number[];
@@ -150,7 +157,6 @@ export function generateDataset(seed = DEFAULT_SEED, songCount = SONG_COUNT): Da
   const plays: number[] = [];
   const lastPlayed: number[] = [];
   const likedIds = new Set<string>();
-  const NOW = 1_795_000_000_000; // fixed reference time so output is deterministic
   for (let i = 0; i < songCount; i++) {
     const inAlbum = i < ALBUM_COUNT * TRACKS_PER_ALBUM;
     const album = inAlbum ? albums[i % ALBUM_COUNT]! : undefined;
@@ -198,10 +204,26 @@ export function generateDataset(seed = DEFAULT_SEED, songCount = SONG_COUNT): Da
       art: { src: `core:playlist_covers/lp-${u + 1}-${randStr(r, 6, "0123456789abcdef")}` },
       pinned: u < 3,
       revision: 1,
+      songIds: [] as string[],
     });
   }
 
   const byId = new Map<string, Track>();
   for (const s of songs) byId.set(s.id, s);
-  return { songs, albums, artists, userAlbums, plays, lastPlayed, byId, likedIds };
+  for (const ua of userAlbums) {
+    const n = Number(ua.id.slice(3));
+    ua.songIds = songs.slice(n * 100, n * 100 + (ua.count ?? 20)).map((t) => t.id);
+  }
+
+  // history: separate rng so the data above stays byte-identical to M0
+  const hr = mulberry32((seed ^ 0x5eed1234) >>> 0);
+  const history: HistoryEvent[] = [];
+  let at = NOW - 60_000;
+  for (let i = 0; i < HISTORY_COUNT; i++) {
+    const song = songs[Math.floor(hr() * hr() * songs.length)]!;
+    history.push({ eventId: String(i + 1), songId: song.id, playedAt: at, playTimeMs: Math.floor((song.durationMs ?? 200_000) * (0.3 + 0.7 * hr())) });
+    // ~ 2000 events over ~ 70 days, denser near now
+    at -= Math.floor(60_000 + hr() * hr() * 3_600_000 * 2.4);
+  }
+  return { songs, albums, artists, userAlbums, history, plays, lastPlayed, byId, likedIds };
 }
