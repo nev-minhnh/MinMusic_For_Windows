@@ -49,7 +49,7 @@ rl.on("line", async (line) => {
     if (typeof msg.token !== "string") { console.error("bad first line"); process.exit(2); }
     handle = await startMock({
       port: 0, token: msg.token, artToken: msg.artToken ?? "mockart",
-      allowedOrigins: dev ? ["http://localhost:5173"] : [],
+      allowedOrigins: dev ? [`http://localhost:${process.env.MM_WEB_PORT || 5173}`] : [],
       capabilities: [],
     });
     try {
