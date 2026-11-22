@@ -1,7 +1,10 @@
 .set{display:grid;grid-template-columns:248px minmax(0,760px);gap:32px;align-items:start}
-.set-cats{display:flex;flex-direction:column;gap:4px;position:sticky;top:8px}
+.set-side{position:sticky;top:8px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.set-side .search.set-search{width:100%;margin-left:0}
+.set-cats{display:flex;flex-direction:column;gap:4px}
 .set-cat{height:40px;border-radius:20px;display:flex;align-items:center;gap:12px;padding:0 12px;color:var(--ink2);width:100%}
 .set-cat:hover{background:var(--hov);color:var(--ink)}
 .set-cat.on{background:var(--acc-c);color:var(--on-acc-c);font-weight:600}
 .set-detail{min-width:0}
 .win[data-w=compact] .set{grid-template-columns:minmax(0,1fr)}
+.win[data-w=compact] .set-side{position:static}
