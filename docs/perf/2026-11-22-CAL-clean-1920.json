@@ -1,0 +1,219 @@
+{
+  "date": "2026-11-22",
+  "size": "1920",
+  "tag": "clean",
+  "endpoint": "http://127.0.0.1:40249",
+  "viewport": {
+    "innerWidth": 1279,
+    "innerHeight": 810,
+    "dpr": 2,
+    "screenW": 1920,
+    "screenH": 1200
+  },
+  "osInput": "cdp-fallback",
+  "presentMon": false,
+  "categories": "benchmark,graphics.pipeline,cc,viz,gpu,input,devtools.timeline,disabled-by-default-devtools.timeline.frame,blink.user_timing,disabled-by-default-devtools.timeline",
+  "results": {
+    "CAL": {
+      "scenario": "CAL",
+      "size": "1920",
+      "runs": [
+        {
+          "run": 1,
+          "pid": 52716,
+          "windowMs": 5269,
+          "frames": 624,
+          "dropped": 26,
+          "droppedPct": 4.17,
+          "partial": 26,
+          "noUpdate": 0,
+          "states": {
+            "STATE_PRESENTED_ALL": 598,
+            "STATE_PRESENTED_PARTIAL": 26
+          },
+          "runTasks": 1708,
+          "longTasks": 0,
+          "maxLongTaskMs": 0,
+          "longTasksPerSec": 0,
+          "eventLatencyP95": 58,
+          "eventLatencyN": 100,
+          "eventLatencyByType": {
+            "MOUSE_WHEEL": {
+              "n": 40,
+              "p95": 33.872
+            },
+            "GESTURE_SCROLL_BEGIN": {
+              "n": 20,
+              "p95": 33.719
+            },
+            "FIRST_GESTURE_SCROLL_UPDATE": {
+              "n": 20,
+              "p95": 64.81
+            },
+            "GESTURE_SCROLL_END": {
+              "n": 20,
+              "p95": 49.385
+            }
+          },
+          "pmLongGaps": null,
+          "info": {
+            "firstMs": 1795345162426,
+            "lastMs": 1795345167248,
+            "notches": 20,
+            "input": "cdp-fallback"
+          },
+          "pmError": null,
+          "tracePath": "D:\\Coding_Project\\MinMusic_4_Windows-wp\\M0-E\\.testdata\\20261122-175749-perf\\traces\\CAL-1920-r1.trace.json",
+          "csvPath": null
+        },
+        {
+          "run": 2,
+          "pid": 52716,
+          "windowMs": 4932,
+          "frames": 584,
+          "dropped": 9,
+          "droppedPct": 1.54,
+          "partial": 9,
+          "noUpdate": 0,
+          "states": {
+            "STATE_PRESENTED_ALL": 575,
+            "STATE_PRESENTED_PARTIAL": 9
+          },
+          "runTasks": 1616,
+          "longTasks": 0,
+          "maxLongTaskMs": 0,
+          "longTasksPerSec": 0,
+          "eventLatencyP95": 59,
+          "eventLatencyN": 100,
+          "eventLatencyByType": {
+            "MOUSE_WHEEL": {
+              "n": 40,
+              "p95": 33.188
+            },
+            "GESTURE_SCROLL_BEGIN": {
+              "n": 20,
+              "p95": 33.537
+            },
+            "FIRST_GESTURE_SCROLL_UPDATE": {
+              "n": 20,
+              "p95": 65.505
+            },
+            "GESTURE_SCROLL_END": {
+              "n": 20,
+              "p95": 49.428
+            }
+          },
+          "pmLongGaps": null,
+          "info": {
+            "firstMs": 1795345171326,
+            "lastMs": 1795345175827,
+            "notches": 20,
+            "input": "cdp-fallback"
+          },
+          "pmError": null,
+          "tracePath": "D:\\Coding_Project\\MinMusic_4_Windows-wp\\M0-E\\.testdata\\20261122-175749-perf\\traces\\CAL-1920-r2.trace.json",
+          "csvPath": null
+        },
+        {
+          "run": 3,
+          "pid": 52716,
+          "windowMs": 5093,
+          "frames": 604,
+          "dropped": 12,
+          "droppedPct": 1.99,
+          "partial": 12,
+          "noUpdate": 0,
+          "states": {
+            "STATE_PRESENTED_ALL": 592,
+            "STATE_PRESENTED_PARTIAL": 12
+          },
+          "runTasks": 3402,
+          "longTasks": 0,
+          "maxLongTaskMs": 0,
+          "longTasksPerSec": 0,
+          "eventLatencyP95": 64.6,
+          "eventLatencyN": 100,
+          "eventLatencyByType": {
+            "MOUSE_WHEEL": {
+              "n": 40,
+              "p95": 35.302
+            },
+            "GESTURE_SCROLL_BEGIN": {
+              "n": 20,
+              "p95": 35.159
+            },
+            "FIRST_GESTURE_SCROLL_UPDATE": {
+              "n": 20,
+              "p95": 66.415
+            },
+            "GESTURE_SCROLL_END": {
+              "n": 20,
+              "p95": 49.419
+            }
+          },
+          "pmLongGaps": null,
+          "info": {
+            "firstMs": 1795345182942,
+            "lastMs": 1795345187580,
+            "notches": 20,
+            "input": "cdp-fallback"
+          },
+          "pmError": null,
+          "tracePath": "D:\\Coding_Project\\MinMusic_4_Windows-wp\\M0-E\\.testdata\\20261122-175749-perf\\traces\\CAL-1920-r3.trace.json",
+          "csvPath": null
+        }
+      ],
+      "worst": {
+        "run": 1,
+        "pid": 52716,
+        "windowMs": 5269,
+        "frames": 624,
+        "dropped": 26,
+        "droppedPct": 4.17,
+        "partial": 26,
+        "noUpdate": 0,
+        "states": {
+          "STATE_PRESENTED_ALL": 598,
+          "STATE_PRESENTED_PARTIAL": 26
+        },
+        "runTasks": 1708,
+        "longTasks": 0,
+        "maxLongTaskMs": 0,
+        "longTasksPerSec": 0,
+        "eventLatencyP95": 58,
+        "eventLatencyN": 100,
+        "eventLatencyByType": {
+          "MOUSE_WHEEL": {
+            "n": 40,
+            "p95": 33.872
+          },
+          "GESTURE_SCROLL_BEGIN": {
+            "n": 20,
+            "p95": 33.719
+          },
+          "FIRST_GESTURE_SCROLL_UPDATE": {
+            "n": 20,
+            "p95": 64.81
+          },
+          "GESTURE_SCROLL_END": {
+            "n": 20,
+            "p95": 49.385
+          }
+        },
+        "pmLongGaps": null,
+        "info": {
+          "firstMs": 1795345162426,
+          "lastMs": 1795345167248,
+          "notches": 20,
+          "input": "cdp-fallback"
+        },
+        "pmError": null,
+        "tracePath": "D:\\Coding_Project\\MinMusic_4_Windows-wp\\M0-E\\.testdata\\20261122-175749-perf\\traces\\CAL-1920-r1.trace.json",
+        "csvPath": null
+      },
+      "medianDroppedPct": 1.99,
+      "medianLongTasks": 0,
+      "verdict": "PASS"
+    }
+  }
+}

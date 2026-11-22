@@ -1,0 +1,53 @@
+﻿{
+    "date":  "2026-11-22",
+    "size":  "1920",
+    "osInput":  "cdp-fallback",
+    "jank":  {
+                 "worstLongTasks":  6,
+                 "medianDroppedPct":  9.83,
+                 "verdict":  "PASS",
+                 "runs":  [
+                              {
+                                  "windowMs":  5331,
+                                  "frames":  603,
+                                  "dropped":  53,
+                                  "longTasks":  5
+                              },
+                              {
+                                  "windowMs":  5304,
+                                  "frames":  590,
+                                  "dropped":  58,
+                                  "longTasks":  6
+                              },
+                              {
+                                  "windowMs":  6048,
+                                  "frames":  680,
+                                  "dropped":  90,
+                                  "longTasks":  6
+                              }
+                          ],
+                 "worstDroppedPct":  13.24,
+                 "maxLongTaskMs":  120.2
+             },
+    "clean":  {
+                  "verdict":  "PASS",
+                  "worstLongTasks":  0,
+                  "medianDroppedPct":  1.99,
+                  "worstDroppedPct":  4.17
+              },
+    "idle":  {
+                 "runTasksSeen":  5,
+                 "verdict":  "PASS",
+                 "longTasks":  0,
+                 "dropped":  0,
+                 "noUpdateFrames":  0,
+                 "frames":  0
+             },
+    "jankDropsExceedClean":  true,
+    "pass":  true,
+    "files":  {
+                  "clean":  "D:\\\\Coding_Project\\\\MinMusic_4_Windows-wp\\\\M0-E\\\\docs\\\\perf\\\\2026-11-22-CAL-clean-1920.json",
+                  "idle":  "D:\\\\Coding_Project\\\\MinMusic_4_Windows-wp\\\\M0-E\\\\docs\\\\perf\\\\2026-11-22-CAL-IDLE-idle-1920.json",
+                  "jank":  "D:\\\\Coding_Project\\\\MinMusic_4_Windows-wp\\\\M0-E\\\\docs\\\\perf\\\\2026-11-22-CAL-jank-1920.json"
+              }
+}
