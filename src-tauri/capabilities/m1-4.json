@@ -1,0 +1,11 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "m1-4",
+  "description": "Shell OS integration: shell.json settings and the maximize-button rect for Snap Layouts.",
+  "windows": ["main", "mini"],
+  "permissions": [
+    "allow-shell-settings-get",
+    "allow-shell-settings-set",
+    "allow-caption-rects"
+  ]
+}
