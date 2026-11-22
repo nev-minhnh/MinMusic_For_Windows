@@ -12,6 +12,7 @@ import { createPlayerStore } from "./stores/player.ts";
 export * from "./client.ts";
 export * from "./art.ts";
 export * from "./clock.ts";
+export * from "./errors.ts";
 export * from "./stores/player.ts";
 export * from "./stores/library.ts";
 export type * from "@minmusic/protocol";
