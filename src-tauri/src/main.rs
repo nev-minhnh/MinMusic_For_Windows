@@ -5,10 +5,17 @@ mod paths;
 mod session_end;
 mod sidecar;
 mod testhooks;
+// <M1-4>
+mod corelink;
+// </M1-4>
+// <M2-4>
+// </M2-4>
 // <M3-1>
 mod potoken;
 mod weblogin;
 // </M3-1>
+// <M5-2>
+// </M5-2>
 
 use paths::Paths;
 use sidecar::{shutdown, supervisor::Supervisor};
@@ -183,10 +190,16 @@ fn with_commands(b: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
         core_config::core_status,
         core_config::core_retry,
         test_set_window_size,
+        // <M1-4>
+        // </M1-4>
+        // <M2-4>
+        // </M2-4>
         // <M3-1>
         weblogin::test_weblogin,
-        potoken::test_po_evaluate
+        potoken::test_po_evaluate,
         // </M3-1>
+        // <M5-2>
+        // </M5-2>
     ])
 }
 
@@ -204,7 +217,15 @@ fn with_commands(b: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
         set_minimize_to_tray,
         core_config::core_config,
         core_config::core_status,
-        core_config::core_retry
+        core_config::core_retry,
+        // <M1-4>
+        // </M1-4>
+        // <M2-4>
+        // </M2-4>
+        // <M3-1>
+        // </M3-1>
+        // <M5-2>
+        // </M5-2>
     ])
 }
 
@@ -240,6 +261,14 @@ fn main() {
         }))
         .plugin(log_plugin)
         .plugin(tauri_plugin_dialog::init())
+        // <M1-4>
+        // </M1-4>
+        // <M2-4>
+        // </M2-4>
+        // <M3-1>
+        // </M3-1>
+        // <M5-2>
+        // </M5-2>
         .on_window_event(|window, event| {
             if window.label() == MAIN {
                 if let WindowEvent::CloseRequested { api, .. } = event {
@@ -264,6 +293,15 @@ fn main() {
                 session_end::install(app.handle(), windows::Win32::Foundation::HWND(hwnd.0));
             }
             build_tray(app)?;
+            // <M1-4>
+            // </M1-4>
+            // <M2-4>
+            // </M2-4>
+            // <M3-1>
+            register_m3_1(app.handle());
+            // </M3-1>
+            // <M5-2>
+            // </M5-2>
             // Safety net: never leave the window hidden forever if the UI never signals ui_ready.
             let h = app.handle().clone();
             std::thread::spawn(move || {
@@ -289,3 +327,26 @@ fn main() {
         }
     });
 }
+
+// <M3-1>
+/// Registers `shell.webLogin` and `shell.po.*` for the core -> shell channel.
+fn register_m3_1(app: &AppHandle) {
+    use corelink::srv::{register, ApiError};
+    use std::sync::Arc;
+    fn adapt<F, Fut>(app: &AppHandle, f: F) -> corelink::srv::Handler
+    where
+        F: Fn(AppHandle, serde_json::Value) -> Fut + Send + Sync + 'static,
+        Fut: std::future::Future<Output = Result<serde_json::Value, weblogin::ApiErr>> + Send + 'static,
+    {
+        let app = app.clone();
+        Arc::new(move |p| {
+            let fut = f(app.clone(), p);
+            Box::pin(async move { fut.await.map_err(|e| ApiError::new(&e.code, e.message)) })
+        })
+    }
+    register("shell.webLogin", adapt(app, weblogin::handle));
+    register("shell.po.evaluate", adapt(app, potoken::evaluate));
+    register("shell.po.reset", adapt(app, potoken::reset));
+    register("shell.po.available", adapt(app, potoken::available));
+}
+// </M3-1>
