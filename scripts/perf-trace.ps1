@@ -84,6 +84,18 @@ function Invoke-Run([string]$Endpoint, [string]$Names, [int]$N, [string]$Tag, [s
   return $(if ([IO.Path]::IsPathRooted($f)) { $f } else { Join-Path $repo $f })
 }
 
+# --- global perf lock (M1-5): one perf run on the machine at a time. mkdir is atomic; retry every 5 s; a lock older than 2 h is stale.
+$lockDir = "D:Coding_ProjectMinMusic_4_Windows-wp.perf.lock"
+$haveLock = $false
+while (-not $haveLock) {
+  try { New-Item -ItemType Directory -Path $lockDir -ErrorAction Stop | Out-Null; $haveLock = $true }
+  catch {
+    $li = Get-Item $lockDir -ErrorAction SilentlyContinue
+    if ($li -and ((Get-Date) - $li.LastWriteTime).TotalHours -gt 2) { Write-Warning "breaking stale perf lock (older than 2 h)"; Remove-Item $lockDir -Recurse -Force -ErrorAction SilentlyContinue }
+    else { Write-Host "perf lock held by another run, retrying in 5 s ($lockDir)"; Start-Sleep -Seconds 5 }
+  }
+}
+
 $exitFail = 0
 try {
   if ($Scenario.ToUpper() -eq 'CAL') {
@@ -148,6 +160,7 @@ try {
     } finally { Stop-TestApp $app }
   }
 } finally {
+  if ($haveLock) { Remove-Item $lockDir -Recurse -Force -ErrorAction SilentlyContinue }
   $after = Get-RealDataSnapshot
   $same = (($before | ConvertTo-Json -Compress) -eq ($after | ConvertTo-Json -Compress))
   Write-Host "real data dirs unchanged: $same"
