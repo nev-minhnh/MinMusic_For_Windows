@@ -31,7 +31,7 @@
 .dlx-qm{display:flex;align-items:center;gap:12px;min-width:0}
 .dlx-qm .t{min-width:0}
 .dlx-qs{display:flex;flex-direction:column;gap:6px;min-width:0}
-.dlx-qs .st{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.dlx-qs .st{display:flex;align-items:center;gap:8px;min-width:0}
 .dlx-qs .err{color:var(--err)}
 .dlx-qa{display:flex;justify-content:flex-end;gap:4px}
 .dlx-qr.failed .dlx-fill{background:var(--err)}

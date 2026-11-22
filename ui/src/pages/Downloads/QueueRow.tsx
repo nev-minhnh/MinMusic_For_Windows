@@ -39,18 +39,18 @@ export function QueueRow(props: { id: () => string | undefined }) {
           </div>
           <div class="dlx-qs">
             <div class="st t12">
-              <span class="i2" data-testid="dl-qstate">{stateLabel()}</span>
-              <span class="num i3" data-testid="dl-qpct">{`${Math.round(i().progress * 100)}%`}</span>
+              <span class="i2 ell" data-testid="dl-qstate">{stateLabel()}</span>
+              <Show when={i().state === "failed"}>
+                <span class="err ell f1" data-testid="dl-qerr" title={errorText(i().error)}>{errorText(i().error)}</span>
+              </Show>
+              <Show when={i().state === "downloading" && i().bytes}>
+                <span class="i3 num ell f1">{fmtBytes(i().bytes ?? 0)}</span>
+              </Show>
+              <span class="num i3 mla" data-testid="dl-qpct">{`${Math.round(i().progress * 100)}%`}</span>
             </div>
             <div class="dlx-track" aria-hidden="true">
               <div class="dlx-fill" style={{ "--s": String(i().progress) }} data-testid="dl-qfill" />
             </div>
-            <Show when={i().state === "failed"}>
-              <div class="err t12 ell" data-testid="dl-qerr" title={errorText(i().error)}>{errorText(i().error)}</div>
-            </Show>
-            <Show when={i().state === "downloading" && i().bytes}>
-              <div class="t12 i3 num ell">{fmtBytes(i().bytes ?? 0)}</div>
-            </Show>
           </div>
           <div class="dlx-qa">
             <Show when={i().state === "failed"}>
