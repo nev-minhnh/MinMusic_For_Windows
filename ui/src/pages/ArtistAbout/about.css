@@ -1,0 +1,5 @@
+.abt-head{display:flex;align-items:center;gap:16px;margin-top:16px}
+.abt-bio{margin-top:24px;max-width:760px;color:var(--ink2);white-space:pre-line}
+.abt-stats{display:flex;flex-wrap:wrap;gap:32px;padding:20px 24px;margin-top:24px}
+.abt-stat{min-width:120px}
+.abt-tags{margin-top:16px;flex-wrap:wrap}
