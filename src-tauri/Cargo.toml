@@ -14,13 +14,14 @@ tauri-build = { version = "2", features = [] }
 
 [dependencies]
 tauri = { version = "2", features = ["tray-icon"] }
-tauri-plugin-single-instance = "2"
+tauri-plugin-single-instance = { version = "2", features = ["deep-link"] }
 tauri-plugin-log = "2"
 tauri-plugin-dialog = "2"
 tauri-plugin-deep-link = "2"
 tauri-plugin-updater = "2"
 tauri-plugin-process = "2"
 webview2-com = "0.39"
+windows-core = "0.62"
 base64 = "0.22"
 url = "2"
 log = "0.4"
@@ -42,6 +43,7 @@ features = [
   "Win32_System_Shutdown",
   "Win32_UI_WindowsAndMessaging",
   "Win32_UI_Shell",
+  "Win32_Globalization",
   "Media",
   "Media_Playback",
   "Storage_Streams",

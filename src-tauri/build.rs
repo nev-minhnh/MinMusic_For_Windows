@@ -15,6 +15,17 @@ fn main() {
         "open_log_folder",
         "set_minimize_to_tray",
         "test_set_window_size",
+        // <M1-4>
+        "shell_settings_get",
+        "shell_settings_set",
+        "caption_rects",
+        // </M1-4>
+        // <M2-4>
+        // </M2-4>
+        // <M3-1>
+        // </M3-1>
+        // <M5-2>
+        // </M5-2>
     ];
     let attrs = tauri_build::Attributes::new()
         .app_manifest(tauri_build::AppManifest::new().commands(cmds));
