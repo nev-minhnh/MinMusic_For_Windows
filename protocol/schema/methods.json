@@ -1,0 +1,8330 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/Methods",
+  "definitions": {
+    "Methods": {
+      "type": "object",
+      "properties": {
+        "sys.hello": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/HelloParams"
+            },
+            "r": {
+              "$ref": "#/definitions/HelloResult"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "sys.ping": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "t": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "t"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "app.info": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/AppInfo"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "app.openUrl": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "handled": {
+                  "type": "boolean"
+                },
+                "nav": {
+                  "$ref": "#/definitions/NavTarget"
+                }
+              },
+              "required": [
+                "handled"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "app.copyLink": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "kind"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "app.logs.tail": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "type": "string",
+                  "enum": [
+                    "app",
+                    "shell",
+                    "ui"
+                  ]
+                },
+                "lines": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "file",
+                "lines"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "text"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "app.log": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "level": {
+                  "type": "string",
+                  "enum": [
+                    "error",
+                    "warn",
+                    "info"
+                  ]
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "stack": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "level",
+                "msg"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "home.get": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "chip": {
+                  "type": "string"
+                },
+                "refresh": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "r": {
+              "$ref": "#/definitions/HomeGetResult"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "home.more": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "cursor": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cursor"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "shelves": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Shelf"
+                  }
+                },
+                "next": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "shelves",
+                "next"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "charts.get": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "enum": [
+                    "zing",
+                    "nct",
+                    "yt"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "source"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/ChartsGetResult"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "browse.page": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "browseId": {
+                  "type": "string"
+                },
+                "params": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "browseId"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/BrowsePageResult"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "moods.list": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "color": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "key",
+                      "title"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "items"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "search.suggest": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "q": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "q"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "queries": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Item"
+                  }
+                }
+              },
+              "required": [
+                "queries",
+                "items"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "search.run": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "q": {
+                  "type": "string"
+                },
+                "source": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/SourceId"
+                    },
+                    {
+                      "type": "string",
+                      "const": "all"
+                    }
+                  ]
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "all",
+                    "track",
+                    "album",
+                    "artist",
+                    "playlist"
+                  ]
+                },
+                "cursor": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "q"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/SearchRunResult"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "search.history.list": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "items"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "search.history.remove": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "q": {
+                  "type": "string"
+                }
+              }
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "library.counts": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/LibraryCounts"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "library.window": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/SongWindowParams"
+            },
+            "r": {
+              "$ref": "#/definitions/LibraryWindowResult"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "library.indexOf": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "list": {
+                  "$ref": "#/definitions/LocalList"
+                },
+                "sort": {
+                  "$ref": "#/definitions/SortSpec"
+                },
+                "filter": {
+                  "$ref": "#/definitions/FilterSpec"
+                },
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "list",
+                "sort",
+                "id"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "index": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "index"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "library.sync": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "track.like": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "liked": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "id",
+                "liked"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "liked": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "liked"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "album.save": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "id",
+                "on"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "on"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "artist.subscribe": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "id",
+                "on"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "on"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "playlist.save": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "id",
+                "on"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "on"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "track.info": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "track": {
+                  "$ref": "#/definitions/Track"
+                },
+                "details": {
+                  "$ref": "#/definitions/TrackDetails"
+                }
+              },
+              "required": [
+                "track",
+                "details"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "track.sources": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SourceOption"
+                  }
+                }
+              },
+              "required": [
+                "options"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "track.setSource": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "source": {
+                  "$ref": "#/definitions/SourceId"
+                }
+              },
+              "required": [
+                "id",
+                "source"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "track.block": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "id",
+                "on"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "artist.block": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "id",
+                "on"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "userAlbum.create": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "trackIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "title"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "userAlbum.rename": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "title"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "userAlbum.delete": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "userAlbum.setCover": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "path"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "art": {
+                  "$ref": "#/definitions/Art"
+                }
+              },
+              "required": [
+                "art"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "userAlbum.add": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "trackIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "dedupe": {
+                  "type": "boolean",
+                  "const": true
+                }
+              },
+              "required": [
+                "id",
+                "trackIds",
+                "dedupe"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "added": {
+                  "type": "number"
+                },
+                "skipped": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "added",
+                "skipped"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "userAlbum.remove": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "entryIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "entryIds"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "userAlbum.move": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "from": {
+                  "type": "number"
+                },
+                "to": {
+                  "type": "number"
+                },
+                "expectedRevision": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "id",
+                "from",
+                "to",
+                "expectedRevision"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "userAlbum.pin": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "pinned": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "id",
+                "pinned"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "userAlbum.list": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/UserAlbumCard"
+                  }
+                }
+              },
+              "required": [
+                "items"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "history.window": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/SongWindowParams"
+            },
+            "r": {
+              "$ref": "#/definitions/HistoryWindowResult"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "history.remove": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "eventIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "eventIds"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "history.clear": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "stats.get": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "period": {
+                  "$ref": "#/definitions/StatsPeriod"
+                }
+              },
+              "required": [
+                "period"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/StatsResult"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "import.files": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "paths": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "paths"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "imported": {
+                  "type": "number"
+                },
+                "failed": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "imported",
+                "failed"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "album.get": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/AlbumGetResult"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "artist.get": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/ArtistGetResult"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "artist.about": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/ArtistAboutResult"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "artist.tracks": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "cursor": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/TrackPage"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "playlist.get": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "cursor": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/PlaylistGetResult"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "podcast.get": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/AlbumGetResult"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "podcast.episodes": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "cursor": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/TrackPage"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "related.get": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "trackId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "trackId"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "shelves": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Shelf"
+                  }
+                }
+              },
+              "required": [
+                "shelves"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.play": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "context": {
+                  "$ref": "#/definitions/PlayContext"
+                },
+                "startIndex": {
+                  "type": "number"
+                },
+                "startId": {
+                  "type": "string"
+                },
+                "shuffle": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "context"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.toggle": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.pause": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.resume": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.next": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.prev": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.seek": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "ms": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "ms"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.seekRelative": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "deltaMs": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "deltaMs"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.seekPercent": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "pct": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "pct"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.setVolume": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "v": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "v"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.mute": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "on"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.setShuffle": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "on"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.setRepeat": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "enum": [
+                    "off",
+                    "all",
+                    "one"
+                  ]
+                }
+              },
+              "required": [
+                "mode"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.cycleRepeat": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.setSpeed": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "speed": {
+                  "type": "number"
+                },
+                "pitch": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "speed"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.sleepTimer": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "minutes": {
+                  "type": "number"
+                },
+                "endOfTrack": {
+                  "type": "boolean"
+                },
+                "cancel": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "deadline": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.output.list": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "devices": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "kind": {
+                        "type": "string",
+                        "enum": [
+                          "speaker",
+                          "wired",
+                          "bluetooth",
+                          "usb",
+                          "other"
+                        ]
+                      },
+                      "default": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name",
+                      "kind",
+                      "default"
+                    ]
+                  }
+                },
+                "current": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "devices",
+                "current"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.output.set": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "player.video": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "on"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "queue.window": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "offset": {
+                  "type": "number"
+                },
+                "limit": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "offset",
+                "limit"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "number"
+                },
+                "revision": {
+                  "type": "number"
+                },
+                "currentIndex": {
+                  "type": "number"
+                },
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/QueueTrack"
+                  }
+                }
+              },
+              "required": [
+                "total",
+                "revision",
+                "currentIndex",
+                "items"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "queue.add": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "position": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "next"
+                    },
+                    {
+                      "type": "string",
+                      "const": "end"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "ids",
+                "position"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "revision": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "revision"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "queue.addContext": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "context": {
+                  "$ref": "#/definitions/PlayContext"
+                },
+                "position": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "next"
+                    },
+                    {
+                      "type": "string",
+                      "const": "end"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "context",
+                "position"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "revision": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "revision"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "queue.remove": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "qids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "qids"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "queue.move": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "from": {
+                  "type": "number"
+                },
+                "to": {
+                  "type": "number"
+                },
+                "expectedRevision": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "from",
+                "to",
+                "expectedRevision"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "queue.select": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "qid": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "qid"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "queue.clear": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "keepCurrent": {
+                  "type": "boolean",
+                  "const": true
+                }
+              },
+              "required": [
+                "keepCurrent"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "queue.setAutoplay": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "on"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "queue.radio": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "seedId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "seedId"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lyrics.get": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "trackId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "trackId"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Lyrics"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lyrics.search": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "trackId": {
+                  "type": "string"
+                },
+                "query": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "trackId"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "candidates": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/LyricsCandidate"
+                  }
+                }
+              },
+              "required": [
+                "candidates"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lyrics.choose": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "trackId": {
+                  "type": "string"
+                },
+                "candidateId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "trackId",
+                "candidateId"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lyrics.setOffset": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "trackId": {
+                  "type": "string"
+                },
+                "ms": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "trackId",
+                "ms"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lyrics.translate": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "trackId": {
+                  "type": "string"
+                },
+                "on": {
+                  "type": "boolean"
+                },
+                "target": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "trackId",
+                "on"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lyrics.romanize": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "trackId": {
+                  "type": "string"
+                },
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "trackId",
+                "on"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lyrics.edit": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "trackId": {
+                  "type": "string"
+                },
+                "lrc": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "trackId",
+                "lrc"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lyrics.providers": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/LyricsProviderState"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lyrics.providers.set": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "order": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "enabled": {
+                  "$ref": "#/definitions/Record%3Cstring%2Cboolean%3E"
+                }
+              },
+              "required": [
+                "order",
+                "enabled"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lyrics.ai.setKey": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "provider": {
+                  "type": "string"
+                },
+                "key": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "provider",
+                "key"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lyrics.ai.test": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "provider": {
+                  "type": "string"
+                }
+              }
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "ok": {
+                  "type": "boolean"
+                },
+                "error": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "ok"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.get": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/EqState"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.setEnabled": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "on"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.setProfile": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.updateBand": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/EqBandUpdate"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.addBand": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "freq": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "freq"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.removeBand": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "index": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "index"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.resetBand": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "index": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "index"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.setPreamp": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "db": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "db"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.setAutoPreamp": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "on"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.setEffects": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/Partial%3CEqEffects%3E"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.profile.save": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "asNew": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "name",
+                "asNew"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.profile.rename": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "name"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.profile.delete": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.undo": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.redo": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.reset": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.importFile": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.exportFile": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "path"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.autoeq.search": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "q": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "q"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "source": {
+                        "type": "string"
+                      },
+                      "variants": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "source",
+                      "variants"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "items"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.autoeq.apply": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "variant": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.device.bind": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "deviceId": {
+                  "type": "string"
+                },
+                "profileId": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "deviceId",
+                "profileId"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "eq.response": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "points": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "points"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "hz": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "db": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              },
+              "required": [
+                "hz",
+                "db"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "download.tracks": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "ids"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "download.context": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "context": {
+                  "$ref": "#/definitions/PlayContext"
+                }
+              },
+              "required": [
+                "context"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "download.cancel": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "all": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "download.pause": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "download.resume": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "download.retry": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "download.remove": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "deleteFiles": {
+                  "type": "boolean",
+                  "const": true
+                }
+              },
+              "required": [
+                "ids",
+                "deleteFiles"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "download.summary": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/DownloadSummary"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "download.window": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/SongWindowParams"
+            },
+            "r": {
+              "$ref": "#/definitions/LibraryWindowResult"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "download.queue": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DownloadQueueItem"
+                  }
+                }
+              },
+              "required": [
+                "items"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "download.setFolder": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "path"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "ok": {
+                  "type": "boolean"
+                },
+                "error": {
+                  "type": "string",
+                  "enum": [
+                    "not_writable",
+                    "missing"
+                  ]
+                }
+              },
+              "required": [
+                "ok"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "download.saveTo": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "ids",
+                "path"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "storage.usage": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/StorageUsage"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "storage.clear": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "what": {
+                  "type": "string",
+                  "enum": [
+                    "songCache",
+                    "imageCache",
+                    "videoCache",
+                    "animatedArt"
+                  ]
+                }
+              },
+              "required": [
+                "what"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "settings.schema": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "entries": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SettingEntry"
+                  }
+                }
+              },
+              "required": [
+                "entries"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "settings.get": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "keys": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "values": {
+                  "$ref": "#/definitions/Record%3Cstring%2Cunknown%3E"
+                }
+              },
+              "required": [
+                "values"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "settings.set": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "values": {
+                  "$ref": "#/definitions/Record%3Cstring%2Cunknown%3E"
+                }
+              },
+              "required": [
+                "values"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "settings.reset": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "keys": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "keys"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "account.get": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/AccountGetResult"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "account.youtube.login": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "ok": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "ok"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "account.youtube.switchChannel": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "account.youtube.logout": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "account.youtube.tokenLogin": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "cookie": {
+                  "type": "string"
+                },
+                "visitorData": {
+                  "type": "string"
+                },
+                "dataSyncId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cookie"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "sources.list": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/SourcesListResult"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "sources.setEnabled": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/definitions/SourceId"
+                },
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "id",
+                "on"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "sources.setPriority": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "order": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SourceId"
+                  }
+                }
+              },
+              "required": [
+                "order"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "sources.setAutoBest": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "on"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "sources.setAutoFallback": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "on"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "source.zing.login": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "ok": {
+                  "type": "boolean"
+                },
+                "vip": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "ok",
+                "vip"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "source.zing.logout": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "source.nct.login": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "countryCode": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "account",
+                "password"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "ok": {
+                  "type": "boolean"
+                },
+                "vip": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "ok",
+                "vip"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "source.nct.logout": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lastfm.login": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "username",
+                "password"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "ok": {
+                  "type": "boolean"
+                },
+                "user": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "ok",
+                "user"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lastfm.logout": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lastfm.status": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "string"
+                },
+                "expired": {
+                  "type": "boolean"
+                },
+                "scrobbling": {
+                  "type": "boolean"
+                },
+                "nowPlaying": {
+                  "type": "boolean"
+                },
+                "pending": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "expired",
+                "scrobbling",
+                "nowPlaying",
+                "pending"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "listenbrainz.setToken": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "token"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "listenbrainz.status": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "discord.login": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "discord.logout": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "discord.status": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "string"
+                },
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "enabled"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "import.providers": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "enum": [
+                          "spotify",
+                          "tidal",
+                          "deezer",
+                          "apple",
+                          "amazon"
+                        ]
+                      },
+                      "signedIn": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "signedIn"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "items"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "import.login": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "provider": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "provider"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "import.playlists": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "provider": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "provider"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "count": {
+                        "type": "number"
+                      },
+                      "art": {
+                        "$ref": "#/definitions/Art"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "title",
+                      "count"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "items"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "import.run": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "provider": {
+                  "type": "string"
+                },
+                "playlistIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "target": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "provider",
+                "playlistIds",
+                "target"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "jobId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "jobId"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lt.state": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/LtState"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lt.create": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lt.join": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "code",
+                "name"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lt.leave": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lt.approve": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "userId"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lt.reject": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "userId"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lt.kick": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "userId"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lt.transferHost": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "userId"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lt.suggest": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "trackId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "trackId"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lt.suggestion.approve": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lt.suggestion.reject": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lt.servers": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url"
+                    ]
+                  }
+                },
+                "current": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "items"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lt.setServer": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lt.blocked": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "items"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lt.unblock": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "lt.invite": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "dc.state": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/DcState"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "dc.enable": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "on"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "dc.setPort": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "port": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "port"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "dc.requireApproval": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "on"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "dc.connectLink": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "link": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "link"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "dc.accept": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "requestId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "requestId"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "dc.reject": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "requestId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "requestId"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "dc.confirmSas": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "requestId": {
+                  "type": "string"
+                },
+                "match": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "requestId",
+                "match"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "dc.forget": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "deviceId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "deviceId"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "dc.transferTo": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "deviceId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "deviceId"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "dc.attach": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "deviceId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "deviceId"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "dc.release": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "deviceId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "deviceId"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "dc.openFirewallSettings": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "backup.create": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "bytes": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "bytes"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "backup.inspect": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "ok": {
+                  "type": "boolean"
+                },
+                "platform": {
+                  "type": "string"
+                },
+                "dbVersion": {
+                  "type": "number"
+                },
+                "createdAt": {
+                  "type": "number"
+                },
+                "error": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "ok",
+                "platform",
+                "dbVersion"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "backup.restore": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "staged": {
+                  "type": "boolean",
+                  "const": true
+                }
+              },
+              "required": [
+                "staged"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "import.foreignBackup": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "imported": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "imported"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "update.status": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/UpdateStatus"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "crash.pending": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "report": {
+                  "type": "object",
+                  "properties": {
+                    "when": {
+                      "type": "number"
+                    },
+                    "summary": {
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "when",
+                    "summary",
+                    "path"
+                  ]
+                }
+              }
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "crash.dismiss": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "onboarding.state": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "completed": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "completed"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "onboarding.complete": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "$ref": "#/definitions/NoParams"
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "sub.open": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "topic": {
+                  "$ref": "#/definitions/Topic"
+                },
+                "params": {
+                  "type": "object",
+                  "properties": {
+                    "spectrum": {
+                      "type": "boolean"
+                    }
+                  },
+                  "additionalProperties": {}
+                }
+              },
+              "required": [
+                "topic"
+              ]
+            },
+            "r": {
+              "type": "object",
+              "properties": {
+                "sub": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "sub"
+              ]
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        },
+        "sub.close": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "sub": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "sub"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ]
+        }
+      },
+      "required": [
+        "sys.hello",
+        "sys.ping",
+        "app.info",
+        "app.openUrl",
+        "app.copyLink",
+        "app.logs.tail",
+        "app.log",
+        "home.get",
+        "home.more",
+        "charts.get",
+        "browse.page",
+        "moods.list",
+        "search.suggest",
+        "search.run",
+        "search.history.list",
+        "search.history.remove",
+        "library.counts",
+        "library.window",
+        "library.indexOf",
+        "library.sync",
+        "track.like",
+        "album.save",
+        "artist.subscribe",
+        "playlist.save",
+        "track.info",
+        "track.sources",
+        "track.setSource",
+        "track.block",
+        "artist.block",
+        "userAlbum.create",
+        "userAlbum.rename",
+        "userAlbum.delete",
+        "userAlbum.setCover",
+        "userAlbum.add",
+        "userAlbum.remove",
+        "userAlbum.move",
+        "userAlbum.pin",
+        "userAlbum.list",
+        "history.window",
+        "history.remove",
+        "history.clear",
+        "stats.get",
+        "import.files",
+        "album.get",
+        "artist.get",
+        "artist.about",
+        "artist.tracks",
+        "playlist.get",
+        "podcast.get",
+        "podcast.episodes",
+        "related.get",
+        "player.play",
+        "player.toggle",
+        "player.pause",
+        "player.resume",
+        "player.next",
+        "player.prev",
+        "player.seek",
+        "player.seekRelative",
+        "player.seekPercent",
+        "player.setVolume",
+        "player.mute",
+        "player.setShuffle",
+        "player.setRepeat",
+        "player.cycleRepeat",
+        "player.setSpeed",
+        "player.sleepTimer",
+        "player.output.list",
+        "player.output.set",
+        "player.video",
+        "queue.window",
+        "queue.add",
+        "queue.addContext",
+        "queue.remove",
+        "queue.move",
+        "queue.select",
+        "queue.clear",
+        "queue.setAutoplay",
+        "queue.radio",
+        "lyrics.get",
+        "lyrics.search",
+        "lyrics.choose",
+        "lyrics.setOffset",
+        "lyrics.translate",
+        "lyrics.romanize",
+        "lyrics.edit",
+        "lyrics.providers",
+        "lyrics.providers.set",
+        "lyrics.ai.setKey",
+        "lyrics.ai.test",
+        "eq.get",
+        "eq.setEnabled",
+        "eq.setProfile",
+        "eq.updateBand",
+        "eq.addBand",
+        "eq.removeBand",
+        "eq.resetBand",
+        "eq.setPreamp",
+        "eq.setAutoPreamp",
+        "eq.setEffects",
+        "eq.profile.save",
+        "eq.profile.rename",
+        "eq.profile.delete",
+        "eq.undo",
+        "eq.redo",
+        "eq.reset",
+        "eq.importFile",
+        "eq.exportFile",
+        "eq.autoeq.search",
+        "eq.autoeq.apply",
+        "eq.device.bind",
+        "eq.response",
+        "download.tracks",
+        "download.context",
+        "download.cancel",
+        "download.pause",
+        "download.resume",
+        "download.retry",
+        "download.remove",
+        "download.summary",
+        "download.window",
+        "download.queue",
+        "download.setFolder",
+        "download.saveTo",
+        "storage.usage",
+        "storage.clear",
+        "settings.schema",
+        "settings.get",
+        "settings.set",
+        "settings.reset",
+        "account.get",
+        "account.youtube.login",
+        "account.youtube.switchChannel",
+        "account.youtube.logout",
+        "account.youtube.tokenLogin",
+        "sources.list",
+        "sources.setEnabled",
+        "sources.setPriority",
+        "sources.setAutoBest",
+        "sources.setAutoFallback",
+        "source.zing.login",
+        "source.zing.logout",
+        "source.nct.login",
+        "source.nct.logout",
+        "lastfm.login",
+        "lastfm.logout",
+        "lastfm.status",
+        "listenbrainz.setToken",
+        "listenbrainz.status",
+        "discord.login",
+        "discord.logout",
+        "discord.status",
+        "import.providers",
+        "import.login",
+        "import.playlists",
+        "import.run",
+        "lt.state",
+        "lt.create",
+        "lt.join",
+        "lt.leave",
+        "lt.approve",
+        "lt.reject",
+        "lt.kick",
+        "lt.transferHost",
+        "lt.suggest",
+        "lt.suggestion.approve",
+        "lt.suggestion.reject",
+        "lt.servers",
+        "lt.setServer",
+        "lt.blocked",
+        "lt.unblock",
+        "lt.invite",
+        "dc.state",
+        "dc.enable",
+        "dc.setPort",
+        "dc.requireApproval",
+        "dc.connectLink",
+        "dc.accept",
+        "dc.reject",
+        "dc.confirmSas",
+        "dc.forget",
+        "dc.transferTo",
+        "dc.attach",
+        "dc.release",
+        "dc.openFirewallSettings",
+        "backup.create",
+        "backup.inspect",
+        "backup.restore",
+        "import.foreignBackup",
+        "update.status",
+        "crash.pending",
+        "crash.dismiss",
+        "onboarding.state",
+        "onboarding.complete",
+        "sub.open",
+        "sub.close"
+      ]
+    },
+    "HelloParams": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/definitions/Role"
+        },
+        "protocol": {
+          "type": "number",
+          "const": 1
+        },
+        "client": {
+          "type": "string",
+          "description": "\"ui/0.1.0\""
+        },
+        "locale": {
+          "type": "string",
+          "description": "\"vi\""
+        }
+      },
+      "required": [
+        "token",
+        "role",
+        "protocol",
+        "client",
+        "locale"
+      ]
+    },
+    "Role": {
+      "type": "string",
+      "enum": [
+        "ui",
+        "mini",
+        "shell"
+      ]
+    },
+    "HelloResult": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "number",
+          "const": 1
+        },
+        "core": {
+          "type": "string",
+          "description": "semver"
+        },
+        "sessionId": {
+          "type": "string"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serverTime": {
+          "type": "number",
+          "description": "epoch ms"
+        }
+      },
+      "required": [
+        "protocol",
+        "core",
+        "sessionId",
+        "capabilities",
+        "serverTime"
+      ]
+    },
+    "NoParams": {
+      "type": "object"
+    },
+    "AppInfo": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "core": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "number"
+        },
+        "buildTime": {
+          "type": "string"
+        },
+        "dataDirs": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "string"
+            },
+            "config": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "cache": {
+              "type": "string"
+            },
+            "logs": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "data",
+            "config",
+            "state",
+            "cache",
+            "logs"
+          ]
+        },
+        "portable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "version",
+        "core",
+        "protocol",
+        "buildTime",
+        "dataDirs",
+        "portable"
+      ]
+    },
+    "NavTarget": {
+      "type": "object",
+      "properties": {
+        "route": {
+          "type": "string"
+        },
+        "params": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "route",
+        "params"
+      ],
+      "description": "route table: frontend-spec §3"
+    },
+    "Empty": {
+      "type": "object"
+    },
+    "HomeGetResult": {
+      "type": "object",
+      "properties": {
+        "shelves": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Shelf"
+          }
+        },
+        "chips": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HomeChip"
+          }
+        },
+        "greeting": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "$ref": "#/definitions/GreetingKey"
+            }
+          },
+          "required": [
+            "key"
+          ]
+        },
+        "fromCache": {
+          "type": "boolean"
+        },
+        "next": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "shelves",
+        "chips",
+        "greeting",
+        "fromCache",
+        "next"
+      ]
+    },
+    "Shelf": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "layout": {
+          "type": "string",
+          "enum": [
+            "quickPicks",
+            "cards",
+            "chart",
+            "rows",
+            "chips"
+          ]
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Item"
+          }
+        },
+        "more": {
+          "$ref": "#/definitions/NavTarget"
+        }
+      },
+      "required": [
+        "key",
+        "title",
+        "layout",
+        "items"
+      ]
+    },
+    "Item": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/TrackItem"
+        },
+        {
+          "$ref": "#/definitions/AlbumItem"
+        },
+        {
+          "$ref": "#/definitions/ArtistItem"
+        },
+        {
+          "$ref": "#/definitions/PlaylistItem"
+        }
+      ]
+    },
+    "TrackItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "artists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtistRef"
+          }
+        },
+        "album": {
+          "$ref": "#/definitions/AlbumRef"
+        },
+        "durationMs": {
+          "type": "number"
+        },
+        "art": {
+          "$ref": "#/definitions/Art"
+        },
+        "explicit": {
+          "type": "boolean"
+        },
+        "source": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "quality": {
+          "$ref": "#/definitions/Quality"
+        },
+        "altSources": {
+          "type": "number",
+          "description": "\"+N\""
+        },
+        "liked": {
+          "type": "boolean"
+        },
+        "download": {
+          "$ref": "#/definitions/DownloadState"
+        },
+        "isVideo": {
+          "type": "boolean"
+        },
+        "playCountText": {
+          "type": "string"
+        },
+        "addedAt": {
+          "type": "number"
+        },
+        "setVideoId": {
+          "type": "string",
+          "description": "playlist entry id for remove/move"
+        },
+        "vip": {
+          "type": "boolean",
+          "description": "needs VIP"
+        },
+        "t": {
+          "type": "string",
+          "const": "track"
+        }
+      },
+      "required": [
+        "artists",
+        "id",
+        "source",
+        "t",
+        "title"
+      ]
+    },
+    "ArtistRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "AlbumRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title"
+      ]
+    },
+    "Art": {
+      "type": "object",
+      "properties": {
+        "src": {
+          "type": "string",
+          "description": "https URL or \"core:<kind>/<id>\""
+        },
+        "w": {
+          "type": "number"
+        },
+        "h": {
+          "type": "number"
+        },
+        "dominant": {
+          "type": "string",
+          "description": "\"#rrggbb\", when known"
+        }
+      },
+      "required": [
+        "src"
+      ]
+    },
+    "SourceId": {
+      "type": "string",
+      "enum": [
+        "yt",
+        "sc",
+        "zing",
+        "nct",
+        "local"
+      ]
+    },
+    "Quality": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "lossless": {
+          "type": "boolean"
+        },
+        "kbps": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "label",
+        "lossless"
+      ]
+    },
+    "DownloadState": {
+      "type": "string",
+      "enum": [
+        "none",
+        "queued",
+        "downloading",
+        "downloaded",
+        "failed"
+      ]
+    },
+    "AlbumItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "artists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtistRef"
+          }
+        },
+        "year": {
+          "type": "number"
+        },
+        "art": {
+          "$ref": "#/definitions/Art"
+        },
+        "source": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "album",
+            "single",
+            "ep"
+          ]
+        },
+        "t": {
+          "type": "string",
+          "const": "album"
+        }
+      },
+      "required": [
+        "artists",
+        "id",
+        "kind",
+        "source",
+        "t",
+        "title"
+      ]
+    },
+    "ArtistItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "art": {
+          "$ref": "#/definitions/Art"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "t": {
+          "type": "string",
+          "const": "artist"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "source",
+        "t"
+      ]
+    },
+    "PlaylistItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "art": {
+          "$ref": "#/definitions/Art"
+        },
+        "source": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "local": {
+          "type": "boolean"
+        },
+        "count": {
+          "type": "number"
+        },
+        "t": {
+          "type": "string",
+          "const": "playlist"
+        }
+      },
+      "required": [
+        "id",
+        "local",
+        "source",
+        "t",
+        "title"
+      ]
+    },
+    "HomeChip": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "selected": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "key",
+        "title",
+        "selected"
+      ]
+    },
+    "GreetingKey": {
+      "type": "string",
+      "enum": [
+        "good_morning",
+        "good_afternoon",
+        "good_evening",
+        "good_night"
+      ]
+    },
+    "ChartsGetResult": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": [
+            "zing",
+            "nct",
+            "yt"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "number"
+        },
+        "tabs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "key",
+              "title"
+            ]
+          }
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChartTrack"
+          }
+        }
+      },
+      "required": [
+        "source",
+        "title",
+        "updatedAt",
+        "tabs",
+        "items"
+      ]
+    },
+    "ChartTrack": {
+      "type": "object",
+      "properties": {
+        "rank": {
+          "type": "number"
+        },
+        "trend": {
+          "type": "string",
+          "enum": [
+            "up",
+            "down",
+            "same",
+            "new"
+          ]
+        },
+        "delta": {
+          "type": "number"
+        },
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "artists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtistRef"
+          }
+        },
+        "album": {
+          "$ref": "#/definitions/AlbumRef"
+        },
+        "durationMs": {
+          "type": "number"
+        },
+        "art": {
+          "$ref": "#/definitions/Art"
+        },
+        "explicit": {
+          "type": "boolean"
+        },
+        "source": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "quality": {
+          "$ref": "#/definitions/Quality"
+        },
+        "altSources": {
+          "type": "number",
+          "description": "\"+N\""
+        },
+        "liked": {
+          "type": "boolean"
+        },
+        "download": {
+          "$ref": "#/definitions/DownloadState"
+        },
+        "isVideo": {
+          "type": "boolean"
+        },
+        "playCountText": {
+          "type": "string"
+        },
+        "addedAt": {
+          "type": "number"
+        },
+        "setVideoId": {
+          "type": "string",
+          "description": "playlist entry id for remove/move"
+        },
+        "vip": {
+          "type": "boolean",
+          "description": "needs VIP"
+        }
+      },
+      "required": [
+        "artists",
+        "id",
+        "rank",
+        "source",
+        "title",
+        "trend"
+      ]
+    },
+    "BrowsePageResult": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "header": {},
+        "shelves": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Shelf"
+          }
+        },
+        "next": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "title",
+        "shelves",
+        "next"
+      ]
+    },
+    "SearchRunResult": {
+      "type": "object",
+      "properties": {
+        "top": {
+          "$ref": "#/definitions/SearchTop"
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchSection"
+          }
+        },
+        "next": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "sections",
+        "next"
+      ]
+    },
+    "SearchTop": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "sources": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SourceId"
+              }
+            },
+            "id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "artists": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ArtistRef"
+              }
+            },
+            "album": {
+              "$ref": "#/definitions/AlbumRef"
+            },
+            "durationMs": {
+              "type": "number"
+            },
+            "art": {
+              "$ref": "#/definitions/Art"
+            },
+            "explicit": {
+              "type": "boolean"
+            },
+            "source": {
+              "$ref": "#/definitions/SourceId"
+            },
+            "quality": {
+              "$ref": "#/definitions/Quality"
+            },
+            "altSources": {
+              "type": "number",
+              "description": "\"+N\""
+            },
+            "liked": {
+              "type": "boolean"
+            },
+            "download": {
+              "$ref": "#/definitions/DownloadState"
+            },
+            "isVideo": {
+              "type": "boolean"
+            },
+            "playCountText": {
+              "type": "string"
+            },
+            "addedAt": {
+              "type": "number"
+            },
+            "setVideoId": {
+              "type": "string",
+              "description": "playlist entry id for remove/move"
+            },
+            "vip": {
+              "type": "boolean",
+              "description": "needs VIP"
+            },
+            "t": {
+              "type": "string",
+              "const": "track"
+            }
+          },
+          "required": [
+            "artists",
+            "id",
+            "source",
+            "sources",
+            "t",
+            "title"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sources": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SourceId"
+              }
+            },
+            "id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "artists": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ArtistRef"
+              }
+            },
+            "year": {
+              "type": "number"
+            },
+            "art": {
+              "$ref": "#/definitions/Art"
+            },
+            "source": {
+              "$ref": "#/definitions/SourceId"
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "album",
+                "single",
+                "ep"
+              ]
+            },
+            "t": {
+              "type": "string",
+              "const": "album"
+            }
+          },
+          "required": [
+            "artists",
+            "id",
+            "kind",
+            "source",
+            "sources",
+            "t",
+            "title"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sources": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SourceId"
+              }
+            },
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "art": {
+              "$ref": "#/definitions/Art"
+            },
+            "subtitle": {
+              "type": "string"
+            },
+            "source": {
+              "$ref": "#/definitions/SourceId"
+            },
+            "t": {
+              "type": "string",
+              "const": "artist"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "source",
+            "sources",
+            "t"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sources": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SourceId"
+              }
+            },
+            "id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "subtitle": {
+              "type": "string"
+            },
+            "art": {
+              "$ref": "#/definitions/Art"
+            },
+            "source": {
+              "$ref": "#/definitions/SourceId"
+            },
+            "owner": {
+              "type": "string"
+            },
+            "local": {
+              "type": "boolean"
+            },
+            "count": {
+              "type": "number"
+            },
+            "t": {
+              "type": "string",
+              "const": "playlist"
+            }
+          },
+          "required": [
+            "id",
+            "local",
+            "source",
+            "sources",
+            "t",
+            "title"
+          ]
+        }
+      ]
+    },
+    "SearchSection": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Item"
+          }
+        },
+        "more": {
+          "$ref": "#/definitions/NavTarget"
+        }
+      },
+      "required": [
+        "type",
+        "title",
+        "items"
+      ]
+    },
+    "LibraryCounts": {
+      "type": "object",
+      "properties": {
+        "songs": {
+          "type": "number"
+        },
+        "liked": {
+          "type": "number"
+        },
+        "downloaded": {
+          "type": "number"
+        },
+        "albums": {
+          "type": "number"
+        },
+        "artists": {
+          "type": "number"
+        },
+        "playlists": {
+          "type": "number"
+        },
+        "userAlbums": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "songs",
+        "liked",
+        "downloaded",
+        "albums",
+        "artists",
+        "playlists",
+        "userAlbums"
+      ]
+    },
+    "SongWindowParams": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "$ref": "#/definitions/LocalList"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortSpec"
+        },
+        "filter": {
+          "$ref": "#/definitions/FilterSpec"
+        },
+        "offset": {
+          "type": "number"
+        },
+        "limit": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "list",
+        "sort",
+        "offset",
+        "limit"
+      ]
+    },
+    "LocalList": {
+      "type": "string"
+    },
+    "SortSpec": {
+      "type": "object",
+      "properties": {
+        "by": {
+          "type": "string",
+          "enum": [
+            "added",
+            "title",
+            "artist",
+            "album",
+            "duration",
+            "plays",
+            "lastPlayed",
+            "custom"
+          ]
+        },
+        "desc": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "by",
+        "desc"
+      ]
+    },
+    "FilterSpec": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "downloaded": {
+          "type": "boolean"
+        },
+        "liked": {
+          "type": "boolean"
+        },
+        "explicit": {
+          "type": "boolean"
+        }
+      }
+    },
+    "LibraryWindowResult": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "number"
+        },
+        "revision": {
+          "type": "number"
+        },
+        "offset": {
+          "type": "number"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LibraryItem"
+          }
+        }
+      },
+      "required": [
+        "total",
+        "revision",
+        "offset",
+        "items"
+      ]
+    },
+    "LibraryItem": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/Track"
+        },
+        {
+          "$ref": "#/definitions/AlbumCard"
+        },
+        {
+          "$ref": "#/definitions/ArtistCard"
+        },
+        {
+          "$ref": "#/definitions/PlaylistCard"
+        }
+      ]
+    },
+    "Track": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "artists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtistRef"
+          }
+        },
+        "album": {
+          "$ref": "#/definitions/AlbumRef"
+        },
+        "durationMs": {
+          "type": "number"
+        },
+        "art": {
+          "$ref": "#/definitions/Art"
+        },
+        "explicit": {
+          "type": "boolean"
+        },
+        "source": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "quality": {
+          "$ref": "#/definitions/Quality"
+        },
+        "altSources": {
+          "type": "number",
+          "description": "\"+N\""
+        },
+        "liked": {
+          "type": "boolean"
+        },
+        "download": {
+          "$ref": "#/definitions/DownloadState"
+        },
+        "isVideo": {
+          "type": "boolean"
+        },
+        "playCountText": {
+          "type": "string"
+        },
+        "addedAt": {
+          "type": "number"
+        },
+        "setVideoId": {
+          "type": "string",
+          "description": "playlist entry id for remove/move"
+        },
+        "vip": {
+          "type": "boolean",
+          "description": "needs VIP"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "artists",
+        "source"
+      ]
+    },
+    "AlbumCard": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "artists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtistRef"
+          }
+        },
+        "year": {
+          "type": "number"
+        },
+        "art": {
+          "$ref": "#/definitions/Art"
+        },
+        "source": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "album",
+            "single",
+            "ep"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "artists",
+        "source",
+        "kind"
+      ]
+    },
+    "ArtistCard": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "art": {
+          "$ref": "#/definitions/Art"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/SourceId"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "source"
+      ]
+    },
+    "PlaylistCard": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "art": {
+          "$ref": "#/definitions/Art"
+        },
+        "source": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "local": {
+          "type": "boolean"
+        },
+        "count": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "source",
+        "local"
+      ]
+    },
+    "TrackDetails": {
+      "type": "object",
+      "properties": {
+        "codec": {
+          "type": "string"
+        },
+        "bitrate": {
+          "type": "number"
+        },
+        "sampleRate": {
+          "type": "number"
+        },
+        "loudnessDb": {
+          "type": "number"
+        },
+        "fileSize": {
+          "type": "number"
+        },
+        "path": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceOption"
+          }
+        }
+      },
+      "required": [
+        "sources"
+      ]
+    },
+    "SourceOption": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "id": {
+          "type": "string"
+        },
+        "quality": {
+          "$ref": "#/definitions/Quality"
+        },
+        "auto": {
+          "type": "boolean"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "hint": {
+          "type": "string",
+          "enum": [
+            "vip_login",
+            "region",
+            "preview_only"
+          ]
+        }
+      },
+      "required": [
+        "source",
+        "id",
+        "quality",
+        "auto",
+        "available"
+      ]
+    },
+    "UserAlbumCard": {
+      "type": "object",
+      "properties": {
+        "pinned": {
+          "type": "boolean"
+        },
+        "revision": {
+          "type": "number"
+        },
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "art": {
+          "$ref": "#/definitions/Art"
+        },
+        "source": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "local": {
+          "type": "boolean"
+        },
+        "count": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "local",
+        "pinned",
+        "revision",
+        "source",
+        "title"
+      ]
+    },
+    "HistoryWindowResult": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "number"
+        },
+        "revision": {
+          "type": "number"
+        },
+        "offset": {
+          "type": "number"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HistoryTrack"
+          }
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "offset": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "label",
+              "offset"
+            ]
+          }
+        }
+      },
+      "required": [
+        "total",
+        "revision",
+        "offset",
+        "items",
+        "groups"
+      ]
+    },
+    "HistoryTrack": {
+      "type": "object",
+      "properties": {
+        "playedAt": {
+          "type": "number"
+        },
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "artists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtistRef"
+          }
+        },
+        "album": {
+          "$ref": "#/definitions/AlbumRef"
+        },
+        "durationMs": {
+          "type": "number"
+        },
+        "art": {
+          "$ref": "#/definitions/Art"
+        },
+        "explicit": {
+          "type": "boolean"
+        },
+        "source": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "quality": {
+          "$ref": "#/definitions/Quality"
+        },
+        "altSources": {
+          "type": "number",
+          "description": "\"+N\""
+        },
+        "liked": {
+          "type": "boolean"
+        },
+        "download": {
+          "$ref": "#/definitions/DownloadState"
+        },
+        "isVideo": {
+          "type": "boolean"
+        },
+        "playCountText": {
+          "type": "string"
+        },
+        "addedAt": {
+          "type": "number"
+        },
+        "setVideoId": {
+          "type": "string",
+          "description": "playlist entry id for remove/move"
+        },
+        "vip": {
+          "type": "boolean",
+          "description": "needs VIP"
+        }
+      },
+      "required": [
+        "artists",
+        "id",
+        "playedAt",
+        "source",
+        "title"
+      ]
+    },
+    "StatsPeriod": {
+      "type": "string",
+      "enum": [
+        "week",
+        "month",
+        "year",
+        "all"
+      ]
+    },
+    "StatsResult": {
+      "type": "object",
+      "properties": {
+        "minutes": {
+          "type": "number"
+        },
+        "topTracks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Track"
+          }
+        },
+        "topArtists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtistCard"
+          }
+        },
+        "topAlbums": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlbumCard"
+          }
+        }
+      },
+      "required": [
+        "minutes",
+        "topTracks",
+        "topArtists",
+        "topAlbums"
+      ]
+    },
+    "AlbumGetResult": {
+      "type": "object",
+      "properties": {
+        "album": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "durationMs": {
+              "type": "number"
+            },
+            "trackCount": {
+              "type": "number"
+            },
+            "year": {
+              "type": "number"
+            },
+            "label": {
+              "type": "string"
+            },
+            "saved": {
+              "type": "boolean"
+            },
+            "id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "artists": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ArtistRef"
+              }
+            },
+            "art": {
+              "$ref": "#/definitions/Art"
+            },
+            "source": {
+              "$ref": "#/definitions/SourceId"
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "album",
+                "single",
+                "ep"
+              ]
+            }
+          },
+          "required": [
+            "artists",
+            "durationMs",
+            "id",
+            "kind",
+            "saved",
+            "source",
+            "title",
+            "trackCount",
+            "year"
+          ]
+        },
+        "tracks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Track"
+          }
+        },
+        "otherVersions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlbumCard"
+          }
+        },
+        "moreBy": {
+          "$ref": "#/definitions/Shelf"
+        }
+      },
+      "required": [
+        "album",
+        "tracks",
+        "otherVersions"
+      ]
+    },
+    "ArtistGetResult": {
+      "type": "object",
+      "properties": {
+        "artist": {
+          "type": "object",
+          "properties": {
+            "banner": {
+              "$ref": "#/definitions/Art"
+            },
+            "subscribers": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "subscribed": {
+              "type": "boolean"
+            },
+            "monthly": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "art": {
+              "$ref": "#/definitions/Art"
+            },
+            "subtitle": {
+              "type": "string"
+            },
+            "source": {
+              "$ref": "#/definitions/SourceId"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "source",
+            "subscribed"
+          ]
+        },
+        "shelves": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Shelf"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceId"
+          }
+        }
+      },
+      "required": [
+        "artist",
+        "shelves",
+        "sources"
+      ]
+    },
+    "ArtistAboutResult": {
+      "type": "object",
+      "properties": {
+        "bio": {
+          "type": "string"
+        },
+        "stats": {
+          "$ref": "#/definitions/Record%3Cstring%2Cunknown%3E"
+        },
+        "lastfm": {
+          "type": "object",
+          "properties": {
+            "listeners": {
+              "type": "number"
+            },
+            "playcount": {
+              "type": "number"
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "listeners",
+            "playcount",
+            "tags"
+          ]
+        }
+      }
+    },
+    "Record<string,unknown>": {
+      "type": "object",
+      "additionalProperties": {}
+    },
+    "TrackPage": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Track"
+          }
+        },
+        "next": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "items",
+        "next"
+      ]
+    },
+    "PlaylistGetResult": {
+      "type": "object",
+      "properties": {
+        "playlist": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "durationMs": {
+              "type": "number"
+            },
+            "editable": {
+              "type": "boolean"
+            },
+            "revision": {
+              "type": "number"
+            },
+            "id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "subtitle": {
+              "type": "string"
+            },
+            "art": {
+              "$ref": "#/definitions/Art"
+            },
+            "source": {
+              "$ref": "#/definitions/SourceId"
+            },
+            "owner": {
+              "type": "string"
+            },
+            "local": {
+              "type": "boolean"
+            },
+            "count": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "editable",
+            "id",
+            "local",
+            "revision",
+            "source",
+            "title"
+          ]
+        },
+        "tracks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Track"
+          }
+        },
+        "next": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "playlist",
+        "tracks",
+        "next"
+      ]
+    },
+    "PlayContext": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "tracks"
+            },
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "title": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "ids"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "album",
+                "playlist",
+                "artist",
+                "radio",
+                "userAlbum",
+                "library"
+              ]
+            },
+            "id": {
+              "type": "string"
+            },
+            "list": {
+              "$ref": "#/definitions/LocalList"
+            },
+            "sort": {
+              "$ref": "#/definitions/SortSpec"
+            },
+            "filter": {
+              "$ref": "#/definitions/FilterSpec"
+            }
+          },
+          "required": [
+            "kind"
+          ]
+        }
+      ]
+    },
+    "QueueTrack": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "artists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtistRef"
+          }
+        },
+        "album": {
+          "$ref": "#/definitions/AlbumRef"
+        },
+        "durationMs": {
+          "type": "number"
+        },
+        "art": {
+          "$ref": "#/definitions/Art"
+        },
+        "explicit": {
+          "type": "boolean"
+        },
+        "source": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "quality": {
+          "$ref": "#/definitions/Quality"
+        },
+        "altSources": {
+          "type": "number",
+          "description": "\"+N\""
+        },
+        "liked": {
+          "type": "boolean"
+        },
+        "download": {
+          "$ref": "#/definitions/DownloadState"
+        },
+        "isVideo": {
+          "type": "boolean"
+        },
+        "playCountText": {
+          "type": "string"
+        },
+        "addedAt": {
+          "type": "number"
+        },
+        "setVideoId": {
+          "type": "string",
+          "description": "playlist entry id for remove/move"
+        },
+        "vip": {
+          "type": "boolean",
+          "description": "needs VIP"
+        },
+        "qid": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "artists",
+        "id",
+        "qid",
+        "source",
+        "title"
+      ]
+    },
+    "Lyrics": {
+      "type": "object",
+      "properties": {
+        "trackId": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "synced": {
+          "type": "string",
+          "enum": [
+            "word",
+            "line",
+            "none"
+          ]
+        },
+        "offsetMs": {
+          "type": "number"
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "t": {
+                "type": "number",
+                "description": "ms"
+              },
+              "end": {
+                "type": "number"
+              },
+              "text": {
+                "type": "string"
+              },
+              "words": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "t": {
+                      "type": "number"
+                    },
+                    "end": {
+                      "type": "number"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "t",
+                    "end",
+                    "text"
+                  ]
+                }
+              },
+              "tr": {
+                "type": "string",
+                "description": "translation"
+              },
+              "ro": {
+                "type": "string",
+                "description": "romanized"
+              },
+              "agent": {
+                "type": "string",
+                "enum": [
+                  "v1",
+                  "v2",
+                  "bg"
+                ]
+              }
+            },
+            "required": [
+              "t",
+              "text"
+            ]
+          }
+        }
+      },
+      "required": [
+        "trackId",
+        "provider",
+        "synced",
+        "offsetMs",
+        "lines"
+      ]
+    },
+    "LyricsCandidate": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "synced": {
+          "type": "string",
+          "enum": [
+            "word",
+            "line",
+            "none"
+          ]
+        },
+        "preview": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "synced",
+        "preview",
+        "id"
+      ]
+    },
+    "LyricsProviderState": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enabled": {
+          "$ref": "#/definitions/Record%3Cstring%2Cboolean%3E"
+        }
+      },
+      "required": [
+        "order",
+        "enabled"
+      ]
+    },
+    "Record<string,boolean>": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "EqState": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "profiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "builtin": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "builtin"
+            ]
+          }
+        },
+        "bands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EqBand"
+          }
+        },
+        "preampDb": {
+          "type": "number"
+        },
+        "autoPreamp": {
+          "type": "boolean"
+        },
+        "effects": {
+          "$ref": "#/definitions/EqEffects"
+        },
+        "limiterReductionDb": {
+          "type": "number"
+        },
+        "canUndo": {
+          "type": "boolean"
+        },
+        "canRedo": {
+          "type": "boolean"
+        },
+        "deviceProfiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "deviceId": {
+                "type": "string"
+              },
+              "deviceName": {
+                "type": "string"
+              },
+              "profileId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "deviceId",
+              "deviceName",
+              "profileId"
+            ]
+          }
+        },
+        "maxBands": {
+          "type": "number",
+          "const": 32
+        }
+      },
+      "required": [
+        "enabled",
+        "profileId",
+        "profiles",
+        "bands",
+        "preampDb",
+        "autoPreamp",
+        "effects",
+        "limiterReductionDb",
+        "canUndo",
+        "canRedo",
+        "deviceProfiles",
+        "maxBands"
+      ]
+    },
+    "EqBand": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "PK",
+            "LSC",
+            "HSC",
+            "LPQ",
+            "HPQ",
+            "BP",
+            "NO"
+          ]
+        },
+        "freq": {
+          "type": "number"
+        },
+        "gain": {
+          "type": "number"
+        },
+        "q": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "type",
+        "freq",
+        "gain",
+        "q"
+      ]
+    },
+    "EqEffects": {
+      "type": "object",
+      "properties": {
+        "bassDb": {
+          "type": "number"
+        },
+        "trebleDb": {
+          "type": "number"
+        },
+        "widthPct": {
+          "type": "number"
+        },
+        "crossfeed": {
+          "type": "string",
+          "enum": [
+            "off",
+            "default",
+            "chuMoy",
+            "janMeier"
+          ]
+        },
+        "limiter": {
+          "type": "boolean"
+        },
+        "outputDb": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "bassDb",
+        "trebleDb",
+        "widthPct",
+        "crossfeed",
+        "limiter",
+        "outputDb"
+      ]
+    },
+    "EqBandUpdate": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "PK",
+            "LSC",
+            "HSC",
+            "LPQ",
+            "HPQ",
+            "BP",
+            "NO"
+          ]
+        },
+        "freq": {
+          "type": "number"
+        },
+        "gain": {
+          "type": "number"
+        },
+        "q": {
+          "type": "number"
+        },
+        "index": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "index"
+      ]
+    },
+    "Partial<EqEffects>": {
+      "type": "object",
+      "properties": {
+        "bassDb": {
+          "type": "number"
+        },
+        "trebleDb": {
+          "type": "number"
+        },
+        "widthPct": {
+          "type": "number"
+        },
+        "crossfeed": {
+          "type": "string",
+          "enum": [
+            "off",
+            "default",
+            "chuMoy",
+            "janMeier"
+          ]
+        },
+        "limiter": {
+          "type": "boolean"
+        },
+        "outputDb": {
+          "type": "number"
+        }
+      }
+    },
+    "DownloadSummary": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "number"
+        },
+        "bytes": {
+          "type": "number"
+        },
+        "byQuality": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "count": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "label",
+              "count"
+            ]
+          }
+        },
+        "folder": {
+          "type": "string"
+        },
+        "folderOk": {
+          "type": "boolean"
+        },
+        "active": {
+          "type": "object",
+          "properties": {
+            "done": {
+              "type": "number"
+            },
+            "total": {
+              "type": "number"
+            },
+            "label": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "done",
+            "total"
+          ]
+        },
+        "paused": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "count",
+        "bytes",
+        "byQuality",
+        "folder",
+        "folderOk",
+        "active",
+        "paused"
+      ]
+    },
+    "DownloadQueueItem": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "queued",
+            "downloading",
+            "downloaded",
+            "failed",
+            "none"
+          ]
+        },
+        "progress": {
+          "type": "number"
+        },
+        "bytes": {
+          "type": "number"
+        },
+        "error": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "artists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtistRef"
+          }
+        },
+        "album": {
+          "$ref": "#/definitions/AlbumRef"
+        },
+        "durationMs": {
+          "type": "number"
+        },
+        "art": {
+          "$ref": "#/definitions/Art"
+        },
+        "explicit": {
+          "type": "boolean"
+        },
+        "source": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "quality": {
+          "$ref": "#/definitions/Quality"
+        },
+        "altSources": {
+          "type": "number",
+          "description": "\"+N\""
+        },
+        "liked": {
+          "type": "boolean"
+        },
+        "download": {
+          "$ref": "#/definitions/DownloadState"
+        },
+        "isVideo": {
+          "type": "boolean"
+        },
+        "playCountText": {
+          "type": "string"
+        },
+        "addedAt": {
+          "type": "number"
+        },
+        "setVideoId": {
+          "type": "string",
+          "description": "playlist entry id for remove/move"
+        },
+        "vip": {
+          "type": "boolean",
+          "description": "needs VIP"
+        }
+      },
+      "required": [
+        "artists",
+        "id",
+        "progress",
+        "source",
+        "state",
+        "title"
+      ]
+    },
+    "StorageUsage": {
+      "type": "object",
+      "properties": {
+        "songCache": {
+          "type": "number"
+        },
+        "imageCache": {
+          "type": "number"
+        },
+        "videoCache": {
+          "type": "number"
+        },
+        "animatedArt": {
+          "type": "number"
+        },
+        "downloads": {
+          "type": "number"
+        },
+        "limits": {
+          "type": "object",
+          "properties": {
+            "songCache": {
+              "type": "number"
+            },
+            "imageCache": {
+              "type": "number"
+            },
+            "videoCache": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "required": [
+        "songCache",
+        "imageCache",
+        "videoCache",
+        "animatedArt",
+        "downloads"
+      ]
+    },
+    "SettingEntry": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "bool",
+            "int",
+            "float",
+            "string",
+            "enum",
+            "json",
+            "secret"
+          ]
+        },
+        "default": {},
+        "enumValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "step": {
+          "type": "number"
+        },
+        "platform": {
+          "type": "string",
+          "enum": [
+            "all",
+            "desktop",
+            "android"
+          ]
+        }
+      },
+      "required": [
+        "key",
+        "type",
+        "default"
+      ]
+    },
+    "AccountGetResult": {
+      "type": "object",
+      "properties": {
+        "youtube": {
+          "$ref": "#/definitions/YoutubeAccount"
+        },
+        "signedIn": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "signedIn"
+      ]
+    },
+    "YoutubeAccount": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "handle": {
+          "type": "string"
+        },
+        "avatar": {
+          "$ref": "#/definitions/Art"
+        },
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SourcesListResult": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceInfo"
+          }
+        },
+        "priority": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceId"
+          }
+        },
+        "autoBest": {
+          "type": "boolean"
+        },
+        "autoFallback": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "items",
+        "priority",
+        "autoBest",
+        "autoFallback"
+      ]
+    },
+    "SourceInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "name": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ok",
+            "degraded",
+            "off"
+          ]
+        },
+        "signedIn": {
+          "type": "boolean"
+        },
+        "vip": {
+          "type": "boolean"
+        },
+        "account": {
+          "type": "string"
+        },
+        "maxQuality": {
+          "$ref": "#/definitions/Quality"
+        },
+        "canLogin": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "enabled",
+        "status",
+        "maxQuality",
+        "canLogin"
+      ]
+    },
+    "LtState": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "idle",
+            "connecting",
+            "host",
+            "guest"
+          ]
+        },
+        "room": {
+          "$ref": "#/definitions/LtRoom"
+        },
+        "server": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "server"
+      ]
+    },
+    "LtRoom": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "host": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "host"
+            ]
+          }
+        },
+        "pending": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          }
+        }
+      },
+      "required": [
+        "code",
+        "users",
+        "pending"
+      ]
+    },
+    "DcState": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "port": {
+          "type": "number"
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "link": {
+          "type": "string"
+        },
+        "qrSvg": {
+          "type": "string"
+        },
+        "firewall": {
+          "type": "string",
+          "enum": [
+            "allowed",
+            "blocked",
+            "no_rule",
+            "unknown"
+          ]
+        },
+        "devices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DcDevice"
+          }
+        },
+        "session": {
+          "type": "object",
+          "properties": {
+            "peerId": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string",
+              "enum": [
+                "controller",
+                "player"
+              ]
+            }
+          },
+          "required": [
+            "peerId",
+            "role"
+          ]
+        }
+      },
+      "required": [
+        "enabled",
+        "port",
+        "addresses",
+        "link",
+        "qrSvg",
+        "firewall",
+        "devices"
+      ]
+    },
+    "DcDevice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "online": {
+          "type": "boolean"
+        },
+        "paired": {
+          "type": "boolean"
+        },
+        "accountBound": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type",
+        "online",
+        "paired",
+        "accountBound"
+      ]
+    },
+    "UpdateStatus": {
+      "type": "object",
+      "properties": {
+        "channel": {
+          "type": "string"
+        },
+        "lastCheck": {
+          "type": "number"
+        },
+        "available": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string"
+            },
+            "notes": {
+              "type": "string"
+            },
+            "size": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "version",
+            "notes",
+            "size"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "idle",
+            "checking",
+            "downloading",
+            "ready",
+            "error"
+          ]
+        },
+        "progress": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "channel",
+        "lastCheck",
+        "state"
+      ]
+    },
+    "Topic": {
+      "type": "string",
+      "enum": [
+        "player",
+        "queue",
+        "lyrics",
+        "library",
+        "downloads",
+        "settings",
+        "eq",
+        "account",
+        "lt",
+        "dc",
+        "app"
+      ]
+    }
+  }
+}
