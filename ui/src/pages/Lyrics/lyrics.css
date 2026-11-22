@@ -1,0 +1,29 @@
+/* Lyrics (frontend-spec 5). Prefix: lyv / ll. Only transform and opacity ever animate; colour swaps are instant. */
+.lyv{position:relative;flex:1;min-height:0;display:flex;flex-direction:column}
+.lyv-scroll{position:relative;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--s3) transparent;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 10%,#000 84%,transparent);mask-image:linear-gradient(180deg,transparent 0,#000 10%,#000 84%,transparent)}
+.lyv-pad{height:38%;flex:none}
+.ll{font-size:20px;line-height:28px;font-weight:600;color:var(--ink3);margin:0 0 16px;max-width:640px;cursor:pointer;white-space:normal;overflow-wrap:anywhere}
+.ll.cur{color:var(--ink)}
+.ll.past{opacity:.72}
+.ll.plain{cursor:default;color:var(--ink2)}
+.ll.bg{font-size:14px;line-height:20px;font-weight:400;color:var(--ink3)}
+.ll.v2{text-align:right;margin-left:auto}
+.lyv.fp .ll{font-size:28px;line-height:36px;margin-bottom:24px}
+.lyv.fp .ll.bg{font-size:20px;line-height:28px}
+.lyv.fs{align-items:center}
+.lyv.fs .lyv-scroll{width:100%;max-width:960px;margin:0 auto}
+.lyv.fs .ll{font-size:40px;line-height:52px;margin-bottom:32px;max-width:960px}
+.lyv.fs .ll.bg{font-size:28px;line-height:36px}
+.ll .ltr,.ll .lro{display:block;font-size:14px;line-height:20px;font-weight:400;color:var(--ink2);margin-top:4px}
+.lyv.fs .ll .ltr,.lyv.fs .ll .lro{font-size:20px;line-height:28px}
+.ll .lro{color:var(--ink3)}
+
+/* word wipe: .wf (clip window) slides right while .wt (its text) slides left by the same amount */
+.ll .lt{white-space:pre-wrap}
+.ll .w{position:relative;display:inline-block;overflow:hidden;white-space:pre;vertical-align:top}
+.ll .wf{position:absolute;inset:0;overflow:hidden;color:var(--ink)}
+.ll .wt{display:block;white-space:pre}
+
+.lyv-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;height:100%;min-height:160px;color:var(--ink3);text-align:center;padding:24px}
+.lyv.pane .lyv-pad{height:30%}

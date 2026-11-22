@@ -1,31 +1,43 @@
-import { For, Show, createEffect, createSignal, on, onCleanup, onMount } from "solid-js";
+import { Show, createEffect, createMemo, createSignal, on, onCleanup, onMount } from "solid-js";
 import { artUrl } from "../lib/core";
 import { Art } from "../components/Art";
 import { Icon } from "../components/Icon";
 import { IconButton } from "../components/IconButton";
-import { Chip } from "../components/Chip";
 import { Seg } from "../components/Seg";
 import { QualityBadge, SourceBadge, AltBadge } from "../components/Badge";
-import { WaveProgress } from "../components/Progress";
 import { Caption } from "./Caption";
 import { player, playerState, elapsed } from "../state/player";
 import { fullOpen, closeFull } from "../state/ui";
+import { fpLayer, fpTab, outputs, pop, setFpLayer, setFpTab, sleep, toggleLyricsFs, togglePop, type FpTab } from "../state/playerExtra";
+import { lyrics } from "../state/lyrics";
+import { navigate } from "../router/router";
 import { pushEsc } from "../lib/esc";
+import { size } from "../lib/layout";
 import { reducedMotion, E_CONTAINER, D_CONTAINER } from "../lib/motion";
 import { fmtRemaining, fmtTime, artistsText } from "../lib/format";
-import { SAMPLE_LYRICS, SAMPLE_TRANSLATION, CURRENT_LINE } from "../stub/lyrics";
 import { t } from "../i18n";
+import { LyricsView } from "../pages/Lyrics/LyricsView";
+import { LyricsTools } from "../pages/Lyrics/LyricsTools";
+import { LyricsSearchDialog } from "../pages/Lyrics/SearchDialog";
+import { QueuePanel } from "./player/QueuePanel";
+import { RelatedPanel } from "./player/RelatedPanel";
+import { ProgressControl } from "./player/ProgressControl";
+import { VolumeSlider } from "./player/VolumeSlider";
+import { sleepLabel } from "./player/Popovers";
+import { tintFor } from "./player/tint";
+import "./player/player.css";
 
 type Phase = "closed" | "opening" | "open" | "closing";
 
 /**
  * Full player: a fixed layer, mounted after first use, `visibility:hidden` while closed (frontend-spec 6.3).
- * Container transform with WAAPI: art translate+scale from the bar art rect, layer background opacity,
- * the single allowed clip-path animation, bar content fade 0-25 %, controls fade + translateY 35-100 %.
+ * Container transform with WAAPI: the art travels from the bar art rect (translate + scale), the layer slides up with a
+ * pure translateY (no clip-path), the layer background fades, the bar content fades 0-25 %, controls fade + translateY 35-100 %.
+ * Two panes when W >= 960 and H >= 600, otherwise one pane plus a "Lời / Tiếp theo" layer.
  */
 export function FullPlayer() {
   const [used, setUsed] = createSignal(false);
-  const [tab, setTab] = createSignal("lyrics");
+  const [find, setFind] = createSignal(false);
   let layer: HTMLDivElement | undefined;
   let bg: HTMLDivElement | undefined;
   let artWrap: HTMLDivElement | undefined;
@@ -65,10 +77,9 @@ export function FullPlayer() {
       el.animate(keyframes, { duration: dur, easing: ease, fill: "both", direction: open ? "normal" : "reverse", ...opts });
     anims = [];
     if (!rm && A) {
-      // Transform-only reveal (frontend-spec 6.3 fallback): the layer slides up from the bar top instead of
-      // animating clip-path. M0 traces showed the composited clip-path re-rasterising its mask every frame
-      // (4 raster tasks per frame, 24-100 ms presents at DPR 2.5). The art keyframe subtracts the layer
-      // offset D; both share the easing, so the art still travels in a straight line from the bar art.
+      // Transform-only reveal (frontend-spec 6.3): the layer slides up from the bar top instead of animating clip-path.
+      // The art keyframe subtracts the layer offset D; both share the easing, so the art still travels in a straight
+      // line from the bar art.
       const D = window.innerHeight - pb;
       anims.push(kf([{ transform: `translate(${A.left - B.left}px,${A.top - B.top - D}px) scale(${A.width / B.width})` }, { transform: "none" }], artWrap));
       anims.push(kf([{ transform: `translateY(${D}px)` }, { transform: "none" }], layer));
@@ -174,15 +185,78 @@ export function FullPlayer() {
     { key: "related", label: t("w2_tab_related") },
   ];
 
+  // two panes when W >= 960 and H >= 600, else one pane + the "Lời / Tiếp theo" layer
+  const two = () => size().w >= 960 && size().h >= 600;
+  createEffect(
+    on(
+      () => fpLayer() && !two() && fullOpen(),
+      (o) => {
+        if (!o) return;
+        const un = pushEsc(() => setFpLayer(false));
+        onCleanup(un);
+      }
+    )
+  );
+  createEffect(on(fullOpen, (o) => { if (!o) setFpLayer(false); }, { defer: true }));
+
+  // tint: art.dominant clamped to L* <= 20, two stacked layers cross-fading over 300 ms (opacity only)
+  const tint = createMemo(() => tintFor(tr()?.art?.dominant, tr()?.id));
+  const [tl, setTl] = createSignal<[string, string]>([tint(), tint()]);
+  const [on2, setOn2] = createSignal<[boolean, boolean]>([true, false]);
+  const [z, setZ] = createSignal<[number, number]>([1, 0]);
+  let front = 0;
+  let zc = 1;
+  let offT = 0;
+  createEffect(
+    on(
+      tint,
+      (c) => {
+        if (c === tl()[front]) return;
+        const back = 1 - front;
+        setTl((l) => (back ? [l[0], c] : [c, l[1]]));
+        setZ((l) => (back ? [l[0], ++zc] : [++zc, l[1]]));
+        const old = front;
+        front = back;
+        requestAnimationFrame(() => setOn2((o) => (back ? [o[0], true] : [true, o[1]])));
+        clearTimeout(offT);
+        offT = window.setTimeout(() => setOn2((o) => (old ? [o[0], false] : [false, o[1]])), 340);
+      },
+      { defer: true }
+    )
+  );
+  onCleanup(() => clearTimeout(offT));
+
+  const lyricsActive = () => fullOpen() && fpTab() === "lyrics" && (two() || fpLayer());
+  const srcLabel = () => {
+    const l = lyrics();
+    return l ? t("w2_m22_ly_src", l.provider, l.synced === "word" ? t("w2_m22_ly_word") : l.synced === "line" ? t("w2_m22_ly_line") : t("w2_m22_ly_plain")) : "";
+  };
+  const goEq = () => {
+    closeFull();
+    navigate("equalizer");
+  };
+
   return (
     <Show when={used()}>
-      <div ref={layer} class="fp" style={{ visibility: "hidden" }} data-testid="full-player" role="dialog" aria-label={t("w2_player")} aria-modal="true">
-        <div class="fp-bg" ref={bg} style={{ "--tint": tr()?.art?.dominant ?? "#2A1622" }} />
+      <div
+        ref={layer}
+        class="fp"
+        classList={{ two: two(), one: !two(), layer: fpLayer() }}
+        style={{ visibility: "hidden", "--tint": tint() }}
+        data-testid="full-player"
+        role="dialog"
+        aria-label={t("w2_player")}
+        aria-modal="true"
+      >
+        <div class="fp-bg" ref={bg}>
+          <div class="fp-tl" classList={{ on: on2()[0] }} style={{ "--tint": tl()[0], "z-index": z()[0] }} data-testid="tint-a" />
+          <div class="fp-tl" classList={{ on: on2()[1] }} style={{ "--tint": tl()[1], "z-index": z()[1] }} data-testid="tint-b" />
+        </div>
         <div class="fp-top tbar" ref={top} data-tauri-drag-region>
           <IconButton icon="down" label={t("w2_collapse")} class="h" onClick={closeFull} testid="collapse-player" />
           <span class="t12 i3" style={{ "margin-left": "4px" }}>{t("w2_collapse")}</span>
           <div class="fp-ctx">
-            <div class="ovl">{t("w2_playing_from_album")}</div>
+            <div class="ovl">{t("w2_m22_playing_from")}</div>
             <div class="w6">{s()?.context?.title}</div>
           </div>
           <div class="row gap8 mla">
@@ -217,7 +291,7 @@ export function FullPlayer() {
                 <IconButton icon="more" label={t("w2_more")} size={40} iconSize={24} />
               </div>
               <div class="fp-prog">
-                <WaveProgress width={640} label={t("w2_seek")} />
+                <ProgressControl where="fp" testid="fp-progress" />
                 <div class="row t12 i3 num" style={{ "justify-content": "space-between", "margin-top": "6px" }}>
                   <span>{fmtTime(elapsed())}</span>
                   <span>{fmtRemaining((s()?.durMs ?? 0) - elapsed())}</span>
@@ -226,55 +300,66 @@ export function FullPlayer() {
               <div class="fp-btns">
                 <IconButton icon="shuffle" label={t("shuffle")} size={48} iconSize={24} active={s()?.shuffle} onClick={() => player.setShuffle(!s()?.shuffle)} />
                 <IconButton icon="prev" label={t("w2_prev")} size={48} iconSize={32} style={{ color: "var(--ink)" }} onClick={() => player.prev()} />
-                <button type="button" class="play72 pressable" aria-label={s()?.playing ? t("w2_pause") : t("w2_play")} onClick={() => player.toggle()}>
+                <button type="button" class="play72 pressable" aria-label={s()?.playing ? t("w2_pause") : t("w2_play")} onClick={() => player.toggle()} data-testid="fp-play">
                   <Icon n={s()?.playing ? "pause" : "play"} s={32} />
                 </button>
                 <IconButton icon="next" label={t("w2_next")} size={48} iconSize={32} style={{ color: "var(--ink)" }} onClick={() => player.next()} />
                 <IconButton icon="repeat" label={t("w2_repeat")} size={48} iconSize={24} active={s()?.repeat !== "off"} onClick={() => player.cycleRepeat()} />
               </div>
               <div class="row gap8 fp-chips">
-                <span class="chipbtn">
+                <button type="button" class="chipbtn btn" data-testid="fp-output" aria-haspopup="menu" aria-expanded={pop()?.kind === "output"} onClick={(e) => togglePop("output", e.currentTarget as HTMLElement)}>
                   <Icon n="phones" s={16} />
-                  {t("w2_output_name")}
-                </span>
-                <span class="chipbtn">
+                  {s()?.output?.name ?? outputs().devices.find((d) => d.id === outputs().current)?.name ?? t("w2_output")}
+                </button>
+                <button type="button" class="chipbtn btn" data-testid="fp-eq" onClick={goEq}>
                   <span class="dot" />
                   {t("w2_eq_chip", s()?.eq.profileName ?? "")}
-                </span>
-                <IconButton icon="moon" label={t("w2_sleep")} size={32} />
+                </button>
+                <IconButton icon="moon" label={t("w2_sleep")} size={32} active={!!sleep()} onClick={(e) => togglePop("sleep", e.currentTarget as HTMLElement)} testid="fp-sleep" />
+                <Show when={sleepLabel()}>
+                  <span class="t12 i2 num">{sleepLabel()}</span>
+                </Show>
                 <div class="row gap8 mla fp-vol">
-                  <Icon n="vol" s={20} />
-                  <div class="bar">
-                    <div class="bar-fill" style={{ transform: `scaleX(${s()?.volume ?? 0})`, background: "var(--ink2)" }} />
-                  </div>
+                  <Icon n={s()?.muted ? "vol_off" : "vol"} s={20} />
+                  <VolumeSlider testid="fp-volume" />
                 </div>
               </div>
+              <button type="button" class="chipbtn btn fp-layer-btn" data-testid="fp-layer-btn" aria-expanded={fpLayer()} onClick={() => setFpLayer(!fpLayer())}>
+                <Icon n="lyrics" s={16} />
+                {t("w2_m22_layer")}
+              </button>
             </div>
           </div>
-          <div class="fp-right" ref={right}>
-            <div class="row gap8">
-              <Seg items={tabs()} value={tab()} onChange={setTab} label={t("w2_player")} class="dark" />
-              <Chip on class="mla">{t("w2_karaoke")}</Chip>
-              <Chip>{t("w2_translate")}</Chip>
-              <IconButton icon="full" label={t("w2_fullscreen")} />
+          <div class="fp-right" ref={right} data-testid="fp-right">
+            <div class="fp-right-h">
+              <Seg items={tabs()} value={fpTab()} onChange={(k) => setFpTab(k as FpTab)} label={t("w2_player")} class="dark" />
+              <Show when={fpTab() === "lyrics"}>
+                <div class="mla row gap8">
+                  <LyricsTools onSearch={() => setFind(true)} />
+                  <IconButton icon="full" label={t("w2_fullscreen")} testid="lyrics-fs" onClick={toggleLyricsFs} />
+                </div>
+              </Show>
+              <Show when={!two()}>
+                <IconButton icon="down" label={t("w2_close")} class={fpTab() === "lyrics" ? "" : "mla"} onClick={() => setFpLayer(false)} testid="fp-layer-close" />
+              </Show>
             </div>
-            <div class="ly">
-              <For each={SAMPLE_LYRICS}>
-                {(line, i) => (
-                  <p classList={{ past: i() < CURRENT_LINE, cur: i() === CURRENT_LINE }}>
-                    {line}
-                    <Show when={i() === CURRENT_LINE}>
-                      <span class="tr2">{SAMPLE_TRANSLATION}</span>
-                    </Show>
-                  </p>
-                )}
-              </For>
-            </div>
-            <div class="row gap8 t12 i3">
-              <span>{t("w2_lyrics_source")}</span>
-            </div>
+            <Show when={fpTab() === "lyrics"}>
+              <LyricsView variant="fp" active={lyricsActive} onSearch={() => setFind(true)} />
+              <div class="row gap8 t12 i3" data-testid="lyrics-source">
+                <span>{srcLabel()}</span>
+              </div>
+            </Show>
+            <Show when={fpTab() === "queue"}>
+              <QueuePanel variant="fp" />
+            </Show>
+            <Show when={fpTab() === "related"}>
+              <RelatedPanel active={() => fullOpen() && fpTab() === "related"} />
+            </Show>
           </div>
         </div>
+        <Show when={find()}>
+          <LyricsSearchDialog onClose={() => setFind(false)} />
+        </Show>
       </div>
     </Show>
   );
