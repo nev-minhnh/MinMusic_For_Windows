@@ -1,4 +1,5 @@
-import { For, Show, createEffect, createSignal, on, onCleanup } from "solid-js";
+import { For, Show, createEffect, createSignal, on, onCleanup, onMount } from "solid-js";
+import { artUrl } from "../lib/core";
 import { Art } from "../components/Art";
 import { Icon } from "../components/Icon";
 import { IconButton } from "../components/IconButton";
@@ -54,6 +55,7 @@ export function FullPlayer() {
       anims.forEach((a) => a.reverse());
       return;
     }
+    endWarm();
     layer.style.visibility = "visible";
     layer.classList.add("anim");
     const pb = document.querySelector<HTMLElement>(".pbar")?.getBoundingClientRect().height ?? 88;
@@ -63,8 +65,13 @@ export function FullPlayer() {
       el.animate(keyframes, { duration: dur, easing: ease, fill: "both", direction: open ? "normal" : "reverse", ...opts });
     anims = [];
     if (!rm && A) {
-      anims.push(kf([{ transform: `translate(${A.left - B.left}px,${A.top - B.top}px) scale(${A.width / B.width})` }, { transform: "none" }], artWrap));
-      anims.push(kf([{ clipPath: `inset(${window.innerHeight - pb}px 0 0 0)` }, { clipPath: "inset(0px 0 0 0)" }], layer));
+      // Transform-only reveal (frontend-spec 6.3 fallback): the layer slides up from the bar top instead of
+      // animating clip-path. M0 traces showed the composited clip-path re-rasterising its mask every frame
+      // (4 raster tasks per frame, 24-100 ms presents at DPR 2.5). The art keyframe subtracts the layer
+      // offset D; both share the easing, so the art still travels in a straight line from the bar art.
+      const D = window.innerHeight - pb;
+      anims.push(kf([{ transform: `translate(${A.left - B.left}px,${A.top - B.top - D}px) scale(${A.width / B.width})` }, { transform: "none" }], artWrap));
+      anims.push(kf([{ transform: `translateY(${D}px)` }, { transform: "none" }], layer));
     }
     anims.push(kf([{ opacity: 0 }, { opacity: 1 }], bg));
     const reveal: Keyframe[] = rm
@@ -116,6 +123,48 @@ export function FullPlayer() {
     )
   );
   onCleanup(() => unEsc?.());
+
+  // First-open cost (M0 trace: a 118-146 ms GPU task on the first open, mostly the first raster and
+  // pipeline setup of the full-screen layer at DPR 2.5). When the app is idle: mount the layer hidden,
+  // then draw it once at opacity 0.002 (invisible, but rastered) for a few frames and hide it again.
+  let warming = false;
+  function endWarm() {
+    if (!warming || !layer) return;
+    warming = false;
+    layer.style.opacity = "";
+    layer.style.pointerEvents = "";
+    if (phase === "closed") layer.style.visibility = "hidden";
+  }
+  function warm() {
+    if (!layer || phase !== "closed" || fullOpen()) return;
+    warming = true;
+    layer.style.opacity = "0.002";
+    layer.style.pointerEvents = "none";
+    layer.style.visibility = "visible";
+    let n = 0;
+    const step = () => (++n < 6 && warming ? requestAnimationFrame(step) : endWarm());
+    requestAnimationFrame(step);
+  }
+  onMount(() => {
+    const idle = (cb: () => void) => ("requestIdleCallback" in window ? requestIdleCallback(cb, { timeout: 3000 }) : setTimeout(cb, 1500));
+    idle(() => {
+      if (!used()) setUsed(true);
+      requestAnimationFrame(() => idle(warm));
+    });
+  });
+  // pre-decode the full-size artwork whenever the track changes, so neither the open nor the art
+  // transform waits for a decode (6.3: bar and full player share the artUrl(…, 520) URL)
+  createEffect(
+    on(
+      () => artUrl(playerState()?.track?.art, 520),
+      (src) => {
+        if (!src || src.startsWith("grad:")) return;
+        const im = new Image();
+        im.src = src;
+        im.decode().catch(() => {});
+      }
+    )
+  );
 
   const s = () => playerState();
   const tr = () => s()?.track;

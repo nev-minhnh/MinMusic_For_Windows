@@ -126,12 +126,12 @@ export function Library(_props: { params: Record<string, string>; active: Access
           }}
           render={(i) => (
             <Row
-              index={i}
-              track={store.track(i)}
-              selected={selected() === i}
-              playing={!!store.track(i) && playerState()?.track?.id === store.track(i)!.id}
+              index={i()}
+              track={store.track(i())}
+              selected={selected() === i()}
+              playing={!!store.track(i()) && playerState()?.track?.id === store.track(i())!.id}
               labels={labels()}
-              onSelect={() => setSelected(i)}
+              onSelect={() => setSelected(i())}
               onPlay={playTrack}
               onOpenAlbum={openAlbum}
             />
