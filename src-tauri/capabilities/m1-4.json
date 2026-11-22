@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "m1-4",
+  "description": "Shell OS integration (window state, caption rects).",
+  "windows": ["main", "mini"],
+  "permissions": []
+}

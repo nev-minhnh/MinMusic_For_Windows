@@ -52,6 +52,11 @@
     }
   },
   "plugins": {
+    "deep-link": {
+      "desktop": {
+        "schemes": ["minmusic", "metrolist", "metrolist-auth"]
+      }
+    },
     "minmusic": {
       "channel": "alpha",
       "displayVersion": "2.0.0-alpha.0"

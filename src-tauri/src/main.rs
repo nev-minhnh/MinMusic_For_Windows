@@ -5,6 +5,15 @@ mod paths;
 mod session_end;
 mod sidecar;
 mod testhooks;
+// <M1-4>
+mod corelink;
+// </M1-4>
+// <M2-4>
+// </M2-4>
+// <M3-1>
+// </M3-1>
+// <M5-2>
+// </M5-2>
 
 use paths::Paths;
 use sidecar::{shutdown, supervisor::Supervisor};
@@ -178,7 +187,15 @@ fn with_commands(b: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
         core_config::core_config,
         core_config::core_status,
         core_config::core_retry,
-        test_set_window_size
+        test_set_window_size,
+        // <M1-4>
+        // </M1-4>
+        // <M2-4>
+        // </M2-4>
+        // <M3-1>
+        // </M3-1>
+        // <M5-2>
+        // </M5-2>
     ])
 }
 
@@ -196,7 +213,15 @@ fn with_commands(b: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
         set_minimize_to_tray,
         core_config::core_config,
         core_config::core_status,
-        core_config::core_retry
+        core_config::core_retry,
+        // <M1-4>
+        // </M1-4>
+        // <M2-4>
+        // </M2-4>
+        // <M3-1>
+        // </M3-1>
+        // <M5-2>
+        // </M5-2>
     ])
 }
 
@@ -232,6 +257,14 @@ fn main() {
         }))
         .plugin(log_plugin)
         .plugin(tauri_plugin_dialog::init())
+        // <M1-4>
+        // </M1-4>
+        // <M2-4>
+        // </M2-4>
+        // <M3-1>
+        // </M3-1>
+        // <M5-2>
+        // </M5-2>
         .on_window_event(|window, event| {
             if window.label() == MAIN {
                 if let WindowEvent::CloseRequested { api, .. } = event {
@@ -256,6 +289,14 @@ fn main() {
                 session_end::install(app.handle(), windows::Win32::Foundation::HWND(hwnd.0));
             }
             build_tray(app)?;
+            // <M1-4>
+            // </M1-4>
+            // <M2-4>
+            // </M2-4>
+            // <M3-1>
+            // </M3-1>
+            // <M5-2>
+            // </M5-2>
             // Safety net: never leave the window hidden forever if the UI never signals ui_ready.
             let h = app.handle().clone();
             std::thread::spawn(move || {
