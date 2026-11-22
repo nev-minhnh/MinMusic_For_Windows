@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-test-set-window-size"
+description = "Enables the test_set_window_size command without any pre-configured scope."
+commands.allow = ["test_set_window_size"]
+
+[[permission]]
+identifier = "deny-test-set-window-size"
+description = "Denies the test_set_window_size command without any pre-configured scope."
+commands.deny = ["test_set_window_size"]

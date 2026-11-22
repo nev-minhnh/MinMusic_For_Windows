@@ -1,0 +1,23 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main",
+  "description": "Main and mini player windows. Login and PO-token webviews get no capability at all.",
+  "windows": ["main", "mini"],
+  "permissions": [
+    "core:event:default",
+    "allow-window-minimize",
+    "allow-window-toggle-maximize",
+    "allow-window-close",
+    "allow-window-start-drag",
+    "allow-app-quit",
+    "allow-core-status",
+    "allow-core-config",
+    "allow-core-retry",
+    "allow-ui-ready",
+    "allow-log-ui",
+    "allow-open-log-folder",
+    "allow-set-minimize-to-tray",
+    "allow-test-set-window-size",
+    "dialog:default"
+  ]
+}
