@@ -4,15 +4,18 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predev": "node ./tools/gen-strings.mjs",
+    "predev": "node ./tools/gen-strings.mjs && node ./tools/check-icons.mjs",
     "dev": "vite --port 5173 --strictPort",
-    "prebuild": "node ./tools/gen-strings.mjs",
+    "prebuild": "node ./tools/gen-strings.mjs && node ./tools/check-icons.mjs",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --port 5173",
     "lint:strings": "node ./tools/lint-strings.mjs",
     "test": "vitest run"
   },
   "dependencies": {
+    "@tauri-apps/api": "2.12.5",
+    "@tauri-apps/plugin-dialog": "2.8.4",
+    "qrcode-generator": "2.0.4",
     "solid-js": "1.9.20"
   },
   "devDependencies": {

@@ -2,7 +2,7 @@ import { For, Show, createResource } from "solid-js";
 import { Icon } from "../components/Icon";
 import { Art } from "../components/Art";
 import { IconButton } from "../components/IconButton";
-import { loadAlbums } from "../state/albums";
+import { loadAlbums } from "../state/userAlbums";
 import { current, navigate } from "../router/router";
 import { t } from "../i18n";
 

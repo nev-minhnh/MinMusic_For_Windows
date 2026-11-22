@@ -1,6 +1,6 @@
 import { createSignal } from "solid-js";
 import { client } from "../lib/core";
-import type { PlayerState, PositionEvent } from "../lib/types";
+import type { PlayerState, PositionEvent, PlayContext } from "../lib/types";
 
 /** pos(now) = posMs + (now - receivedAt) * rate, clamped to durMs (frontend-spec 6.4). */
 export function interp(posMs: number, receivedAt: number, now: number, rate: number, durMs: number, playing = true): number {
@@ -73,4 +73,22 @@ export const player = {
   setShuffle: (on: boolean) => client.call("player.setShuffle", { on }),
   cycleRepeat: () => client.call("player.cycleRepeat"),
   like: (id: string, liked: boolean) => client.call("track.like", { id, liked }),
+  seekRelative: (deltaMs: number) => client.call("player.seekRelative", { deltaMs }),
+  setVolume: (v: number) => client.call("player.setVolume", { v }),
+  mute: (on: boolean) => client.call("player.mute", { on }),
+  playNext,
+  addToQueue,
+  addContextToQueue,
 };
+
+/** queue.add next / end. Resolves to the new queue revision. */
+export function playNext(ids: string[]) {
+  return client.call<{ revision: number }>("queue.add", { ids, position: "next" });
+}
+export function addToQueue(ids: string[]) {
+  return client.call<{ revision: number }>("queue.add", { ids, position: "end" });
+}
+/** queue.addContext: a whole album / playlist / list, resolved by the core. */
+export function addContextToQueue(context: PlayContext, position: "next" | "end" | number = "end") {
+  return client.call<{ revision: number }>("queue.addContext", { context, position });
+}

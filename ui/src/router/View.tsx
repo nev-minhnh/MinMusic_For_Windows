@@ -1,13 +1,13 @@
-import { For, createEffect, on, onMount, type Component, type Accessor } from "solid-js";
+import { For, createEffect, on, onMount } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import { current, mounted, direction, savedScroll, type Route } from "./router";
-import { Home } from "../pages/Home";
-import { Library } from "../pages/Library";
-import { Album } from "../pages/Album";
 import { reducedMotion } from "../lib/motion";
+import { buildPages, pageFor, type PageModule, type PageProps } from "./registry";
+import Missing from "../pages/_Missing";
 
-export type PageProps = { params: Record<string, string>; active: Accessor<boolean> };
-const PAGES: Record<string, Component<PageProps>> = { home: Home, library: Library, album: Album, search: Home };
+export type { PageProps };
+// Every pages/<Name>/index.tsx registers itself: `export const routes` + default component. Page WPs never edit the router.
+const PAGES = buildPages(import.meta.glob<PageModule>("../pages/*/index.tsx", { eager: true }));
 
 const NAV_EASE = "cubic-bezier(0.05,0.7,0.1,1)";
 
@@ -27,7 +27,7 @@ function Page(props: { route: Route }) {
   );
   return (
     <div ref={el} class="pg" classList={{ hid: !active() }} data-key={props.route.key} data-route={props.route.name} tabindex="-1">
-      <Dynamic component={PAGES[props.route.name]} params={props.route.params} active={active} />
+      <Dynamic component={pageFor(PAGES, props.route.name, Missing)} params={props.route.params} active={active} />
     </div>
   );
 }

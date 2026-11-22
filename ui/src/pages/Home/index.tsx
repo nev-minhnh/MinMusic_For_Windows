@@ -1,18 +1,19 @@
+import type { RouteName } from "../../router/routes";
 import { For, Show, createResource, createSignal, onCleanup, onMount, type Accessor } from "solid-js";
-import { Chip } from "../components/Chip";
-import { Seg } from "../components/Seg";
-import { Tile } from "../components/Tile";
-import { Card } from "../components/Card";
-import { ChartRow } from "../components/Row";
-import { IconButton } from "../components/IconButton";
-import { client } from "../lib/core";
-import { idbGet, idbSet } from "../lib/idb";
-import { win } from "../lib/tauri";
-import { wClass } from "../lib/layout";
-import { navigate } from "../router/router";
-import { player } from "../state/player";
-import { locale, t } from "../i18n";
-import type { HomeResult, ChartsResult, Item, Shelf } from "../lib/types";
+import { Chip } from "../../components/Chip";
+import { Seg } from "../../components/Seg";
+import { Tile } from "../../components/Tile";
+import { Card } from "../../components/Card";
+import { ChartRow } from "../../components/Row";
+import { IconButton } from "../../components/IconButton";
+import { client } from "../../lib/core";
+import { idbGet, idbSet } from "../../lib/idb";
+import { win } from "../../lib/tauri";
+import { wClass } from "../../lib/layout";
+import { navigate } from "../../router/router";
+import { player } from "../../state/player";
+import { locale, t } from "../../i18n";
+import type { HomeResult, ChartsResult, Item, Shelf } from "../../lib/types";
 
 const HOME_KEY = "mm.home.v1";
 
@@ -159,3 +160,6 @@ export function Home(_props: { params: Record<string, string>; active: Accessor<
 function trendText(x: { trend: string; delta?: number }): string {
   return x.trend === "up" ? `▲ ${x.delta}` : x.trend === "down" ? `▼ ${x.delta}` : x.trend === "same" ? "—" : "new";
 }
+
+export const routes: RouteName[] = ["home"];
+export default Home;

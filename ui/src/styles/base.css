@@ -262,3 +262,7 @@ input{font:inherit;color:inherit}
 .ly p.cur{color:var(--ink)}.ly p.past{opacity:.72}
 .ly .tr2{display:block;font-size:14px;line-height:20px;font-weight:400;color:var(--ink2);margin-top:4px}
 @media (max-width:959px),(max-height:599px){.fp-body{grid-template-columns:minmax(0,1fr);padding:8px 24px 24px}.fp-right{display:none}}
+
+/* ===== empty state (route without a page) ===== */
+.empty-state{display:flex;flex-direction:column;align-items:center;gap:8px;padding:96px 0;text-align:center;color:var(--ink3)}
+.empty-state .ic{width:32px;height:32px}

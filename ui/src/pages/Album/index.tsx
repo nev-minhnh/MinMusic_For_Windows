@@ -1,14 +1,15 @@
+import type { RouteName } from "../../router/routes";
 import { For, Show, createResource, onCleanup, onMount, createSignal, type Accessor } from "solid-js";
-import { Art } from "../components/Art";
-import { Icon } from "../components/Icon";
-import { IconButton } from "../components/IconButton";
-import { SourceBadge } from "../components/Badge";
-import { Row } from "../components/Row";
-import { client } from "../lib/core";
-import { player, playerState } from "../state/player";
-import { hClass } from "../lib/layout";
-import { t } from "../i18n";
-import type { AlbumResult, Track } from "../lib/types";
+import { Art } from "../../components/Art";
+import { Icon } from "../../components/Icon";
+import { IconButton } from "../../components/IconButton";
+import { SourceBadge } from "../../components/Badge";
+import { Row } from "../../components/Row";
+import { client } from "../../lib/core";
+import { player, playerState } from "../../state/player";
+import { hClass } from "../../lib/layout";
+import { t } from "../../i18n";
+import type { AlbumResult, Track } from "../../lib/types";
 
 function durationText(ms: number): string {
   const m = Math.round(ms / 60000);
@@ -116,3 +117,6 @@ export function Album(props: { params: Record<string, string>; active: Accessor<
     </div>
   );
 }
+
+export const routes: RouteName[] = ["album"];
+export default Album;
