@@ -1,6 +1,6 @@
 // Player state that does not belong to M1-3a's state/player.ts: support pane, lyrics fullscreen, full-player tab,
 // sleep timer, output devices, speed, bar variants (local prefs until the Settings WP binds them).
-import { createEffect, createMemo, createRoot, createSignal, on } from "solid-js";
+import { createEffect, createRoot, createSignal, on } from "solid-js";
 import { client } from "../lib/core";
 import { playerState } from "./player";
 import { size, wClass } from "../lib/layout";
@@ -39,15 +39,16 @@ export function togglePane(tab: PaneTab) {
 export function dockedFor(winW: number, sb: number, paneW: number): boolean {
   return winW - sb - paneW >= DOCK_MIN_CONTENT;
 }
-export const paneDocked = createRoot(() =>
-  createMemo(() => {
-    const w = size().w; // settles at the end of a resize
-    wClass();
-    const win = document.querySelector<HTMLElement>(".win");
-    const sb = win ? parseFloat(getComputedStyle(win).getPropertyValue("--sb")) || 0 : 0;
-    return dockedFor(w, sb, paneWidth());
-  })
-);
+const SB = { compact: 64, medium: 80, expanded: 256 };
+/** Reactive on the window size, width class, pane width and open state; reads the live --sb of the shell (the sidebar can be dragged). */
+export function paneDocked(): boolean {
+  paneOpen();
+  const w = size().w; // settles at the end of a resize
+  const c = wClass();
+  const win = document.querySelector<HTMLElement>(".win");
+  const sb = (win && parseFloat(getComputedStyle(win).getPropertyValue("--sb"))) || SB[c];
+  return dockedFor(w, sb, paneWidth());
+}
 
 // ---- full player: right-hand tab and the single-pane layer, lyrics fullscreen
 export type FpTab = "lyrics" | "queue" | "related";

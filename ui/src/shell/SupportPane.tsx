@@ -26,7 +26,7 @@ export function SupportPane() {
 
   // overlay mode: Esc peels it, and a slide-in from the right (transform only)
   createEffect(
-    on([paneOpen, paneDocked], ([o, d]) => {
+    on([paneOpen, () => paneDocked()], ([o, d]) => {
       if (!o || d) return;
       const un = pushEsc(closePane);
       queueMicrotask(() => {

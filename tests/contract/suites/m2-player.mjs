@@ -129,6 +129,8 @@ export const tests = [
   }],
   ["queue.setAutoplay: at the end of the queue more tracks are appended", async (ctx) => {
     const c = await ui(ctx);
+    await c.call("player.setShuffle", { on: false });
+    await c.call("player.setRepeat", { mode: "off" });
     await play(c, 2, 1);
     await c.call("queue.setAutoplay", { on: true });
     await c.call("player.next", {});

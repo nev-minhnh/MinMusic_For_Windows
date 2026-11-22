@@ -15,7 +15,7 @@
 .qp{flex:1;min-height:0;display:flex;flex-direction:column;position:relative}
 .qp.over:after{content:"";position:absolute;inset:4px;border:2px dashed var(--acc);border-radius:12px;pointer-events:none;z-index:2}
 .qp-scroll.pg{position:relative;inset:auto;flex:1;min-height:0;background:var(--s1);padding:0 8px}
-.qp.fp .qp-scroll.pg{background:transparent}
+.qp.in-fp .qp-scroll.pg{background:transparent}
 .qp-h{padding:8px 8px 4px}
 .qp-h2{display:flex;align-items:center;gap:8px;padding:16px 8px 4px;min-height:44px}
 .qp-clear{height:28px;padding:0 12px}
@@ -97,7 +97,7 @@
 .pr .spd{min-width:36px;padding:0 8px}
 
 /* ===== full player: final fidelity ===== */
-.fp .fp-bg{background:none;overflow:hidden}
+.fp .fp-bg{background:none;overflow:hidden;z-index:0;pointer-events:none}
 .fp-tl{position:absolute;inset:0;background:linear-gradient(180deg,var(--tint,#2A1622) 0%,var(--bg) 70%);opacity:0;transition:opacity 300ms linear}
 .fp-tl.on{opacity:1}
 .fp.two .fp-body{grid-template-columns:var(--fl) minmax(0,1fr);padding:8px 64px 32px}

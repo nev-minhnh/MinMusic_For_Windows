@@ -87,6 +87,11 @@ export function LyricsView(props: { variant: "pane" | "fp" | "fs"; active?: () =
       if (ct >= w.dur) {
         w.a.pause(); w.b.pause();
         w.a.currentTime = w.dur; w.b.currentTime = w.dur;
+      } else if (ct < 0) {
+        // not sung yet: hold at the hidden first frame (play() would auto-rewind a negative time and start it now);
+        // the scheduler's word boundary re-syncs and starts it
+        w.a.pause(); w.b.pause();
+        w.a.currentTime = 0; w.b.currentTime = 0;
       } else {
         w.a.currentTime = ct; w.b.currentTime = ct;
         if (playing) { w.a.play(); w.b.play(); } else { w.a.pause(); w.b.pause(); }
@@ -105,7 +110,10 @@ export function LyricsView(props: { variant: "pane" | "fp" | "fs"; active?: () =
       follow(i);
       buildWipes();
     },
-    onWord: (_l, w) => setWord(w),
+    onWord: (_l, w) => {
+      setWord(w);
+      if (w >= 0) syncWipes(true);
+    },
   });
 
   // manual scroll: wheel / touch / pointer / key pause auto-follow for 4 s (passive listeners, no scroll handler)
@@ -124,7 +132,7 @@ export function LyricsView(props: { variant: "pane" | "fp" | "fs"; active?: () =
   };
 
   return (
-    <div class="lyv" classList={{ pane: props.variant === "pane", fp: props.variant === "fp", fs: props.variant === "fs" }} data-testid="lyrics-view" data-state={lyState()} data-synced={lyrics()?.synced ?? ""}>
+    <div class="lyv" classList={{ "v-pane": props.variant === "pane", "v-fp": props.variant === "fp", "v-fs": props.variant === "fs" }} data-testid="lyrics-view" data-state={lyState()} data-synced={lyrics()?.synced ?? ""}>
       <div class="lyv-scroll" ref={scroller} data-testid="lyrics-scroll" tabindex="-1">
         <Show when={lyrics() && lyState() === "ready"} fallback={<LyEmpty state={lyState()} onSearch={props.onSearch} />}>
           <div class="lyv-pad" />

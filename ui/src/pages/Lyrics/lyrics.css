@@ -9,14 +9,14 @@
 .ll.plain{cursor:default;color:var(--ink2)}
 .ll.bg{font-size:14px;line-height:20px;font-weight:400;color:var(--ink3)}
 .ll.v2{text-align:right;margin-left:auto}
-.lyv.fp .ll{font-size:28px;line-height:36px;margin-bottom:24px}
-.lyv.fp .ll.bg{font-size:20px;line-height:28px}
-.lyv.fs{align-items:center}
-.lyv.fs .lyv-scroll{width:100%;max-width:960px;margin:0 auto}
-.lyv.fs .ll{font-size:40px;line-height:52px;margin-bottom:32px;max-width:960px}
-.lyv.fs .ll.bg{font-size:28px;line-height:36px}
+.lyv.v-fp .ll{font-size:28px;line-height:36px;margin-bottom:24px}
+.lyv.v-fp .ll.bg{font-size:20px;line-height:28px}
+.lyv.v-fs{align-items:center}
+.lyv.v-fs .lyv-scroll{width:100%;max-width:960px;margin:0 auto}
+.lyv.v-fs .ll{font-size:40px;line-height:52px;margin-bottom:32px;max-width:960px}
+.lyv.v-fs .ll.bg{font-size:28px;line-height:36px}
 .ll .ltr,.ll .lro{display:block;font-size:14px;line-height:20px;font-weight:400;color:var(--ink2);margin-top:4px}
-.lyv.fs .ll .ltr,.lyv.fs .ll .lro{font-size:20px;line-height:28px}
+.lyv.v-fs .ll .ltr,.lyv.v-fs .ll .lro{font-size:20px;line-height:28px}
 .ll .lro{color:var(--ink3)}
 
 /* word wipe: .wf (clip window) slides right while .wt (its text) slides left by the same amount */
@@ -26,4 +26,4 @@
 .ll .wt{display:block;white-space:pre}
 
 .lyv-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;height:100%;min-height:160px;color:var(--ink3);text-align:center;padding:24px}
-.lyv.pane .lyv-pad{height:30%}
+.lyv.v-pane .lyv-pad{height:30%}
