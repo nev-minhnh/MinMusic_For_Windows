@@ -49,7 +49,7 @@ Kotlin WPs always start after the previous integration, from the merged `feat/de
 | M4-1b | `…-wp\M4-1b` / `wp/M4-1b` | – | 5191 / 48011 |
 | M3-2 | `…-wp\M3-2-test` | `MinMusic-wt-m3-2` / `feat/desktop-core-m3-2` | – |
 | M3-4a | `…-wp\M3-4a-test` | `MinMusic-wt-m3-4a` / `feat/desktop-core-m3-4a` | – |
-| M4-1a | `…-wp\M4-1a-test` | `MinMusic-wt-m4-1a` / `feat/desktop-core-m4-1a` | – |
+| M4-1a | `…-wp\M4-1a` / `wp/M4-1a` (shell part) | `MinMusic-wt-m4-1a` / `feat/desktop-core-m4-1a` | – |
 | M3-4b | `…-wp\M3-4b` / `wp/M3-4b` | – | 5193 / 48013 |
 | M4-2b | `…-wp\M4-2b` / `wp/M4-2b` | – | 5194 / 48014 |
 | M4-3b | `…-wp\M4-3b` / `wp/M4-3b` | – | 5195 / 48015 |
