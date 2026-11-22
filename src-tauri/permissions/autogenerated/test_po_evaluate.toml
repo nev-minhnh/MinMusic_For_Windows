@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-test-po-evaluate"
+description = "Enables the test_po_evaluate command without any pre-configured scope."
+commands.allow = ["test_po_evaluate"]
+
+[[permission]]
+identifier = "deny-test-po-evaluate"
+description = "Denies the test_po_evaluate command without any pre-configured scope."
+commands.deny = ["test_po_evaluate"]

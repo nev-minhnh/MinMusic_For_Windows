@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-test-weblogin"
+description = "Enables the test_weblogin command without any pre-configured scope."
+commands.allow = ["test_weblogin"]
+
+[[permission]]
+identifier = "deny-test-weblogin"
+description = "Denies the test_weblogin command without any pre-configured scope."
+commands.deny = ["test_weblogin"]
