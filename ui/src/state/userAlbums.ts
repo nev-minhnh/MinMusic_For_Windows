@@ -1,6 +1,7 @@
 import { createSignal } from "solid-js";
 import { client } from "../lib/core";
 import { onLibraryEvent } from "./library";
+import { toast } from "../toast";
 import type { Art } from "../lib/types";
 
 export type UserAlbum = { id: string; title: string; subtitle?: string; art?: Art; pinned: boolean; count?: number; revision?: number };
@@ -77,4 +78,14 @@ export const userAlbums = {
 export async function loadAlbums(): Promise<UserAlbum[]> {
   if (!loaded()) await refresh();
   return items();
+}
+
+/** Tracks dropped on a user album (sidebar, rail, card): userAlbum.add + the toast "Đã thêm N · bỏ qua M". */
+export async function addDropped(albumId: string, ids: string[]): Promise<void> {
+  try {
+    const r = await userAlbums.add(albumId, ids);
+    toast({ i18n: "w2_added_skipped", args: [r.added, r.skipped] });
+  } catch {
+    toast({ i18n: "w2_error_generic", level: "error" });
+  }
 }

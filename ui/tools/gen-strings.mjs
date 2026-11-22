@@ -43,6 +43,8 @@ export function scanKeys(dir) {
       } else if (/\.(ts|tsx)$/.test(f) && !/\.test\./.test(f)) {
         const src = readFileSync(p, "utf8");
         for (const m of src.matchAll(/\b(?:t|plural)\(\s*["']([\w.]+)["']/g)) keys.add(m[1]);
+        // `i18n: "key"` (toast({i18n}), anything that hands a key to t() later)
+        for (const m of src.matchAll(/\bi18n:\s*["']([\w.]+)["']/g)) keys.add(m[1]);
       }
     }
   };

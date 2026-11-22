@@ -132,7 +132,7 @@ export function Library(_props: { params: Record<string, string>; active: Access
               selected={selected() === i()}
               playing={!!store.track(i()) && playerState()?.track?.id === store.track(i())!.id}
               labels={labels()}
-              onSelect={() => setSelected(i())}
+              onPick={() => setSelected(i())}
               onPlay={playTrack}
               onOpenAlbum={openAlbum}
             />

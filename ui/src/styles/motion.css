@@ -29,3 +29,15 @@
   .wave-run{animation:none!important}
 }
 .anim{will-change:transform,opacity}
+
+/* ===== overlays: menu, dialog, toast, overlay sidebar (opacity + transform only) ===== */
+@keyframes mm-fade{from{opacity:0}to{opacity:1}}
+@keyframes mm-fade-out{from{opacity:1}to{opacity:0}}
+@keyframes mm-menu-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@keyframes mm-dlg-in{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+@keyframes mm-toast-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes mm-ovl-in{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .mn,.dlg,.toast,.side.ovl{animation-name:mm-fade!important;animation-duration:120ms!important}
+}
+.reduce-motion .mn,.reduce-motion .dlg,.reduce-motion .toast,.reduce-motion .side.ovl{animation-name:mm-fade!important;animation-duration:120ms!important}

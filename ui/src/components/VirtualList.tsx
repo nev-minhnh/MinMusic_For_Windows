@@ -20,6 +20,8 @@ export function VirtualList(props: {
   onRange?: (start: number, end: number) => void;
   testid?: string;
   label?: string;
+  /** ARIA role of the host (default grid; a Table nests it as rowgroup) */
+  role?: "grid" | "rowgroup";
   ref?: (api: { scrollToIndex: (i: number) => void }) => void;
 }) {
   let host!: HTMLDivElement;
@@ -122,7 +124,7 @@ export function VirtualList(props: {
   };
 
   return (
-    <div ref={host} class="vl" role="grid" aria-label={props.label} aria-rowcount={props.total} data-testid={props.testid} style={{ height: props.total * props.rowHeight + "px" }}>
+    <div ref={host} class="vl" role={props.role ?? "grid"} aria-label={props.label} aria-rowcount={props.role ? undefined : props.total} data-testid={props.testid} style={{ height: props.total * props.rowHeight + "px" }}>
       <Index each={slots()}>
         {(i) => (
           <Show when={i() >= 0}>
