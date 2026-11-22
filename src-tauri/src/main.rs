@@ -85,6 +85,8 @@ fn window_toggle_maximize(window: WebviewWindow) {
 
 #[tauri::command]
 fn window_close(app: AppHandle) {
+    // The caption close button raises no CloseRequested (no decorations), so the first-hide balloon starts here.
+    tray::on_close_requested(&app);
     handle_close(&app);
 }
 
