@@ -2,7 +2,7 @@ import { For, Show, createResource } from "solid-js";
 import { Icon } from "../components/Icon";
 import { Art } from "../components/Art";
 import { IconButton } from "../components/IconButton";
-import { client } from "../lib/core";
+import { loadAlbums } from "../state/albums";
 import { current, navigate } from "../router/router";
 import { t } from "../i18n";
 
@@ -29,7 +29,7 @@ const activeKey = () => {
 };
 
 function useAlbums() {
-  const [res] = createResource(() => client.call<{ items: any[] }>("userAlbum.list").then((r) => r.items));
+  const [res] = createResource(loadAlbums);
   return res;
 }
 

@@ -32,9 +32,10 @@ function open(it: Item) {
   else navigate("album", { id: it.id });
 }
 function play(it: Item) {
-  player.play({ kind: it.t === "playlist" && it.local ? "userAlbum" : "playlist", id: it.id, title: it.t === "track" ? it.title : it.title });
+  player.play({ kind: it.t === "playlist" && it.local ? "userAlbum" : "playlist", id: it.id, title: title(it) });
 }
-const sub = (it: Item) => (it.t === "playlist" ? it.subtitle : it.t === "album" ? it.artists.map((a) => a.name).join(", ") : "");
+const title = (it: any): string => it.title ?? it.name ?? "";
+const sub = (it: any): string => (it.t === "playlist" ? it.subtitle ?? "" : it.t === "album" ? (it.artists ?? []).map((a: any) => a.name).join(", ") : it.subtitle ?? "");
 
 function ShelfRow(props: { shelf: Shelf; below?: boolean }) {
   let sc!: HTMLDivElement;
@@ -47,7 +48,7 @@ function ShelfRow(props: { shelf: Shelf; below?: boolean }) {
         <IconButton icon="right" label={t("w2_scroll_right")} tonal onClick={() => by(1)} />
       </div>
       <div class="shelf" ref={sc} data-testid="shelf">
-        <For each={props.shelf.items}>{(it) => <Card title={it.title} subtitle={sub(it)} art={it.art} onOpen={() => open(it)} onPlay={() => play(it)} playLabel={t("w2_play")} />}</For>
+        <For each={props.shelf.items}>{(it) => <Card title={title(it)} subtitle={sub(it)} art={it.art} onOpen={() => open(it)} onPlay={() => play(it)} playLabel={t("w2_play")} />}</For>
       </div>
     </section>
   );
@@ -57,7 +58,18 @@ export function Home(_props: { params: Record<string, string>; active: Accessor<
   let root!: HTMLDivElement;
   const [home, setHome] = createSignal<HomeResult | undefined>();
   const [src, setSrc] = createSignal("zing");
-  const [chart] = createResource(src, (source) => client.call<ChartsResult>("charts.get", { source }));
+  // charts: a "chart" shelf of home.get when present (mock core), else charts.get
+  const [chart] = createResource(
+    () => [src(), home()] as const,
+    async ([source, h]) => {
+      const sh = h?.shelves.filter((x) => x.layout === "chart");
+      const hit = sh?.find((x) => x.key === source) ?? sh?.[0];
+      if (hit)
+        return { updatedAt: Date.now(), items: hit.items.filter((i) => i.t === "track").map((i, k) => ({ ...(i as any), rank: k + 1, trend: (i as any).trend ?? ["up", "same", "down", "new"][k % 4], delta: (i as any).delta ?? (k % 5) + 1 })) } as unknown as ChartsResult;
+      if (!h) return undefined;
+      return client.call<ChartsResult>("charts.get", { source }).catch(() => undefined);
+    }
+  );
   const [mood, setMood] = createSignal(0);
 
   onMount(() => {
@@ -80,8 +92,8 @@ export function Home(_props: { params: Record<string, string>; active: Accessor<
     onCleanup(() => ro.disconnect());
   });
 
-  const quick = () => home()?.shelves.find((s) => s.key === "quick")?.items ?? [];
-  const shelves = () => home()?.shelves.filter((s) => s.layout === "cards") ?? [];
+  const quick = () => (home()?.shelves.find((s) => s.layout === "quickPicks")?.items ?? []).slice(0, 8);
+  const shelves = () => home()?.shelves.filter((s) => s.layout === "cards").slice(0, 3) ?? [];
   const dateText = () => new Intl.DateTimeFormat(locale(), { weekday: "long", day: "numeric", month: "long" }).format(new Date());
   const moods = () => [t("w2_mood_relax"), t("w2_mood_focus"), t("w2_mood_workout"), t("w2_mood_sad"), t("w2_mood_party"), t("w2_mood_drive")];
   const labels = () => ({ like: t("w2_like"), more: t("w2_more"), play: t("w2_play") });
@@ -102,7 +114,7 @@ export function Home(_props: { params: Record<string, string>; active: Accessor<
         </div>
       </div>
       <div class="qp">
-        <For each={quick()}>{(it) => <Tile title={it.title} art={it.art} onOpen={() => open(it)} onPlay={() => play(it)} playLabel={t("w2_play")} />}</For>
+        <For each={quick()}>{(it) => <Tile title={title(it)} art={it.art} onOpen={() => open(it)} onPlay={() => play(it)} playLabel={t("w2_play")} />}</For>
       </div>
       <div class="sh">
         <h3>

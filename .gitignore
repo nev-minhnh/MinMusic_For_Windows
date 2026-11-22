@@ -7,3 +7,4 @@ tools/perf/bin/
 test-results/
 playwright-report/
 *.log
+.env.local

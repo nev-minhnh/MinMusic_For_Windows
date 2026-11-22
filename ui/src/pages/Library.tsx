@@ -8,6 +8,7 @@ import { VirtualList } from "../components/VirtualList";
 import { QualityBadge } from "../components/Badge";
 import { createWindowStore } from "../state/library";
 import { client } from "../lib/core";
+import { loadAlbums } from "../state/albums";
 import { navigate } from "../router/router";
 import { player, playerState } from "../state/player";
 import { t } from "../i18n";
@@ -20,7 +21,7 @@ export function Library(_props: { params: Record<string, string>; active: Access
   const store = createWindowStore("songs", SORT);
   const [selected, setSelected] = createSignal(-1);
   const [chip, setChip] = createSignal(0);
-  const [albums] = createResource(() => client.call<{ items: any[] }>("userAlbum.list").then((r) => r.items));
+  const [albums] = createResource(loadAlbums);
   let range: [number, number] = [0, 40];
 
   onMount(() => {
