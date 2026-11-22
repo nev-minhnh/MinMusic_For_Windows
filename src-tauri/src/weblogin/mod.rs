@@ -8,6 +8,8 @@
 //! Security: login windows get no capability and no IPC; cookie and script values are never logged
 //! (cookie names only); the data directory is always deleted.
 pub mod auth_callback;
+#[allow(unused_imports)]
+pub use auth_callback::on_auth_callback;
 pub mod done;
 mod poll;
 pub mod types;

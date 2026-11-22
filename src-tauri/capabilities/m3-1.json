@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "m3-1",
+  "description": "M3-1: login-* and potoken webviews get NO capability and no IPC (this file lists only the main window). The e2e commands test_weblogin and test_po_evaluate need 'allow-test-weblogin' and 'allow-test-po-evaluate' here once the coordinator adds them to build.rs.",
+  "windows": ["main"],
+  "permissions": []
+}
