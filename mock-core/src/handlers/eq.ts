@@ -110,7 +110,7 @@ const maxBoost = (m: Model) => Math.max(0, ...responseDb(m.cur.bands, 128).db);
 function limiterReduction(m: Model) {
   if (!m.cur.effects.limiter) return 0;
   const peak = maxBoost(m) + (m.cur.autoPreamp ? 0 : m.cur.preampDb) + m.cur.effects.outputDb + Math.max(0, m.cur.effects.bassDb);
-  return Number(Math.max(0, peak + 0.3).toFixed(1));
+  return Number(Math.max(0, peak).toFixed(1));
 }
 function state(m: Model): EqState {
   const preampDb = m.cur.autoPreamp ? -Number(maxBoost(m).toFixed(1)) : m.cur.preampDb;

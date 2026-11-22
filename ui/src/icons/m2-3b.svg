@@ -1,0 +1,6 @@
+<symbol id="i-eq_undo" viewBox="0 0 24 24"><path d="M9 7 4.5 11.5 9 16M5 11.5h9a5 5 0 0 1 0 10h-3"/></symbol>
+<symbol id="i-eq_redo" viewBox="0 0 24 24"><path d="m15 7 4.5 4.5L15 16M19 11.5h-9a5 5 0 0 0 0 10h3"/></symbol>
+<symbol id="i-eq_import" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M5 20h14"/></symbol>
+<symbol id="i-eq_export" viewBox="0 0 24 24"><path d="M12 4v12M7 11l5 5 5-5M5 20h14"/></symbol>
+<symbol id="i-eq_reset" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.4-5.5M4.5 4v4.5H9"/></symbol>
+<symbol id="i-eq_spectrum" viewBox="0 0 24 24"><path d="M5 20v-6M9 20V6M13 20v-9M17 20V9M21 20v-4"/></symbol>
