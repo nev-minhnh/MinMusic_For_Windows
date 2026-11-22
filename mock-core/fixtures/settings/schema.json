@@ -1,0 +1,2675 @@
+{
+ "entries": [
+  {
+   "key": "accountChannelHandle",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "accountEmail",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "accountName",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "accountThumbnail",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "activeLyricsTextPosition",
+   "type": "string",
+   "default": "CENTER",
+   "platform": "all"
+  },
+  {
+   "key": "aiSlopBlocklistUpdatedAt",
+   "type": "int",
+   "default": 0,
+   "platform": "all"
+  },
+  {
+   "key": "androidActiveFontId",
+   "type": "string",
+   "default": "",
+   "platform": "android"
+  },
+  {
+   "key": "androidAutoPinnedPlaylistPlaybackMode",
+   "type": "string",
+   "default": "",
+   "platform": "android"
+  },
+  {
+   "key": "androidAutoPinnedPlaylistsJson",
+   "type": "string",
+   "default": "[]",
+   "platform": "android"
+  },
+  {
+   "key": "androidAutoTargetPlaylist",
+   "type": "string",
+   "default": "",
+   "platform": "android"
+  },
+  {
+   "key": "androidCustomFontFile",
+   "type": "string",
+   "default": "",
+   "platform": "android"
+  },
+  {
+   "key": "androidCustomFontName",
+   "type": "string",
+   "default": "",
+   "platform": "android"
+  },
+  {
+   "key": "androidLastStorageAudit",
+   "type": "int",
+   "default": 0,
+   "platform": "android"
+  },
+  {
+   "key": "androidLastTrackedPlaylistSync",
+   "type": "int",
+   "default": 0,
+   "platform": "android"
+  },
+  {
+   "key": "androidStorageAuditLocation",
+   "type": "string",
+   "default": "",
+   "platform": "android"
+  },
+  {
+   "key": "animatedArtworkCacheSize",
+   "type": "int",
+   "default": 2048,
+   "platform": "all"
+  },
+  {
+   "key": "animatedCoverCacheJson",
+   "type": "string",
+   "default": "{}",
+   "platform": "all"
+  },
+  {
+   "key": "animatedCoverResolution",
+   "type": "enum",
+   "default": "MEDIUM_720",
+   "enumValues": [
+    "LOW_360",
+    "MEDIUM_720",
+    "HIGH_1080",
+    "ORIGINAL"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "animatedGradient",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "appFont",
+   "type": "enum",
+   "default": "SYSTEM",
+   "enumValues": [
+    "SYSTEM",
+    "INTER",
+    "GOOGLE_SANS",
+    "MAPLE_MONO"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "appIcon",
+   "type": "string",
+   "default": "ORIGINAL",
+   "platform": "android"
+  },
+  {
+   "key": "appLanguage",
+   "type": "enum",
+   "default": "SYSTEM",
+   "enumValues": [
+    "SYSTEM",
+    "en",
+    "vi"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "appLayout",
+   "type": "enum",
+   "default": "EXPRESS",
+   "enumValues": [
+    "EXPRESS",
+    "COMFORTABLE",
+    "FOCUSED",
+    "DYNAMIC"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "appleMusicArtistCacheJson",
+   "type": "string",
+   "default": "{}",
+   "platform": "all"
+  },
+  {
+   "key": "appleMusicArtistVideoResolution",
+   "type": "enum",
+   "default": "MEDIUM_720",
+   "enumValues": [
+    "LOW_360",
+    "MEDIUM_720",
+    "HIGH_1080",
+    "ORIGINAL"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "artistBannerSource",
+   "type": "string",
+   "default": "YOUTUBE",
+   "platform": "all"
+  },
+  {
+   "key": "artistCustomBannersJson",
+   "type": "string",
+   "default": "{}",
+   "platform": "all"
+  },
+  {
+   "key": "artistIconSource",
+   "type": "string",
+   "default": "YOUTUBE",
+   "platform": "all"
+  },
+  {
+   "key": "artistNameAliasesJson",
+   "type": "string",
+   "default": "{}",
+   "platform": "all"
+  },
+  {
+   "key": "audioBoostDb",
+   "type": "float",
+   "default": 0,
+   "platform": "all"
+  },
+  {
+   "key": "audioCacheLocation",
+   "type": "enum",
+   "default": "INTERNAL",
+   "enumValues": [
+    "INTERNAL",
+    "EXTERNAL"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "audioNormalization",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "audioQuality",
+   "type": "enum",
+   "default": "AUTO",
+   "enumValues": [
+    "LOW",
+    "AUTO",
+    "HIGH"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "audioTrackPlaybackParams",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "autoBestSource",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "autoDownloadOnLike",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "autoDownloadSavedCollections",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "autoLoadMore",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "autoPureBlack",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "autoSkipNextOnError",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "blockAiSlopArtists",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "blockedArtistIds",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "blockedArtistsJson",
+   "type": "string",
+   "default": "[]",
+   "platform": "all"
+  },
+  {
+   "key": "blockedArtistsUndoHintShown",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "blockedSongIds",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "blockedSongsJson",
+   "type": "string",
+   "default": "[]",
+   "platform": "all"
+  },
+  {
+   "key": "blockedSongsUndoHintShown",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "blockedUsersUndoHintShown",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "blockScreenshots",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "cachedAvailableUpdateJson",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "cachedCollectionSort",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "cachedCollectionSortDirection",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "cachedUpdateReleasesJson",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "canvasContentOrder",
+   "type": "string",
+   "default": "YOUTUBE_MUSIC_VIDEO,SPOTIFY_CANVAS,APPLE_MUSIC",
+   "platform": "all"
+  },
+  {
+   "key": "canvasEnabledSources",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "castEnabled",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "checkForUpdates",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "collectionCoversJson",
+   "type": "string",
+   "default": "{}",
+   "platform": "all"
+  },
+  {
+   "key": "contentCountry",
+   "type": "string",
+   "default": "SYSTEM",
+   "platform": "all"
+  },
+  {
+   "key": "contentLanguage",
+   "type": "string",
+   "default": "SYSTEM",
+   "platform": "all"
+  },
+  {
+   "key": "corruptPendingScrobblesJson",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "cropAlbumArt",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "crossfadeDuration",
+   "type": "float",
+   "default": 10,
+   "min": 1,
+   "max": 12,
+   "step": 1,
+   "platform": "all"
+  },
+  {
+   "key": "crossfadeEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "crossfadeGapless",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "customDownloadPath",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "databaseLikesRecoveryVersion",
+   "type": "int",
+   "default": 0,
+   "platform": "all"
+  },
+  {
+   "key": "dataSyncId",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "defaultOpenTab",
+   "type": "string",
+   "default": "HOME",
+   "platform": "all"
+  },
+  {
+   "key": "deletedPlaylistIdsJson",
+   "type": "string",
+   "default": "[]",
+   "platform": "all"
+  },
+  {
+   "key": "density_scale_factor",
+   "type": "float",
+   "default": 1,
+   "platform": "all"
+  },
+  {
+   "key": "desktopFloatingPlayerBar",
+   "type": "bool",
+   "default": false,
+   "platform": "desktop"
+  },
+  {
+   "key": "desktopMiniPlayerOnMinimize",
+   "type": "bool",
+   "default": false,
+   "platform": "desktop"
+  },
+  {
+   "key": "desktopMiniPlayerPosition",
+   "type": "string",
+   "default": "",
+   "platform": "desktop"
+  },
+  {
+   "key": "desktopMiniPlayerWindow",
+   "type": "bool",
+   "default": true,
+   "platform": "desktop"
+  },
+  {
+   "key": "desktopOnboardingComplete",
+   "type": "bool",
+   "default": false,
+   "platform": "desktop"
+  },
+  {
+   "key": "desktopOnboardingInitialized",
+   "type": "bool",
+   "default": false,
+   "platform": "desktop"
+  },
+  {
+   "key": "desktopPendingOnboardingSentryConsent",
+   "type": "string",
+   "default": "",
+   "platform": "desktop"
+  },
+  {
+   "key": "desktopRenderBackend",
+   "type": "string",
+   "default": "AUTO",
+   "platform": "desktop"
+  },
+  {
+   "key": "desktopSidebarDocked",
+   "type": "bool",
+   "default": true,
+   "platform": "desktop"
+  },
+  {
+   "key": "desktopSidebarWidth",
+   "type": "int",
+   "default": 256,
+   "platform": "desktop"
+  },
+  {
+   "key": "desktopStoppedDownloadIdsJson",
+   "type": "string",
+   "default": "",
+   "platform": "desktop"
+  },
+  {
+   "key": "desktopTaskbarButtons",
+   "type": "bool",
+   "default": true,
+   "platform": "desktop"
+  },
+  {
+   "key": "desktopTrayToggleOnClick",
+   "type": "bool",
+   "default": true,
+   "platform": "desktop"
+  },
+  {
+   "key": "desktopWindowPlacement",
+   "type": "string",
+   "default": "",
+   "platform": "desktop"
+  },
+  {
+   "key": "desktopWindowPosition",
+   "type": "string",
+   "default": "",
+   "platform": "desktop"
+  },
+  {
+   "key": "deviceConnectDefaultDeviceId",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "deviceConnectDeviceId",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "deviceConnectDeviceName",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "deviceConnectEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "deviceConnectManualEndpoints",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "deviceConnectPairedDevices",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "deviceConnectPort",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "devtoolsBenchmarkClients",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "devtoolsPlaybackClient",
+   "type": "string",
+   "default": "AUTO",
+   "platform": "all"
+  },
+  {
+   "key": "devtoolsUnlocked",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "disableAnimatedArtworkOnMobileData",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "disableLoadMoreWhenRepeatAll",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "disableWaylandScaleFix",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "discordAccessToken",
+   "type": "secret",
+   "default": {
+    "set": false
+   },
+   "platform": "all"
+  },
+  {
+   "key": "discordActivityName",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "discordActivityType",
+   "type": "string",
+   "default": "2",
+   "platform": "all"
+  },
+  {
+   "key": "discordAdvancedMode",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "discordAvatar",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "discordButton1Enabled",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "discordButton1Text",
+   "type": "string",
+   "default": "Listen on YouTube Music",
+   "platform": "all"
+  },
+  {
+   "key": "discordButton1Url",
+   "type": "string",
+   "default": "{song.url}",
+   "platform": "all"
+  },
+  {
+   "key": "discordButton2Enabled",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "discordButton2Text",
+   "type": "string",
+   "default": "Visit MinMusic",
+   "platform": "all"
+  },
+  {
+   "key": "discordButton2Url",
+   "type": "string",
+   "default": "https://github.com/nev-minhnh/MinMusic",
+   "platform": "all"
+  },
+  {
+   "key": "discordClientUuid",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "discordDetailsTemplate",
+   "type": "string",
+   "default": "{song.name}",
+   "platform": "all"
+  },
+  {
+   "key": "discordDeviceVendorId",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "discordExpiresAt",
+   "type": "int",
+   "default": 0,
+   "platform": "all"
+  },
+  {
+   "key": "discordName",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "discordPendingAuthSession",
+   "type": "secret",
+   "default": {
+    "set": false
+   },
+   "platform": "all"
+  },
+  {
+   "key": "discordRefreshToken",
+   "type": "secret",
+   "default": {
+    "set": false
+   },
+   "platform": "all"
+  },
+  {
+   "key": "discordRpcShowArtistIcon",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "discordStateTemplate",
+   "type": "string",
+   "default": "{artist.name}",
+   "platform": "all"
+  },
+  {
+   "key": "discordUsername",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "dislikedSongIds",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "downloadedCollectionSort",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "downloadedCollectionSortDirection",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "downloadLocation",
+   "type": "enum",
+   "default": "INTERNAL",
+   "enumValues": [
+    "INTERNAL",
+    "EXTERNAL",
+    "CUSTOM"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "downloadQueueJson",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "dynamicTheme",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "enableAnimatedCovers",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "enableAppleMusicArtistArtwork",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "enableAppleMusicArtistVideos",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "enableDiscordIntegration",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "enableHapticFeedback",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "enableLandscapeScaling",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "enableLogging",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "enableSystemWindowFrame",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "equalizerActiveProfileId",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "equalizerCurrentProfileJson",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "equalizerDeviceProfilesJson",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "equalizerEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "equalizerLimiterEnabled",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "equalizerProfilesJson",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "explicitOnly",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "expressiveMiniPlayerArtworkPlayback",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "expressiveMiniPlayerCookieArtwork",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "expressiveMiniPlayerShapeMotion",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "floatingNavBar",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "floatingSearch",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "floatingTopBar",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "forceBottomNavBar",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "githubNTransformConfigUrl",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "githubNTransformEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "globalLyricsOffsetMs",
+   "type": "int",
+   "default": 0,
+   "min": -2000,
+   "max": 2000,
+   "step": 50,
+   "platform": "all"
+  },
+  {
+   "key": "grid_item_size",
+   "type": "enum",
+   "default": "BIG",
+   "enumValues": [
+    "BIG",
+    "SMALL"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "hasNewUploads",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "hiddenHomeItemsJson",
+   "type": "string",
+   "default": "[]",
+   "platform": "all"
+  },
+  {
+   "key": "hiddenHomeUndoHintShown",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "hiddenLibraryPlaylistsJson",
+   "type": "string",
+   "default": "[]",
+   "platform": "all"
+  },
+  {
+   "key": "hiddenLibraryUndoHintShown",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "hideExplicit",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "hideNonMusicalVideos",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "hidePodcasts",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "hideRecentSearches",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "hideShortSongs",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "hideVideoSongs",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "historyDuration",
+   "type": "float",
+   "default": 30,
+   "min": 1,
+   "max": 365,
+   "step": 1,
+   "platform": "all"
+  },
+  {
+   "key": "historyPlaylistsEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "homeSectionVisibility",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "immersivePlayer",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "innerTubeAuthUser",
+   "type": "string",
+   "default": "0",
+   "platform": "all"
+  },
+  {
+   "key": "innerTubeCookie",
+   "type": "secret",
+   "default": {
+    "set": false
+   },
+   "platform": "all"
+  },
+  {
+   "key": "installedNightlyDigest",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "iosCustomFontFile",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "iosCustomFontName",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "iosCustomFontRevision",
+   "type": "int",
+   "default": 0,
+   "platform": "all"
+  },
+  {
+   "key": "iosOnboardingComplete",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "isExpanded",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "isQueueLocked",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "keepDownloadedPlaylistsJson",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "keepPausedOnSongChange",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "keepScreenOnMode",
+   "type": "enum",
+   "default": "NEVER",
+   "enumValues": [
+    "NEVER",
+    "PLAYER",
+    "LYRICS",
+    "PLAYER_AND_LYRICS"
+   ],
+   "platform": "android"
+  },
+  {
+   "key": "knownUploadIdsJson",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "lastFmActivityEnabled",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "lastFmArtistCacheV2Json",
+   "type": "string",
+   "default": "{}",
+   "platform": "all"
+  },
+  {
+   "key": "lastFmDelayPercent",
+   "type": "float",
+   "default": 0.5,
+   "platform": "all"
+  },
+  {
+   "key": "lastFmEnabled",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "lastFmFriendsCacheJson",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "lastFmFriendsCacheUser",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "lastFmMaxDelay",
+   "type": "int",
+   "default": 180,
+   "platform": "all"
+  },
+  {
+   "key": "lastFmMinDuration",
+   "type": "int",
+   "default": 30,
+   "platform": "all"
+  },
+  {
+   "key": "lastFmPhotoCacheJson",
+   "type": "string",
+   "default": "{}",
+   "platform": "all"
+  },
+  {
+   "key": "lastFmSession",
+   "type": "secret",
+   "default": {
+    "set": false
+   },
+   "platform": "all"
+  },
+  {
+   "key": "lastFmSessionExpired",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "lastFmShowFriends",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "lastFmUseNowPlaying",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "lastFmUsername",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "lastLibraryRefreshAccount",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "lastLibraryRefreshEpoch",
+   "type": "int",
+   "default": 0,
+   "platform": "all"
+  },
+  {
+   "key": "lastNotifiedUpdateVersion",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "lastRemoteLibraryItemKeysJson",
+   "type": "string",
+   "default": "[]",
+   "platform": "all"
+  },
+  {
+   "key": "lastResolvedContentCountry",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "lastResolvedContentLanguage",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "lastRunAppVersion",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "lastUpdateCheckAttemptTimestamp",
+   "type": "int",
+   "default": 0,
+   "platform": "all"
+  },
+  {
+   "key": "lastUpdateCheckTimestamp",
+   "type": "int",
+   "default": 0,
+   "platform": "all"
+  },
+  {
+   "key": "launchesSinceUpdatePrompt",
+   "type": "int",
+   "default": 0,
+   "platform": "all"
+  },
+  {
+   "key": "library_grid_columns",
+   "type": "int",
+   "default": 3,
+   "platform": "all"
+  },
+  {
+   "key": "library_pinch_columns",
+   "type": "int",
+   "default": 0,
+   "platform": "all"
+  },
+  {
+   "key": "library_sort_direction",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "library_sorting_by_filter",
+   "type": "string",
+   "default": "{}",
+   "platform": "all"
+  },
+  {
+   "key": "library_views_by_filter",
+   "type": "string",
+   "default": "{}",
+   "platform": "all"
+  },
+  {
+   "key": "libraryContentSort",
+   "type": "enum",
+   "default": "RECENTLY_ADDED",
+   "enumValues": [
+    "RECENTLY_ADDED",
+    "NAME",
+    "LAST_UPDATED",
+    "MANUAL",
+    "ARTIST",
+    "YEAR",
+    "SONG_COUNT",
+    "LENGTH",
+    "PLAYTIME",
+    "DOWNLOADED"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "libraryFilter",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "libraryGridView",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "libraryManualOrder",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "libraryViewType",
+   "type": "enum",
+   "default": "LIST",
+   "enumValues": [
+    "LIST",
+    "GRID"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "likedSongIds",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "likedSongsCustomOrdersJson",
+   "type": "string",
+   "default": "{}",
+   "platform": "all"
+  },
+  {
+   "key": "likedSongsJson",
+   "type": "string",
+   "default": "[]",
+   "platform": "all"
+  },
+  {
+   "key": "likedSongsOrderAccount",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "likedSongsOrderCustomized",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "likedSongSort",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "likedSongSortDirection",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "likedSongsRecencyJson",
+   "type": "string",
+   "default": "[]",
+   "platform": "all"
+  },
+  {
+   "key": "listenBrainzEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "listenBrainzToken",
+   "type": "secret",
+   "default": {
+    "set": false
+   },
+   "platform": "all"
+  },
+  {
+   "key": "listenBrainzUseNowPlaying",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "listenBrainzUsername",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "listenTogetherAutoApproveJoinRequests",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "listenTogetherAutoApproveSongSuggestions",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "listenTogetherBlockedUsers",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "listenTogetherCustomServers",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "listenTogetherDesktopSession",
+   "type": "secret",
+   "default": {
+    "set": false
+   },
+   "platform": "all"
+  },
+  {
+   "key": "listenTogetherEnabled",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "listenTogetherServerMetadata",
+   "type": "string",
+   "default": "{}",
+   "platform": "all"
+  },
+  {
+   "key": "listenTogetherServerUrl",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "listenTogetherSyncHostVolume",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "listenTogetherUsername",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "loudnessLevel",
+   "type": "enum",
+   "default": "BALANCED",
+   "enumValues": [
+    "AGGRESSIVE",
+    "LOUD",
+    "BALANCED",
+    "QUIET"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "lyricsActiveByRealTiming",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "lyricsAiActivationMode",
+   "type": "enum",
+   "default": "Automatic",
+   "enumValues": [
+    "Automatic",
+    "Manual"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "lyricsAiApiKey",
+   "type": "secret",
+   "default": {
+    "set": false
+   },
+   "platform": "all"
+  },
+  {
+   "key": "lyricsAiApiKeys",
+   "type": "secret",
+   "default": {
+    "set": false
+   },
+   "platform": "all"
+  },
+  {
+   "key": "lyricsAiBaseUrl",
+   "type": "string",
+   "default": "https://openrouter.ai/api/v1/chat/completions",
+   "platform": "all"
+  },
+  {
+   "key": "lyricsAiModel",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "lyricsAiProvider",
+   "type": "string",
+   "default": "OpenRouter",
+   "platform": "all"
+  },
+  {
+   "key": "lyricsAiSystemPrompt",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "lyricsAiTargetLanguage",
+   "type": "string",
+   "default": "device",
+   "platform": "all"
+  },
+  {
+   "key": "lyricsAiTranslationEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "lyricsAiTranslationMode",
+   "type": "enum",
+   "default": "Literal",
+   "enumValues": [
+    "Literal",
+    "Transcreation"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "lyricsAnimationStyle",
+   "type": "enum",
+   "default": "Apple",
+   "enumValues": [
+    "None",
+    "Fade",
+    "Glow",
+    "Slide",
+    "Karaoke",
+    "Apple"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "lyricsAutoScroll",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "lyricsClickToSeek",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "lyricsDeepLApiKey",
+   "type": "secret",
+   "default": {
+    "set": false
+   },
+   "platform": "all"
+  },
+  {
+   "key": "lyricsDeepLFormality",
+   "type": "enum",
+   "default": "default",
+   "enumValues": [
+    "default",
+    "more",
+    "less"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "lyricsEnabledProviders",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "lyricsHideStatusBarInFullscreen",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "lyricsLineSpacing",
+   "type": "float",
+   "default": 1.3,
+   "min": 1,
+   "max": 2,
+   "step": 0.05,
+   "platform": "all"
+  },
+  {
+   "key": "lyricsNeutralColor",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "lyricsOpenRouterOAuthKey",
+   "type": "secret",
+   "default": {
+    "set": false
+   },
+   "platform": "all"
+  },
+  {
+   "key": "lyricsOpenRouterOAuthSession",
+   "type": "secret",
+   "default": {
+    "set": false
+   },
+   "platform": "all"
+  },
+  {
+   "key": "lyricsPlusLighter",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "lyricsProgressiveBlur",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "lyricsProviderOrder",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "lyricsRomanizationEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "lyricsRomanizeAsMain",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "lyricsRomanizeCyrillicByLine",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "lyricsRomanizeLanguages",
+   "type": "string",
+   "default": "Japanese:true,Korean:true,Chinese:true,Arabic:true,Hindi:true,Punjabi:true,Thai:true,Russian:true,Ukrainian:true,Serbian:true,Bulgarian:true,Belarusian:true,Kyrgyz:true,Macedonian:true",
+   "platform": "all"
+  },
+  {
+   "key": "lyricsShareImageStyle",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "lyricsShowOriginalLyrics",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "lyricsShowTranslations",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "lyricsSyllableRomanizationEnabled",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "lyricsTextPosition",
+   "type": "enum",
+   "default": "CENTER",
+   "enumValues": [
+    "LEFT",
+    "CENTER",
+    "RIGHT"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "lyricsTextSize",
+   "type": "float",
+   "default": 36,
+   "min": 16,
+   "max": 72,
+   "step": 1,
+   "platform": "all"
+  },
+  {
+   "key": "macDefaultFrameApplied",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "materialYouEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "matugenTheme",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "maxImageCacheSize",
+   "type": "int",
+   "default": 512,
+   "min": 0,
+   "max": 8192,
+   "step": 64,
+   "platform": "all"
+  },
+  {
+   "key": "maxSongCacheSize",
+   "type": "int",
+   "default": 1024,
+   "min": 0,
+   "max": 65536,
+   "step": 128,
+   "platform": "all"
+  },
+  {
+   "key": "minimizeToTrayOnClose",
+   "type": "bool",
+   "default": true,
+   "platform": "desktop"
+  },
+  {
+   "key": "minimumSongDurationSeconds",
+   "type": "int",
+   "default": 30,
+   "min": 0,
+   "max": 600,
+   "step": 5,
+   "platform": "all"
+  },
+  {
+   "key": "miniPlayerBackgroundStyle",
+   "type": "string",
+   "default": "DEFAULT",
+   "platform": "android"
+  },
+  {
+   "key": "miniplayerFocusMode",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "miniPlayerType",
+   "type": "enum",
+   "default": "MINMUSIC",
+   "enumValues": [
+    "MODERN",
+    "VINTAGE",
+    "EXPRESSIVE",
+    "MINMUSIC"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "musicVideoCacheJson",
+   "type": "string",
+   "default": "{}",
+   "platform": "all"
+  },
+  {
+   "key": "musicVideoPlaybackEnabled",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "musicVideoQuality",
+   "type": "enum",
+   "default": "AUTO",
+   "enumValues": [
+    "AUTO",
+    "P2160",
+    "P1440",
+    "P1080",
+    "P720",
+    "P480"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "nctSourceEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "nctSourceToken",
+   "type": "secret",
+   "default": {
+    "set": false
+   },
+   "platform": "all"
+  },
+  {
+   "key": "pauseListenHistory",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "pauseOnMute",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "pauseSearchHistory",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "pendingContinuePlayback",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "pendingRemoteLibraryRemovalKeysJson",
+   "type": "string",
+   "default": "[]",
+   "platform": "all"
+  },
+  {
+   "key": "pendingScrobblesJson",
+   "type": "string",
+   "default": "[]",
+   "platform": "all"
+  },
+  {
+   "key": "pendingSongVotesJson",
+   "type": "string",
+   "default": "{}",
+   "platform": "all"
+  },
+  {
+   "key": "pendingUpdateReleaseJson",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "persistentQueue",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "persistentShuffleAcrossQueues",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "playbackClientStatsJson",
+   "type": "string",
+   "default": "{}",
+   "platform": "all"
+  },
+  {
+   "key": "playbackClientStatsLaunches",
+   "type": "int",
+   "default": 0,
+   "platform": "all"
+  },
+  {
+   "key": "playbackPitch",
+   "type": "float",
+   "default": 1,
+   "min": 0.5,
+   "max": 2,
+   "step": 0.05,
+   "platform": "all"
+  },
+  {
+   "key": "playbackSpeed",
+   "type": "float",
+   "default": 1,
+   "min": 0.25,
+   "max": 2,
+   "step": 0.05,
+   "platform": "all"
+  },
+  {
+   "key": "playerBackgroundStyle",
+   "type": "enum",
+   "default": "SOLID",
+   "enumValues": [
+    "BLURRED_ARTWORK",
+    "SOLID",
+    "GRADIENT",
+    "ANIMATED_GRADIENT",
+    "LIQUID"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "playerCanvasEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "playerConfigRemoteEtag",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "playerConfigRemoteFetchedAt",
+   "type": "int",
+   "default": 0,
+   "platform": "all"
+  },
+  {
+   "key": "playerConfigRemoteJson",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "playerConfigRemoteSourceUrl",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "playerThumbnailStyle",
+   "type": "enum",
+   "default": "COMPACT",
+   "enumValues": [
+    "COMPACT",
+    "FULLSCREEN",
+    "CANVAS"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "playerType",
+   "type": "enum",
+   "default": "MINMUSIC",
+   "enumValues": [
+    "MODERN",
+    "VINTAGE",
+    "CLASSIC",
+    "MINMUSIC"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "playlistCollectionSortingsJson",
+   "type": "string",
+   "default": "{}",
+   "platform": "all"
+  },
+  {
+   "key": "playlistEditLock",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "playlistPickerSort",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "playlistPickerSortDirection",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "playlistSongSort",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "playlistSongSortDirection",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "playlistSongSortingsJson",
+   "type": "string",
+   "default": "{}",
+   "platform": "all"
+  },
+  {
+   "key": "playVideosInMiniPlayer",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "preferWordSyncedLyrics",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "preventDuplicateTracksInQueue",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "previousVolume",
+   "type": "float",
+   "default": 0.7,
+   "min": 0,
+   "max": 1,
+   "step": 0.01,
+   "platform": "all"
+  },
+  {
+   "key": "promptContinuePlayback",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "queuedYouTubeHistoryJson",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "queueYouTubeHistoryWhenOffline",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "recentPlayedSearchSongsJson",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "rememberShuffleAndRepeat",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "respectAgentPositioning",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "savedHeight",
+   "type": "int",
+   "default": 800,
+   "platform": "all"
+  },
+  {
+   "key": "savedWidth",
+   "type": "int",
+   "default": 1280,
+   "platform": "all"
+  },
+  {
+   "key": "searchHistory",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "seekDurationSeconds",
+   "type": "int",
+   "default": 10,
+   "min": 1,
+   "max": 60,
+   "step": 1,
+   "platform": "all"
+  },
+  {
+   "key": "seekExtraSeconds",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "selectedThemeColor",
+   "type": "int",
+   "default": 0,
+   "platform": "all"
+  },
+  {
+   "key": "sentryEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "showBottomNavHome",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "showBottomNavLibrary",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "showBottomNavSearch",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "showCachedPlaylist",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "showDownloadedPlaylist",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "showExpressiveMiniPlayerLikeButton",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "showExpressiveMiniPlayerNextButton",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "showExpressiveMiniPlayerPlaylistButton",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "showExpressiveMiniPlayerPlayPauseButton",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "showExpressiveMiniPlayerPreviousButton",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "showExpressiveMiniPlayerProgress",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "showExpressiveMiniPlayerSubscribeButton",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "showLikedPlaylist",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "showLyricsOnPlayer",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "showMiniplayer",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "showMiniPlayerLikeButton",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "showMiniPlayerPlaylistButton",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "showMiniPlayerSubscribeButton",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "showPlayerCastButton",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "showPlayerVideoButton",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "showTopPlaylist",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "showUploadedPlaylist",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "shuffleEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "sidebarNavItems",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "skipSilence",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "skipSilenceInstant",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "sleepTimerDefaultFadeOut",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "sleepTimerDefaultFinishCurrentSong",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "sleepTimerDefaultMinutes",
+   "type": "int",
+   "default": 15,
+   "min": 1,
+   "max": 180,
+   "step": 1,
+   "platform": "all"
+  },
+  {
+   "key": "sliderStyle",
+   "type": "enum",
+   "default": "DEFAULT",
+   "enumValues": [
+    "DEFAULT",
+    "WAVY",
+    "SLIM",
+    "SQUIGGLY",
+    "LINEAR",
+    "LINEAR_WAVY"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "sliderTrackThicknessDp",
+   "type": "float",
+   "default": 5,
+   "min": 1,
+   "max": 12,
+   "step": 1,
+   "platform": "all"
+  },
+  {
+   "key": "slimNavBar",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "songCacheEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "soundCloudSourceEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "speedDialSurprisePinned",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "sponsorBlockEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "spotifySession",
+   "type": "secret",
+   "default": {
+    "set": false
+   },
+   "platform": "all"
+  },
+  {
+   "key": "stopMusicOnTaskClear",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "subtitleTextSize",
+   "type": "float",
+   "default": 16,
+   "min": 10,
+   "max": 32,
+   "step": 1,
+   "platform": "all"
+  },
+  {
+   "key": "supportPromptDismissed",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "supportPromptLaunches",
+   "type": "int",
+   "default": 0,
+   "platform": "all"
+  },
+  {
+   "key": "supportPromptLaunchThreshold",
+   "type": "int",
+   "default": 0,
+   "platform": "all"
+  },
+  {
+   "key": "swapPlayerControls",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "swipeSensitivity",
+   "type": "float",
+   "default": 73,
+   "platform": "android"
+  },
+  {
+   "key": "swipeThumbnail",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "swipeToRemoveSong",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "swipeToSong",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "systemInDarkTheme",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "tempoPitchPresetsJson",
+   "type": "string",
+   "default": "[]",
+   "platform": "all"
+  },
+  {
+   "key": "themeMode",
+   "type": "enum",
+   "default": "DARK",
+   "enumValues": [
+    "LIGHT",
+    "DARK",
+    "AUTO",
+    "PURE_BLACK"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "themePaletteStyle",
+   "type": "enum",
+   "default": "TONAL_SPOT",
+   "enumValues": [
+    "TONAL_SPOT",
+    "VIBRANT",
+    "EXPRESSIVE",
+    "RAINBOW",
+    "FRUIT_SALAD",
+    "MONOCHROME",
+    "NEUTRAL",
+    "CONTENT"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "tokenLoginWarningDismissed",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "uiEnhancements",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "updateCacheSource",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "updateChannel",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "updateNotifications",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "updatePromptVersion",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "useLegacyShuffle",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "useRoundedRectPlayButton",
+   "type": "bool",
+   "default": false,
+   "platform": "android"
+  },
+  {
+   "key": "varispeed",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "videoViewerVisible",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "visibleAutoPlaylists",
+   "type": "string",
+   "default": "liked,downloaded,top,uploaded,cached",
+   "platform": "all"
+  },
+  {
+   "key": "visitorData",
+   "type": "string",
+   "default": "",
+   "platform": "all"
+  },
+  {
+   "key": "voiceSearchEnabled",
+   "type": "bool",
+   "default": true,
+   "platform": "android"
+  },
+  {
+   "key": "volume",
+   "type": "float",
+   "default": 0.7,
+   "min": 0,
+   "max": 1,
+   "step": 0.01,
+   "platform": "all"
+  },
+  {
+   "key": "waylandDefaultFrameApplied",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  },
+  {
+   "key": "youtubeCanvasMode",
+   "type": "enum",
+   "default": "SHORT_CLIPS",
+   "enumValues": [
+    "SHORT_CLIPS",
+    "FULL_VIDEO"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "youtubeCanvasQuality",
+   "type": "enum",
+   "default": "P480",
+   "enumValues": [
+    "AUTO",
+    "P2160",
+    "P1440",
+    "P1080",
+    "P720",
+    "P480"
+   ],
+   "platform": "all"
+  },
+  {
+   "key": "ytmSync",
+   "type": "bool",
+   "default": true,
+   "platform": "all"
+  },
+  {
+   "key": "zingSourceCookie",
+   "type": "secret",
+   "default": {
+    "set": false
+   },
+   "platform": "all"
+  },
+  {
+   "key": "zingSourceEnabled",
+   "type": "bool",
+   "default": false,
+   "platform": "all"
+  }
+ ]
+}
