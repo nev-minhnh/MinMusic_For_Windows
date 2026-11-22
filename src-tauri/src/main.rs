@@ -7,6 +7,11 @@ mod sidecar;
 mod testhooks;
 // <M1-4>
 mod corelink;
+mod deeplink;
+mod smtc;
+mod snap;
+mod tray;
+mod window_state;
 // </M1-4>
 // <M2-4>
 // </M2-4>
@@ -189,6 +194,9 @@ fn with_commands(b: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
         core_config::core_retry,
         test_set_window_size,
         // <M1-4>
+        window_state::shell_settings_get,
+        window_state::shell_settings_set,
+        snap::caption_rects,
         // </M1-4>
         // <M2-4>
         // </M2-4>
@@ -215,6 +223,9 @@ fn with_commands(b: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
         core_config::core_status,
         core_config::core_retry,
         // <M1-4>
+        window_state::shell_settings_get,
+        window_state::shell_settings_set,
+        snap::caption_rects,
         // </M1-4>
         // <M2-4>
         // </M2-4>
@@ -258,6 +269,7 @@ fn main() {
         .plugin(log_plugin)
         .plugin(tauri_plugin_dialog::init())
         // <M1-4>
+        .plugin(tauri_plugin_deep_link::init())
         // </M1-4>
         // <M2-4>
         // </M2-4>
@@ -290,6 +302,15 @@ fn main() {
             }
             build_tray(app)?;
             // <M1-4>
+            corelink::builtin::register(app.handle());
+            window_state::install(&win, &paths);
+            tray::install(app.handle())?;
+            tray::install_close_balloon(&win);
+            snap::enable_non_client_region(app.handle(), &win);
+            if let Ok(hwnd) = win.hwnd() {
+                smtc::install(windows::Win32::Foundation::HWND(hwnd.0));
+            }
+            deeplink::install(app);
             // </M1-4>
             // <M2-4>
             // </M2-4>

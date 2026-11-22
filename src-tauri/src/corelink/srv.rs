@@ -7,10 +7,12 @@ use std::sync::{Arc, Mutex, OnceLock};
 
 pub type BoxFuture<T> = Pin<Box<dyn Future<Output = T> + Send + 'static>>;
 
-#[derive(Clone, Debug, serde::Serialize)]
+#[derive(Clone, Debug, serde::Serialize, serde::Deserialize)]
 pub struct ApiError {
     pub code: String,
+    #[serde(default)]
     pub msg: String,
+    #[serde(default)]
     pub retryable: bool,
 }
 

@@ -5,7 +5,6 @@ use super::spawn::{self, CoreProcess, SpawnSpec};
 use super::stale;
 use crate::paths::Paths;
 use crate::testhooks;
-use futures_util::{SinkExt, StreamExt};
 use serde::Serialize;
 use std::collections::VecDeque;
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -14,7 +13,6 @@ use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 use tauri::{AppHandle, Emitter};
 use tokio::sync::watch;
-use tokio_tungstenite::tungstenite::Message;
 
 pub const PING_INTERVAL: Duration = Duration::from_secs(5);
 pub const PING_MISSES: u32 = 3;
@@ -243,6 +241,7 @@ impl Supervisor {
                             serde_json::json!({"shellPid": std::process::id(), "corePid": core.pid}).to_string(),
                         );
                     }
+                    crate::corelink::global().attach(cfg.clone());
                     self.set_status(CoreState::Ready, restarts, None, Some(cfg.clone()));
                     let cancel = Arc::new(AtomicBool::new(false));
                     self.spawn_exit_watcher(core.clone(), gen);
@@ -254,12 +253,14 @@ impl Supervisor {
                             Ok(Ctl::PingDead(g)) if g == gen => break "core stopped answering sys.ping".to_string(),
                             Ok(Ctl::Quit) | Err(_) => {
                                 cancel.store(true, Ordering::SeqCst);
+                                crate::corelink::global().detach();
                                 return;
                             }
                             Ok(_) => {}
                         }
                     };
                     cancel.store(true, Ordering::SeqCst);
+                    crate::corelink::global().detach();
                     if self.is_quitting() {
                         return;
                     }
@@ -439,56 +440,9 @@ fn resolve_on_path(program: &str) -> std::path::PathBuf {
         .unwrap_or(p)
 }
 
-type Ws = tokio_tungstenite::WebSocketStream<tokio_tungstenite::MaybeTlsStream<tokio::net::TcpStream>>;
-
-async fn read_json_until(ws: &mut Ws, id: u64, limit: Duration) -> Result<serde_json::Value, String> {
-    let deadline = tokio::time::Instant::now() + limit;
-    loop {
-        let left = deadline.saturating_duration_since(tokio::time::Instant::now());
-        let msg = tokio::time::timeout(left, ws.next()).await.map_err(|_| "timeout".to_string())?;
-        match msg {
-            None => return Err("closed".into()),
-            Some(Err(e)) => return Err(e.to_string()),
-            Some(Ok(Message::Text(t))) => {
-                let Ok(v) = serde_json::from_str::<serde_json::Value>(t.as_str()) else { continue };
-                if v.get("sid").is_some() {
-                    // The shell channel (shell.webLogin, shell.po.*) arrives in later milestones.
-                    let reply = serde_json::json!({
-                        "sid": v["sid"], "e": {"code":"unsupported","msg":"not implemented in this shell","retryable":false}
-                    });
-                    let _ = ws.send(Message::Text(reply.to_string().into())).await;
-                } else if v.get("id").and_then(|x| x.as_u64()) == Some(id) {
-                    return Ok(v);
-                }
-            }
-            Some(Ok(Message::Close(_))) => return Err("closed".into()),
-            Some(Ok(_)) => {}
-        }
-    }
-}
-
-async fn connect(cfg: &CoreConfig) -> Result<Ws, String> {
-    let url = format!("ws://127.0.0.1:{}/rpc", cfg.port);
-    let (mut ws, _) = tokio::time::timeout(Duration::from_secs(3), tokio_tungstenite::connect_async(url))
-        .await
-        .map_err(|_| "connect timeout".to_string())?
-        .map_err(|e| e.to_string())?;
-    let hello = serde_json::json!({
-        "id": 1, "m": "sys.hello",
-        "p": {"token": cfg.token, "role": "shell", "protocol": 1, "client": "shell/2.0.0", "locale": "vi"}
-    });
-    ws.send(Message::Text(hello.to_string().into())).await.map_err(|e| e.to_string())?;
-    let r = read_json_until(&mut ws, 1, Duration::from_secs(4)).await?;
-    if r.get("e").is_some() {
-        return Err(format!("sys.hello rejected: {r}"));
-    }
-    Ok(ws)
-}
-
 /// Returns true when the core is considered dead (3 misses), false when cancelled.
-async fn ping_loop(cfg: CoreConfig, cancel: Arc<AtomicBool>) -> bool {
-    let mut conn: Option<Ws> = None;
-    let mut next_id: u64 = 2;
+async fn ping_loop(_cfg: CoreConfig, cancel: Arc<AtomicBool>) -> bool {
+    let link = crate::corelink::global();
     let mut misses = 0u32;
     let mut tick = tokio::time::interval(PING_INTERVAL);
     tick.set_missed_tick_behavior(tokio::time::MissedTickBehavior::Delay);
@@ -497,28 +451,16 @@ async fn ping_loop(cfg: CoreConfig, cancel: Arc<AtomicBool>) -> bool {
         if cancel.load(Ordering::SeqCst) {
             return false;
         }
-        let ok = async {
-            if conn.is_none() {
-                conn = Some(connect(&cfg).await?);
-            }
-            let id = next_id;
-            next_id += 1;
-            let ws = conn.as_mut().unwrap();
-            ws.send(Message::Text(serde_json::json!({"id": id, "m": "sys.ping", "p": {}}).to_string().into()))
-                .await
-                .map_err(|e| e.to_string())?;
-            read_json_until(ws, id, Duration::from_secs(4)).await.map(|_| ())
-        }
-        .await;
+        // The shell WS connection (role `shell`) is owned by corelink; ping goes through it.
+        let ok = link.call_timeout("sys.ping", serde_json::json!({}), Duration::from_secs(4)).await;
         if cancel.load(Ordering::SeqCst) {
             return false;
         }
         match ok {
-            Ok(()) => misses = 0,
+            Ok(_) => misses = 0,
             Err(e) => {
-                conn = None;
                 misses += 1;
-                log::warn!("core ping miss {misses}/{PING_MISSES}: {e}");
+                log::warn!("core ping miss {misses}/{PING_MISSES}: {}", e.msg);
                 if misses >= PING_MISSES {
                     return true;
                 }
