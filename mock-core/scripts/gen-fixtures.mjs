@@ -1,10 +1,18 @@
-// node mock-core/scripts/gen-fixtures.mjs  ->  mock-core/fixtures/{home,album}.json (deterministic)
-import { writeFileSync } from "node:fs";
+// node mock-core/scripts/gen-fixtures.mjs  (deterministic; same seed -> byte-identical files)
+//   mock-core/fixtures/browse/home.json, mock-core/fixtures/pages/album.json
+//   tests/fixtures/home.json              (= the home fixture, passed to the real core as --fixture-home)
+//   tests/fixtures/library-seed.json      (5,000 songs, 40 albums, 50 artists, 10 user albums, 2,000 history events;
+//                                          M1-2b seed format, passed to the real core as --seed-library. Same data as the mock library)
+import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { mulberry32, remoteArt } from "../src/gen.ts";
+import { generateDataset, mulberry32, remoteArt } from "../src/gen.ts";
 
-const dir = join(dirname(fileURLToPath(import.meta.url)), "..", "fixtures");
+const root = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
+const browseDir = join(root, "mock-core", "fixtures", "browse");
+const pagesDir = join(root, "mock-core", "fixtures", "pages");
+const testFixtures = join(root, "tests", "fixtures");
+for (const d of [browseDir, pagesDir, testFixtures]) mkdirSync(d, { recursive: true });
 const r = mulberry32(777);
 const B = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 const rid = (n) => Array.from({ length: n }, () => B[Math.floor(r() * 64)]).join("");
@@ -66,7 +74,8 @@ const home = {
   fromCache: true,
   next: null,
 };
-writeFileSync(join(dir, "home.json"), JSON.stringify(home, null, 2) + "\n");
+writeFileSync(join(browseDir, "home.json"), JSON.stringify(home, null, 2) + "\n");
+writeFileSync(join(testFixtures, "home.json"), JSON.stringify(home, null, 2) + "\n");
 
 const albumArt = remoteArt(r, "yt");
 const aTracks = SONGS.slice(0, 12).map((s, i) => ({ ...mkTrack(s, "yt", i), t: undefined, art: albumArt, album: { id: "MPREb_mockAlbum01", title: "Sky Tour" } }));
@@ -81,5 +90,20 @@ const album = {
   otherVersions: [mkAlbum(["Sky Tour (Deluxe)", "Sơn Tùng M-TP", 2020, "album"]), mkAlbum(["Sky Tour (Instrumental)", "Sơn Tùng M-TP", 2021, "album"])].map(({ t, ...a }) => a),
   moreBy: { key: "moreBy", title: "Thêm từ Sơn Tùng M-TP", layout: "cards", items: ALBUMS.slice(0, 3).map((a) => mkAlbum([a[0] + " ", "Sơn Tùng M-TP", a[2], a[3]])) },
 };
-writeFileSync(join(dir, "album.json"), JSON.stringify(album, null, 2) + "\n");
-console.log("fixtures written to", dir);
+writeFileSync(join(pagesDir, "album.json"), JSON.stringify(album, null, 2) + "\n");
+
+// ---- library seed (M1-2b format), from the same dataset the mock serves
+const ds = generateDataset();
+const seed = {
+  songs: ds.songs.map((s, i) => ({
+    id: s.id, title: s.title, artists: s.artists.map((a) => ({ id: a.id ?? "", name: a.name })),
+    ...(s.album ? { album: { id: s.album.id ?? "", title: s.album.title } } : {}),
+    durationMs: s.durationMs, thumbnailUrl: s.art?.src ?? "", liked: !!s.liked, addedAt: s.addedAt, plays: ds.plays[i],
+  })),
+  albums: ds.albums.map((a) => ({ id: a.id, title: a.title, artists: a.artists.map((x) => ({ name: x.name })), year: a.year, thumbnailUrl: a.art?.src ?? "" })),
+  artists: ds.artists.map((a) => ({ id: a.id, name: a.name, thumbnailUrl: a.art?.src ?? "" })),
+  userAlbums: ds.userAlbums.map((u) => ({ title: u.title, songIds: u.songIds, pinned: u.pinned })),
+  history: ds.history.map((e) => ({ songId: e.songId, playedAt: e.playedAt, playTimeMs: e.playTimeMs })),
+};
+writeFileSync(join(testFixtures, "library-seed.json"), JSON.stringify(seed) + "\n");
+console.log("fixtures written: mock-core/fixtures/{browse,pages}, tests/fixtures/{home,library-seed}.json");
