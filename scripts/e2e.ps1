@@ -72,6 +72,8 @@ try {
     $env:MM_CDP_ENDPOINT = "http://127.0.0.1:$($app.Port)"
     $env:MM_RUN_ID = $id
     $env:MM_SHOTS_DIR = $shots
+    # m1-4 deep-link spec: the second instance must share the test root (same single-instance key), never the real one.
+    $env:MINMUSIC_DATA_ROOT = $app.Root; $env:MM_APP_EXE = $exePath; $env:MM_SECOND_URL = 'minmusic://music.youtube.com/browse/MPREb_02D9VvpRQPT'
     $json = Join-Path $root 'playwright.json'
     $env:PLAYWRIGHT_JSON_OUTPUT_NAME = $json
     Push-Location $repo
