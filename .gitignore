@@ -1,0 +1,9 @@
+node_modules/
+dist/
+target/
+sidecar/dist/
+.testdata/
+tools/perf/bin/
+test-results/
+playwright-report/
+*.log
