@@ -1,0 +1,5 @@
+/* Settings > Backup (M4-3b). Prefix bk-. */
+.bk-row .sr-lbl{gap:2px}
+.bk-btn{display:inline-flex;align-items:center;gap:8px}
+.bk-status{color:var(--acc-t)}
+.bk-status.err{color:var(--err)}
