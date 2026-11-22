@@ -50,6 +50,8 @@ try {
     try { & npx playwright test --project=web $webSpec --reporter=list; $failures = $LASTEXITCODE } finally { Pop-Location }
   } elseif ($Suite -eq 'process') {
     . (Join-Path $repo 'tests\e2e\process\lifecycle.ps1')
+    . (Join-Path $repo 'tests\e2e\process\m1-4.ps1')
+    $script:ProcessTests['M1-4a'] = ${function:Test-M14Balloon}; $script:ProcessTests['M1-4b'] = ${function:Test-M14Smtc}
     $ctx = @{ Exe = $exePath; RunRoot = $root }
     $rows = @()
     foreach ($name in $script:ProcessTests.Keys) {

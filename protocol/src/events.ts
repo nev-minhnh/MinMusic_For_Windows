@@ -11,7 +11,8 @@ export interface PlayerPosition {
 export interface PlayerError { code: string; i18n: string; trackId: string; skipped: boolean }
 export interface QueueSnapshot { total: number; revision: number; currentIndex: number; head: QueueTrack[] }
 export interface AppToast {
-  i18n: string; args?: string[]; level: "info" | "error";
+  /** One of `i18n` (a UI string key) or `text` (already localised by the core) is set. */
+  i18n?: string; text?: string; args?: string[]; level: "info" | "error";
   action?: { label: string; m: string; p?: object };
 }
 

@@ -1685,6 +1685,10 @@
       "type": "object",
       "properties": {
         "i18n": {
+          "type": "string",
+          "description": "One of `i18n` (a UI string key) or `text` (already localised by the core) is set."
+        },
+        "text": {
           "type": "string"
         },
         "args": {
@@ -1720,7 +1724,6 @@
         }
       },
       "required": [
-        "i18n",
         "level"
       ]
     },

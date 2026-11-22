@@ -23,6 +23,7 @@ export function initToasts() {
     const a = d.action as { label: string; m: string; p?: unknown } | undefined;
     toast({
       i18n: d.i18n,
+      text: d.text,
       args: d.args,
       level: d.level === "error" ? "error" : "info",
       action: a ? { label: a.label, run: () => void client.call(a.m, a.p).catch(() => {}) } : undefined,
