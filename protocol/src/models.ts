@@ -140,7 +140,8 @@ export interface EqEffects {
 }
 export interface EqState {
   enabled: boolean;
-  profileId: string;
+  /** null when no profile is selected (e.g. the active one was deleted) */
+  profileId: string | null;
   profiles: { id: string; name: string; builtin: boolean }[];
   bands: EqBand[];
   preampDb: number;

@@ -172,7 +172,7 @@ function Test-TP8($Ctx) {
 function Test-TP9($Ctx) {
   $app = Start-Ready $Ctx 'tp9'
   try {
-    try { Invoke-CoreCall $app.Port 'settings.set' @{ key = 'minimizeToTrayOnClose'; value = $false } | Out-Null }
+    try { Invoke-CoreCall $app.Port 'settings.set' @{ values = @{ minimizeToTrayOnClose = $false } } | Out-Null }
     catch { return New-TestResult $true "settings.set minimizeToTrayOnClose unavailable: $_" -Skip }
     $pids = Get-AppPids $app
     Invoke-CdpEval $app.Port "window.__TAURI__.core.invoke('window_close')" 2>$null | Out-Null

@@ -78,7 +78,11 @@ function Start-TestApp {
   if (-not $Port) { $Port = Get-FreePort }
   $pidfile = Join-Path $Root 'pids.json'
   Remove-Item $pidfile -ErrorAction SilentlyContinue
-  $set = @{ MINMUSIC_DATA_ROOT = $Root; MINMUSIC_DEVTOOLS_PORT = "$Port"; MINMUSIC_TEST_PIDFILE = $pidfile } + $ExtraEnv
+  $set = @{ MINMUSIC_DATA_ROOT = $Root; MINMUSIC_DEVTOOLS_PORT = "$Port"; MINMUSIC_TEST_PIDFILE = $pidfile }
+  # The real core fills an EMPTY test library from the shared seed (5,000 songs, as the mock); pass -ExtraEnv to override.
+  $seed = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../tests/fixtures/library-seed.json'))
+  if (-not $ExtraEnv.ContainsKey('MINMUSIC_CORE_EXTRA_ARGS') -and (Test-Path $seed) -and $seed -notmatch '\s') { $set.MINMUSIC_CORE_EXTRA_ARGS = "--seed-library $seed" }
+  foreach ($k in $ExtraEnv.Keys) { $set[$k] = $ExtraEnv[$k] }
   $old = @{}
   foreach ($k in $set.Keys) { $old[$k] = [Environment]::GetEnvironmentVariable($k); [Environment]::SetEnvironmentVariable($k, [string]$set[$k]) }
   try { $proc = Start-Process -FilePath $Exe -PassThru -WorkingDirectory (Split-Path $Exe) }
@@ -87,6 +91,17 @@ function Start-TestApp {
 }
 
 # Poll /json/version for 20 s, then core_status == ready (CDP evaluate), up to another 20 s.
+# A fresh test root is a first run: the M4-3b startup hook opens the onboarding. Specs and perf scenarios start from Home,
+# so finish the onboarding and the v2 first-run flag on this root and reload the page. Call after Wait-AppReady.
+function Complete-FirstRun([pscustomobject]$App) {
+  try {
+    Invoke-CoreCall $App.Port 'onboarding.complete' | Out-Null
+    Invoke-CoreCall $App.Port 'settings.set' @{ values = @{ w2FirstRunDone = $true } } | Out-Null
+    Invoke-CdpEval $App.Port "location.hash = '#/home'; location.reload()" | Out-Null
+    Start-Sleep -Seconds 2
+  } catch { Write-Host "Complete-FirstRun failed: $_" }
+}
+
 function Wait-AppReady([pscustomobject]$App, [int]$CdpSeconds = 20, [int]$ReadySeconds = 20) {
   $sw = [Diagnostics.Stopwatch]::StartNew(); $ok = $false
   while ($sw.Elapsed.TotalSeconds -lt $CdpSeconds) {

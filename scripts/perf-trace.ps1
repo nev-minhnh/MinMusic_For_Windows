@@ -146,6 +146,7 @@ try {
     $app = Start-TestApp -Exe $exePath -Root (Join-Path $root 'app') -ExtraEnv $env1
     try {
       Wait-AppReady $app | Out-Null
+      Complete-FirstRun $app
       $w, $h = $(if ($Size -eq '1920') { 1920, 1200 } else { 3840, 2400 })
       try { Invoke-CdpEval $app.Port "window.__TAURI__.core.invoke('test_set_window_size',{width:$w,height:$h})" | Out-Null } catch { Write-Warning "test_set_window_size failed ($_): window size NOT forced" }
       Write-Host "warm-up $WarmupSeconds s..."; Start-Sleep -Seconds $WarmupSeconds

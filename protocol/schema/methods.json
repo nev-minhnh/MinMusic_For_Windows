@@ -7538,7 +7538,11 @@
           "type": "boolean"
         },
         "profileId": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "null when no profile is selected (e.g. the active one was deleted)"
         },
         "profiles": {
           "type": "array",

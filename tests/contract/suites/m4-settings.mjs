@@ -50,7 +50,8 @@ export const tests = [
     v = (await c.call("settings.get", { keys: ["lyricsAiApiKey"] })).values.lyricsAiApiKey;
     assert.deepEqual(v, { set: true });
     assert.ok(!JSON.stringify(await c.call("settings.get")).includes("sk-secret"), "secret leaked in get");
-    assert.equal((await c.call("lyrics.ai.test", { provider: "OpenRouter" })).ok, true);
+    // the mock accepts any key; the real core asks the provider, which refuses a dummy key
+    if (ctx.target.kind === "mock") assert.equal((await c.call("lyrics.ai.test", { provider: "OpenRouter" })).ok, true);
     await c.call("lyrics.ai.setKey", { provider: "OpenRouter", key: "" });
     assert.deepEqual((await c.call("settings.get", { keys: ["lyricsAiApiKey"] })).values.lyricsAiApiKey, { set: false });
   }],

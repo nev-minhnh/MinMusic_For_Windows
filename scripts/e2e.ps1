@@ -68,6 +68,9 @@ try {
   } else {
     $app = Start-TestApp -Exe $exePath -Root (Join-Path $root 'app')
     Wait-AppReady $app | Out-Null
+    # A fresh test root is a first run: the startup hook would open the onboarding (M4-3b, covered by its web spec E-54).
+    # The app specs start from Home, so finish the onboarding and the v2 first-run flag on this root, then reload.
+    Complete-FirstRun $app
     Write-Host "app ready: shell pid $($app.ShellPid), CDP port $($app.Port)"
     $env:MM_CDP_ENDPOINT = "http://127.0.0.1:$($app.Port)"
     $env:MM_RUN_ID = $id

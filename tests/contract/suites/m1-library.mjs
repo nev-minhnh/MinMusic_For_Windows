@@ -151,11 +151,14 @@ export const tests = [
     await c.call("artist.block", { id: ar.id, on: true });
     await c.call("artist.block", { id: ar.id, on: false });
   }],
-  ["real-target tolerance: track.setSource and import.files answer `unsupported`", async (ctx) => {
+  // INT-W5: track.setSource (M3-2) and import.files (M4-2a) exist on both targets now.
+  ["track.setSource and import.files: errors and a missing file", async (ctx) => {
     const c = await ui(ctx);
-    const t = (await win(c, "songs", SORT, 0, 1)).items[0];
-    assert.equal((await c.raw("track.setSource", { id: t.id, source: "zing" })).e?.code, "unsupported");
-    assert.equal((await c.raw("import.files", { paths: ["C:\\nope\\a.mp3"] })).e?.code, "unsupported");
+    assert.ok((await c.raw("track.setSource", { id: "nope-id", source: "zing" })).e, "an unknown track cannot take a source");
+    const r = await c.raw("import.files", { paths: ["C:/nope/a.mp3"] }, { validate: false });
+    if (!r.e) assert.deepEqual(r.r, { imported: 0, failed: 1 });
+    else assert.equal(r.e.code, "unsupported"); // mock
+    assert.equal((await c.raw("import.files", {}, { validate: false })).e?.code, "bad_request");
   }],
 
   // ---------------------------------------------------------------- user albums
