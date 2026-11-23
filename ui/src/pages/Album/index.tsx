@@ -1,119 +1,108 @@
+import { For, Show, createSignal } from "solid-js";
 import type { RouteName } from "../../router/routes";
-import { For, Show, createResource, onCleanup, onMount, createSignal, type Accessor } from "solid-js";
-import { Art } from "../../components/Art";
-import { Icon } from "../../components/Icon";
-import { IconButton } from "../../components/IconButton";
+import type { PageProps } from "../../router/registry";
+import { CollectionHeader } from "../../components/pages/CollectionHeader";
+import { LoadError } from "../../components/pages/LoadError";
+import { PageShelf } from "../../components/pages/Shelf";
+import { albumData, durationText } from "../../components/pages/data";
+import { albumContext, playExtra } from "../../components/pages/playContext";
+import { Table } from "../../components/Table";
 import { SourceBadge } from "../../components/Badge";
-import { Row } from "../../components/Row";
+import { openMenu } from "../../components/Menu";
+import { cardMenu } from "../../menus/card";
 import { client } from "../../lib/core";
+import { navigate } from "../../router/router";
 import { player, playerState } from "../../state/player";
-import { hClass } from "../../lib/layout";
+import { toast } from "../../toast";
 import { t } from "../../i18n";
-import type { AlbumResult, Track } from "../../lib/types";
+import type { Item, SourceId } from "../../lib/types";
+import "./album.css";
 
-function durationText(ms: number): string {
-  const m = Math.round(ms / 60000);
-  return m >= 60 ? t("w2_dur_hm", Math.floor(m / 60), m % 60) : t("w2_dur_m", m);
-}
+const KICKER = { album: "w2_pg_album", single: "w2_pg_single", ep: "w2_pg_ep" } as const;
 
-/** Album / user album: header (168 short, 232 otherwise) + 12 row table. The header collapses to a sticky 56 bar through an IntersectionObserver sentinel. */
-export function Album(props: { params: Record<string, string>; active: Accessor<boolean> }) {
-  const [data] = createResource(() => props.params.id, (id) => client.call<AlbumResult>("album.get", { id }));
-  const [stuck, setStuck] = createSignal(false);
-  let sentinel!: HTMLDivElement;
-  onMount(() => {
-    const io = new IntersectionObserver(([e]) => setStuck(!e.isIntersecting), { threshold: 0 });
-    io.observe(sentinel);
-    onCleanup(() => io.disconnect());
-  });
-  const labels = () => ({ like: t("w2_like"), more: t("w2_more"), play: t("w2_play") });
-  const playAll = (shuffle = false, startId?: string) => player.play({ kind: "userAlbum", id: props.params.id, title: data()?.album.title }, { shuffle, startId });
-  const counts = (tracks: Track[]) => {
+/** Album: CollectionHeader + track Table (no virtualisation up to 60 rows) + "Phiên bản khác" and "Thêm từ <artist>" shelves. */
+export function Album(props: PageProps) {
+  const id = () => props.params.id;
+  const { data, mutate, error, reload } = albumData(id);
+  const [busy, setBusy] = createSignal(false);
+  const play = (extra?: { shuffle?: boolean; startId?: string }) => void player.play(albumContext(id()), playExtra(extra));
+
+  const save = async () => {
+    const d = data();
+    if (!d || busy()) return;
+    const on = !d.album.saved;
+    setBusy(true);
+    mutate((v) => ({ ...v, album: { ...v.album, saved: on } }));
+    try {
+      await client.call("album.save", { id: id(), on });
+    } catch {
+      mutate((v) => ({ ...v, album: { ...v.album, saved: !on } }));
+      toast({ i18n: "w2_error_generic", level: "error" });
+    } finally {
+      setBusy(false);
+    }
+  };
+  const counts = () => {
     const m = new Map<string, number>();
-    tracks.forEach((x) => m.set(x.source, (m.get(x.source) ?? 0) + 1));
+    data()?.tracks.forEach((x) => m.set(x.source, (m.get(x.source) ?? 0) + 1));
     return [...m.entries()];
   };
+  const tracks = () => data()?.tracks ?? [];
+  const items = (xs: Item[] | undefined) => xs ?? [];
 
   return (
     <div class="sc album" data-testid="album">
-      <div class="al-sentinel" ref={sentinel} />
-      <div class="al-sticky" aria-hidden={!stuck()}>
-        <div class="al-bar" classList={{ on: stuck() }}>
+      <CollectionHeader
+        loading={!data()}
+        art={data()?.album.art}
+        kicker={t(KICKER[data()?.album.kind ?? "album"])}
+        title={data()?.album.title}
+        meta={
           <Show when={data()}>
             {(d) => (
               <>
-                <Art art={d().album.art} size={40} />
-                <div class="w6 f1 ell">{d().album.title}</div>
-                <button type="button" class="btn pri sm" onClick={() => playAll()}>
-                  <Icon n="play" s={16} />
-                  {t("w2_play")}
-                </button>
+                <For each={d().album.artists}>
+                  {(a, i) => (
+                    <>
+                      {i() > 0 && ", "}
+                      <span class="lnk" classList={{ w6: true }} role="link" tabindex="0" onClick={() => a.id && navigate("artist", { id: a.id })} onKeyDown={(e) => e.key === "Enter" && a.id && navigate("artist", { id: a.id })}>
+                        {a.name}
+                      </span>
+                    </>
+                  )}
+                </For>
+                {" · "}
+                {d().album.year} · <span class="num">{d().album.trackCount}</span> {t("w2_songs_unit")} · {durationText(d().album.durationMs, t)}
               </>
             )}
           </Show>
-        </div>
+        }
+        badges={<For each={counts()}>{([s, n]) => <SourceBadge source={s as SourceId} count={n} />}</For>}
+        onPlay={() => play()}
+        onShuffle={() => play({ shuffle: true })}
+        saved={data()?.album.saved}
+        onSave={save}
+        onMore={(at) => data() && openMenu(cardMenu({ t: "album", ...data()!.album }), at)}
+      />
+      <LoadError error={error()} hasData={!!data()} retry={reload} />
+      <div class="alb-tbl">
+        <Table
+          label={data()?.album.title ?? t("w2_pg_album")}
+          testid="album-table"
+          cols={["index", "title", "like", "dur", "more"]}
+          total={() => tracks().length}
+          trackAt={(i) => tracks()[i]}
+          playingId={() => playerState()?.track?.id}
+          onPlay={(i) => play({ startId: tracks()[i]?.id })}
+          showSource={false}
+        />
       </div>
-      <div class="al-head">
-        <Show when={data()} fallback={<div class="art skel-art al-art" style={{ width: hClass() === "short" ? "168px" : "232px", height: hClass() === "short" ? "168px" : "232px" }} />}>
-          {(d) => <Art art={d().album.art} size={hClass() === "short" ? 168 : 232} class="al-art" />}
+      <Show when={data()}>
+        <PageShelf title={t("w2_pg_other_versions")} items={items(data()!.otherVersions.map((a) => ({ t: "album" as const, ...a })))} below testid="shelf-versions" />
+        <Show when={data()!.moreBy}>
+          {(s) => <PageShelf title={t("w2_pg_more_from", data()!.album.artists[0]?.name ?? "")} items={s().items} more={s().more} below testid="shelf-more-by" />}
         </Show>
-        <div class="f1" style={{ "min-width": "0" }}>
-          <Show
-            when={data()}
-            fallback={
-              <>
-                <div class="skel" style={{ width: "30%" }} />
-                <div class="skel" style={{ width: "50%", "margin-top": "12px" }} />
-              </>
-            }
-          >
-            {(d) => (
-              <>
-                <div class="ovl">{t("w2_album_caps")}</div>
-                <div class="t28 w6" style={{ "margin-top": "4px" }}>{d().album.title}</div>
-                <div class="i2" style={{ "margin-top": "4px" }}>
-                  {t("w2_created_by_you")} · <span class="num">{d().album.trackCount}</span> {t("w2_songs_unit")} · {durationText(d().album.durationMs)}
-                </div>
-                <div class="row" style={{ gap: "6px", "margin-top": "8px" }}>
-                  <For each={counts(d().tracks)}>{([s, n]) => <SourceBadge source={s as any} count={n} />}</For>
-                  <span class="t12 i3">{t("w2_downloaded_n", 11)}</span>
-                </div>
-                <div class="row gap8" style={{ "margin-top": "16px" }}>
-                  <button type="button" class="btn pri" onClick={() => playAll()} data-testid="album-play">
-                    <Icon n="play" s={20} />
-                    {t("w2_play")}
-                  </button>
-                  <button type="button" class="btn ton" onClick={() => playAll(true)}>
-                    <Icon n="shuffle" s={20} />
-                    {t("shuffle")}
-                  </button>
-                  <IconButton icon="dl" label={t("w2_downloads")} tonal size={40} />
-                  <IconButton icon="edit" label={t("w2_edit")} tonal size={40} />
-                  <IconButton icon="more" label={t("w2_more")} tonal size={40} />
-                </div>
-              </>
-            )}
-          </Show>
-        </div>
-      </div>
-      <div class="tbl album-tbl">
-        <div class="th">
-          <div style={{ "text-align": "center" }}>{"#"}</div>
-          <div>{t("w2_col_title")}</div>
-          <div class="c-album">{t("w2_col_orig_album")}</div>
-          <div class="c-added">{t("w2_col_added")}</div>
-          <div />
-          <div style={{ "text-align": "right" }}>{"⏱"}</div>
-          <div />
-        </div>
-        <Show when={data()}>
-          {(d) => (
-            <For each={d().tracks}>
-              {(tr, i) => <Row index={i()} track={tr} playing={playerState()?.track?.id === tr.id} labels={labels()} onPlay={(x) => playAll(false, x.id)} />}
-            </For>
-          )}
-        </Show>
-      </div>
+      </Show>
     </div>
   );
 }

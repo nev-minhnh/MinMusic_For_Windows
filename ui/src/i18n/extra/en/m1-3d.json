@@ -1,0 +1,21 @@
+{
+  "w2_pg_album": "ALBUM",
+  "w2_pg_single": "SINGLE",
+  "w2_pg_ep": "EP",
+  "w2_pg_playlist": "PLAYLIST",
+  "w2_pg_podcast": "PODCAST",
+  "w2_pg_about": "About",
+  "w2_pg_episodes": "episodes",
+  "w2_pg_other_versions": "Other versions",
+  "w2_pg_more_from": "More from {0}",
+  "w2_pg_save": "Save to library",
+  "w2_pg_unsave": "Remove from library",
+  "w2_pg_subscribe": "Subscribe",
+  "w2_pg_subscribed": "Subscribed",
+  "w2_pg_radio": "Radio",
+  "w2_pg_top_songs": "Top songs",
+  "w2_pg_all_songs": "All songs by {0}",
+  "w2_pg_listeners": "Listeners",
+  "w2_pg_playcount": "Plays",
+  "w2_pg_retry": "Retry"
+}

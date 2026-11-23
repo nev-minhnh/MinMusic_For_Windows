@@ -1,0 +1,10 @@
+/* Artist page (art- prefix). The banner feather is a static gradient overlay: nothing here animates. */
+.art-banner{position:relative;height:232px;border-radius:16px;overflow:hidden;background:var(--s1);contain:layout paint style;margin-top:8px}
+.art-bimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.art-feather{position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,color-mix(in srgb,var(--bg) 55%,transparent) 38%,transparent 80%)}
+.art-bin{position:absolute;left:24px;right:24px;bottom:16px}
+.art-act{margin-top:12px}
+.art-allhead{display:flex;align-items:center;gap:12px;margin:8px 0 12px}
+.art-about{padding:16px 20px;cursor:pointer;display:flex;flex-direction:column;gap:8px}
+.art-about:hover{background:var(--s2)}
+.art-bio{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;color:var(--ink2)}

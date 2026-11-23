@@ -1,0 +1,21 @@
+{
+  "w2_pg_album": "ALBUM",
+  "w2_pg_single": "ĐĨA ĐƠN",
+  "w2_pg_ep": "EP",
+  "w2_pg_playlist": "PLAYLIST",
+  "w2_pg_podcast": "PODCAST",
+  "w2_pg_about": "Giới thiệu",
+  "w2_pg_episodes": "tập",
+  "w2_pg_other_versions": "Phiên bản khác",
+  "w2_pg_more_from": "Thêm từ {0}",
+  "w2_pg_save": "Lưu vào thư viện",
+  "w2_pg_unsave": "Xoá khỏi thư viện",
+  "w2_pg_subscribe": "Theo dõi",
+  "w2_pg_subscribed": "Đang theo dõi",
+  "w2_pg_radio": "Radio",
+  "w2_pg_top_songs": "Bài hát hàng đầu",
+  "w2_pg_all_songs": "Tất cả bài hát của {0}",
+  "w2_pg_listeners": "Người nghe",
+  "w2_pg_playcount": "Lượt phát",
+  "w2_pg_retry": "Thử lại"
+}

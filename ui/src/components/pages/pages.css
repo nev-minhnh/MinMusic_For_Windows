@@ -1,0 +1,10 @@
+/* shared collection-page styles (CollectionHeader, PageShelf); classes prefixed ch-/pgx- */
+.ch-title{margin-top:4px;overflow-wrap:anywhere}
+.ch-meta{margin-top:4px}
+.ch-badges{gap:6px;margin-top:8px}
+.ch-actions{margin-top:16px}
+.ch-meta .lnk{cursor:pointer}.ch-meta .lnk:hover{text-decoration:underline}
+.pgx-sentinel{height:1px;margin-top:-1px;pointer-events:none}
+.pgx-empty{padding:48px 0;text-align:center;color:var(--ink3)}
+.pgx-err{padding:24px 0;color:var(--ink2)}
+.sec .sh .btn.txt.more{height:32px}

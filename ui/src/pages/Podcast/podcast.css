@@ -1,0 +1,11 @@
+/* Podcast episode rows (ep- prefix): fixed 72 high so VirtualList can be used past 60 rows */
+.ep{height:72px;display:flex;align-items:center;gap:16px;padding:0 12px;border-radius:12px;position:relative;contain:layout paint style}
+.ep:hover{background:var(--hov)}
+.ep.playing .w6{color:var(--acc-t)}
+.ep-m{min-width:0}
+.ep-d{flex:none;width:72px;text-align:right}
+.ep-p{flex:none;opacity:0;transition:opacity var(--m-fast) var(--e-fast)}
+.ep:hover .ep-p,.ep:focus-within .ep-p{opacity:1}
+.ep-bar{position:absolute;left:12px;right:12px;bottom:4px;height:2px;border-radius:1px;background:var(--line);overflow:hidden}
+.ep-bar i{display:block;height:100%;background:var(--acc);transform-origin:left center;transform:scaleX(0)}
+.ep-skel{background:var(--s1);opacity:.5}
