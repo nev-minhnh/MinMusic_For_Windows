@@ -55,7 +55,7 @@ jobs:
           LYPRIO_HMAC_KEY: ${{ secrets.LYPRIO_HMAC_KEY }}
         run: |
           ./gradlew --stacktrace --no-daemon --no-configuration-cache \
-            :desktopCore:sidecarImage -PsidecarOut=../../sidecar/dist -Pmetrolist.debug=false
+            :desktopCore:sidecarImage -PsidecarOut="$(cygpath -m "$GITHUB_WORKSPACE/sidecar/dist")" -Pmetrolist.debug=false
           test -f ../../sidecar/dist/runtime/bin/minmusic-core.exe
 
       - name: Set up Node 26
