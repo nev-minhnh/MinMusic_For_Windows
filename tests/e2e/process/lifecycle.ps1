@@ -33,9 +33,13 @@ function Test-TP1($Ctx) {
 function Test-TP2($Ctx) {
   $app = Start-Ready $Ctx 'tp2'
   try {
-    $win = Invoke-CoreCall $app.Port 'library.window' @{ list = 'songs'; sort = @{ by = 'title'; dir = 'asc' }; offset = 0; limit = 5 }
-    if (-not $win -or -not $win.items -or $win.items.Count -lt 5) { return New-TestResult $true 'needs a fixture library with >= 5 songs and a playing core (library.window/player.play unavailable)' -Skip }
-    $ids = @($win.items | ForEach-Object { $_.id })
+    # W6: the seed library ids are synthetic and never load, so nothing could be restored; use the live YouTube ids
+    # (tests/contract/fixtures/live-ids.json). The seek lands while the stream still loads (2 s after play), the case
+    # PlayerState keeps as the pending resume position and persists at once.
+    $live = Get-Content (Join-Path $script:Repo 'tests\contract\fixtures\live-ids.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+    $ids = @($live.tracks | ForEach-Object { $_.id })
+    if ($ids.Count -lt 2) { return New-TestResult $true 'needs tests/contract/fixtures/live-ids.json with 2 tracks' -Skip }
+    Invoke-CoreCall $app.Port 'queue.setAutoplay' @{ on = $false } | Out-Null  # no radio appended to the 2 tracks
     Invoke-CoreCall $app.Port 'player.play' @{ context = @{ kind = 'tracks'; ids = $ids } } | Out-Null
     Start-Sleep -Seconds 2
     Invoke-CoreCall $app.Port 'player.seek' @{ ms = 42000 } | Out-Null
@@ -51,7 +55,7 @@ function Test-TP2($Ctx) {
       $q = Invoke-CoreCall $app2.Port 'queue.window' @{ offset = 0; limit = 10 }
       $snap = Invoke-Cdp -Port $app2.Port core 'sub:player' '{}' | ConvertFrom-Json
       $pos = [double]($snap.p.posMs); $playing = $snap.p.playing
-      $ok = ($q.total -eq 5) -and ([math]::Abs($pos / 1000 - 42) -le 1) -and (-not $playing)
+      $ok = ($q.total -eq $ids.Count) -and ([math]::Abs($pos / 1000 - 42) -le 1) -and (-not $playing)
       New-TestResult $ok ("quit {0:N2} s; restored total={1} index={2} pos={3:N1}s playing={4}" -f $t, $q.total, $q.currentIndex, ($pos / 1000), $playing)
     } finally { Stop-TestApp $app2 }
   } catch { New-TestResult $false "$_" } finally { Stop-TestApp $app }
