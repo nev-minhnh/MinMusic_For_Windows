@@ -10,7 +10,7 @@ import { player, playerState } from "../../state/player";
 import { navigate } from "../../router/router";
 import { artistsText } from "../../lib/format";
 import { t } from "../../i18n";
-import { keepScroll, onPageEvent } from "../Library/util";
+import { onPageEvent } from "../Library/util";
 import "../Library/library.css";
 
 export const PERIODS: StatsPeriod[] = ["week", "month", "year", "all"];
@@ -45,7 +45,6 @@ export function Stats(props: { params: Record<string, string>; active: Accessor<
     if (ids[i]) void player.play({ kind: "tracks", ids, title: t("w2_stats_top_tracks") }, { startIndex: i });
   };
   onMount(() => {
-    keepScroll(root, props.active);
     onPageEvent(root, "mm-refresh", () => void refetch());
   });
   const empty = () => !!data() && !data()!.minutes && !tracks().length;

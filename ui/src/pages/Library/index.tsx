@@ -16,7 +16,7 @@ import { t, plural } from "../../i18n";
 import { SongList, SORT_CHOICES, FilterField, type ListApi } from "./SongList";
 import { CardGrid, type CardList } from "./CardGrid";
 import { DownloadsBox } from "../../components/downloads/DownloadsBox";
-import { debounce, keepScroll, onPageEvent } from "./util";
+import { debounce, onPageEvent } from "./util";
 import type { SortSpec } from "../../lib/types";
 import "./library.css";
 
@@ -61,7 +61,6 @@ export function Library(props: { params: Record<string, string>; active: Accesso
 
   onMount(() => {
     void userAlbums.refresh();
-    keepScroll(root, props.active);
     onPageEvent(root, "mm-refresh", () => void userAlbums.refresh());
   });
 

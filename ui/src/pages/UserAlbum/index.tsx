@@ -14,7 +14,7 @@ import { hClass } from "../../lib/layout";
 import { back, navigate } from "../../router/router";
 import { toast } from "../../toast";
 import { t, plural } from "../../i18n";
-import { keepScroll, onPageEvent } from "../Library/util";
+import { onPageEvent } from "../Library/util";
 import { attachReorder, createRevision, errorCode } from "./reorder";
 import type { SourceId, Track } from "../../lib/types";
 import "../Library/library.css";
@@ -110,7 +110,6 @@ export function UserAlbum(props: { params: Record<string, string>; active: Acces
     const tid = setTimeout(() => setSettled(true), 600);
     const tbl = tableWrap.querySelector<HTMLElement>(".tbl2");
     const off = tbl ? attachReorder(tbl, root.closest<HTMLElement>(".pg") ?? root, { list, total: store.total, onReorder: (f, to) => void onReorder(f, to) }) : () => {};
-    keepScroll(root, props.active);
     onPageEvent(root, "mm-delete", () => void removeSelected());
     onPageEvent(root, "mm-rename", rename);
     onPageEvent(root, "mm-refresh", reload);

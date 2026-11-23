@@ -14,7 +14,7 @@ import { player, playerState } from "../../state/player";
 import { navigate } from "../../router/router";
 import { toast } from "../../toast";
 import { t, plural } from "../../i18n";
-import { clockText, keepScroll, onPageEvent } from "../Library/util";
+import { clockText, onPageEvent } from "../Library/util";
 import { createHistoryStore, type HistoryRow } from "./store";
 import { HEAD_H, TRACK_H, flatAtY, flatCount, flatOfTrack, heightOf, rowAt, topOf, totalHeight, trackRange } from "./flat";
 import "../Library/library.css";
@@ -209,7 +209,6 @@ export function History(props: { params: Record<string, string>; active: Accesso
     const off = delegate(root);
     const focusIn = () => setActiveList({ ids: () => rowsOf(selectedIdx()).map((x) => x.id) });
     root.addEventListener("focusin", focusIn);
-    keepScroll(root, props.active);
     onPageEvent(root, "mm-delete", () => void removeRows(rowsOf(selectedIdx())));
     onPageEvent(root, "mm-refresh", () => store.reload());
     const tid = setTimeout(() => setSettled(true), 500);
