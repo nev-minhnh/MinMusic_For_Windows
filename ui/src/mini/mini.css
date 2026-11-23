@@ -1,0 +1,24 @@
+/* Mini player (#/mini). Prefixed .mini-*; transform/opacity only, no hover transitions on layout. */
+.mini{position:fixed;inset:0;display:flex;align-items:center;gap:12px;padding:12px;background:var(--s1);overflow:hidden}
+.mini-art{flex:none;width:64px;height:64px;border-radius:var(--r-sm);overflow:hidden}
+.mini-art *{pointer-events:none}
+.mini-body{flex:1;min-width:0;height:64px;display:flex;flex-direction:column;justify-content:space-between}
+.mini-text{min-width:0;height:34px}
+.mini-title{font-size:13px;line-height:18px}
+.mini-artist{line-height:16px;color:var(--ink3)}
+.mini-ctl{display:flex;align-items:center;gap:2px;height:28px}
+.mini-sp{flex:1}
+.mini-b{width:28px;height:28px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--ink2);flex:none}
+.mini-b:hover{background:var(--hov);color:var(--ink)}
+.mini-b:disabled{opacity:.38;pointer-events:none}
+.mini-b.pp{color:var(--ink)}
+.mini-line{position:absolute;left:0;right:0;bottom:0;height:2px}
+/* square mode: the art fills the window, text and controls sit on a bottom scrim */
+.mini.sq{padding:0;gap:0;display:block}
+.mini.sq .mini-art{position:absolute;inset:0;width:320px;height:320px;border-radius:0}
+.mini.sq .mini-body{position:absolute;left:0;right:0;bottom:0;height:auto;padding:36px 12px 12px;background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,0));color:#fff;gap:6px}
+.mini.sq .mini-text{height:auto}
+.mini.sq .mini-artist,.mini.sq .mini-b{color:rgba(255,255,255,.82)}
+.mini.sq .mini-b:hover,.mini.sq .mini-b.pp{color:#fff}
+.mini.sq .mini-b:hover{background:rgba(255,255,255,.16)}
+html.mini-root,html.mini-root body{background:var(--s1)}
