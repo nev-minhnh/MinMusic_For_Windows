@@ -35,5 +35,5 @@ export const commands: Command[] = [
   { id: "page.delete", run: toPage("mm-delete") },
   { id: "page.rename", run: toPage("mm-rename") },
   // outside M1: wired, logged, spied in tests
-  ...["pane.lyrics", "pane.queue", "pane.deviceConnect", "video.captions", "video.mode", "window.fullscreen", "mini.open", "fullscreen.toggle", "settings.open", "shortcuts.sheet", "logs.open", "app.quit"].map(noop),
+  ...["pane.lyrics", "pane.queue", "video.captions", "video.mode", "window.fullscreen", "mini.open", "fullscreen.toggle", "settings.open", "shortcuts.sheet", "logs.open", "app.quit"].map(noop),
 ];
