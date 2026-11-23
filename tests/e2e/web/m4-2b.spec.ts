@@ -9,7 +9,7 @@ import path from 'node:path';
 const ROOT = path.resolve(__dirname, '../../..');
 const shots = path.join(ROOT, '.testdata', 'm4-2b', 'shots');
 fs.mkdirSync(shots, { recursive: true });
-const MOCK_PORT = Number(process.env.MOCK_PORT) || 48014;
+const MOCK_PORT = Number(process.env.MOCK_PORT) || 47999; // the suite default (playwright.config.ts)
 
 test.use({ viewport: { width: 1440, height: 900 } });
 test.describe.configure({ mode: 'serial' });

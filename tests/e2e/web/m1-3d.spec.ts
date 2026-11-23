@@ -74,7 +74,7 @@ test.describe('Album', () => {
     await expect(page.getByTestId('album-table')).toBeVisible();
     await expect(visiblePage(page, 'album').getByTestId('song-row').first()).toBeVisible();
     const art = await page.locator('.al-head .al-art').boundingBox();
-    expect(art!.width).toBe(232);
+    expect(art!.width).toBeCloseTo(232, 1); // layout may round to a subpixel (231.99997)
     await shot(page, 'album-header');
 
     // sticky bar: hidden at the top, shown once the header has scrolled away (IntersectionObserver, no scroll handler)
@@ -124,7 +124,7 @@ test.describe('Artist', () => {
     await go(page, 'artist', { id: 'UCg-Ds_COVaFZp8UNDZTfie6' });
     await expect(page.getByTestId('artist-name')).toBeVisible();
     await expect(page.getByTestId('artist-top-table').getByTestId('song-row')).toHaveCount(5);
-    expect((await page.getByTestId('artist-banner').boundingBox())!.height).toBe(232);
+    expect((await page.getByTestId('artist-banner').boundingBox())!.height).toBeCloseTo(232, 1);
     await shot(page, 'artist');
 
     await clearCalls(page);

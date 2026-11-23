@@ -6,8 +6,8 @@ import path from 'node:path';
 // E-54 .. E-55 (M4-3b) on the `web` project (Vite + mock-core): Settings > Backup (create, restore with confirm, import),
 // log viewer (Ctrl Shift L), crash prompt, onboarding, first-run toast. Ports 5195 / 48015: MM_WEB_PORT=5195 MOCK_PORT=48015.
 // File dialogs and app_restart are stubbed through window.__mmNative (test seam of dev/e2e builds, see Backup/native.ts).
-const mockPort = Number(process.env.MOCK_PORT) || 48015;
-const webPort = Number(process.env.MM_WEB_PORT) || 5195;
+const mockPort = Number(process.env.MOCK_PORT) || 47999; // the suite default (playwright.config.ts)
+const webPort = Number(process.env.MM_WEB_PORT) || 5173; // the suite default (playwright.config.ts)
 const SHOTS = process.env.MM_SHOTS_DIR ?? path.resolve(__dirname, '../../../../shots-M4-3b');
 fs.mkdirSync(SHOTS, { recursive: true });
 const shot = (page: Page, name: string) => page.screenshot({ path: path.join(SHOTS, `${name}.png`) });
