@@ -29,6 +29,10 @@ fn main() {
         "test_po_evaluate",
         // </M3-1>
         // <M5-2>
+        "update_check",
+        "update_status",
+        "update_install",
+        "update_open_release_page",
         // </M5-2>
     ];
     let attrs = tauri_build::Attributes::new()

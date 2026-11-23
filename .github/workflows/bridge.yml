@@ -1,0 +1,142 @@
+name: v1 bridge release
+
+# Open question 3 (architecture section 7). v1.0.x apps update from nev-minhnh/MinMusic releases tagged
+# `windows-vX.Y.Z` and accept a release only if it is published (not draft, not prerelease) and holds exactly
+# one asset named `MinMusic-X.Y.Z-windows-x64-setup.exe` (DesktopUpdateManager.kt). This job copies the v2 setup
+# of a finished release of THIS repo to such a release in the MinMusic repo, so the v1 in-app updater offers
+# v2; running that setup uninstalls the v1 MSI (hooks.nsh) and keeps the user data.
+#
+# Manual only. Needs the repo secret BRIDGE_TOKEN: a fine-grained PAT limited to nev-minhnh/MinMusic with
+# "Contents: read and write" (scripts/gen-updater-key.md). Nothing here runs on push or tag.
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'v2 release tag of this repo whose setup is copied (for example v2.0.0)'
+        required: true
+        type: string
+      dry_run:
+        description: 'Validate and print what would be published, publish nothing'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bridge-${{ inputs.tag }}
+  cancel-in-progress: false
+
+env:
+  BRIDGE_REPO: nev-minhnh/MinMusic
+
+jobs:
+  bridge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check inputs
+        id: v
+        shell: bash
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$TAG" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            echo "::error::tag '$TAG' must be a final release tag vX.Y.Z (v1 updaters ignore pre-releases)"; exit 1
+          fi
+          ver="${BASH_REMATCH[1]}"
+          echo "version=$ver" >> "$GITHUB_OUTPUT"
+          echo "bridge_tag=windows-v$ver" >> "$GITHUB_OUTPUT"
+          echo "setup=MinMusic-$ver-windows-x64-setup.exe" >> "$GITHUB_OUTPUT"
+
+      - name: Check that the bridge token is present
+        if: ${{ !inputs.dry_run }}
+        shell: bash
+        env:
+          BRIDGE_TOKEN: ${{ secrets.BRIDGE_TOKEN }}
+        run: |
+          [ -n "$BRIDGE_TOKEN" ] || { echo "::error::secret BRIDGE_TOKEN is not set (see scripts/gen-updater-key.md)"; exit 1; }
+
+      - name: Download the v2 setup (and its sha256) from this repo
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+          SETUP: ${{ steps.v.outputs.setup }}
+        run: |
+          set -euo pipefail
+          state=$(gh release view "$TAG" -R "$GITHUB_REPOSITORY" --json isDraft,isPrerelease --jq '"\(.isDraft) \(.isPrerelease)"')
+          [ "$state" = "false false" ] || { echo "::error::release $TAG is a draft or a pre-release ($state)"; exit 1; }
+          mkdir -p bridge
+          gh release download "$TAG" -R "$GITHUB_REPOSITORY" -p "$SETUP" -p "$SETUP.sha256" -D bridge
+          ls -l bridge
+          [ -s "bridge/$SETUP" ] || { echo "::error::$SETUP is missing or empty in $TAG"; exit 1; }
+          if [ -f "bridge/$SETUP.sha256" ]; then
+            (cd bridge && sha256sum -c "$SETUP.sha256")
+          else
+            echo "::warning::no $SETUP.sha256 in $TAG, checksum not verified against the release"
+          fi
+          sha256sum "bridge/$SETUP" | cut -d' ' -f1 > bridge/expected.sha256
+
+      - name: Dry run summary
+        if: ${{ inputs.dry_run }}
+        shell: bash
+        env:
+          BRIDGE_TAG: ${{ steps.v.outputs.bridge_tag }}
+          SETUP: ${{ steps.v.outputs.setup }}
+        run: |
+          echo "dry run: would create $BRIDGE_REPO release $BRIDGE_TAG with the single asset $SETUP ($(stat -c %s "bridge/$SETUP") bytes, sha256 $(cat bridge/expected.sha256))"
+
+      - name: Publish the bridge release to the MinMusic repo
+        if: ${{ !inputs.dry_run }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.BRIDGE_TOKEN }}
+          TAG: ${{ inputs.tag }}
+          VERSION: ${{ steps.v.outputs.version }}
+          BRIDGE_TAG: ${{ steps.v.outputs.bridge_tag }}
+          SETUP: ${{ steps.v.outputs.setup }}
+        run: |
+          set -euo pipefail
+          if gh release view "$BRIDGE_TAG" -R "$BRIDGE_REPO" > /dev/null 2>&1; then
+            echo "::error::$BRIDGE_REPO already has a release $BRIDGE_TAG; delete it by hand first if it must be replaced"; exit 1
+          fi
+          notes=$(printf '%s\n' \
+            "MinMusic for Windows ${VERSION}: the new Tauri-based app." \
+            "" \
+            "This release only forwards the v1 in-app updater. The installer is the same file as the" \
+            "[v${VERSION} release](https://github.com/${GITHUB_REPOSITORY}/releases/tag/${TAG}) of the new repository," \
+            "which holds the release notes, the portable zip and all future updates." \
+            "" \
+            "- Installing it replaces the v1 app and keeps your library, likes and settings." \
+            "- The files are not code-signed, so Windows SmartScreen may say \"Unknown publisher\": choose **More info** and then **Run anyway**.")
+          gh release create "$BRIDGE_TAG" "bridge/$SETUP" \
+            -R "$BRIDGE_REPO" \
+            --title "MinMusic for Windows ${VERSION}" \
+            --notes "$notes" \
+            --latest=false
+
+      - name: Verify what v1 updaters will see
+        if: ${{ !inputs.dry_run }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.BRIDGE_TOKEN }}
+          BRIDGE_TAG: ${{ steps.v.outputs.bridge_tag }}
+          SETUP: ${{ steps.v.outputs.setup }}
+        run: |
+          set -euo pipefail
+          want=$(cat bridge/expected.sha256)
+          gh api "repos/$BRIDGE_REPO/releases/tags/$BRIDGE_TAG" > rel.json
+          jq -e --arg n "$SETUP" --arg t "$BRIDGE_TAG" '
+            .tag_name == $t and .draft == false and .prerelease == false
+            and (.assets | length) == 1
+            and .assets[0].name == $n and .assets[0].state == "uploaded"' rel.json > /dev/null \
+            || { echo "::error::the published bridge release does not look like a valid v1 update"; cat rel.json; exit 1; }
+          got=$(jq -r '.assets[0].digest // ""' rel.json)
+          if [ -n "$got" ] && [ "$got" != "sha256:$want" ]; then
+            echo "::error::GitHub digest $got differs from the local sha256 $want"; exit 1
+          fi
+          echo "bridge release $BRIDGE_TAG ok: $SETUP ($(jq -r '.assets[0].size' rel.json) bytes)"

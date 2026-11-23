@@ -22,6 +22,7 @@ mod potoken;
 mod weblogin;
 // </M3-1>
 // <M5-2>
+mod update;
 // </M5-2>
 // <M4-1a>
 mod settings_link;
@@ -216,6 +217,10 @@ fn with_commands(b: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
         potoken::test_po_evaluate,
         // </M3-1>
         // <M5-2>
+        update::update_check,
+        update::update_status,
+        update::update_install,
+        update::update_open_release_page,
         // </M5-2>
     ])
 }
@@ -247,6 +252,10 @@ fn with_commands(b: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
         // <M3-1>
         // </M3-1>
         // <M5-2>
+        update::update_check,
+        update::update_status,
+        update::update_install,
+        update::update_open_release_page,
         // </M5-2>
     ])
 }
@@ -291,6 +300,7 @@ fn main() {
         // <M3-1>
         // </M3-1>
         // <M5-2>
+        .plugin(update::plugin())
         // </M5-2>
         .on_window_event(|window, event| {
             if window.label() == MAIN {
@@ -336,6 +346,7 @@ fn main() {
             deeplink::set_auth_handler(Box::new(|url: String| weblogin::on_auth_callback(&url)));
             // </M3-1>
             // <M5-2>
+            update::register(app.handle());
             // </M5-2>
             // <M4-1a>
             settings_link::install(app.handle());

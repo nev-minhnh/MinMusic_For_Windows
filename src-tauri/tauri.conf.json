@@ -62,17 +62,32 @@
       "../sidecar/dist/lib": "core/lib",
       "../sidecar/dist/core.args": "core/core.args",
       "../sidecar/dist/core.jsa": "core/core.jsa"
-    }
+    },
+    "createUpdaterArtifacts": true
   },
   "plugins": {
     "deep-link": {
       "desktop": {
-        "schemes": ["minmusic", "metrolist", "metrolist-auth"]
+        "schemes": [
+          "minmusic",
+          "metrolist",
+          "metrolist-auth"
+        ]
       }
     },
     "minmusic": {
       "channel": "alpha",
       "displayVersion": "2.0.0-alpha.0"
+    },
+    "updater": {
+      "endpoints": [
+        "https://github.com/nev-minhnh/MinMusic_For_Windows/releases/latest/download/latest.json"
+      ],
+      "pubkey": "REPLACE_AT_INT_W5",
+      "requireSignedVersion": true,
+      "windows": {
+        "installMode": "passive"
+      }
     }
   }
 }

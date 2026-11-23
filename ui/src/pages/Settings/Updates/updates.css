@@ -1,0 +1,6 @@
+/* Updates page (M5-2). Prefix upd-. Transform and opacity only. */
+.upd-btns{gap:8px;flex-wrap:wrap}
+.upd-prog{gap:12px}
+.upd-bar{flex:1;min-width:0;height:8px;accent-color:var(--acc)}
+.upd-notes{padding:8px 0}
+.upd-p{margin:0;padding:6px 16px;white-space:pre-line;overflow-wrap:anywhere;user-select:text;-webkit-user-select:text}
