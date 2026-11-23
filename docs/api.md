@@ -261,6 +261,28 @@ type Lyrics = { trackId, provider, synced:"word"|"line"|"none", offsetMs:number,
   lines: { t:number /*ms*/, end?:number, text:string, words?:{t:number,end:number,text:string}[], tr?:string /*translation*/, ro?:string /*romanized*/, agent?:"v1"|"v2"|"bg" }[] }
 ```
 
+<!-- M2-1 -->
+#### 3.7a M2-1 additions (player, queue, lyrics)
+| Item | Behaviour |
+|---|---|
+| `queue.setLocked` | `{on:boolean}`. Sets the v1 queue lock (`Settings.isQueueLocked`, **default true**). The UI must show the lock and offer "Mở khoá". The core reports the flag but does not enforce it on `queue.remove` / `queue.move` / `queue.clear` |
+| `locked` | Additive boolean on `queue.window`, `queue.snapshot` and `queue.changed {revision, currentIndex, locked}`. `queue.changed` is also sent when only the lock flips |
+| `queue.add` with a number | Inserts at that index, clamped to the old end; **before** the playing entry is allowed and `currentIndex` follows |
+| `queue.move` | `from` / `to` are queue indices, `expectedRevision` must equal the revision of the last `queue.window` or `queue.changed`, else `conflict`. Out of range: `bad_request` |
+| `queue.remove` | Unknown `qid`s are ignored. Removing the playing entry is allowed |
+| `queue.clear {keepCurrent}` | `true` (default): every entry except the playing one is removed. `false`: pauses and empties the queue |
+| `queue.radio {seedId}` | Returns once the radio tracks are loaded (at most 12 s) |
+| `player.next` | At the end of a queue with autoplay on, returns once the radio tracks are appended (at most 10 s) |
+| `player.state` | Carries `posMs`, `durMs`, `bufMs`, `at` too (the UI clock reads them). `muted` = volume 0. `sleep` and `output` are filled. `speed` / `pitch` are rounded to 2 decimals |
+| `player.sleepTimer` | `{minutes}` returns `{deadline}` (epoch ms); `{endOfTrack:true}` and `{cancel:true}` return `{}` |
+| `player.output.set {id}` | Unknown id: `not_found`. The choice is persisted by the core and applies from the next line open (track change or seek) |
+| `lyrics.get {trackId}` | Playing track: the core starts the provider fetch itself and waits (at most 15 s). Any other track: read from the lyrics cache or the providers, without changing the playing track's lyrics. No lyrics: `{synced:"none", lines:[]}` |
+| `Lyrics.lines[].words[].text` | Includes the trailing space of the word, so `words.map(w => w.text).join("")` equals the line text. In a `word` track a line without word timing has one word spanning the line |
+| `Lyrics.lines[].agent` | `bg` for background lines, else `v1` for the first agent, `v2` for the second; more agents have none |
+| `lyrics.search/choose/setOffset/translate/romanize/edit` | Playing track only (other ids: `not_found`; `setOffset` also saves for another track). Candidate id = `<PROVIDER>:<index>` |
+| `lyrics.providers` / `.set` | `{order:string[], enabled:{[provider]:boolean}}` over the user-configurable providers. `set` takes the same shape (`enabled` may also be a list of names; an empty set is stored as `NONE`) |
+<!-- /M2-1 -->
+
 ### 3.8 Equalizer
 | Method | Params → Result |
 |---|---|
