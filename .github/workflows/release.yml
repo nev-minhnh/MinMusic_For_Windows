@@ -61,15 +61,24 @@ jobs:
       - name: Check required secrets are set
         env:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
           LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
           LASTFM_SECRET: ${{ secrets.LASTFM_SECRET }}
           LYPRIO_BASE_URL: ${{ secrets.LYPRIO_BASE_URL }}
           LYPRIO_HMAC_KEY: ${{ secrets.LYPRIO_HMAC_KEY }}
         run: |
           missing=0
-          for n in TAURI_SIGNING_PRIVATE_KEY LASTFM_API_KEY LASTFM_SECRET LYPRIO_BASE_URL LYPRIO_HMAC_KEY; do
+          for n in TAURI_SIGNING_PRIVATE_KEY TAURI_SIGNING_PRIVATE_KEY_PASSWORD; do
             if [ -z "${!n:-}" ]; then echo "::error::secret $n is not set"; missing=1; fi
           done
+          # Optional: the core builds without them (Last.fm scrobbling / Lyprio lyrics stay off), as the local builds do.
+          # Each pair must be complete or empty (shared/build.gradle.kts requires LYPRIO_* together).
+          for n in LASTFM_API_KEY LASTFM_SECRET LYPRIO_BASE_URL LYPRIO_HMAC_KEY; do
+            if [ -z "${!n:-}" ]; then echo "::warning::optional secret $n is not set"; fi
+          done
+          if { [ -z "${LYPRIO_BASE_URL:-}" ] && [ -n "${LYPRIO_HMAC_KEY:-}" ]; } || { [ -n "${LYPRIO_BASE_URL:-}" ] && [ -z "${LYPRIO_HMAC_KEY:-}" ]; }; then
+            echo "::error::LYPRIO_BASE_URL and LYPRIO_HMAC_KEY must be set together"; missing=1
+          fi
           exit $missing
 
       - name: Set up JDK 25
@@ -125,6 +134,9 @@ jobs:
 
       - name: Install tauri-cli
         run: command -v cargo-tauri >/dev/null || cargo install tauri-cli --version "^2" --locked
+
+      - name: Build the UI for the bundle (tauri.conf has no beforeBuildCommand)
+        run: npm -w ui run build
 
       - name: Build NSIS installer (signed for the updater)
         env:
