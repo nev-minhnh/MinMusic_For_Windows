@@ -66,7 +66,12 @@ try {
     $rows | ConvertTo-Json | Set-Content (Join-Path $root 'process-results.json') -Encoding utf8
     Write-Host ("process suite: {0} pass, {1} fail, {2} skip" -f @($rows | ? Status -eq 'PASS').Count, $failures, @($rows | ? Status -eq 'SKIP').Count)
   } else {
-    $app = Start-TestApp -Exe $exePath -Root (Join-Path $root 'app')
+    # Deterministic Home (quick picks, 10 chart rows) from the shared fixture, beside the seeded library: a test root has no
+    # listening history, so live Home has no quick picks. Both flags must be passed together (ExtraEnv replaces the default).
+    $seedF = Join-Path $repo 'tests/fixtures/library-seed.json'; $homeF = Join-Path $repo 'tests/fixtures/home.json'
+    $extra = @{}
+    if ((Test-Path $seedF) -and (Test-Path $homeF) -and ("$seedF$homeF" -notmatch '\s')) { $extra['MINMUSIC_CORE_EXTRA_ARGS'] = "--seed-library $seedF --fixture-home $homeF" }
+    $app = Start-TestApp -Exe $exePath -Root (Join-Path $root 'app') -ExtraEnv $extra
     Wait-AppReady $app | Out-Null
     # A fresh test root is a first run: the startup hook would open the onboarding (M4-3b, covered by its web spec E-54).
     # The app specs start from Home, so finish the onboarding and the v2 first-run flag on this root, then reload.
