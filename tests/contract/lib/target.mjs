@@ -13,7 +13,12 @@ export async function startTarget(kind, { testRoot = join(repo, ".testdata", "co
   const artToken = randomBytes(16).toString("hex");
   mkdirSync(join(testRoot, "Local"), { recursive: true });
   mkdirSync(join(testRoot, "Roaming"), { recursive: true });
-  const env = { ...process.env, LOCALAPPDATA: join(testRoot, "Local"), APPDATA: join(testRoot, "Roaming"), MINMUSIC_DATA_ROOT: testRoot };
+  // XDG_* win over APPDATA/LOCALAPPDATA in XdgUtils, so they are redirected too (INT-W5 incident: never reach the owner's profile).
+  const env = {
+    ...process.env, LOCALAPPDATA: join(testRoot, "Local"), APPDATA: join(testRoot, "Roaming"), MINMUSIC_DATA_ROOT: testRoot,
+    XDG_DATA_HOME: join(testRoot, "xdg", "data"), XDG_CONFIG_HOME: join(testRoot, "xdg", "config"),
+    XDG_STATE_HOME: join(testRoot, "xdg", "state"), XDG_CACHE_HOME: join(testRoot, "xdg", "cache"),
+  };
 
   let child;
   if (kind === "mock") {
