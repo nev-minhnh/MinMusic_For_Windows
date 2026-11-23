@@ -75,7 +75,7 @@ export function QueuePanel(props: { variant: "pane" | "fp" }) {
   };
 
   return (
-    <div class="qp" classList={{ over: over(), "in-fp": props.variant === "fp" }} ref={wrap} data-testid="queue-panel">
+    <div class="qpanel" classList={{ over: over(), "in-fp": props.variant === "fp" }} ref={wrap} data-testid="queue-panel">
       <div class="qp-scroll pg" tabindex="0" role="group" aria-label={t("queue")} onKeyDown={onKey}>
         <Show when={track()} fallback={<div class="qp-empty">{t("w2_m22_queue_empty")}</div>}>
           {(tr) => (

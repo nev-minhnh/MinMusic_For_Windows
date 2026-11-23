@@ -20,7 +20,7 @@ export type SearchSection = { type: string; title: string; items: Item[]; more?:
 export type SearchRun = { top?: Item & { sources: SourceId[] }; sections: SearchSection[]; next: string | null };
 
 export const SOURCES: { key: string; label: string; dot?: string }[] = [
-  { key: "all", label: "w2_chip_all" },
+  { key: "all", label: "w2_chip_all" }, // t("w2_chip_all") keeps the key in the tree-shaken i18n bundle
   { key: "yt", label: "YouTube Music", dot: "#E8453C" },
   { key: "sc", label: "SoundCloud", dot: "#F26B1D" },
   { key: "zing", label: "Zing MP3", dot: "#9B51E0" },
