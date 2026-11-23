@@ -1,0 +1,329 @@
+{
+  "date": "2026-11-23",
+  "size": "1920",
+  "tag": null,
+  "endpoint": "http://127.0.0.1:13078",
+  "viewport": {
+    "innerWidth": 1920,
+    "innerHeight": 1200,
+    "dpr": 1,
+    "screenW": 3840,
+    "screenH": 2400
+  },
+  "osInput": "cdp-fallback",
+  "presentMon": false,
+  "categories": "benchmark,graphics.pipeline,cc,viz,gpu,input,devtools.timeline,disabled-by-default-devtools.timeline.frame,blink.user_timing,disabled-by-default-devtools.timeline",
+  "results": {
+    "P2": {
+      "scenario": "P2",
+      "size": "1920",
+      "runs": [
+        {
+          "run": 1,
+          "pid": 32588,
+          "windowMs": 9448,
+          "frames": 89,
+          "dropped": 89,
+          "droppedPct": 100,
+          "partial": 0,
+          "noUpdate": 116,
+          "states": {
+            "STATE_NO_UPDATE_DESIRED": 116,
+            "STATE_DROPPED": 89
+          },
+          "runTasks": 467,
+          "longTasks": 0,
+          "maxLongTaskMs": 0,
+          "longTasksPerSec": 0,
+          "eventLatencyP95": 2.3,
+          "eventLatencyN": 120,
+          "eventLatencyByType": {
+            "MOUSE_WHEEL": {
+              "n": 80,
+              "p95": 2.239
+            },
+            "GESTURE_SCROLL_BEGIN": {
+              "n": 40,
+              "p95": 2.345
+            }
+          },
+          "pmLongGaps": null,
+          "info": {
+            "firstMs": 1795398332713,
+            "lastMs": 1795398336732,
+            "notches": 20,
+            "input": "cdp-fallback"
+          },
+          "pmError": null,
+          "tracePath": "D:\\Coding_Project\\MinMusic_4_Windows-wp\\INT-W1\\.testdata\\20261123-084457-perf\\traces\\P2-1920-r1.trace.json",
+          "csvPath": null
+        }
+      ],
+      "worst": {
+        "run": 1,
+        "pid": 32588,
+        "windowMs": 9448,
+        "frames": 89,
+        "dropped": 89,
+        "droppedPct": 100,
+        "partial": 0,
+        "noUpdate": 116,
+        "states": {
+          "STATE_NO_UPDATE_DESIRED": 116,
+          "STATE_DROPPED": 89
+        },
+        "runTasks": 467,
+        "longTasks": 0,
+        "maxLongTaskMs": 0,
+        "longTasksPerSec": 0,
+        "eventLatencyP95": 2.3,
+        "eventLatencyN": 120,
+        "eventLatencyByType": {
+          "MOUSE_WHEEL": {
+            "n": 80,
+            "p95": 2.239
+          },
+          "GESTURE_SCROLL_BEGIN": {
+            "n": 40,
+            "p95": 2.345
+          }
+        },
+        "pmLongGaps": null,
+        "info": {
+          "firstMs": 1795398332713,
+          "lastMs": 1795398336732,
+          "notches": 20,
+          "input": "cdp-fallback"
+        },
+        "pmError": null,
+        "tracePath": "D:\\Coding_Project\\MinMusic_4_Windows-wp\\INT-W1\\.testdata\\20261123-084457-perf\\traces\\P2-1920-r1.trace.json",
+        "csvPath": null
+      },
+      "medianDroppedPct": 100,
+      "medianLongTasks": 0,
+      "verdict": "FAIL: dropped 100% > 0.5%"
+    },
+    "P3": {
+      "scenario": "P3",
+      "size": "1920",
+      "runs": [
+        {
+          "run": 1,
+          "pid": 32588,
+          "windowMs": 10561,
+          "frames": 459,
+          "dropped": 59,
+          "droppedPct": 12.85,
+          "partial": 9,
+          "noUpdate": 63,
+          "states": {
+            "STATE_NO_UPDATE_DESIRED": 63,
+            "STATE_PRESENTED_ALL": 400,
+            "STATE_DROPPED": 50,
+            "STATE_PRESENTED_PARTIAL": 9
+          },
+          "runTasks": 2471,
+          "longTasks": 0,
+          "maxLongTaskMs": 0,
+          "longTasksPerSec": 0,
+          "eventLatencyP95": 85.3,
+          "eventLatencyN": 70,
+          "eventLatencyByType": {
+            "MOUSE_RELEASED": {
+              "n": 10,
+              "p95": 155.151
+            },
+            "MOUSE_PRESSED": {
+              "n": 10,
+              "p95": 155.272
+            },
+            "MOUSE_MOVED_EVENT": {
+              "n": 10,
+              "p95": 155.454
+            },
+            "KEY_PRESSED": {
+              "n": 20,
+              "p95": 78.376
+            },
+            "KEY_RELEASED": {
+              "n": 20,
+              "p95": 6.391
+            }
+          },
+          "pmLongGaps": null,
+          "transitions": 20,
+          "droppedPerTransition": 2.95,
+          "info": {},
+          "pmError": null,
+          "tracePath": "D:\\Coding_Project\\MinMusic_4_Windows-wp\\INT-W1\\.testdata\\20261123-084457-perf\\traces\\P3-1920-r1.trace.json",
+          "csvPath": null
+        }
+      ],
+      "worst": {
+        "run": 1,
+        "pid": 32588,
+        "windowMs": 10561,
+        "frames": 459,
+        "dropped": 59,
+        "droppedPct": 12.85,
+        "partial": 9,
+        "noUpdate": 63,
+        "states": {
+          "STATE_NO_UPDATE_DESIRED": 63,
+          "STATE_PRESENTED_ALL": 400,
+          "STATE_DROPPED": 50,
+          "STATE_PRESENTED_PARTIAL": 9
+        },
+        "runTasks": 2471,
+        "longTasks": 0,
+        "maxLongTaskMs": 0,
+        "longTasksPerSec": 0,
+        "eventLatencyP95": 85.3,
+        "eventLatencyN": 70,
+        "eventLatencyByType": {
+          "MOUSE_RELEASED": {
+            "n": 10,
+            "p95": 155.151
+          },
+          "MOUSE_PRESSED": {
+            "n": 10,
+            "p95": 155.272
+          },
+          "MOUSE_MOVED_EVENT": {
+            "n": 10,
+            "p95": 155.454
+          },
+          "KEY_PRESSED": {
+            "n": 20,
+            "p95": 78.376
+          },
+          "KEY_RELEASED": {
+            "n": 20,
+            "p95": 6.391
+          }
+        },
+        "pmLongGaps": null,
+        "transitions": 20,
+        "droppedPerTransition": 2.95,
+        "info": {},
+        "pmError": null,
+        "tracePath": "D:\\Coding_Project\\MinMusic_4_Windows-wp\\INT-W1\\.testdata\\20261123-084457-perf\\traces\\P3-1920-r1.trace.json",
+        "csvPath": null
+      },
+      "medianDroppedPct": 12.85,
+      "medianLongTasks": 0,
+      "verdict": "FAIL: dropped/transition 2.95 > 1"
+    },
+    "P4": {
+      "scenario": "P4",
+      "size": "1920",
+      "runs": [
+        {
+          "run": 1,
+          "pid": 32588,
+          "windowMs": 19663,
+          "frames": 986,
+          "dropped": 55,
+          "droppedPct": 5.58,
+          "partial": 21,
+          "noUpdate": 179,
+          "states": {
+            "STATE_PRESENTED_ALL": 931,
+            "STATE_DROPPED": 34,
+            "STATE_PRESENTED_PARTIAL": 21,
+            "STATE_NO_UPDATE_DESIRED": 179
+          },
+          "runTasks": 3745,
+          "longTasks": 0,
+          "maxLongTaskMs": 0,
+          "longTasksPerSec": 0,
+          "eventLatencyP95": 34.5,
+          "eventLatencyN": 100,
+          "eventLatencyByType": {
+            "MOUSE_RELEASED": {
+              "n": 20,
+              "p95": 34.257
+            },
+            "MOUSE_PRESSED": {
+              "n": 20,
+              "p95": 34.506
+            },
+            "MOUSE_MOVED_EVENT": {
+              "n": 20,
+              "p95": 1.017
+            },
+            "KEY_RELEASED": {
+              "n": 20,
+              "p95": 4.264
+            },
+            "KEY_PRESSED": {
+              "n": 20,
+              "p95": 34.864
+            }
+          },
+          "pmLongGaps": null,
+          "transitions": 40,
+          "droppedPerTransition": 1.38,
+          "info": {},
+          "pmError": null,
+          "tracePath": "D:\\Coding_Project\\MinMusic_4_Windows-wp\\INT-W1\\.testdata\\20261123-084457-perf\\traces\\P4-1920-r1.trace.json",
+          "csvPath": null
+        }
+      ],
+      "worst": {
+        "run": 1,
+        "pid": 32588,
+        "windowMs": 19663,
+        "frames": 986,
+        "dropped": 55,
+        "droppedPct": 5.58,
+        "partial": 21,
+        "noUpdate": 179,
+        "states": {
+          "STATE_PRESENTED_ALL": 931,
+          "STATE_DROPPED": 34,
+          "STATE_PRESENTED_PARTIAL": 21,
+          "STATE_NO_UPDATE_DESIRED": 179
+        },
+        "runTasks": 3745,
+        "longTasks": 0,
+        "maxLongTaskMs": 0,
+        "longTasksPerSec": 0,
+        "eventLatencyP95": 34.5,
+        "eventLatencyN": 100,
+        "eventLatencyByType": {
+          "MOUSE_RELEASED": {
+            "n": 20,
+            "p95": 34.257
+          },
+          "MOUSE_PRESSED": {
+            "n": 20,
+            "p95": 34.506
+          },
+          "MOUSE_MOVED_EVENT": {
+            "n": 20,
+            "p95": 1.017
+          },
+          "KEY_RELEASED": {
+            "n": 20,
+            "p95": 4.264
+          },
+          "KEY_PRESSED": {
+            "n": 20,
+            "p95": 34.864
+          }
+        },
+        "pmLongGaps": null,
+        "transitions": 40,
+        "droppedPerTransition": 1.38,
+        "info": {},
+        "pmError": null,
+        "tracePath": "D:\\Coding_Project\\MinMusic_4_Windows-wp\\INT-W1\\.testdata\\20261123-084457-perf\\traces\\P4-1920-r1.trace.json",
+        "csvPath": null
+      },
+      "medianDroppedPct": 5.58,
+      "medianLongTasks": 0,
+      "verdict": "FAIL: dropped/transition 1.38 > 1"
+    }
+  }
+}

@@ -23,4 +23,4 @@ Follow `integration.md`. **Start when** M1-2b, M1-3b, M1-3c, M1-3d, M2-2 and M5-
 5. **Manual-QA screenshots** for Minh (test-guide §6 M1): Home, Search, Library and pages at 1920×1200 and 1280×800, light theme, VI/EN. Put them in `.testdata\INT-W2\qa\`, with an index listed in STATUS.
 
 ## Acceptance = M1 gate (milestones.md)
-All M1 contract tests pass on the real sidecar; E-1…E-12 pass; P1–P5 pass; the sidecar dist is ≤ 200 MB.
+All M1 contract tests pass on the real sidecar; E-1…E-12 pass; P1–P5 pass. Sizes are reported only (no size criterion since 2026-11-23).

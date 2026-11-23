@@ -1,5 +1,5 @@
 <#
-.SYNOPSIS  I1 local check: NSIS setup size and installed size against the limits (setup <= 100 MB, installed <= 280 MB).
+.SYNOPSIS  Size report: NSIS setup size, installed size and sidecar dist. Report only; there is no size budget (owner decision 2026-11-23), exit code is always 0.
 .DESCRIPTION
   Setup size  = the newest src-tauri\target\**\bundle\nsis\*.exe (if one was built).
   Installed   = size of the files that setup would install: MinMusic.exe + core\ (sidecar\dist) + resources,
@@ -26,8 +26,7 @@ else {
 $res = [ordered]@{
   setupMB = $(if ($setup) { MB $setup.Length } else { $null }); setupFile = $(if ($setup) { $setup.FullName } else { 'none built' })
   installedMB = MB $installed; installedNote = $note
-  setupLimitMB = 100; installedLimitMB = 280
+  sidecarDistMB = MB (Dir-Size (Join-Path $repo 'sidecar\dist'))
 }
-$res.setupOk = $(if ($null -ne $res.setupMB) { $res.setupMB -le 100 } else { $null })
-$res.installedOk = $res.installedMB -le 280
 $res | ConvertTo-Json
+exit 0

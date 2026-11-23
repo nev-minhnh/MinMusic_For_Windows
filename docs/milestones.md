@@ -29,7 +29,7 @@ Dropped frames use Chromium `PipelineReporter` frames with state `STATE_DROPPED`
 | R1 | Total private bytes (shell + all msedgewebview2 children + core) after 10 min browse + play | ≤ 700 MB | ≤ 800 MB |
 | R2 | Hidden in tray, playing, 5 min | ≤ 450 MB | same |
 | C1 | CPU, full player visible with lyrics, playing (all processes) | ≤ 4 % of total CPU avg over 60 s | ≤ 5 % |
-| I1 | NSIS setup size / installed size | ≤ 100 MB / ≤ 280 MB | – |
+| I1 | NSIS setup size / installed size | reported only, no target (owner decision 2026-11-23: speed over size) | – |
 
 For comparison, the v1 baseline is 20–45 % duplicate frames during transitions.
 
@@ -77,7 +77,7 @@ Order:
 - **Scope moves:** `track.sources`/`track.setSource` (per-track source choice; no v1 backing) → M3-2. `import.files` (no v1 importer) → M4-2a.
 - **Queue:** the basic queue and auto-advance are folded into M1-2a. The remaining queue methods and the queue pane UI stay in M2.
 
-**Acceptance (INT-W2):** all M1 contract tests pass against the real sidecar; e2e browse flows E-1…E-12 pass; P1–P5 still pass; sidecar dist ≤ 200 MB.
+**Acceptance (INT-W2):** all M1 contract tests pass against the real sidecar; e2e browse flows E-1…E-12 pass; P1–P5 still pass. (Sizes are reported only; no size criterion.)
 
 ## M2: Player complete
 | WP | Wave | Content |

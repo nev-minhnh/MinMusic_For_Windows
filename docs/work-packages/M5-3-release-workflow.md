@@ -24,7 +24,7 @@ Read first:
   7. Rust stable MSVC, `cargo tauri build --target x86_64-pc-windows-msvc --bundles nsis` with `TAURI_SIGNING_PRIVATE_KEY`(+ `_PASSWORD`)
   8. `scripts/portable.ps1`
   9. sha256 files + `node scripts/make-latest-json.mjs`
-  10. `scripts/size.ps1` (fail on an I1 breach)
+  10. `scripts/size.ps1` (report only, never fails)
   11. `gh release create` with the setup, zip, sig and `latest.json`
 - **`ci.yml`** (manual `workflow_dispatch` only; Actions are for releases): the same up to step 6, without a release. It is used by W6 for a dry run on a branch.
 - **Pin every action by commit SHA.** Concurrency group per tag. Least-privilege `permissions: contents: write` only on the release job.
