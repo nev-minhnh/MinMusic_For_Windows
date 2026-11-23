@@ -55,3 +55,19 @@ same scenario passes.
   timed out with no output. Fixed: absolute output path; the warm-up timeout is no longer fatal and logs its output.
 - The offline real-core contract step is report only: 109/127 on the runner (the known test-data failures plus the
   runner's missing audio endpoint and LAN address).
+
+## Release
+https://github.com/nev-minhnh/MinMusic_For_Windows/releases/tag/v2.0.0 (run 45123733637, latest, not prerelease)
+
+| Asset | Size | SHA-256 |
+|---|---|---|
+| `MinMusic-2.0.0-windows-x64-setup.exe` | 145,361,852 | `90633a7517836ed8778ddb99ea83b5a803d81cb1affa9720bf1504aec62fd8ff` |
+| `MinMusic-2.0.0-portable-x64.zip` | 157,305,588 | `21ef2e0bb9c7643cf6fb3c3470796d46c4635990dca2f7bc3919ea540c524fde` |
+| `.sig`, `.sha256` ×2, `latest.json` | | the downloaded hashes match the `.sha256` files; the `.sig` key id matches `plugins.updater.pubkey`, trusted comment `version:2.0.0`; `latest.json` carries the same signature |
+
+Smoke test: the portable zip (MSVC) starts from a `.testdata` folder with `portable.flag`, core READY, data under
+`<exe>\data`, `%APPDATA%`/`%LOCALAPPDATA%\MinMusic` unchanged.
+
+**Found:** the portable app registers `minmusic://`, `metrolist://` and `metrolist-auth://` in HKCU to its own exe path, so
+running a portable copy takes over the installed app's deep links. W6 restored the owner's keys afterwards. Decide whether
+portable mode should skip the scheme registration (follow-up).
