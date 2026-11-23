@@ -148,8 +148,9 @@ test.describe('E-7 song context menu', () => {
     expect((await page.locator('.mn-it').first().boundingBox())!.height).toBeCloseTo(36, 0);
     await expect(page.locator('[data-id="copy-link"] .mn-k')).toHaveText('Ctrl C');
     await expect(page.locator('[data-id="info"] .mn-k')).toHaveText('Ctrl I');
-    await expect(page.locator('[data-id="download"]')).toHaveAttribute('aria-disabled', 'true');
-    await expect(page.locator('[data-id="download"] .mn-k')).toHaveText('M4');
+    // downloads are ready (M4-2b): a live submenu, no "M4" hint
+    await expect(page.locator('[data-id="download"]')).toHaveAttribute('aria-haspopup', 'menu');
+    await expect(page.locator('[data-id="download"]')).not.toHaveAttribute('aria-disabled', 'true');
 
     // hover "Thêm vào album của tôi": submenu after 200 ms, flipped to the left of the parent
     await page.locator('[data-id="add-album"]').hover();
@@ -474,11 +475,11 @@ test.describe('E-11 shortcut table', () => {
     await page.keyboard.press('Escape');
     await page.locator('.pg').first().focus();
     await page.keyboard.press('Control+e');
-    await expect(page.getByTestId('missing-page')).toBeVisible();
+    await expect(page.getByTestId('equalizer')).toBeVisible();
     await page.keyboard.press('Alt+ArrowLeft');
     await expect(page.getByTestId('home')).toBeVisible();
     await page.keyboard.press('Alt+ArrowRight');
-    await expect(page.getByTestId('missing-page')).toBeVisible();
+    await expect(page.getByTestId('equalizer')).toBeVisible();
     await page.keyboard.press('Control+b');
     await expect(page.getByTestId('rail')).toBeVisible();
     await page.keyboard.press('Control+b');
@@ -488,9 +489,8 @@ test.describe('E-11 shortcut table', () => {
     await boot(page);
     await page.locator('.pg').first().focus();
     const noops: [string, string][] = [
-      ['l', 'pane.lyrics'], ['q', 'pane.queue'], ['d', 'pane.deviceConnect'], ['c', 'video.captions'], ['v', 'video.mode'],
-      ['f', 'window.fullscreen'], ['Control+m', 'mini.open'], ['Control+,', 'settings.open'], ['F11', 'fullscreen.toggle'],
-      ['Control+Shift+L', 'logs.open'], ['Control+`', 'shortcuts.sheet'], ['Control+/', 'shortcuts.sheet'], ['Control+q', 'app.quit'],
+      // only the ids without an owner yet; pane.*, mini.open, settings.open, logs.open, shortcuts.sheet, ... have real commands
+      ['c', 'video.captions'], ['v', 'video.mode'], ['f', 'window.fullscreen'], ['Control+q', 'app.quit'],
     ];
     for (const [key, id] of noops) {
       await press(page, key);
@@ -529,7 +529,7 @@ test.describe('E-11 shortcut table', () => {
     expect(await page.evaluate(() => navigator.clipboard.readText())).toContain('https://example.test/');
     await clearCalls(page);
     await page.keyboard.press('Control+i');
-    await expect.poll(async () => (await calls(page, 'app.log')).some((c) => /song info/.test(c.p.msg))).toBe(true);
+    await expect(page.getByTestId('songinfo-dialog')).toBeVisible();
   });
   test('plain keys are ignored while typing in the search field; Ctrl K still works', async ({ page }) => {
     await boot(page);
@@ -587,8 +587,9 @@ test.describe('route registry', () => {
   test.use({ viewport: { width: 1536, height: 960 } });
   test('a route without a page renders the missing page; Settings dev route renders one category', async ({ page }) => {
     await boot(page);
+    // every route has a page now (the Missing fallback is covered by router/registry unit tests)
     await page.getByTestId('nav-stats').click();
-    await expect(page.getByTestId('missing-page')).toBeVisible();
+    await expect(page.getByTestId('stats')).toBeVisible();
     await page.getByTestId('nav-settings').click();
     await expect(page.getByTestId('settings')).toBeVisible();
     await page.goto('/?lang=en#/dev/settings/none');
@@ -598,7 +599,7 @@ test.describe('route registry', () => {
   test('deep link: the mm-nav event navigates', async ({ page }) => {
     await boot(page);
     await page.evaluate(() => window.dispatchEvent(new CustomEvent('mm-nav', { detail: { route: 'liked', params: {} } })));
-    await expect(page.getByTestId('missing-page')).toBeVisible();
+    await expect(page.getByTestId('liked')).toBeVisible();
     await clearCalls(page);
     await page.evaluate(() => window.dispatchEvent(new CustomEvent('mm-nav', { detail: { route: 'nope', params: {} } })));
     expect((await calls(page, 'app.log')).some((c) => /unknown route/.test(c.p.msg))).toBe(true);
