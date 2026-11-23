@@ -30,9 +30,10 @@ export const TRACE_CATEGORIES =
 // Selector table. The data-testid names are the M0-C contract; the fallbacks are tried in order.
 export const SEL = {
   home: '[data-testid="home"]',
-  list: '[data-testid="songs-list"]',
-  row: '[data-testid="song-row"]',
-  tile: '[data-testid="qp-tile"], [data-testid="card"]',
+  // keep-alive pages stay mounted (hidden): only the visible page counts
+  list: '.pg:not(.hid) [data-testid="songs-list"]',
+  row: '.pg:not(.hid) [data-testid="song-row"]',
+  tile: '.pg:not(.hid) [data-testid="qp-tile"], .pg:not(.hid) [data-testid="card"]',
   playerBar: '[data-testid="player-bar"]',
   playerArt: '[data-testid="player-art"]',
   fullPlayer: '[data-testid="full-player"]',

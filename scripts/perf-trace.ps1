@@ -142,7 +142,10 @@ try {
     $env1 = @{}
     if ($Size -eq '1920') { $env1['WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS'] = '--force-device-scale-factor=1' }
     if (-not $FixtureHome) { $f = Join-Path $repo 'tests\fixtures\home.json'; if (Test-Path $f) { $FixtureHome = $f } }
-    if ($FixtureHome) { $env1['MINMUSIC_CORE_EXTRA_ARGS'] = "--fixture-home `"$FixtureHome`"" }
+    # the shell splits MINMUSIC_CORE_EXTRA_ARGS on whitespace (no quoting): the seed (P1/P5 library) and the Home fixture
+    $seedF = Join-Path $repo 'tests/fixtures/library-seed.json'
+    $extraArgs = @(); if (Test-Path $seedF) { $extraArgs += "--seed-library $seedF" }; if ($FixtureHome) { $extraArgs += "--fixture-home $FixtureHome" }
+    if ($extraArgs) { $env1['MINMUSIC_CORE_EXTRA_ARGS'] = $extraArgs -join ' ' }
     $app = Start-TestApp -Exe $exePath -Root (Join-Path $root 'app') -ExtraEnv $env1
     try {
       Wait-AppReady $app | Out-Null
