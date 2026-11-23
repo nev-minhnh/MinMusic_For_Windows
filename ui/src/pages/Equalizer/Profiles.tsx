@@ -174,12 +174,13 @@ export async function importApo() {
 }
 export async function exportApo() {
   const s = eqState();
-  if (!s) return;
-  const name = s.profiles.find((p) => p.id === s.profileId)?.name ?? "EQ";
+  const id = s?.profileId;
+  if (!s || !id) return; // no active profile (e.g. it was just deleted): nothing to export
+  const name = s.profiles.find((p) => p.id === id)?.name ?? "EQ";
   const p = pathOf(await invoke("save_file", { defaultName: `${name}.txt` }));
   if (!p) return;
   try {
-    await eqApi.exportFile(s.profileId, p);
+    await eqApi.exportFile(id, p);
     setEqStatus({ kind: "ok", key: "w2_eq_exported", arg: p.split(/[\\/]/).pop() });
   } catch { /* reported */ }
 }
