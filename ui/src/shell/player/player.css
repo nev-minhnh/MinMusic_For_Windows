@@ -1,0 +1,123 @@
+/* M2-2: support pane, queue, popovers, volume, switch, dialog, bar variants, full-player final fidelity.
+   Rules (frontend-spec 6): transform/opacity only, no backdrop-filter, static shadows, hover = opacity of pre-rendered overlays. */
+
+/* ===== support pane ===== */
+.sp{grid-row:2;grid-column:3;width:var(--spw,336px);background:var(--s1);border-left:1px solid var(--line);display:flex;flex-direction:column;min-height:0;min-width:0;position:relative;overflow:hidden}
+.win:has(.sp.docked) .main{grid-column:2/3}
+.sp.ovl{position:fixed;top:var(--tb);bottom:var(--pb);right:0;z-index:30;box-shadow:var(--menu-sh);overflow:visible}
+.sp-grip{position:absolute;left:-3px;top:0;bottom:0;width:7px;z-index:3;cursor:col-resize;touch-action:none}
+.sp-grip:hover,.sp.dragging .sp-grip{background:var(--acc);opacity:.45}
+.sp-head{height:56px;flex:none;display:flex;align-items:center;gap:8px;padding:0 8px 0 12px}
+.sp-body{flex:1;min-height:0;display:flex;flex-direction:column}
+.sp .lyv{padding:0 4px 0 16px}
+
+/* ===== queue ===== */
+.qp{flex:1;min-height:0;display:flex;flex-direction:column;position:relative}
+.qp.over:after{content:"";position:absolute;inset:4px;border:2px dashed var(--acc);border-radius:12px;pointer-events:none;z-index:2}
+.qp-scroll.pg{position:relative;inset:auto;flex:1;min-height:0;background:var(--s1);padding:0 8px}
+.qp.in-fp .qp-scroll.pg{background:transparent}
+.qp-h{padding:8px 8px 4px}
+.qp-h2{display:flex;align-items:center;gap:8px;padding:16px 8px 4px;min-height:44px}
+.qp-clear{height:28px;padding:0 12px}
+.qp-clear:disabled{opacity:.38}
+.qr{height:56px;display:flex;align-items:center;gap:12px;padding:0 8px;border-radius:8px;contain:layout paint style;position:relative;width:100%;text-align:left}
+.qr.cur{background:var(--hov)}
+.qr:hover:not(.cur),.qr:focus-visible{background:var(--hov)}
+.qr.sel{background:var(--acc-c)}.qr.sel .meta-l,.qr.sel .i3{color:var(--on-acc-c)}
+.qr-grip{color:var(--ink3);opacity:0;cursor:grab;flex:none;margin-left:-8px;margin-right:-4px}
+.qr:hover .qr-grip{opacity:1}
+.qr-rm{opacity:0;flex:none}
+.qr:hover .qr-rm,.qr-rm:focus-visible{opacity:1}
+.qr-dur{flex:none;min-width:34px;text-align:right}
+.qr .art{width:40px;height:40px}
+.qp-list{position:relative}
+.qp-drop{position:absolute;left:0;right:0;top:-1px;height:2px;background:var(--acc);opacity:0;pointer-events:none;border-radius:1px}
+.qp-drop.on{opacity:1}
+.qp-foot{flex:none;display:flex;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--line)}
+.qp-empty{padding:32px 16px;text-align:center;color:var(--ink3)}
+.rel{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--s3) transparent;padding:0 8px}
+.rel-h{padding:12px 8px 4px}
+
+/* ===== switch ===== */
+.sw{width:40px;height:24px;border-radius:12px;background:var(--s3);position:relative;flex:none}
+.sw i{position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:9px;background:var(--ink2);transition:transform var(--m-fast) var(--e-fast)}
+.sw.on{background:var(--acc)}
+.sw.on i{transform:translateX(16px);background:#0B0B0B}
+
+/* ===== popovers ===== */
+@keyframes mm-pop{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.pop{position:fixed;z-index:80;min-width:220px;max-width:320px;max-height:min(70vh,560px);overflow-y:auto;overscroll-behavior:contain;background:var(--s2);border-radius:12px;box-shadow:var(--menu-sh);padding:8px;animation:mm-pop var(--m-fast) var(--e-fast);scrollbar-width:thin}
+.pop-vol{min-width:280px}
+.pop-vrow{display:flex;align-items:center;gap:8px;padding:4px}
+.pop-pct{min-width:36px;text-align:right}
+.pop-h{padding:6px 12px 2px;font-size:12px;line-height:18px;font-weight:600;color:var(--ink3);letter-spacing:.2px}
+.pop-it{display:flex;align-items:center;gap:8px;width:100%;height:36px;padding:0 12px 0 4px;border-radius:8px;color:var(--ink)}
+.pop-it:hover{background:var(--hov)}
+.pop-ck{width:20px;display:flex;justify-content:center;color:var(--acc-t);flex:none}
+.pop-sep{height:1px;background:var(--line);margin:6px 0}
+.pop-note{padding:6px 12px;color:var(--ink3);font-size:12px;line-height:18px}
+.pop-row{display:flex;align-items:center;gap:8px;padding:2px 8px 2px 12px;min-height:36px}
+.pop-off{min-width:56px;text-align:center}
+
+/* ===== volume slider ===== */
+.vslider{flex:1;height:4px;border-radius:2px;background:var(--line);position:relative;container-type:inline-size;min-width:72px;touch-action:none;cursor:pointer}
+.vslider:after{content:"";position:absolute;left:-6px;right:-6px;top:-10px;bottom:-10px}
+.vs-fill{position:absolute;inset:0;border-radius:2px;background:var(--ink2);transform-origin:0 50%}
+.vs-thumb{position:absolute;left:0;top:-4px;width:12px;height:12px;margin-left:-6px;border-radius:6px;background:var(--ink);opacity:0}
+.vslider:hover .vs-thumb,.vslider:focus-visible .vs-thumb{opacity:1}
+.vslider.bar-vol{flex:0 0 96px}
+
+/* ===== dialog (448, r28, scrim 60 % / 42 % light) ===== */
+.dlg-scrim{position:fixed;inset:0;z-index:90;background:var(--scrim);display:flex;align-items:center;justify-content:center}
+.dlg{width:448px;max-width:calc(100vw - 32px);background:var(--s2);border-radius:28px;padding:20px 24px 24px;box-shadow:var(--menu-sh);display:flex;flex-direction:column;gap:12px}
+.dlg-in{height:44px;border-radius:12px;background:var(--bg);display:flex;align-items:center;padding:0 12px}
+.dlg-in:focus-within{box-shadow:inset 0 0 0 2px var(--acc)}
+.dlg-in input{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--ink);user-select:text;-webkit-user-select:text}
+.dlg-list{max-height:320px;min-height:64px;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:2px}
+.dlg-note{padding:16px 12px;text-align:center}
+.dlg-cand{display:block;width:100%;padding:10px 12px;border-radius:12px;text-align:left}
+.dlg-cand:hover{background:var(--hov)}
+.badge-s{font-size:12px;line-height:18px;padding:0 8px;border-radius:9px;background:var(--s3);color:var(--ink2);flex:none}
+
+/* ===== fullscreen lyrics ===== */
+.lyfs{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;background:linear-gradient(180deg,var(--tint,#2A1622) 0%,var(--bg) 85%)}
+.lyfs-top{height:56px;flex:none;display:flex;align-items:center;gap:8px;padding:0 16px}
+.lyfs .lyv{padding:0 24px 16px}
+
+/* ===== player bar extras ===== */
+.pbar .prog{flex:1;min-width:0;display:flex;align-items:center}
+.pbar .prog .wave{width:100%}
+.prog.thick .bar{height:8px;border-radius:4px}.prog.thick .bar-fill{border-radius:4px}.prog.thick .bar-thumb b{top:-2px}
+.pbar.float{background:transparent;border-top:0;padding:0 12px 8px}
+.pbar.float .pbar-in{background:var(--s2);border-radius:16px;box-shadow:var(--menu-sh);padding:0 16px}
+.pbar.float.cmp .pbar-in{padding:0 8px 0 12px}
+.chipbtn.sleep-on{color:var(--acc-t)}
+.chipbtn.btn{cursor:default}
+.chipbtn.btn:hover{background:var(--s3)}
+.pr .spd{min-width:36px;padding:0 8px}
+/* Right-side buttons line up with the play row, not the seek row (owner): the centre column is
+   controls 40 + gap 4 + seek row 18, so the play row sits 11px above the bar's centre (9px when short). */
+.pbar:not(.cmp) .pr,.pbar:not(.cmp) .liked-btn{transform:translateY(-11px)}
+.win[data-h=short] .pbar:not(.cmp) .pr,.win[data-h=short] .pbar:not(.cmp) .liked-btn{transform:translateY(-9px)}
+/* Seek row is 80 % of the centre column, centred under the controls (owner). */
+.pbar:not(.cmp) .pc .prow{width:80%}
+
+/* ===== full player: final fidelity ===== */
+.fp .fp-bg{background:none;overflow:hidden;z-index:0;pointer-events:none}
+.fp-tl{position:absolute;inset:0;background:linear-gradient(180deg,var(--tint,#2A1622) 0%,var(--bg) 70%);opacity:0;transition:opacity 300ms linear}
+.fp-tl.on{opacity:1}
+.fp.two .fp-body{grid-template-columns:var(--fl) minmax(0,1fr);padding:8px 64px 32px}
+.fp.two .fp-right{display:flex}
+.fp.one .fp-body{grid-template-columns:minmax(0,1fr);padding:8px 24px 24px}
+.fp.one .fp-right{display:flex;position:absolute;inset:0;z-index:3;padding:8px 24px 24px;background:linear-gradient(180deg,var(--tint,#2A1622) 0%,var(--bg) 70%);transform:translateY(100%);visibility:hidden;transition:transform var(--m-nav) var(--e-nav),visibility 0s linear var(--m-nav)}
+.fp.one.layer .fp-right{transform:none;visibility:visible;transition-delay:0s}
+.fp-right .lyv{margin-top:8px}
+.fp-right .qp,.fp-right .rel{margin-top:8px}
+.fp-layer-btn{display:none;margin-top:16px;align-self:center}
+.fp.one .fp-layer-btn{display:inline-flex}
+.fp-chips{flex-wrap:wrap;row-gap:8px}
+.fp-vol .vslider{--vw:96px;flex:0 0 96px}
+.fp-prog .prog{width:100%}
+.fp-prog .prog .wave{width:100%}
+.fp-right .seg{max-width:100%}
+.fp-right-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
