@@ -72,7 +72,7 @@ test.describe('Album', () => {
     await boot(page);
     await go(page, 'album', { id: 'MPREb_mockAlbum01' });
     await expect(page.getByTestId('album-table')).toBeVisible();
-    await expect(page.getByTestId('song-row').first()).toBeVisible();
+    await expect(visiblePage(page, 'album').getByTestId('song-row').first()).toBeVisible();
     const art = await page.locator('.al-head .al-art').boundingBox();
     expect(art!.width).toBe(232);
     await shot(page, 'album-header');
@@ -94,7 +94,7 @@ test.describe('Album', () => {
     expect(play[0].p).toEqual({ context: { kind: 'album', id: 'MPREb_mockAlbum01' } });
     expect(play[1].p).toEqual({ context: { kind: 'album', id: 'MPREb_mockAlbum01' }, shuffle: true });
 
-    const row = page.getByTestId('song-row').nth(2);
+    const row = visiblePage(page, 'album').getByTestId('song-row').nth(2);
     const id = await page.evaluate(() => null); // placeholder to keep the order explicit
     void id;
     await row.dblclick();
@@ -200,11 +200,11 @@ test.describe('Playlist', () => {
     await boot(page);
     await go(page, 'playlist', { id: PLAYLIST });
     await expect(page.getByTestId('playlist-table')).toBeVisible();
-    await expect(page.getByTestId('song-row').first()).toBeVisible();
+    await expect(visiblePage(page, 'playlist').getByTestId('song-row').first()).toBeVisible();
     await expect(page.getByTestId('coll-title')).toBeVisible();
     // mock page size is 100: the first page already exceeds 60 rows, so the table is virtualised
     await expect(page.getByTestId('songs-list')).toBeVisible();
-    const rendered = await page.getByTestId('song-row').count();
+    const rendered = await visiblePage(page, 'playlist').getByTestId('song-row').count();
     expect(rendered).toBeLessThan(100);
     await shot(page, 'playlist');
     // scroll to the end: the sentinel pulls the next cursor pages (300 rows in the mock)
@@ -230,7 +230,7 @@ test.describe('Playlist', () => {
   test('sticky bar appears after scrolling', async ({ page }) => {
     await boot(page);
     await go(page, 'playlist', { id: PLAYLIST });
-    await expect(page.getByTestId('song-row').first()).toBeVisible();
+    await expect(visiblePage(page, 'playlist').getByTestId('song-row').first()).toBeVisible();
     const bar = visiblePage(page, 'playlist').getByTestId('coll-sticky');
     await expect(bar).toHaveAttribute('data-on', '0');
     await page.evaluate(() => (document.querySelector('.pg:not(.hid)') as HTMLElement).scrollTo(0, 600));
@@ -315,7 +315,7 @@ test('perf proxy: 20 push/pop transitions, <= 1 dropped frame each (relative to 
   );
   const cheap = await measure(20); // Home <-> Library
   await go(page, 'album', { id: 'MPREb_mockAlbum01' });
-  await expect(page.getByTestId('song-row').first()).toBeVisible();
+  await expect(visiblePage(page, 'album').getByTestId('song-row').first()).toBeVisible();
   await go(page, 'artist', { id: 'UCg-Ds_COVaFZp8UNDZTfie6' });
   await expect(page.getByTestId('artist-name')).toBeVisible();
   const ours = await measure(20);
