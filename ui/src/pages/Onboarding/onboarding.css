@@ -1,0 +1,15 @@
+/* Onboarding (M4-3b). Prefix ob-. Static layout, no animation. */
+.ob{display:flex;justify-content:center;padding-top:48px}
+.ob-card{width:100%;max-width:560px;padding:32px;display:flex;flex-direction:column;gap:16px;border-radius:28px}
+.ob-dots{display:flex;gap:8px}
+.ob-dot{width:24px;height:4px;border-radius:2px;background:var(--s3)}
+.ob-dot.on{background:var(--acc)}
+.ob-h{margin:8px 0 0}
+.ob p{margin:0}
+.ob-field{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.ob-actions-inline{display:flex;gap:12px}
+.ob-note{color:var(--acc-t)}
+.ob-note.err{color:var(--err)}
+.ob-nav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:12px;flex-wrap:wrap}
+.ob-nav-r{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ob .btn:disabled{opacity:.45}
