@@ -50,7 +50,7 @@ function Test-TP2($Ctx) {
       Wait-AppReady $app2 | Out-Null
       $q = Invoke-CoreCall $app2.Port 'queue.window' @{ offset = 0; limit = 10 }
       $snap = Invoke-Cdp -Port $app2.Port core 'sub:player' '{}' | ConvertFrom-Json
-      $pos = [double]($snap.p.positionMs); $playing = $snap.p.playing
+      $pos = [double]($snap.p.posMs); $playing = $snap.p.playing
       $ok = ($q.total -eq 5) -and ([math]::Abs($pos / 1000 - 42) -le 1) -and (-not $playing)
       New-TestResult $ok ("quit {0:N2} s; restored total={1} index={2} pos={3:N1}s playing={4}" -f $t, $q.total, $q.currentIndex, ($pos / 1000), $playing)
     } finally { Stop-TestApp $app2 }
@@ -215,8 +215,8 @@ function Test-TP11($Ctx) {
     }
     $text = ''
     if ($script:tp11Dlg -ne [IntPtr]::Zero) {
-      $st = [Mm.W11]::FindWindowEx($script:tp11Dlg, [IntPtr]::Zero, 'Static', $null)
-      while ($st -ne [IntPtr]::Zero -and -not $text) { $sb = New-Object System.Text.StringBuilder 256; [void][Mm.W11]::GetWindowText($st, $sb, 256); $text = $sb.ToString(); $st = [Mm.W11]::FindWindowEx($script:tp11Dlg, $st, 'Static', $null) }
+      $st = [Mm.W11]::FindWindowEx($script:tp11Dlg, [IntPtr]::Zero, 'Static', [NullString]::Value)
+      while ($st -ne [IntPtr]::Zero -and -not $text) { $sb = New-Object System.Text.StringBuilder 256; [void][Mm.W11]::GetWindowText($st, $sb, 256); $text = $sb.ToString(); $st = [Mm.W11]::FindWindowEx($script:tp11Dlg, $st, 'Static', [NullString]::Value) }
     }
     $msg = $text -match 'MinMusic 1\.x'
     $cores = @(Get-CimInstance Win32_Process -Filter "Name='minmusic-core.exe'" | Where-Object { $_.ParentProcessId -eq $shellPid })
