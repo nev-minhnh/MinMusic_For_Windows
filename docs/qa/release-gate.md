@@ -1,6 +1,6 @@
 # Release gate v2.0.0 (W6, 2026-11-23)
 
-Main at the release commit `2857b9a`, core `feat/desktop-core` `ea8d5670`. Owner policy for W6: speed first; perf and the
+Core `feat/desktop-core` `3637455` (W6 seek fix `ea8d5670` + CDS warm-up build fix). Owner policy for W6: speed first; perf and the
 upgrade tests that need a separate Windows user stay pending for the owner and do not block the release.
 
 ## Fix in W6: seek during loading, silent stall after a far seek
@@ -49,3 +49,9 @@ same scenario passes.
   Zing VIP 320 vs non-VIP; NCT login; Device Connect with Android 1.0.2 (QR, SAS, both ways, transfer); Listen Together;
   Last.fm scrobble; downloads keep format + tags (foobar2000/MP3Tag); folder change; backup → restore; crash prompt after
   `taskkill` of the core during a write; SmartScreen flow; portable zip from a USB path.
+
+## CI (release.yml on windows-latest)
+- First run: the sidecar image went to `core/sidecar/dist` (`-PsidecarOut` is relative to `desktopCore`) and the CDS warm-up
+  timed out with no output. Fixed: absolute output path; the warm-up timeout is no longer fatal and logs its output.
+- The offline real-core contract step is report only: 109/127 on the runner (the known test-data failures plus the
+  runner's missing audio endpoint and LAN address).
