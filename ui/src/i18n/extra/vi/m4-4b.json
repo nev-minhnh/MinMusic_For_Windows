@@ -1,0 +1,32 @@
+{
+ "w2_imp_title": "Nhập playlist",
+ "w2_imp_providers": "Dịch vụ",
+ "w2_imp_p_spotify": "Spotify",
+ "w2_imp_p_tidal": "Tidal",
+ "w2_imp_p_deezer": "Deezer",
+ "w2_imp_p_apple": "Apple Music",
+ "w2_imp_p_amazon": "Amazon Music",
+ "w2_imp_waiting": "Đang chờ đăng nhập…",
+ "w2_imp_signed_in": "Đã đăng nhập",
+ "w2_imp_signed_out": "Chưa đăng nhập",
+ "w2_imp_login": "Đăng nhập",
+ "w2_imp_choose": "Chọn playlist",
+ "w2_imp_playlists": "Playlist {0}",
+ "w2_imp_none": "Không có playlist nào",
+ "w2_imp_all": "Chọn tất cả",
+ "w2_imp_none_sel": "Bỏ chọn",
+ "w2_imp_selected": "Đã chọn {0} · {1} bài",
+ "w2_imp_tracks": {
+  "one": "{0} bài",
+  "other": "{0} bài"
+ },
+ "w2_imp_target": "Nhập vào",
+ "w2_imp_new_album": "Album mới",
+ "w2_imp_run": "Bắt đầu nhập",
+ "w2_imp_progress": "Tiến độ",
+ "w2_imp_count": "{0}/{1} bài · {2} lỗi",
+ "w2_imp_done": "Đã nhập {0} bài · {1} lỗi",
+ "w2_imp_failed_list": "Các bài không nhập được",
+ "w2_imp_open_album": "Mở album",
+ "w2_imp_err": "Nhập thất bại. Thử lại."
+}

@@ -1,0 +1,32 @@
+{
+ "w2_imp_title": "Import playlists",
+ "w2_imp_providers": "Services",
+ "w2_imp_p_spotify": "Spotify",
+ "w2_imp_p_tidal": "Tidal",
+ "w2_imp_p_deezer": "Deezer",
+ "w2_imp_p_apple": "Apple Music",
+ "w2_imp_p_amazon": "Amazon Music",
+ "w2_imp_waiting": "Waiting for sign-in…",
+ "w2_imp_signed_in": "Signed in",
+ "w2_imp_signed_out": "Not signed in",
+ "w2_imp_login": "Sign in",
+ "w2_imp_choose": "Choose playlists",
+ "w2_imp_playlists": "{0} playlists",
+ "w2_imp_none": "No playlists found",
+ "w2_imp_all": "Select all",
+ "w2_imp_none_sel": "Select none",
+ "w2_imp_selected": "{0} selected · {1} tracks",
+ "w2_imp_tracks": {
+  "one": "{0} track",
+  "other": "{0} tracks"
+ },
+ "w2_imp_target": "Import into",
+ "w2_imp_new_album": "New album",
+ "w2_imp_run": "Start import",
+ "w2_imp_progress": "Progress",
+ "w2_imp_count": "{0} of {1} tracks · {2} failed",
+ "w2_imp_done": "Imported {0} tracks · {1} failed",
+ "w2_imp_failed_list": "Tracks that could not be imported",
+ "w2_imp_open_album": "Open album",
+ "w2_imp_err": "Import failed. Try again."
+}
