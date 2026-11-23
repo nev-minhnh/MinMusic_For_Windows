@@ -310,6 +310,8 @@ test.describe('lyrics', () => {
     await page.locator('[data-testid="lyrics-find"]').click();
     const dlg = page.locator('[data-testid="lyrics-search"]');
     await expect(dlg).toBeVisible();
+    // the dialog pops in with a scale animation (account.css .dlg); measure the settled size
+    await dlg.evaluate((el) => Promise.all(el.getAnimations().map((x) => x.finished)));
     expect(Math.round((await dlg.boundingBox())!.width)).toBe(448);
     await page.screenshot({ path: `${SHOTS}/lyrics-search.png` });
     await dlg.locator('[data-testid="lyrics-cand"][data-synced="line"]').click();
