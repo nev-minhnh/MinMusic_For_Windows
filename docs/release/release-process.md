@@ -10,12 +10,12 @@ Releases are **not Authenticode-signed** (owner decision; SmartScreen shows "Unk
 |---|---|---|
 | `TAURI_SIGNING_PRIVATE_KEY` | `cargo tauri build` | minisign private key (file content or path) from `cargo tauri signer generate`. Required; the release fails early when empty |
 | `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` | `cargo tauri build` | password of that key; set it (empty string only if the key has none) |
-| `LASTFM_API_KEY`, `LASTFM_SECRET` | sidecar Gradle build | same values as the MinMusic Android/desktop builds |
-| `LYPRIO_BASE_URL`, `LYPRIO_HMAC_KEY` | sidecar Gradle build | same values as the MinMusic builds |
+| `LASTFM_API_KEY`, `LASTFM_SECRET` | sidecar Gradle build | optional (W6): without them Last.fm scrobbling stays off; same values as the MinMusic builds when set |
+| `LYPRIO_BASE_URL`, `LYPRIO_HMAC_KEY` | sidecar Gradle build | optional (W6), but both or neither; same values as the MinMusic builds when set |
 
 `GITHUB_TOKEN` is provided by Actions; only the `publish` job gets `contents: write`. `BRIDGE_TOKEN` (PAT) belongs to the manual `bridge.yml` job (M5-2), not to this workflow.
 
-The public key goes into `src-tauri/tauri.conf.json` `plugins.updater.pubkey` (done at INT-W5). `scripts/ci/check-tag.mjs` fails the release while that value is missing or a placeholder, and when `bundle.createUpdaterArtifacts` is not `true`. Generating the key and setting secrets is done by the owner; see `scripts/gen-updater-key.md` (M5-2). Never commit a private key. Losing the key means existing installs can no longer verify updates, so keep a backup.
+The public key goes into `src-tauri/tauri.conf.json` `plugins.updater.pubkey` (done at INT-W5). `scripts/ci/check-tag.mjs` fails the release while that value is missing or a placeholder, and when `bundle.createUpdaterArtifacts` is not `true`. The key was generated at W6 (2026-11-23); the private key and its password are kept outside the repo in `D:\Coding_Project\MinMusic-secrets\` (owner-only ACL) and set as the two repository secrets. See `scripts/gen-updater-key.md` (M5-2). Never commit a private key. Losing the key means existing installs can no longer verify updates, so keep a backup.
 
 ## 2. Cut a release
 
