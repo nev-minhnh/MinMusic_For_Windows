@@ -1,0 +1,22 @@
+{
+  "w2_dc_moods": "Tâm trạng",
+  "w2_dc_good_night": "Chúc ngủ ngon",
+  "w2_dc_quick_picks": "Chọn nhanh",
+  "w2_dc_play_all": "Phát tất cả",
+  "w2_dc_shuffle_all": "Trộn bài",
+  "w2_dc_chart_tabs": "Bảng xếp hạng",
+  "w2_dc_n_songs": "{0} bài hát",
+  "w2_dc_trend": "Xu hướng",
+  "w2_dc_delta": "Thay đổi",
+  "w2_srch_artist": "Nghệ sĩ",
+  "w2_srch_album": "Album",
+  "w2_srch_playlist": "Playlist",
+  "w2_srch_song": "Bài hát",
+  "w2_srch_remove": "Xoá khỏi lịch sử",
+  "w2_srch_top": "Kết quả hàng đầu",
+  "w2_srch_n_sources": "{0} nguồn",
+  "w2_srch_follow": "Theo dõi",
+  "w2_srch_following": "Đang theo dõi",
+  "w2_srch_albums_singles": "Album và đĩa đơn",
+  "w2_srch_none": "Không có kết quả cho \"{0}\""
+}

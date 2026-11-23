@@ -1,0 +1,22 @@
+{
+  "w2_dc_moods": "Moods",
+  "w2_dc_good_night": "Good night",
+  "w2_dc_quick_picks": "Quick picks",
+  "w2_dc_play_all": "Play all",
+  "w2_dc_shuffle_all": "Shuffle",
+  "w2_dc_chart_tabs": "Chart",
+  "w2_dc_n_songs": "{0} songs",
+  "w2_dc_trend": "Trend",
+  "w2_dc_delta": "Change",
+  "w2_srch_artist": "Artist",
+  "w2_srch_album": "Album",
+  "w2_srch_playlist": "Playlist",
+  "w2_srch_song": "Song",
+  "w2_srch_remove": "Remove from history",
+  "w2_srch_top": "Top result",
+  "w2_srch_n_sources": "{0} sources",
+  "w2_srch_follow": "Follow",
+  "w2_srch_following": "Following",
+  "w2_srch_albums_singles": "Albums and singles",
+  "w2_srch_none": "No results for \"{0}\""
+}

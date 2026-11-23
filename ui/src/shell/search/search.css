@@ -1,0 +1,10 @@
+/* title-bar search field: suggestions popover (opacity + translate only) */
+.search{position:relative}
+.sg{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:60;background:var(--s2);border-radius:16px;padding:6px;box-shadow:var(--menu-sh);color:var(--ink);cursor:default;animation:sg-in var(--m-std-in) both}
+@keyframes sg-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.sg-row{display:flex;align-items:center;gap:12px;height:48px;padding:0 8px 0 10px;border-radius:12px;contain:layout paint style}
+.sg-row.on{background:var(--hov)}
+.sg-ic{color:var(--ink3);flex:none;width:32px}
+.sg-t{flex:1;min-width:0}
+.sg-x{flex:none;width:32px;height:32px;opacity:.7}
+.sg-x:hover{opacity:1}

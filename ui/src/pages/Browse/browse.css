@@ -1,0 +1,8 @@
+/* Browse / mood page. Classes prefixed .brw- */
+.brw-head{margin-top:16px}
+.brw-moods{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-top:24px}
+.brw-mood{height:72px;border-radius:12px;padding:0 16px;display:flex;align-items:center;color:#fff;font-weight:600;font-size:16px;line-height:24px;text-align:left;contain:layout paint style;position:relative;overflow:hidden}
+.brw-mood::after{content:"";position:absolute;inset:0;background:#000;opacity:0;transition:opacity var(--m-fast) var(--e-fast)}
+.brw-mood:hover::after{opacity:.15}
+.brw-mood span{position:relative;z-index:1}
+.brw-sentinel{height:1px}
