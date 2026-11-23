@@ -45,11 +45,23 @@
         "languages": [
           "Vietnamese",
           "English"
-        ]
+        ],
+        "installerHooks": "nsis/hooks.nsh",
+        "compression": "lzma"
       },
       "webviewInstallMode": {
         "type": "downloadBootstrapper"
       }
+    },
+    "shortDescription": "MinMusic",
+    "longDescription": "MinMusic for Windows: YouTube Music client",
+    "copyright": "Copyright (c) nev-minhnh",
+    "category": "Music",
+    "resources": {
+      "../sidecar/dist/runtime": "core/runtime",
+      "../sidecar/dist/lib": "core/lib",
+      "../sidecar/dist/core.args": "core/core.args",
+      "../sidecar/dist/core.jsa": "core/core.jsa"
     }
   },
   "plugins": {
