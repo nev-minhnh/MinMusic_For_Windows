@@ -11,8 +11,10 @@ test('app E-2: Library End reaches the last row; scroll kept after Album -> Back
   await p.keyboard.press('End');
   const total = Number((await p.getByTestId('lib-count').textContent())!.replace(/\D/g, ''));
   await expect(p.locator(`[data-testid="songs-table"] [data-testid="song-row"][data-index="${total - 1}"]`)).toBeVisible({ timeout: 8000 });
+  // End scrolls smoothly: the last row appears before the scroller reaches its end, so wait for the real bottom before reading the offset
+  await expect.poll(() => p.locator('[data-route="library"]').evaluate((e) => e.scrollHeight - e.clientHeight - e.scrollTop), { timeout: 8000 }).toBeLessThan(2);
+  await rows.last().click({ button: 'right', position: { x: 80, y: 28 } }); // may scroll the row into view: read the offset after it
   const top = await p.locator('[data-route="library"]').evaluate((e) => e.scrollTop);
-  await rows.last().click({ button: 'right', position: { x: 80, y: 28 } });
   await p.locator('[data-id="go-album"]').click();
   await expect(p.getByTestId('album')).toBeVisible();
   await p.keyboard.press('Alt+ArrowLeft');

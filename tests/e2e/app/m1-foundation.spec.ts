@@ -4,7 +4,7 @@ import { test, expect } from '../fixtures/app';
 // The page under test is the dev route #/dev/table, so the app must be built with VITE_E2E=1 (see notes in STATUS.md).
 test('app: song context menu at 1536x960 DPR 2.5, screenshot for the MK 3 crop', async ({ app }) => {
   await app.page.evaluate(() => (location.hash = '#/dev/table'));
-  const row = app.page.locator('[data-testid="song-row"]').nth(2);
+  const row = app.page.locator('.pg:not(.hid) [data-testid="song-row"]').nth(2);
   await expect(row).toBeVisible();
   const b = (await row.boundingBox())!;
   await app.page.mouse.click(b.x + b.width - 60, b.y + 20, { button: 'right' });
@@ -18,4 +18,7 @@ test('app: song context menu at 1536x960 DPR 2.5, screenshot for the MK 3 crop',
   const f = await app.shot('m1-menu-mk3');
   expect(f).toMatch(/m1-menu-mk3\.png$/);
   await app.page.keyboard.press('Escape');
+  // the app is shared by the next specs: leave the dev route (it replaces the shell, so global shortcuts such as Ctrl E do not work)
+  await app.page.evaluate(() => { location.hash = '#/home'; location.reload(); }); // the dev route replaces the whole shell: reload it
+  await expect(app.page.locator('[data-testid="home"]')).toBeVisible();
 });

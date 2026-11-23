@@ -22,6 +22,7 @@ test('app E-6: Ctrl K, suggestions, Enter, results, Esc x3', async ({ app }) => 
   await input.press('Enter');
   await expect(p.locator('[data-testid="search-page"]')).toBeVisible();
   await app.shot('m1-3b-search');
+  await input.focus(); // as the web spec: Enter moves focus to the results page
   await p.keyboard.press('Escape');
   await expect(input).toHaveValue('');
   await p.keyboard.press('Escape');
