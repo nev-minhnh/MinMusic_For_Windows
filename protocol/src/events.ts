@@ -66,3 +66,8 @@ export interface Events {
 }
 
 export type EventName = keyof Events;
+
+// <M2-1>
+/** api.md 3.7a: additive `locked` on the queue snapshot (and on `queue.window` / `queue.changed`, merged at the checkpoint). */
+export interface QueueSnapshot { locked?: boolean }
+// </M2-1>

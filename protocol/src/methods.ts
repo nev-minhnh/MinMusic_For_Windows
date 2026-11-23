@@ -400,3 +400,9 @@ export type MethodName = keyof Methods;
 export type Params<K extends MethodName> = Methods[K]["p"];
 export type Result<K extends MethodName> = Methods[K]["r"];
 
+// <M2-1>
+/** api.md 3.7a: queue lock. Interface merging adds the method to `Methods`. */
+export interface Methods {
+  "queue.setLocked": { p: { on: boolean }; r: Empty };
+}
+// </M2-1>
