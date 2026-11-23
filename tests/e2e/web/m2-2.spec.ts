@@ -398,6 +398,9 @@ test.describe('full player', () => {
 test.describe('bar extras', () => {
   test('E-30 volume slider, mute (M), sleep timer, output, speed, progress variants, floating bar', async ({ page }) => {
     await playTracks(8, 0);
+    // the mock core is shared by every spec of a run: start from full volume, not muted (m1-foundation presses M)
+    await core('player.mute', { on: false });
+    await core('player.setVolume', { v: 1 });
     await open(page);
     // volume: role=slider on the bar, arrows change it, M mutes
     const vol = page.locator('[data-testid="player-bar"] [data-testid="volume-slider"]');

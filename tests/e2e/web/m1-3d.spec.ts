@@ -189,8 +189,11 @@ test.describe('Artist', () => {
     const b = (await shelf.boundingBox())!;
     await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
     const top0 = await page.evaluate(() => (document.querySelector('.pg:not(.hid)') as HTMLElement).scrollTop);
-    await page.mouse.wheel(0, 300);
-    await expect.poll(() => page.evaluate(() => (document.querySelector('.pg:not(.hid)') as HTMLElement).scrollTop)).toBeGreaterThan(top0);
+    // the shelf can sit at the very end of the page (data dependent): wheel towards the side that still has room
+    const room = await page.evaluate(() => { const e = document.querySelector('.pg:not(.hid)') as HTMLElement; return e.scrollHeight - e.clientHeight - e.scrollTop; });
+    const dy = room >= 300 ? 300 : -300;
+    await page.mouse.wheel(0, dy);
+    await expect.poll(() => page.evaluate(() => (document.querySelector('.pg:not(.hid)') as HTMLElement).scrollTop)).not.toBe(top0);
     expect(await sl()).toBe(0); // vertical wheel never becomes horizontal scroll
   });
 });
