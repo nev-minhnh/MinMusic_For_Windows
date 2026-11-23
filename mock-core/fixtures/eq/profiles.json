@@ -1,0 +1,206 @@
+[
+ {
+  "id": "flat",
+  "name": "Phẳng",
+  "builtin": true,
+  "preampDb": 0,
+  "bands": [
+   {
+    "type": "LSC",
+    "freq": 31,
+    "gain": 0,
+    "q": 0.71
+   },
+   {
+    "type": "PK",
+    "freq": 62,
+    "gain": 0,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 125,
+    "gain": 0,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 250,
+    "gain": 0,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 500,
+    "gain": 0,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 1000,
+    "gain": 0,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 2000,
+    "gain": 0,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 4000,
+    "gain": 0,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 8000,
+    "gain": 0,
+    "q": 1.41
+   },
+   {
+    "type": "HSC",
+    "freq": 16000,
+    "gain": 0,
+    "q": 0.71
+   }
+  ]
+ },
+ {
+  "id": "bass",
+  "name": "Bass mạnh",
+  "builtin": true,
+  "preampDb": -4,
+  "bands": [
+   {
+    "type": "LSC",
+    "freq": 31,
+    "gain": 6,
+    "q": 0.71
+   },
+   {
+    "type": "PK",
+    "freq": 62,
+    "gain": 5,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 125,
+    "gain": 3.5,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 250,
+    "gain": 1.5,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 500,
+    "gain": 0,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 1000,
+    "gain": 0,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 2000,
+    "gain": 0,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 4000,
+    "gain": 0,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 8000,
+    "gain": 0,
+    "q": 1.41
+   },
+   {
+    "type": "HSC",
+    "freq": 16000,
+    "gain": 0,
+    "q": 0.71
+   }
+  ]
+ },
+ {
+  "id": "harman",
+  "name": "Harman",
+  "builtin": true,
+  "preampDb": -3.5,
+  "bands": [
+   {
+    "type": "LSC",
+    "freq": 31,
+    "gain": 4.5,
+    "q": 0.71
+   },
+   {
+    "type": "PK",
+    "freq": 62,
+    "gain": 3.5,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 125,
+    "gain": 1.5,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 250,
+    "gain": -0.5,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 500,
+    "gain": -1,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 1000,
+    "gain": 0,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 2000,
+    "gain": 1.5,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 4000,
+    "gain": 2.5,
+    "q": 1.41
+   },
+   {
+    "type": "PK",
+    "freq": 8000,
+    "gain": -1,
+    "q": 1.41
+   },
+   {
+    "type": "HSC",
+    "freq": 16000,
+    "gain": -2.5,
+    "q": 0.71
+   }
+  ]
+ }
+]
