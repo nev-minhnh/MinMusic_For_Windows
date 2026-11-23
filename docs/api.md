@@ -379,6 +379,21 @@ Secret keys cannot be written through `settings.set`. Use the dedicated methods 
 | `dc.attach` / `dc.release` | `{deviceId}` |
 | `dc.openFirewallSettings` | `{}` (core runs `control.exe` as v1 does) |
 
+<!-- M3-4a -->
+#### 3.13/3.14 notes of the real core (M3-4a)
+- `dc.requireApproval` answers `unsupported`: v1 always requires approval to pair by code, there is no setting. The UI hides or disables the toggle on the real core.
+- `dc.state` adds `fixedPortUnavailable: boolean` (additive): the configured fixed port was busy and the listener fell back to a free one; `port` is always the actual listening port. When disabled, `port` is the configured port.
+- `dc.setPort` takes an integer in `1024..65535` (`bad_request` otherwise; the manager also knows 0 = system-chosen, the API does not expose it). `dc.enable {on:false}` and `dc.setPort` return after the listener has settled (at most 5 s), so a following `dc.state` is current.
+- `dc.confirmSas {match:true}` only records the confirmation in the core; `dc.accept` is refused with `bad_request "sas_unconfirmed"` until then. `match:false` rejects the request. A request with an empty `sas`, and `link:` requests, are accepted directly. `dc.reject` is idempotent and always `{}`.
+- Link offers (`dc.connectLink`) surface as `dc.request {requestId:"link:<sha1(address)[0..12]>", peer, sas:""}`. `dc.accept` on it connects; nothing connects before.
+- `dc.attach` is `transferTo` semantics: `DeviceConnectRemote.discoverPlayback()` broadcasts an automatic ATTACH to every peer and cannot target a device. With an empty local queue `transferTo` sends a targeted ATTACH (the core then controls that device); with a non-empty local queue it hands the queue over.
+- `dc.state.session.peerId` is the target when this device controls, and the first controller when this device plays.
+- `lt.join` code: 4..8 letters or digits (the v1 UI uses 8). `lt.setServer` accepts `wss://` URLs only (v1 policy); an unknown URL is added as a custom server. `lt.create`/`lt.join` return `conflict` when already in or waiting for a room and `unsupported` when Listen Together is off in settings; the room itself arrives later as `lt.state`.
+- `lt.state.error` is `"connection_failed"` while the connection is in the ERROR state.
+- `lt.kick` does not block the user (v1 behaviour; the mock does). `lt.blocked` ids are usernames, `lt.unblock {id}` takes a username. `lt.servers` items also carry `operator` and `custom`.
+- Events: `lt.joinRequest {userId, name}` and `lt.suggestion {id, trackId, by, track}` are emitted once per new entry, and also for entries already pending when a subscription starts. `dc.request` likewise.
+<!-- /M3-4a -->
+
 ### 3.15 Backup, updates, misc
 | Method | Params → Result |
 |---|---|
