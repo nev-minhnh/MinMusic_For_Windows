@@ -334,9 +334,9 @@ for (const vp of VIEWPORTS) {
       expect(pl[0].p.context).toMatchObject({ kind: 'library', list: 'liked' });
       expect(pl[1].p.shuffle).toBe(true);
       await goNav(page, 'downloads');
-      await expect(page.getByTestId('downloads-table')).toBeVisible();
-      await expect(rowsOf(page, 'downloads-table').first()).toBeVisible();
-      await expect(page.getByTestId('dl-box')).toHaveCount(0); // download.summary is not answered by the mock core
+      // the Downloads page is M4-2b's (details in m4-2b.spec.ts): done table with rows, queue below
+      await expect(page.getByTestId('downloads-page')).toBeVisible();
+      await expect(rowsOf(page, 'dl-table').first()).toBeVisible();
     });
 
     test('History: group headers, windowed list, Del removes the selection', async ({ page }) => {
@@ -424,32 +424,15 @@ for (const vp of VIEWPORTS) {
   });
 }
 
-test.describe('downloads summary box (core answers download.summary)', () => {
+test.describe('downloads summary box (M4-2b DownloadsBox mounted in the Library)', () => {
   test.use({ viewport: { width: 1536, height: 960 }, deviceScaleFactor: 2.5 });
-  test('shown in the Library with quality badges; hidden when the core says unsupported', async ({ page }) => {
-    await boot(
-      page,
-      `window.__mmMock = { 'download.summary': () => ({ count: 1248, bytes: 6200000000, byQuality: [{label:'FLAC',count:214},{label:'320',count:806},{label:'Opus 160',count:228}], folder: 'D:\\\\Nhac\\\\MinMusic', folderOk: true, active: {done:3,total:12,label:'Chill cuoi tuan'}, paused: false }) };`
-    );
+  test('shown in the Library from the mock core download.summary; details live in m4-2b.spec.ts', async ({ page }) => {
+    await boot(page);
     await openLibrary(page);
-    const box = page.getByTestId('dl-box');
-    await expect(box).toBeVisible();
-    await expect(box).toContainText('1.248');
-    await expect(box).toContainText('6,2 GB');
-    await expect(box).toContainText('FLAC');
-    await expect(box).toContainText('Downloading 3/12');
+    await expect(page.getByTestId('dl-box')).toBeVisible();
+    await expect(page.getByTestId('dl-box-summary')).toContainText(/\d+ songs/);
+    await expect(page.getByTestId('dl-box-bars')).toBeVisible();
     await shot(page, 'library-dlbox');
-    const fill = await box.locator('.bar-fill').evaluate((e) => getComputedStyle(e).transform);
-    expect(fill).toMatch(/matrix\(0\.25/);
-  });
-  test('unsupported: no box', async ({ page }) => {
-    await boot(
-      page,
-      `window.__mmMock = { 'download.summary': () => { throw Object.assign(new Error('unsupported'), { code: 'unsupported' }); } };`
-    );
-    await openLibrary(page);
-    await page.waitForTimeout(400);
-    await expect(page.getByTestId('dl-box')).toHaveCount(0);
   });
 });
 
