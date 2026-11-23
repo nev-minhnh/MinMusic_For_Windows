@@ -17,7 +17,6 @@ const UI_KEYS: &[&str] = &[
     "sidebarDocked",
     "paneWidth",
     "trayBalloonShown",
-    "desktopTrayToggleOnClick",
 ];
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]

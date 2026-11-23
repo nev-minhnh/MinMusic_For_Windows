@@ -21,6 +21,9 @@ mod weblogin;
 // </M3-1>
 // <M5-2>
 // </M5-2>
+// <M4-1a>
+mod settings_link;
+// </M4-1a>
 
 use paths::Paths;
 use sidecar::{shutdown, supervisor::Supervisor};
@@ -326,6 +329,9 @@ fn main() {
             // </M3-1>
             // <M5-2>
             // </M5-2>
+            // <M4-1a>
+            settings_link::install(app.handle());
+            // </M4-1a>
             // Safety net: never leave the window hidden forever if the UI never signals ui_ready.
             let h = app.handle().clone();
             std::thread::spawn(move || {
