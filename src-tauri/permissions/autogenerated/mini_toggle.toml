@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-mini-toggle"
+description = "Enables the mini_toggle command without any pre-configured scope."
+commands.allow = ["mini_toggle"]
+
+[[permission]]
+identifier = "deny-mini-toggle"
+description = "Denies the mini_toggle command without any pre-configured scope."
+commands.deny = ["mini_toggle"]

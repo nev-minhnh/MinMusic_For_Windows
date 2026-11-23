@@ -21,6 +21,8 @@ fn main() {
         "caption_rects",
         // </M1-4>
         // <M2-4>
+        "mini_toggle",
+        "mini_set_mode",
         // </M2-4>
         // <M3-1>
         "test_weblogin",

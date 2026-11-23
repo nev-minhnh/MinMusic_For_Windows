@@ -1,0 +1,14 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "m2-4",
+  "description": "Mini-player window: toggle and mode switch (main and mini), and native drag of data-tauri-drag-region areas.",
+  "windows": [
+    "main",
+    "mini"
+  ],
+  "permissions": [
+    "allow-mini-toggle",
+    "allow-mini-set-mode",
+    "core:window:allow-start-dragging"
+  ]
+}

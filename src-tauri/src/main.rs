@@ -14,6 +14,8 @@ mod tray;
 mod window_state;
 // </M1-4>
 // <M2-4>
+mod mini;
+mod taskbar;
 // </M2-4>
 // <M3-1>
 mod potoken;
@@ -203,6 +205,8 @@ fn with_commands(b: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
         snap::caption_rects,
         // </M1-4>
         // <M2-4>
+        mini::mini_toggle,
+        mini::mini_set_mode,
         // </M2-4>
         // <M3-1>
         weblogin::test_weblogin,
@@ -234,6 +238,8 @@ fn with_commands(b: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
         snap::caption_rects,
         // </M1-4>
         // <M2-4>
+        mini::mini_toggle,
+        mini::mini_set_mode,
         // </M2-4>
         // <M3-1>
         // </M3-1>
@@ -319,6 +325,8 @@ fn main() {
             deeplink::install(app);
             // </M1-4>
             // <M2-4>
+            mini::install(app.handle(), &win);
+            taskbar::install(app.handle(), &win);
             // </M2-4>
             // <M3-1>
             register_m3_1(app.handle());
