@@ -25,7 +25,8 @@ function Enter-InstallerSandbox([string]$BackupDir, [switch]$AllowV1Uninstall) {
     $i++
     $f = Join-Path $BackupDir "key$i.reg"
     Remove-Item $f -ErrorAction SilentlyContinue
-    & reg.exe export "HKCU\$k" $f /y 2>$null | Out-Null
+    # cmd /c: under ErrorActionPreference=Stop, PS 5.1 turns reg.exe stderr (missing key) into a terminating error
+    & cmd.exe /c "reg.exe export `"HKCU\$k`" `"$f`" /y >nul 2>nul"
     $state.Keys[$k] = $(if (Test-Path $f) { $f } else { $null })
   }
   $i = 0
@@ -40,8 +41,8 @@ function Enter-InstallerSandbox([string]$BackupDir, [switch]$AllowV1Uninstall) {
 function Exit-InstallerSandbox($State) {
   if (-not $State) { return }
   foreach ($k in $State.Keys.Keys) {
-    & reg.exe delete "HKCU\$k" /f 2>$null | Out-Null
-    if ($State.Keys[$k]) { & reg.exe import $State.Keys[$k] 2>$null | Out-Null }
+    & cmd.exe /c "reg.exe delete `"HKCU\$k`" /f >nul 2>nul"
+    if ($State.Keys[$k]) { & cmd.exe /c "reg.exe import `"$($State.Keys[$k])`" >nul 2>nul" }
   }
   foreach ($p in $State.Files.Keys) {
     if ($State.Files[$p]) { Copy-Item $State.Files[$p] $p -Force } else { Remove-Item $p -Force -ErrorAction SilentlyContinue }

@@ -49,6 +49,9 @@ function Get-InstProcs([string]$Dir) {
 }
 function Start-Installed {
   $exe = Join-Path $inst 'MinMusic.exe'
+  # A release build ignores MINMUSIC_DATA_ROOT (test hooks are compiled out), so it would use the owner's real profile
+  # (INT-W5 incident). portable.flag keeps all shell and core data in <install>\data instead.
+  Set-Content (Join-Path $inst 'portable.flag') '' -Encoding ascii
   $old = @{}
   foreach ($k in 'MINMUSIC_DATA_ROOT') { $old[$k] = [Environment]::GetEnvironmentVariable($k) }
   [Environment]::SetEnvironmentVariable('MINMUSIC_DATA_ROOT', $data)
@@ -107,6 +110,7 @@ try {
   foreach ($x in @($app2.Shell, $app2.Core)) { if ($x) { Stop-Process -Id $x.Id -Force -ErrorAction SilentlyContinue } }
   Start-Sleep -Milliseconds 800
 
+  Remove-Item (Join-Path $inst 'portable.flag') -Force -ErrorAction SilentlyContinue
   # 5. uninstall keeps data, removes schemes
   $code = Invoke-TestUninstall $inst
   Check 'uninstall exit code 0' ($code -eq 0) "exit $code"
