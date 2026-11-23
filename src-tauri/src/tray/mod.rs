@@ -172,7 +172,7 @@ pub fn install(app: &AppHandle) -> tauri::Result<()> {
     tray.on_tray_icon_event(|tray, ev| {
         if let TrayIconEvent::Click { button: MouseButton::Left, button_state: MouseButtonState::Up, .. } = ev {
             let app = tray.app_handle();
-            let toggle_on_click = window_state::store().is_some_and(|s| s.get_bool("desktopTrayToggleOnClick"));
+            let toggle_on_click = crate::settings_link::get_bool(crate::settings_link::TRAY_TOGGLE_ON_CLICK);
             let main = app.get_webview_window("main");
             let showing = main
                 .as_ref()
