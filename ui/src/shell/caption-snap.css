@@ -1,0 +1,4 @@
+/* Maximize button hover/pressed look driven by the native Snap Layouts overlay (event mm-caption).
+   The overlay covers the button, so WebView2 never sees :hover there; same colours as .cap button:hover. */
+.cap button.sh{background:var(--hov);color:var(--ink)}
+.cap button.sh.sd{background:var(--s3)}
