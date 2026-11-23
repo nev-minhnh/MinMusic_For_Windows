@@ -232,7 +232,7 @@ export interface Methods {
   "player.video": { p: { on: boolean }; r: Empty };
   "queue.window": {
     p: { offset: number; limit: number };
-    r: { total: number; revision: number; currentIndex: number; items: QueueTrack[] };
+    r: { total: number; revision: number; currentIndex: number; items: QueueTrack[]; locked?: boolean };
   };
   "queue.add": { p: { ids: string[]; position: "next" | "end" | number }; r: { revision: number } };
   "queue.addContext": { p: { context: PlayContext; position: "next" | "end" | number }; r: { revision: number } };
@@ -242,6 +242,8 @@ export interface Methods {
   "queue.clear": { p: { keepCurrent: true }; r: Empty };
   "queue.setAutoplay": { p: { on: boolean }; r: Empty };
   "queue.radio": { p: { seedId: string }; r: Empty };
+  /** api.md 3.7a: queue lock. The core only reports it; the UI shows it and offers Unlock. */
+  "queue.setLocked": { p: { on: boolean }; r: Empty };
 
   // 3.7 lyrics
   "lyrics.get": { p: { trackId: string }; r: Lyrics };
@@ -292,7 +294,7 @@ export interface Methods {
   "download.window": { p: SongWindowParams; r: LibraryWindowResult };
   "download.queue": { p: NoParams; r: { items: DownloadQueueItem[] } };
   "download.setFolder": { p: { path: string | null }; r: { ok: boolean; error?: "not_writable" | "missing" } };
-  "download.saveTo": { p: { ids: string[]; path: string }; r: Empty };
+  "download.saveTo": { p: { ids: string[]; path: string; userAlbum?: string }; r: { saved: number; failed: number } };
   "storage.usage": { p: NoParams; r: StorageUsage };
   "storage.clear": { p: { what: "songCache" | "imageCache" | "videoCache" | "animatedArt" }; r: Empty };
 
@@ -399,10 +401,3 @@ export const TOPICS: readonly Topic[] = ["player", "queue", "lyrics", "library",
 export type MethodName = keyof Methods;
 export type Params<K extends MethodName> = Methods[K]["p"];
 export type Result<K extends MethodName> = Methods[K]["r"];
-
-// <M2-1>
-/** api.md 3.7a: queue lock. Interface merging adds the method to `Methods`. */
-export interface Methods {
-  "queue.setLocked": { p: { on: boolean }; r: Empty };
-}
-// </M2-1>

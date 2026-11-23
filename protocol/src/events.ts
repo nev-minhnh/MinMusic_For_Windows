@@ -9,7 +9,7 @@ export interface PlayerPosition {
   at: number;
 }
 export interface PlayerError { code: string; i18n: string; trackId: string; skipped: boolean }
-export interface QueueSnapshot { total: number; revision: number; currentIndex: number; head: QueueTrack[] }
+export interface QueueSnapshot { total: number; revision: number; currentIndex: number; head: QueueTrack[]; locked?: boolean }
 export interface AppToast {
   /** One of `i18n` (a UI string key) or `text` (already localised by the core) is set. */
   i18n?: string; text?: string; args?: string[]; level: "info" | "error";
@@ -24,7 +24,7 @@ export interface Events {
   "player.error": PlayerError;
   // queue
   "queue.snapshot": QueueSnapshot;
-  "queue.changed": { revision: number; currentIndex: number };
+  "queue.changed": { revision: number; currentIndex: number; locked?: boolean };
   // lyrics
   "lyrics.snapshot": Lyrics | null;
   "lyrics.updated": Lyrics;
@@ -66,8 +66,3 @@ export interface Events {
 }
 
 export type EventName = keyof Events;
-
-// <M2-1>
-/** api.md 3.7a: additive `locked` on the queue snapshot (and on `queue.window` / `queue.changed`, merged at the checkpoint). */
-export interface QueueSnapshot { locked?: boolean }
-// </M2-1>

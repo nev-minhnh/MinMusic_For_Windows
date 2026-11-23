@@ -15,7 +15,7 @@ import { userAlbumMenu } from "../../menus/userAlbum";
 import { t, plural } from "../../i18n";
 import { SongList, SORT_CHOICES, FilterField, type ListApi } from "./SongList";
 import { CardGrid, type CardList } from "./CardGrid";
-import { DownloadsBox } from "./DownloadsBox";
+import { DownloadsBox } from "../../components/downloads/DownloadsBox";
 import { debounce, keepScroll, onPageEvent } from "./util";
 import type { SortSpec } from "../../lib/types";
 import "./library.css";

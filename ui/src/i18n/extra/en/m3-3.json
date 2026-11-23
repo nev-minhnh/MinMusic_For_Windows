@@ -25,7 +25,6 @@
   "w2_src_status_ok": "Working",
   "w2_src_status_degraded": "Degraded",
   "w2_src_status_off": "Off",
-  "w2_src_vip": "VIP",
   "w2_src_maxq": "Best quality",
   "w2_src_signedout": "Not signed in",
   "w2_src_nologin": "No account needed",

@@ -202,11 +202,28 @@ function Test-TP11($Ctx) {
   $app = $null
   try {
     $app = Start-TestApp -Exe $Ctx.Exe -Root $root
-    Start-Sleep -Seconds 6
-    $txt = try { Invoke-CdpEval $app.Port 'document.body.innerText' } catch { '' }
-    $msg = $txt -match 'MinMusic 1\.x'
-    $cores = @(Get-CimInstance Win32_Process -Filter "Name='minmusic-core.exe'" | Where-Object { $_.ParentProcessId -eq $app.ShellPid })
-    New-TestResult ($msg -and $cores.Count -eq 0) "message shown=$msg; cores under the shell=$($cores.Count)"
+    # The core exits with 20 before READY; the shell must not retry: a native message box (dialog class #32770, text
+    # "MinMusic 1.x ...") appears, and closing it ends the shell.
+    Add-Type -Namespace Mm -Name W11 -MemberDefinition '[DllImport("user32.dll")] public static extern bool EnumWindows(EnumProc p, System.IntPtr l); public delegate bool EnumProc(System.IntPtr h, System.IntPtr l); [DllImport("user32.dll")] public static extern int GetWindowThreadProcessId(System.IntPtr h, out int pid); [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern int GetClassName(System.IntPtr h, System.Text.StringBuilder s, int n); [DllImport("user32.dll")] public static extern bool IsWindowVisible(System.IntPtr h); [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern System.IntPtr FindWindowEx(System.IntPtr p, System.IntPtr a, string c, string w); [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern int GetWindowText(System.IntPtr h, System.Text.StringBuilder s, int n); [DllImport("user32.dll")] public static extern bool PostMessage(System.IntPtr h, int m, System.IntPtr w, System.IntPtr l);' -ErrorAction SilentlyContinue
+    $shellPid = $app.ShellPid
+    $script:tp11Dlg = [IntPtr]::Zero
+    $deadline = (Get-Date).AddSeconds(30)
+    while ($script:tp11Dlg -eq [IntPtr]::Zero -and (Get-Date) -lt $deadline) {
+      Start-Sleep -Milliseconds 500
+      $cb = [Mm.W11+EnumProc]{ param($h, $l) $p = 0; [void][Mm.W11]::GetWindowThreadProcessId($h, [ref]$p); if ($p -eq $shellPid -and [Mm.W11]::IsWindowVisible($h)) { $sb = New-Object System.Text.StringBuilder 64; [void][Mm.W11]::GetClassName($h, $sb, 64); if ($sb.ToString() -eq '#32770') { $script:tp11Dlg = $h; return $false } }; return $true }
+      [void][Mm.W11]::EnumWindows($cb, [IntPtr]::Zero)
+    }
+    $text = ''
+    if ($script:tp11Dlg -ne [IntPtr]::Zero) {
+      $st = [Mm.W11]::FindWindowEx($script:tp11Dlg, [IntPtr]::Zero, 'Static', $null)
+      while ($st -ne [IntPtr]::Zero -and -not $text) { $sb = New-Object System.Text.StringBuilder 256; [void][Mm.W11]::GetWindowText($st, $sb, 256); $text = $sb.ToString(); $st = [Mm.W11]::FindWindowEx($script:tp11Dlg, $st, 'Static', $null) }
+    }
+    $msg = $text -match 'MinMusic 1\.x'
+    $cores = @(Get-CimInstance Win32_Process -Filter "Name='minmusic-core.exe'" | Where-Object { $_.ParentProcessId -eq $shellPid })
+    if ($script:tp11Dlg -ne [IntPtr]::Zero) { [void][Mm.W11]::PostMessage($script:tp11Dlg, 0x0010, [IntPtr]::Zero, [IntPtr]::Zero) } # WM_CLOSE
+    $exited = $false
+    try { $exited = (Get-Process -Id $shellPid -ErrorAction Stop).WaitForExit(10000) } catch { $exited = $true }
+    New-TestResult ($msg -and $cores.Count -eq 0 -and $exited) "message box='$text'; cores under the shell=$($cores.Count); shell exited after OK=$exited"
   } catch { New-TestResult $false "$_" } finally { $fs.Dispose(); Stop-TestApp $app }
 }
 

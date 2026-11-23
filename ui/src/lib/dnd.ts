@@ -41,7 +41,8 @@ const endDrag = () => {
 };
 if (typeof window !== "undefined") {
   window.addEventListener("dragend", endDrag);
-  window.addEventListener("drop", () => queueMicrotask(endDrag), true);
+  // a macrotask: a microtask queued in a capture listener runs before the target's drop handlers and would clear `live` too early
+  window.addEventListener("drop", () => setTimeout(endDrag, 0), true);
 }
 
 export const isTrackDrag = (e: DragEvent) => !!e.dataTransfer && [...e.dataTransfer.types].includes(MIME);

@@ -33,6 +33,7 @@ export const queueApi = {
   select: (qid: string) => client.call("queue.select", { qid }),
   remove: (qids: string[]) => client.call("queue.remove", { qids }),
   clear: () => client.call("queue.clear", { keepCurrent: true }),
+  unlock: () => client.call("queue.setLocked", { on: false }),
   radio: (seedId: string) => client.call("queue.radio", { seedId }),
   addEnd: (ids: string[]) => client.call("queue.add", { ids, position: "end" }),
   /** returns false on a revision conflict (the caller refreshes) */

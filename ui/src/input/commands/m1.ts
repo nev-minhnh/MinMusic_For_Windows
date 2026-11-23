@@ -34,6 +34,7 @@ export const commands: Command[] = [
   { id: "page.refresh", run: toPage("mm-refresh") },
   { id: "page.delete", run: toPage("mm-delete") },
   { id: "page.rename", run: toPage("mm-rename") },
-  // outside M1: wired, logged, spied in tests
-  ...["pane.lyrics", "pane.queue", "video.captions", "video.mode", "window.fullscreen", "mini.open", "fullscreen.toggle", "settings.open", "shortcuts.sheet", "logs.open", "app.quit"].map(noop),
+  // not implemented yet: wired, logged, spied in tests. Ids with a real command elsewhere (player, mini, settings, logs) are
+  // not listed: the glob registry lets the file that sorts last win, so a no-op here would shadow them.
+  ...["video.captions", "video.mode", "window.fullscreen", "app.quit"].map(noop),
 ];

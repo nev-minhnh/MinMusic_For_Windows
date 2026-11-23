@@ -2,6 +2,7 @@ import { SEP, tidy, type MenuItem } from "./types";
 import { t, plural } from "../i18n";
 import { client } from "../lib/core";
 import { caps } from "../lib/caps";
+import { downloadMenu } from "./ext/download";
 import { copyLinks } from "../lib/clipboard";
 import { openSongInfo } from "../lib/songInfo";
 import { navigate } from "../router/router";
@@ -79,7 +80,7 @@ export function songMenu(tracks: Track[], ctx: SongMenuCtx = {}): MenuItem[] {
       icon: "download",
       disabled: caps.downloads === "soon",
       hint: caps.downloads === "soon" ? "M4" : undefined,
-      children: caps.downloads === "soon" ? undefined : [],
+      children: caps.downloads === "soon" ? undefined : downloadMenu({ tracks }),
     },
     one && { id: "sources", label: t("w2_choose_source"), icon: "swap_horiz", children: async () => sourceItems(one.id, (await client.call<{ options: SourceOption[] }>("track.sources", { id: one.id })).options) },
     SEP,

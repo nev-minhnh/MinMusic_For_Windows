@@ -79,6 +79,7 @@
     "queue.clear",
     "queue.setAutoplay",
     "queue.radio",
+    "queue.setLocked",
     "lyrics.get",
     "lyrics.search",
     "lyrics.choose",

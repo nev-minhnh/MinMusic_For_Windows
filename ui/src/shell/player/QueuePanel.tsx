@@ -91,6 +91,11 @@ export function QueuePanel(props: { variant: "pane" | "fp" }) {
               </div>
               <div class="qp-h2">
                 <span class="ovl ell f1">{t("w2_m22_next_from", context())}</span>
+                <Show when={queue.locked()}>
+                  <button type="button" class="chip qp-clear" data-testid="queue-unlock" title={t("w2_queue_locked")} onClick={() => void queueApi.unlock()}>
+                    {t("w2_queue_unlock")}
+                  </button>
+                </Show>
                 <button type="button" class="chip qp-clear" data-testid="queue-clear" disabled={upcoming() === 0} onClick={() => queueApi.clear()}>
                   {t("w2_m22_clear")}
                 </button>

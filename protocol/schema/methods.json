@@ -1969,6 +1969,9 @@
                   "items": {
                     "$ref": "#/definitions/QueueTrack"
                   }
+                },
+                "locked": {
+                  "type": "boolean"
                 }
               },
               "required": [
@@ -2230,6 +2233,30 @@
             "p",
             "r"
           ]
+        },
+        "queue.setLocked": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "object",
+              "properties": {
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "on"
+              ]
+            },
+            "r": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "required": [
+            "p",
+            "r"
+          ],
+          "description": "api.md 3.7a: queue lock. The core only reports it; the UI shows it and offers Unlock."
         },
         "lyrics.get": {
           "type": "object",
@@ -3354,6 +3381,9 @@
                 },
                 "path": {
                   "type": "string"
+                },
+                "userAlbum": {
+                  "type": "string"
                 }
               },
               "required": [
@@ -3362,7 +3392,19 @@
               ]
             },
             "r": {
-              "$ref": "#/definitions/Empty"
+              "type": "object",
+              "properties": {
+                "saved": {
+                  "type": "number"
+                },
+                "failed": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "saved",
+                "failed"
+              ]
             }
           },
           "required": [
@@ -5251,6 +5293,7 @@
         "queue.clear",
         "queue.setAutoplay",
         "queue.radio",
+        "queue.setLocked",
         "lyrics.get",
         "lyrics.search",
         "lyrics.choose",

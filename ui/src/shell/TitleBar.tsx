@@ -2,7 +2,8 @@ import { Show } from "solid-js";
 import { IconButton } from "../components/IconButton";
 import { SearchBox } from "./search/SearchBox";
 import { Caption } from "./Caption";
-import { back, forward, canBack, canForward } from "../router/router";
+import { back, forward, canBack, canForward, navigate } from "../router/router";
+import { AccountButton } from "./account";
 import { wClass } from "../lib/layout";
 import { t } from "../i18n";
 
@@ -15,8 +16,8 @@ export function TitleBar(props: { searchRef: (el: HTMLInputElement) => void }) {
         <SearchBox inputRef={props.searchRef} />
       </Show>
       <div class="row gap8 mla" data-tauri-drag-region>
-        <IconButton icon="dl" label={t("w2_downloads")} />
-        <div class="avatar">{"M"}</div>
+        <IconButton icon="dl" label={t("w2_downloads")} onClick={() => navigate("downloads")} testid="tb-downloads" />
+        <AccountButton />
       </div>
       <Caption reportRect />
     </div>

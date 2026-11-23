@@ -40,7 +40,7 @@ export const handlers: HandlerModule["handlers"] = {
     const lists = p.playlistIds.map((x: string) => fixture[id].find((l) => l.id === x) ?? (() => { throw bad(`unknown playlist ${x}`); })());
     const tgt = p.target;
     if (tgt !== "newUserAlbum" && !(typeof tgt === "string" && /^lp:.+/.test(tgt) && st.userAlbums.has(tgt))) throw bad("target");
-    const total = lists.reduce((n, l) => n + l.count, 0);
+    const total = lists.reduce((n: number, l: { count: number }) => n + l.count, 0);
     const jobId = `imp-${nextJob++}`;
     const failedTracks: string[] = [];
     let n = 0;

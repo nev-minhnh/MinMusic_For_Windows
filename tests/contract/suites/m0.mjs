@@ -376,15 +376,11 @@ export const mockOnly = [
     assert.ok(ev.p.revision > snap.p.revision);
     assert.deepEqual(ev.p.lists, ["songs"]);
   }],
-  ["mock: unsupported topic -> error", async (ctx) => {
+  // eq/lt/dc/downloads/lyrics/settings exist since W2-W5 (INT-W5): only a topic nobody defines is refused here;
+  // unknown methods are covered by "errors: unknown method -> bad_request".
+  ["mock: unknown topic -> error", async (ctx) => {
     const c = await ui(ctx);
-    assert.ok((await c.raw("sub.open", { topic: "lt" })).e);
-  }],
-  ["mock: methods outside M0 answer bad_request", async (ctx) => {
-    const c = await ui(ctx);
-    for (const m of ["eq.get", "lt.state", "download.summary", "lyrics.get"]) {
-      assert.equal((await c.raw(m, undefined, { validate: false })).e?.code, "bad_request", m);
-    }
+    assert.ok((await c.raw("sub.open", { topic: "nope" }, { validate: false })).e);
   }],
   ["mock: art endpoint needs the artToken", async (ctx) => {
     const ok = await fetch(`http://127.0.0.1:${ctx.port}/art/mock/abc?w=128&k=${ctx.artToken}`);

@@ -3,6 +3,7 @@ import { artUrl } from "../lib/core";
 import { Art } from "../components/Art";
 import { Icon } from "../components/Icon";
 import { IconButton } from "../components/IconButton";
+import { runCommand } from "../input/keys";
 import { Seg } from "../components/Seg";
 import { QualityBadge, SourceBadge, AltBadge } from "../components/Badge";
 import { Caption } from "./Caption";
@@ -260,7 +261,7 @@ export function FullPlayer() {
             <div class="w6">{s()?.context?.title}</div>
           </div>
           <div class="row gap8 mla">
-            <IconButton icon="pip" label={t("w2_mini")} />
+            <IconButton icon="pip" label={t("w2_mini")} onClick={() => runCommand("mini.open")} testid="fp-mini" />
             <IconButton icon="full" label={t("w2_fullscreen")} />
             <IconButton icon="more" label={t("w2_more")} />
           </div>

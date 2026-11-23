@@ -12,22 +12,30 @@ pub struct Paths {
     pub roaming_root: PathBuf,
     /// Set when `MINMUSIC_DATA_ROOT` is in effect.
     pub test_root: Option<PathBuf>,
+    /// Portable zip (`portable.flag` next to the exe, no test root): `<exe dir>\data`, which is also the core's
+    /// portable data root (`MINMUSIC_PORTABLE=1`). The shell's logs, WebView2 data and shell.json live under it too.
+    pub portable_root: Option<PathBuf>,
 }
 
 impl Paths {
     pub fn resolve() -> Paths {
         let test_root = testhooks::data_root();
-        let (local_root, roaming_root) = match &test_root {
-            Some(r) => (r.join("Local"), r.join("Roaming")),
-            None => (
+        let exe_dir = std::env::current_exe().ok().and_then(|p| p.parent().map(Path::to_path_buf));
+        let portable_root = portable_root(test_root.as_deref(), exe_dir.as_deref());
+        let (local_root, roaming_root) = match (&test_root, &portable_root) {
+            (Some(r), _) | (None, Some(r)) => (r.join("Local"), r.join("Roaming")),
+            (None, None) => (
                 std::env::var_os("LOCALAPPDATA").map(PathBuf::from).unwrap_or_default(),
                 std::env::var_os("APPDATA").map(PathBuf::from).unwrap_or_default(),
             ),
         };
-        Paths { sidecar_dist: resolve_dist(), local_root, roaming_root, test_root }
+        Paths { sidecar_dist: resolve_dist(), local_root, roaming_root, test_root, portable_root }
     }
     pub fn app_local(&self) -> PathBuf {
-        self.local_root.join("MinMusic")
+        match &self.portable_root {
+            Some(r) => r.clone(),
+            None => self.local_root.join("MinMusic"),
+        }
     }
     /// `%LOCALAPPDATA%\MinMusic\state\metrolist`
     pub fn state_dir(&self) -> PathBuf {
@@ -45,6 +53,15 @@ impl Paths {
     pub fn core_exe(&self) -> PathBuf {
         self.sidecar_dist.join("runtime").join("bin").join("minmusic-core.exe")
     }
+}
+
+/// `<exe dir>\data` when `portable.flag` sits next to the exe and no test root is set.
+pub fn portable_root(test_root: Option<&Path>, exe_dir: Option<&Path>) -> Option<PathBuf> {
+    if test_root.is_some() {
+        return None;
+    }
+    let d = exe_dir?;
+    d.join("portable.flag").is_file().then(|| d.join("data"))
 }
 
 fn resolve_dist() -> PathBuf {

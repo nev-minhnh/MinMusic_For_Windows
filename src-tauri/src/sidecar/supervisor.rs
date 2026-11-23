@@ -270,6 +270,15 @@ impl Supervisor {
                     *self.current.lock().unwrap() = None;
                     crash_reason = ev;
                 }
+                Err(e) if e == spawn::V1_LOCKED => {
+                    // T-P11: never retried. Failed, a native notice, then the shell quits.
+                    log::error!("core refused to start: {e}");
+                    self.set_status(CoreState::Failed, restarts, Some(e), None);
+                    v1_running_notice();
+                    self.quitting.store(true, Ordering::SeqCst);
+                    self.app.exit(spawn::V1_LOCK_EXIT_CODE as i32);
+                    return;
+                }
                 Err(e) => {
                     start_failures += 1;
                     crash_reason = e;
@@ -373,7 +382,11 @@ impl Supervisor {
         args.extend(testhooks::core_extra_args());
 
         let mut env_overrides = Vec::new();
-        if paths.test_root.is_some() {
+        if paths.portable_root.is_some() {
+            // The core derives `<app>\data` itself (PortableMode); its other writes stay inside that folder too.
+            env_overrides.push(("MINMUSIC_PORTABLE".into(), "1".into()));
+        }
+        if paths.test_root.is_some() || paths.portable_root.is_some() {
             env_overrides.push(("LOCALAPPDATA".into(), paths.local_root.display().to_string()));
             env_overrides.push(("APPDATA".into(), paths.roaming_root.display().to_string()));
         }
@@ -428,6 +441,26 @@ impl Supervisor {
     }
 }
 
+/// The text of the T-P11 notice in the OS UI language.
+pub fn v1_running_text(lang: crate::tray::Lang) -> &'static str {
+    match lang {
+        crate::tray::Lang::Vi => "MinMusic 1.x đang chạy — hãy thoát nó trước",
+        crate::tray::Lang::En => "MinMusic 1.x is running — quit it first",
+    }
+}
+
+/// Native message box (blocks this thread until it is closed).
+fn v1_running_notice() {
+    use windows::core::PCWSTR;
+    use windows::Win32::UI::WindowsAndMessaging::{MessageBoxW, MB_ICONWARNING, MB_OK, MB_SETFOREGROUND, MB_TOPMOST};
+    let wide = |s: &str| s.encode_utf16().chain(Some(0)).collect::<Vec<u16>>();
+    let text = wide(v1_running_text(crate::tray::os_lang()));
+    let title = wide("MinMusic");
+    unsafe {
+        MessageBoxW(None, PCWSTR(text.as_ptr()), PCWSTR(title.as_ptr()), MB_OK | MB_ICONWARNING | MB_SETFOREGROUND | MB_TOPMOST);
+    }
+}
+
 /// Test builds only: `node` becomes the full path of node.exe, so the stale-pid image check works.
 fn resolve_on_path(program: &str) -> std::path::PathBuf {
     let p = std::path::PathBuf::from(program);
@@ -472,6 +505,12 @@ async fn ping_loop(_cfg: CoreConfig, cancel: Arc<AtomicBool>) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn v1_notice_text() {
+        assert_eq!(v1_running_text(crate::tray::Lang::Vi), "MinMusic 1.x đang chạy — hãy thoát nó trước");
+        assert!(v1_running_text(crate::tray::Lang::En).starts_with("MinMusic 1.x is running"));
+    }
 
     #[test]
     fn backoff_schedule() {

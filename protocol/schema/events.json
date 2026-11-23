@@ -28,6 +28,9 @@
             },
             "currentIndex": {
               "type": "number"
+            },
+            "locked": {
+              "type": "boolean"
             }
           },
           "required": [
@@ -929,6 +932,9 @@
           "items": {
             "$ref": "#/definitions/QueueTrack"
           }
+        },
+        "locked": {
+          "type": "boolean"
         }
       },
       "required": [

@@ -15,6 +15,8 @@ export function createQueueModel(call: Call) {
   const [total, setTotal] = createSignal(0);
   const [revision, setRevision] = createSignal(0);
   const [currentIndex, setCurrentIndex] = createSignal(-1);
+  /** api.md 3.7a: the core reports the lock only (it does not enforce it); the pane shows it with an Unlock button */
+  const [locked, setLocked] = createSignal(false);
   const [tick, setTick] = createSignal(0);
   const chunks = new Map<number, QTrack[]>();
   const inflight = new Map<number, number>(); // chunk -> revision asked for
@@ -25,7 +27,7 @@ export function createQueueModel(call: Call) {
   const fetchChunk = (c: number) => {
     if (inflight.get(c) === wantRev) return;
     inflight.set(c, wantRev);
-    call<{ total: number; revision: number; currentIndex: number; items: QTrack[] }>("queue.window", { offset: c * CHUNK, limit: CHUNK })
+    call<{ total: number; revision: number; currentIndex: number; items: QTrack[]; locked?: boolean }>("queue.window", { offset: c * CHUNK, limit: CHUNK })
       .then((r) => {
         if (inflight.get(c) === wantRev) inflight.delete(c);
         if (r.revision < chunkRev) return; // an older answer than what is cached
@@ -38,6 +40,7 @@ export function createQueueModel(call: Call) {
         setTotal(r.total);
         setRevision(r.revision);
         setCurrentIndex(r.currentIndex);
+        if (r.locked !== undefined) setLocked(r.locked);
         wantRev = Math.max(wantRev, r.revision);
         setTick((n) => n + 1);
         // the content moved on while we were asking: ask again for what is on screen
@@ -62,7 +65,7 @@ export function createQueueModel(call: Call) {
   }
 
   return {
-    total, revision, currentIndex,
+    total, revision, currentIndex, locked,
     /** reactive: reads `tick` so rows re-render when a chunk lands */
     item(i: number): QTrack | undefined {
       tick();
@@ -74,6 +77,7 @@ export function createQueueModel(call: Call) {
       ensure();
     },
     onEvent(name: string, d: any) {
+      if (d && typeof d.locked === "boolean") setLocked(d.locked);
       if (name === "queue.snapshot") {
         setTotal(d.total);
         setCurrentIndex(d.currentIndex);

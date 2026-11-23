@@ -89,7 +89,18 @@ impl CoreProcess {
     pub fn wait_exit(&self, ms: u32) -> bool {
         unsafe { WaitForSingleObject(self.process.0, ms) == WAIT_OBJECT_0 }
     }
+    /// The exit code once the process has ended (None while it runs or when it cannot be read).
+    pub fn exit_code(&self) -> Option<u32> {
+        let mut code = 0u32;
+        unsafe { GetExitCodeProcess(self.process.0, &mut code) }.ok()?;
+        (code != STILL_ACTIVE.0 as u32).then_some(code)
+    }
 }
+
+/// The core exits with this code when MinMusic 1.x holds `metrolist.lock` (T-P11). Not retried.
+pub const V1_LOCK_EXIT_CODE: u32 = 20;
+/// The error string `spawn` returns for [V1_LOCK_EXIT_CODE].
+pub const V1_LOCKED: &str = "v1-locked: MinMusic 1.x holds metrolist.lock";
 
 pub struct SpawnSpec {
     /// Program. When it has no extension and is not a path, the OS searches PATH (`node`).
@@ -240,6 +251,14 @@ pub fn spawn(spec: &SpawnSpec, job: Option<&JobObject>) -> Result<(CoreProcess, 
         match rx.recv_timeout(READY_TIMEOUT) {
             Ok(Ok(r)) => Ok((core, r)),
             Ok(Err(e)) => {
+                // stdout closed before READY: the exit code tells a v1 lock (20) from a crash
+                if core.wait_exit(3000) {
+                    return Err(match core.exit_code() {
+                        Some(V1_LOCK_EXIT_CODE) => V1_LOCKED.to_string(),
+                        Some(code) => format!("{e} (exit code {code})"),
+                        None => e,
+                    });
+                }
                 core.terminate();
                 Err(e)
             }

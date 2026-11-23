@@ -44,6 +44,12 @@ export function App() {
     initKeys(() => search?.focus());
     initFileDrop();
     const offToasts = initToasts();
+    // startup/*.ts hooks (crash prompt, onboarding, first-run toast...) run once after the first paint
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
+        for (const load of Object.values(import.meta.glob<{ run?: () => unknown }>("../startup/*.ts"))) void load().then((m) => m.run?.()).catch(() => {});
+      }),
+    );
 
     const hash = () => setDev(devKey());
     window.addEventListener("hashchange", hash);

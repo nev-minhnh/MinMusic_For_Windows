@@ -50,7 +50,7 @@ rl.on("line", async (line) => {
     handle = await startMock({
       port: 0, token: msg.token, artToken: msg.artToken ?? "mockart",
       allowedOrigins: dev ? [`http://localhost:${process.env.MM_WEB_PORT || 5173}`] : [],
-      capabilities: [],
+      capabilities: ["deviceConnect", "listenTogether"],
     });
     try {
       mkdirSync(stateDir, { recursive: true });

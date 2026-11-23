@@ -86,6 +86,6 @@ describe("Ctrl M", () => {
     const { commandFor, runCommand } = await import("../input/keys");
     expect(commandFor({ key: "m", ctrlKey: true, metaKey: false, altKey: false, shiftKey: false })?.cmd).toBe("mini.open");
     runCommand("mini.open");
-    expect(invoked).toEqual([{ cmd: "mini_toggle", args: undefined }]);
+    expect(invoked.filter((i) => i.cmd !== "core_config")).toEqual([{ cmd: "mini_toggle", args: undefined }]);
   });
 });

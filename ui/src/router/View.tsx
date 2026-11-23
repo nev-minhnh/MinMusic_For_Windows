@@ -14,15 +14,29 @@ const NAV_EASE = "cubic-bezier(0.05,0.7,0.1,1)";
 function Page(props: { route: Route }) {
   const active = () => current().key === props.route.key;
   let el!: HTMLDivElement;
+  // A hidden page (content-visibility:hidden) loses its scroll extent, so Chromium clamps scrollTop to 0 and fires scroll
+  // events; and when it shows again it restores the wrong offset. Record only while the page is active and settled, and put
+  // the remembered offset back when it becomes active again (keep-alive scroll restore).
+  let settling = true;
+  const restore = () => {
+    settling = true;
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
+        const saved = savedScroll.get(props.route.key) ?? 0;
+        if (el.scrollTop !== saved) el.scrollTop = saved;
+        setTimeout(() => (settling = false), 50);
+      })
+    );
+  };
   onMount(() => {
-    const saved = savedScroll.get(props.route.key);
-    if (saved) requestAnimationFrame(() => (el.scrollTop = saved));
     // passive bookkeeping only: remembers the scroll offset, writes no styles
-    el.addEventListener("scroll", () => savedScroll.set(props.route.key, el.scrollTop), { passive: true });
+    el.addEventListener("scroll", () => active() && !settling && savedScroll.set(props.route.key, el.scrollTop), { passive: true });
   });
   createEffect(
     on(active, (a) => {
-      if (a) el.focus({ preventScroll: true });
+      if (!a) return;
+      el.focus({ preventScroll: true });
+      restore();
     })
   );
   return (
